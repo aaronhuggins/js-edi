@@ -25,6 +25,13 @@
     "antlr4ts": "^0.5.0-alpha.4"
   },
   "devDependencies": {
-    "antlr4ts-cli": "^0.5.0-alpha.4"
+    "@types/node": "^14.14.31",
+    "antlr4ts-cli": "^0.5.0-alpha.4",
+    "eslint": "^7.21.0",
+    "gulp": "^4.0.2",
+    "gulp-shell": "^0.8.0",
+    "ts-node": "^9.1.1",
+    "ts-standard": "^10.0.0",
+    "typescript": "^4.2.2"
   }
 }
