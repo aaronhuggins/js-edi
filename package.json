@@ -21,6 +21,11 @@
     "url": "https://github.com/ahuggins-nhs/edi-parser/issues"
   },
   "homepage": "https://github.com/ahuggins-nhs/edi-parser#readme",
+  "ts-standard": {
+    "ignore": [
+      "src/x12/EdiX12*.ts"
+    ]
+  },
   "dependencies": {
     "antlr4ts": "^0.5.0-alpha.4"
   },

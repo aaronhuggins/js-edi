@@ -43,11 +43,11 @@ export class EdiParser {
   }
 
   fileName: string
-  private lexer: EdiX12Lexer
-  private tokens: CommonTokenStream
-  private parser: EdiX12Parser
-  private charStream: CharStream
-  private encoding: BufferEncoding
+  private readonly lexer: EdiX12Lexer
+  private readonly tokens: CommonTokenStream
+  private readonly parser: EdiX12Parser
+  private readonly charStream: CharStream
+  private readonly encoding: BufferEncoding
 
   getParser (): EdiX12Parser {
     return this.parser

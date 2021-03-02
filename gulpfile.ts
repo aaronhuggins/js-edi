@@ -32,7 +32,7 @@ export async function nyc (): Promise<void> {
 export const test = series(cleanup, mocha)
 export const coverage = series(cleanup, nyc)
 
-export async function antlr4ts () {
+export async function antlr4ts (): Promise<void> {
   const lexerX12ClassPath = 'src/x12/EdiX12Lexer.ts'
   const lexerX12ImportRx = /import \{ X12BaseLexer \} from ['"]\.\/X12BaseLexer['"]/gu
   const lexerX12ImportStatment = "import { X12BaseLexer } from './X12BaseLexer'\n"
