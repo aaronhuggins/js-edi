@@ -1,5 +1,36 @@
 import * as shell from 'gulp-shell'
+import * as del from 'del'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
+import { series } from 'gulp'
+
+export async function cleanup (): Promise<void> {
+  await del([
+    '**/*.d.ts',
+    '**/*.js',
+    '**/*.js.map'
+  ], {
+    ignore: ['**/node_modules/**']
+  })
+}
+
+export async function lint (): Promise<void> {
+  await shell.task('ts-standard --report codeframe')()
+}
+
+export async function fix (): Promise<void> {
+  await shell.task('ts-standard --fix --report codeframe')()
+}
+
+export async function mocha (): Promise<void> {
+  await shell.task('mocha')()
+}
+
+export async function nyc (): Promise<void> {
+  await shell.task('nyc mocha')()
+}
+
+export const test = series(cleanup, mocha)
+export const coverage = series(cleanup, nyc)
 
 export async function antlr4ts () {
   const lexerX12ClassPath = 'src/x12/EdiX12Lexer.ts'

@@ -107,3 +107,7 @@ dist
 *.interp
 *.tokens
 **/.antlr/**
+
+# Generated files
+*.js
+*.d.ts
