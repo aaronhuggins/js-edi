@@ -29,7 +29,7 @@ describe('EdiParser', () => {
     strictEqual(typeof parser2, 'undefined')
   })
 
-  it('should parse a complex version 5010 document', () => {
+  it('should parse a complex EDIX12 version 5010 document', () => {
     const fileName = './test/data/271.edi'
     const contents = readFileSync(fileName)
     const parser = new EdiParser({
@@ -49,7 +49,7 @@ describe('EdiParser', () => {
     strictEqual(result.text, contents.toString('utf8'))
   })
 
-  it('should parse a version 4010 document', () => {
+  it('should parse an EDIX12 version 4010 document', () => {
     const fileName = './test/data/850.edi'
     const contents = readFileSync(fileName)
     const parser = new EdiParser({
@@ -69,7 +69,7 @@ describe('EdiParser', () => {
     strictEqual(result.text, contents.toString('utf8'))
   })
 
-  it('should parse a fat document', () => {
+  it('should parse an EDIX12 fat document', () => {
     const fileName = './test/data/850_fat.edi'
     const contents = readFileSync(fileName, 'utf8')
     const parser = new EdiParser({
