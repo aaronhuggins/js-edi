@@ -1,7 +1,13 @@
 import { Readable } from 'stream'
 import { CharStream, CharStreams, CommonTokenStream, RecognitionException, Recognizer } from 'antlr4ts'
-import { DocumentContext, EdiX12Parser } from './x12/EdiX12Parser'
 import { EdiX12Lexer } from './x12/EdiX12Lexer'
+import { DocumentContext as EdiX12DocumentContext, EdiX12Parser } from './x12/EdiX12Parser'
+import { EdiFactLexer } from './fact/EdiFactLexer'
+import { DocumentContext as EdiFactDocumentContext, EdiFactParser } from './fact/EdiFactParser'
+
+export type DocumentContext = EdiX12DocumentContext | EdiFactDocumentContext
+export type EdiCustomLexer = EdiX12Lexer | EdiFactLexer
+export type EdiCustomParser = EdiX12Parser | EdiFactParser
 
 export interface EdiParserOpts {
   encoding?: BufferEncoding
@@ -29,6 +35,9 @@ export class EdiParser {
 
     switch (opts.ediType) {
       case 'EDIFACT':
+        this.lexer = new EdiFactLexer(this.charStream)
+        this.tokens = new CommonTokenStream(this.lexer)
+        this.parser = new EdiFactParser(this.tokens)
         break
       case 'EDIX12':
       default:
@@ -61,13 +70,13 @@ export class EdiParser {
   }
 
   fileName: string
-  private readonly lexer: EdiX12Lexer
+  private readonly lexer: EdiCustomLexer
   private readonly tokens: CommonTokenStream
-  private readonly parser: EdiX12Parser
+  private readonly parser: EdiCustomParser
   private readonly charStream: CharStream
   private readonly encoding: BufferEncoding
 
-  getParser (): EdiX12Parser {
+  getParser (): EdiCustomParser {
     return this.parser
   }
 

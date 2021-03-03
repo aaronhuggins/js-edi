@@ -25,8 +25,7 @@ describe('EdiParser', () => {
     const parser2 = result2.getParser()
 
     strictEqual(result2 instanceof EdiParser, true)
-    // At the time of this commit, there is no parser for EdiFact.
-    strictEqual(typeof parser2, 'undefined')
+    strictEqual(typeof parser2, 'object')
   })
 
   it('should parse a complex EDIX12 version 5010 document', () => {
