@@ -56,9 +56,9 @@ fragment AsciiControl:
   | US;
 
 // Fragments for printable character detection.
-fragment Number: [0-9];
-fragment Letter: [a-zA-Z];
-fragment Special: [ !"&'()*+,-./:;?=%~@[\]_{}\\|<>#$];
+fragment Number: '\u0030'..'\u0039';
+fragment Letter: '\u0041'..'\u005A' | '\u0061'..'\u007A';
+fragment Special: '\u0020'..'\u002F' | '\u003A'..'\u0040' | '\u005B'..'\u0060' | '\u007B'..'\u007E';
 
 // Special token for discovering the position of control characters for a given EDI document.
 ControlChar:

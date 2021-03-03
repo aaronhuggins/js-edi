@@ -4,7 +4,7 @@ import { EdiParser } from '../src/EdiParser'
 
 describe('EdiParser', () => {
   it('should parse', () => {
-    const fileName = './test/data/850_fat.edi'
+    const fileName = './test/data/271.edi'
     const contents = readFileSync(fileName)
     const parser = new EdiParser({
       ediType: 'EDIX12',
