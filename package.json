@@ -23,6 +23,7 @@
   "homepage": "https://github.com/ahuggins-nhs/edi-parser#readme",
   "ts-standard": {
     "ignore": [
+      "src/fact/EdiFact*.ts",
       "src/x12/EdiX12*.ts"
     ]
   },

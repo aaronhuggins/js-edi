@@ -3,7 +3,10 @@ import * as del from 'del'
 import { series } from 'gulp'
 
 export async function antlr4ts (): Promise<void> {
-  await shell.task(['antlr4ts -visitor grammar/EdiX12Lexer.g4 grammar/EdiX12Parser.g4 -o src/x12'])()
+  await shell.task([
+    'antlr4ts -visitor grammar/EdiFactLexer.g4 grammar/EdiFactParser.g4 -o src/fact',
+    'antlr4ts -visitor grammar/EdiX12Lexer.g4 grammar/EdiX12Parser.g4 -o src/x12'
+  ])()
 }
 
 export async function cleanup (): Promise<void> {
