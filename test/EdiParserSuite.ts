@@ -28,6 +28,26 @@ describe('EdiParser', () => {
     strictEqual(typeof parser2, 'object')
   })
 
+  it('should parse an EDIFACT document', () => {
+    const fileName = './test/data/EdifactSample.edi'
+    const contents = readFileSync(fileName)
+    const parser = new EdiParser({
+      ediType: 'EDIFACT',
+      keepInitialListeners: false,
+      throwOnError: true,
+      fileName,
+      contents
+    })
+    console.time(parseLabel)
+    const result = parser.parse()
+    console.timeEnd(parseLabel)
+
+    // Document successfully returned.
+    strictEqual(typeof result, 'object')
+    // Parsed document tree matches original input.
+    strictEqual(result.text, contents.toString('utf8'))
+  })
+
   it('should parse a complex EDIX12 version 5010 document', () => {
     const fileName = './test/data/271.edi'
     const contents = readFileSync(fileName)

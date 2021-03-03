@@ -97,7 +97,7 @@ export abstract class FactBaseLexer extends Lexer {
 
   /** Handles UNA segments encountered by the lexer. */
   handleUNA (): void {
-    if (this.text === 'UNA' && this.line === 1 && this.charPositionInLine === 1) {
+    if (this.text === 'UNA' && this.line === 1 && this.charPositionInLine === 3) {
       this._encounteredUNA = true
     }
   }
