@@ -1,5 +1,5 @@
 import { Readable } from 'stream'
-import { CharStream, CharStreams, CommonTokenStream } from 'antlr4ts'
+import { CharStream, CharStreams, CommonTokenStream, RecognitionException, Recognizer } from 'antlr4ts'
 import { DocumentContext, EdiX12Parser } from './x12/EdiX12Parser'
 import { EdiX12Lexer } from './x12/EdiX12Lexer'
 
@@ -8,12 +8,14 @@ export interface EdiParserOpts {
   fileName?: string
   ediType?: 'EDIX12' | 'EDIFACT'
   keepInitialListeners?: boolean
+  throwOnError?: boolean
   contents: string | Buffer | Readable
 }
 
 export class EdiParser {
   constructor (opts: EdiParserOpts) {
     const keepInitialListeners = opts.keepInitialListeners ?? false
+    const throwOnError = opts.throwOnError ?? false
     this.encoding = opts.encoding ?? 'utf8'
     this.fileName = opts.fileName ?? 'document.edi'
 
@@ -35,9 +37,24 @@ export class EdiParser {
         break
     }
 
-    if (!keepInitialListeners) {
-      if (typeof this.parser === 'object') {
+    if (typeof this.parser === 'object') {
+      if (!keepInitialListeners) {
         this.parser.removeErrorListeners()
+      }
+
+      if (throwOnError) {
+        this.parser.addErrorListener({
+          syntaxError<T = any>(
+            recognizer: Recognizer<T, any>,
+            offendingSymbol: T,
+            line: number,
+            charPositionInLine: number,
+            msg: string,
+            e?: RecognitionException
+          ): void {
+            throw new Error(`line ${line}:${charPositionInLine} ${msg}`)
+          }
+        })
       }
     }
   }

@@ -4,8 +4,10 @@ options {
   tokenVocab = EdiX12Lexer ;
 }
 
+// The document root.
 document: interchange+;
 
+// Document structure
 interchange:
   interchangeHeader
     group+
@@ -26,21 +28,88 @@ segment:
     element+
   segmentEnd;
 
-interchangeHeader: InterchangeHeader element+ segmentEnd;
-interchangeTrailer: InterchangeTrailer element+ segmentEnd;
+// Segment header and trailer statements.
+interchangeHeader:
+  InterchangeHeader
+    (ControlChar | DataSeparator) value+
+    DataSeparator value+
+    DataSeparator value+
+    DataSeparator value+
+    DataSeparator value+
+    DataSeparator value+
+    DataSeparator value+
+    DataSeparator value+
+    DataSeparator value+
+    DataSeparator value+
+    DataSeparator (ControlChar | RepititionSeparator | value)
+    DataSeparator value+
+    DataSeparator value+
+    DataSeparator value+
+    DataSeparator value+
+    DataSeparator (ControlChar | ComponentSeparator)
+  segmentEnd;
 
-groupHeader: GroupHeader element+ segmentEnd;
-groupTrailer: GroupTrailer element+ segmentEnd;
+interchangeTrailer:
+  InterchangeTrailer
+    DataSeparator value+
+    DataSeparator value+
+  segmentEnd;
 
-transactionHeader: TransactionHeader element+ segmentEnd;
-transactionTrailer: TransactionTrailer element+ segmentEnd;
+groupHeader:
+  GroupHeader
+    DataSeparator value*
+    DataSeparator value+
+    DataSeparator value+
+    DataSeparator value*
+    DataSeparator value+
+    DataSeparator value+
+    DataSeparator value+
+    DataSeparator value+
+  segmentEnd;
 
-segmentEnd: SegmentTerminator | SegmentTerminator EndOfLine;
+groupTrailer:
+  GroupTrailer
+    DataSeparator value+
+    DataSeparator value+
+  segmentEnd;
 
-element: DataSeparator (value|component|repitition)+;
+transactionHeader:
+    (
+    TransactionHeader
+      DataSeparator value+
+      DataSeparator value+
+      DataSeparator value+
+    segmentEnd
+    )
+  | (
+    TransactionHeader
+      DataSeparator value+
+      DataSeparator value+
+    segmentEnd
+    );
 
-repitition: (value|component) (RepititionSeparator (value|component))+;
+transactionTrailer:
+  TransactionTrailer
+    DataSeparator value+
+    DataSeparator value+
+  segmentEnd;
 
-component: value (ComponentSeparator value)+;
+// X12 components.
+segmentEnd: ControlChar ControlChar | ControlChar | SegmentTerminator EndOfLine | SegmentTerminator;
 
-value: Numeric | Decimal | String | Binary | NonPrintable;
+element: DataSeparator (value|component|repitition)*;
+
+repitition: (value|component)* (RepititionSeparator (value|component)*)+;
+
+component: value* (ComponentSeparator value*)+;
+
+value: 
+    Tag
+  | Char
+  | NonPrintable
+  | InterchangeHeader
+  | InterchangeTrailer
+  | GroupHeader
+  | GroupTrailer
+  | TransactionHeader
+  | TransactionTrailer;
