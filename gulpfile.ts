@@ -1,6 +1,5 @@
 import * as shell from 'gulp-shell'
 import * as del from 'del'
-import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { series } from 'gulp'
 
 export async function antlr4ts (): Promise<void> {
