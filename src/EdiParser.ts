@@ -31,6 +31,7 @@ export class EdiParser {
       case 'EDIFACT':
         break
       case 'EDIX12':
+      default:
         this.lexer = new EdiX12Lexer(this.charStream)
         this.tokens = new CommonTokenStream(this.lexer)
         this.parser = new EdiX12Parser(this.tokens)
