@@ -1,4 +1,5 @@
 import { CharStream, Lexer } from 'antlr4ts'
+import { EdiDomOptions } from '../dom/EdiDomTypes'
 
 export enum ControlChar {
   SegmentTerminator = 'SegmentTerminator',
@@ -87,4 +88,30 @@ export abstract class X12BaseLexer extends Lexer {
   }
 
   protected ControlCharMap: Map<string, ControlChar>
+
+  getOptions (): EdiDomOptions {
+    const options: any = {}
+
+    for (const [char, type] of this.ControlCharMap) {
+      switch (type) {
+        case ControlChar.ComponentSeparator:
+          options.componentSeparator = char
+          break
+        case ControlChar.DataSeparator:
+          options.dataSeparator = char
+          break
+        case ControlChar.EndOfLine:
+          options.endOfLine = char
+          break
+        case ControlChar.RepititionSeparator:
+          options.repititionSeparator = char
+          break
+        case ControlChar.SegmentTerminator:
+          options.segmentTerminator = char
+          break
+      }
+    }
+
+    return options
+  }
 }

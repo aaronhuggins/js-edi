@@ -1,4 +1,5 @@
 import { CharStream, Lexer } from 'antlr4ts'
+import { EdiDomOptions } from '../dom/EdiDomTypes'
 
 export interface EdiFactOptions {
   componentSeparator: string
@@ -147,6 +148,40 @@ export abstract class FactBaseLexer extends Lexer {
     }
   }
 
+  protected ControlCharMap: Map<string, ControlChar>
+
+  getOptions (): EdiDomOptions {
+    const options: any = {}
+
+    for (const [char, type] of this.ControlCharMap) {
+      switch (type) {
+        case ControlChar.ComponentSeparator:
+          options.componentSeparator = char
+          break
+        case ControlChar.DataSeparator:
+          options.dataSeparator = char
+          break
+        case ControlChar.EndOfLine:
+          options.endOfLine = char
+          break
+        case ControlChar.RepititionSeparator:
+          options.repititionSeparator = char
+          break
+        case ControlChar.SegmentTerminator:
+          options.segmentTerminator = char
+          break
+        case ControlChar.DecimalMark:
+          options.decimalMark = char as any
+          break
+        case ControlChar.ReleaseIndicator:
+          options.releaseIndicator = char
+          break
+      }
+    }
+
+    return options
+  }
+
   /** Set the options for EDIFACT parsing if no UNA segment is provided. UNA segments take precedence over provided options. */
   setOptions (options: EdiFactOptions): void {
     const eolChars = '\r\n'
@@ -182,6 +217,4 @@ export abstract class FactBaseLexer extends Lexer {
       this.ControlCharMap.set(options.segmentTerminator, ControlChar.SegmentTerminator)
     }
   }
-
-  protected ControlCharMap: Map<string, ControlChar>
 }
