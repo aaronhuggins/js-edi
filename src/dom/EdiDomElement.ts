@@ -11,6 +11,10 @@ export type EdiDomElementType<T extends EdiDomElement|EdiDomComponent|EdiDomValu
 
 /** An element containing one or more repeated elements, a component, or a value. */
 export class EdiDomElement<T extends EdiDomElement|EdiDomComponent|EdiDomValue = EdiDomValue> {
+  constructor () {
+    this.type = '' as EdiDomElementType<T>
+  }
+
   type: EdiDomElementType<T>
   value: T extends EdiDomElement ? EdiDomElement[] : EdiDomComponent|EdiDomValue
 }

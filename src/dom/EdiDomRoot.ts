@@ -24,6 +24,11 @@ export interface EdiDomOptions {
 
 /** The document root containing one or more interchanges. */
 export class EdiDomRoot {
+  constructor () {
+    this.options = {} as EdiDomOptions
+    this.interchanges = []
+  }
+
   /** Options for parsing/reconstructing an EDI document. */
   options: EdiDomOptions
   interchanges: EdiDomInterchange[]
