@@ -62,8 +62,6 @@ export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends 
       }
     }
 
-    if (typeof this.value !== 'undefined') {
-      yield this.value
-    }
+    if (typeof this.value !== 'undefined') yield this.value
   }
 }

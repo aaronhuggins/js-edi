@@ -40,7 +40,7 @@ export class EdiDomInterchange extends EdiDomNode<EdiDomNodeType.Interchange> {
 
   * walk (): Generator<EdiDomNode> {
     yield this
-    yield this.header
+    if (typeof this.header !== 'undefined') yield this.header
 
     for (const group of this.groups) {
       for (const node of group.walk()) {
@@ -54,6 +54,6 @@ export class EdiDomInterchange extends EdiDomNode<EdiDomNodeType.Interchange> {
       }
     }
 
-    yield this.trailer
+    if (typeof this.trailer !== 'undefined') yield this.trailer
   }
 }
