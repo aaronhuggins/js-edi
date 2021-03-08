@@ -6,11 +6,11 @@ import { EdiDomValue } from './EdiDomValue'
 export type EdiDomElementType= 'repeated' | 'component' | 'value'
 
 /** An element containing one or more repeated elements, a component, or a value. */
-export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = EdiDomValue> extends EdiDomNode<EdiDomNodeType.Element> {
-  constructor () {
+export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends EdiDomNode<EdiDomNodeType.Element> {
+  constructor (type?: EdiDomElementType) {
     super()
     this.nodeType = EdiDomNodeType.Element
-    this.type = 'value'
+    this.type = type ?? 'value'
     this.elements = []
   }
 

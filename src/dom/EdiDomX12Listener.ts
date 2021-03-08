@@ -2,12 +2,19 @@ import { ErrorNode } from 'antlr4ts/tree'
 import { EdiX12Lexer } from '../x12/EdiX12Lexer'
 import {
   ComponentCharElementContext,
+  ElementContext,
+  GroupHeaderContext,
+  GroupTrailerContext,
   InterchangeHeaderContext,
   InterchangeTrailerContext,
   RepititionCharElementContext,
+  StrictElementContext,
+  TransactionHeaderContext,
+  TransactionTrailerContext,
   ValueContext
 } from '../x12/EdiX12Parser'
 import { EdiX12ParserListener } from '../x12/EdiX12ParserListener'
+import { EdiDomComponent } from './EdiDomComponent'
 import { EdiDomElement } from './EdiDomElement'
 import { EdiDomGroup } from './EdiDomGroup'
 import { EdiDomInterchange } from './EdiDomInterchange'
@@ -45,6 +52,21 @@ function controlCharElement (ctx: RepititionCharElementContext | ComponentCharEl
   return domValue
 }
 
+function strictSegment<T extends string> (tag: T, ctxElements: StrictElementContext[]): EdiDomSegment<T> {
+  const domSegment = new EdiDomSegment(tag)
+
+  if (Array.isArray(ctxElements)) {
+    for (const ctxElement of ctxElements) {
+      const domElement = new EdiDomElement()
+
+      domElement.addChildNode(value(ctxElement.value()))
+      domSegment.addChildNode(domElement)
+    }
+  }
+
+  return domSegment
+}
+
 /** Safely convert a ParseTree value[] to a string value. */
 function value (ctxValue: ValueContext[]): EdiDomValue {
   const domValue = new EdiDomValue()
@@ -74,7 +96,7 @@ export class EdiDomX12Listener implements EdiX12ParserListener {
   private group: EdiDomGroup
   private message: EdiDomMessage
   private segment: EdiDomSegment
-  private element: EdiDomElement
+  private repitition?: EdiDomElement
 
   /** Deal with errors as encountered. */
   visitErrorNode (node: ErrorNode): void {}
@@ -92,25 +114,48 @@ export class EdiDomX12Listener implements EdiX12ParserListener {
   }
 
   /** Set the current message and add it to the current group. */
-  enterMessage (): void {
+  enterTransaction (): void {
     this.message = new EdiDomMessage()
     this.group.addChildNode(this.message)
   }
 
+  /** Set the current segment and add it to the current message. */
   enterSegment (): void {
     this.segment = new EdiDomSegment()
     this.message.addChildNode(this.segment)
   }
 
   enterRepitition (): void {
-    if (typeof this.element === 'object' && this.element.type === 'value' && typeof this.element.value === 'undefined') {
-      
-    }
+    this.repitition = new EdiDomElement('repeated')
+    this.segment.addChildNode(this.repitition)
   }
 
-  enterElement (): void {
-    this.element = new EdiDomElement()
-    this.segment.addChildNode(this.element)
+  exitRepitition (): void {
+    this.repitition = undefined
+  }
+
+  exitElement (ctx: ElementContext): void {
+    const element = new EdiDomElement()
+    const ctxComponents = ctx.component()
+    const ctxValues = ctx.value()
+
+    if (Array.isArray(ctxComponents) && ctxComponents.length > 0) {
+      const domComponent = new EdiDomComponent()
+
+      for (const ctxComponent of ctxComponents) {
+        domComponent.addChildNode(value(ctxComponent.value()))
+      }
+
+      element.addChildNode(domComponent)
+    } else {
+      element.addChildNode(value(ctxValues))
+    }
+
+    if (typeof this.repitition === 'object') {
+      this.repitition.addChildNode(element)
+    } else {
+      this.segment.addChildNode(element)
+    }
   }
 
   /** Get the discovered options and the ISA header for the current interchange. */
@@ -129,16 +174,16 @@ export class EdiDomX12Listener implements EdiX12ParserListener {
 
         switch ('object') {
           case (typeof ctxElement.strictElement()):
-            element.value = value(ctxElement.strictElement().value())
+            element.addChildNode(value(ctxElement.strictElement().value()))
             break
           case (typeof ctxElement.dataCharElement()):
-            element.value = value(ctxElement.dataCharElement().value())
+            element.addChildNode(value(ctxElement.dataCharElement().value()))
             break
           case (typeof ctxElement.componentCharElement()):
-            element.value = controlCharElement(ctxElement.componentCharElement())
+            element.addChildNode(controlCharElement(ctxElement.componentCharElement()))
             break
           case (typeof ctxElement.repititionCharElement()):
-            element.value = controlCharElement(ctxElement.repititionCharElement())
+            element.addChildNode(controlCharElement(ctxElement.repititionCharElement()))
             break
         }
 
@@ -148,17 +193,22 @@ export class EdiDomX12Listener implements EdiX12ParserListener {
   }
 
   exitInterchangeTrailer (ctx: InterchangeTrailerContext): void {
-    const ctxElements = ctx.strictElement()
-    this.interchange.trailer = new EdiDomSegment('IEA')
+    this.interchange.trailer = strictSegment('IEA', ctx.strictElement())
+  }
 
-    if (Array.isArray(ctxElements)) {
-      for (const ctxElement of ctxElements) {
-        const element = new EdiDomElement()
+  exitGroupHeader (ctx: GroupHeaderContext): void {
+    this.group.header = strictSegment('GS', ctx.strictElement())
+  }
 
-        element.value = value(ctxElement.value())
+  exitGroupTrailer (ctx: GroupTrailerContext): void {
+    this.group.trailer = strictSegment('GE', ctx.strictElement())
+  }
 
-        this.interchange.trailer.addChildNode(element)
-      }
-    }
+  exitTransactionHeader (ctx: TransactionHeaderContext): void {
+    this.message.header = strictSegment('ST', ctx.strictElement())
+  }
+
+  exitTransactionTrailer (ctx: TransactionTrailerContext): void {
+    this.message.trailer = strictSegment('SE', ctx.strictElement())
   }
 }
