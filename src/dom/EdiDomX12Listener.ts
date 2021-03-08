@@ -97,6 +97,22 @@ export class EdiDomX12Listener implements EdiX12ParserListener {
     this.group.addChildNode(this.message)
   }
 
+  enterSegment (): void {
+    this.segment = new EdiDomSegment()
+    this.message.addChildNode(this.segment)
+  }
+
+  enterRepitition (): void {
+    if (typeof this.element === 'object' && this.element.type === 'value' && typeof this.element.value === 'undefined') {
+      
+    }
+  }
+
+  enterElement (): void {
+    this.element = new EdiDomElement()
+    this.segment.addChildNode(this.element)
+  }
+
   /** Get the discovered options and the ISA header for the current interchange. */
   exitInterchangeHeader (ctx: InterchangeHeaderContext): void {
     const ctxElements = ctx.interchangeElement()
