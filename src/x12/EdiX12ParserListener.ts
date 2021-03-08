@@ -16,6 +16,11 @@ import { TransactionHeaderContext } from "./EdiX12Parser";
 import { TransactionTrailerContext } from "./EdiX12Parser";
 import { SegmentEndContext } from "./EdiX12Parser";
 import { ElementContext } from "./EdiX12Parser";
+import { InterchangeElementContext } from "./EdiX12Parser";
+import { StrictElementContext } from "./EdiX12Parser";
+import { DataCharElementContext } from "./EdiX12Parser";
+import { RepititionCharElementContext } from "./EdiX12Parser";
+import { ComponentCharElementContext } from "./EdiX12Parser";
 import { RepititionContext } from "./EdiX12Parser";
 import { ComponentContext } from "./EdiX12Parser";
 import { ValueContext } from "./EdiX12Parser";
@@ -168,6 +173,61 @@ export interface EdiX12ParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitElement?: (ctx: ElementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `EdiX12Parser.interchangeElement`.
+	 * @param ctx the parse tree
+	 */
+	enterInterchangeElement?: (ctx: InterchangeElementContext) => void;
+	/**
+	 * Exit a parse tree produced by `EdiX12Parser.interchangeElement`.
+	 * @param ctx the parse tree
+	 */
+	exitInterchangeElement?: (ctx: InterchangeElementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `EdiX12Parser.strictElement`.
+	 * @param ctx the parse tree
+	 */
+	enterStrictElement?: (ctx: StrictElementContext) => void;
+	/**
+	 * Exit a parse tree produced by `EdiX12Parser.strictElement`.
+	 * @param ctx the parse tree
+	 */
+	exitStrictElement?: (ctx: StrictElementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `EdiX12Parser.dataCharElement`.
+	 * @param ctx the parse tree
+	 */
+	enterDataCharElement?: (ctx: DataCharElementContext) => void;
+	/**
+	 * Exit a parse tree produced by `EdiX12Parser.dataCharElement`.
+	 * @param ctx the parse tree
+	 */
+	exitDataCharElement?: (ctx: DataCharElementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `EdiX12Parser.repititionCharElement`.
+	 * @param ctx the parse tree
+	 */
+	enterRepititionCharElement?: (ctx: RepititionCharElementContext) => void;
+	/**
+	 * Exit a parse tree produced by `EdiX12Parser.repititionCharElement`.
+	 * @param ctx the parse tree
+	 */
+	exitRepititionCharElement?: (ctx: RepititionCharElementContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `EdiX12Parser.componentCharElement`.
+	 * @param ctx the parse tree
+	 */
+	enterComponentCharElement?: (ctx: ComponentCharElementContext) => void;
+	/**
+	 * Exit a parse tree produced by `EdiX12Parser.componentCharElement`.
+	 * @param ctx the parse tree
+	 */
+	exitComponentCharElement?: (ctx: ComponentCharElementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `EdiX12Parser.repitition`.
