@@ -28,6 +28,7 @@ export class EdiParser {
     const throwOnError = opts.throwOnError ?? false
     this.encoding = opts.encoding ?? 'utf8'
     this.fileName = opts.fileName ?? 'document.edi'
+    this.parsed = false
 
     if (typeof opts.contents === 'string') {
       this.charStream = CharStreams.fromString(opts.contents, this.fileName)
@@ -82,6 +83,7 @@ export class EdiParser {
   private readonly parser: EdiCustomParser
   private readonly charStream: CharStream
   private readonly encoding: BufferEncoding
+  private parsed: boolean
 
   /** Get the internal parser instance. */
   getParser (): EdiCustomParser {
@@ -90,12 +92,16 @@ export class EdiParser {
 
   /** Synchronously parse to return an ANTLR4 ParseTree. */
   parse (): DocumentContext {
-    return this.parser.document()
+    const tree = this.parser.document()
+    this.parsed = true
+
+    return tree
   }
 
   /** Synchronously parse to return an EDI DOM root. */
   documentRoot (): EdiDomRoot {
-    this.parse()
+    if (!this.parsed) this.parse()
+
     return this.listener.root
   }
 }
