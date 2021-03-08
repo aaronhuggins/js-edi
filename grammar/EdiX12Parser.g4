@@ -31,73 +31,79 @@ segment:
 // Segment header and trailer statements.
 interchangeHeader:
   InterchangeHeader
-    (ControlChar | DataSeparator) value+
-    DataSeparator value+
-    DataSeparator value+
-    DataSeparator value+
-    DataSeparator value+
-    DataSeparator value+
-    DataSeparator value+
-    DataSeparator value+
-    DataSeparator value+
-    DataSeparator value+
-    DataSeparator (ControlChar | RepititionSeparator | value)
-    DataSeparator value+
-    DataSeparator value+
-    DataSeparator value+
-    DataSeparator value+
-    DataSeparator (ControlChar | ComponentSeparator)
+    interchangeElement
+    interchangeElement
+    interchangeElement
+    interchangeElement
+    interchangeElement
+    interchangeElement
+    interchangeElement
+    interchangeElement
+    interchangeElement
+    interchangeElement
+    interchangeElement
+    interchangeElement
+    interchangeElement
+    interchangeElement
+    interchangeElement
+    interchangeElement
   segmentEnd;
 
 interchangeTrailer:
   InterchangeTrailer
-    DataSeparator value+
-    DataSeparator value+
+    strictElement
+    strictElement
   segmentEnd;
 
 groupHeader:
   GroupHeader
-    DataSeparator value*
-    DataSeparator value+
-    DataSeparator value+
-    DataSeparator value*
-    DataSeparator value+
-    DataSeparator value+
-    DataSeparator value+
-    DataSeparator value+
+    strictElement
+    strictElement
+    strictElement
+    strictElement
+    strictElement
+    strictElement
+    strictElement
+    strictElement
   segmentEnd;
 
 groupTrailer:
   GroupTrailer
-    DataSeparator value+
-    DataSeparator value+
+    strictElement
+    strictElement
   segmentEnd;
 
 transactionHeader:
     (
     TransactionHeader
-      DataSeparator value+
-      DataSeparator value+
-      DataSeparator value+
+      strictElement
+      strictElement
+      strictElement
     segmentEnd
     )
   | (
     TransactionHeader
-      DataSeparator value+
-      DataSeparator value+
+      strictElement
+      strictElement
     segmentEnd
     );
 
 transactionTrailer:
   TransactionTrailer
-    DataSeparator value+
-    DataSeparator value+
+    strictElement
+    strictElement
   segmentEnd;
 
 // X12 components.
 segmentEnd: ControlChar ControlChar | ControlChar | SegmentTerminator EndOfLine | SegmentTerminator;
 
 element: DataSeparator (value|component|repitition)*;
+
+interchangeElement: dataCharElement | strictElement | repititionCharElement | componentCharElement;
+strictElement: DataSeparator value+;
+dataCharElement: (ControlChar | DataSeparator) value+;
+repititionCharElement: DataSeparator (ControlChar | RepititionSeparator | value);
+componentCharElement: DataSeparator (ControlChar | ComponentSeparator);
 
 repitition: (value|component)* (RepititionSeparator (value|component)*)+;
 
