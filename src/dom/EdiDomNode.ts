@@ -15,6 +15,7 @@ export class EdiDomNode<T extends EdiDomNodeType = any> {
   root: EdiDomNode<EdiDomNodeType.Root>
   protected _header?: EdiDomNode<EdiDomNodeType.Segment>
   protected _trailer?: EdiDomNode<EdiDomNodeType.Segment>
+  protected _text?: string
 
   /** Add a child node to the dom. On value nodes, this is a no-op. */
   addChildNode (child: EdiDomNode) {}
@@ -29,9 +30,11 @@ export class EdiDomNode<T extends EdiDomNodeType = any> {
   toJSON (): Partial<this> {
     const header = this._header
     const trailer = this._trailer
+    const text = this._text
     const result = {
       header,
       ...this,
+      text,
       trailer
     }
 
@@ -40,6 +43,7 @@ export class EdiDomNode<T extends EdiDomNodeType = any> {
     delete result.root
     delete result._header
     delete result._trailer
+    delete result._text
 
     return result
   }

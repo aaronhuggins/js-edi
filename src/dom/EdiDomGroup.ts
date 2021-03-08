@@ -1,20 +1,21 @@
-import { EdiDomMessage } from './EdiDomMessage'
+import type { EdiDomMessage } from './EdiDomMessage'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomNode'
-import { EdiDomSegment } from './EdiDomSegment'
+import type { EdiDomRoot } from './EdiDomRoot'
+import type { EdiDomSegment } from './EdiDomSegment'
 
 /** An EDIFACT UNG message or an X12 ST transaction. */
 export class EdiDomGroup extends EdiDomNode<EdiDomNodeType.Group> {
   constructor () {
     super()
     this.nodeType = EdiDomNodeType.Group
-    this.header = new EdiDomSegment()
     this.messages = []
-    this.trailer = new EdiDomSegment()
   }
 
   protected _header: EdiDomSegment<'UNG'|'GS'>
   /** The messages contained in this group. */
   messages: EdiDomMessage[]
+  /** The root of this instance. */
+  root: EdiDomRoot
   protected _trailer: EdiDomSegment<'UNE'|'GE'>
 
   /** The header of this group. */
@@ -47,6 +48,15 @@ export class EdiDomGroup extends EdiDomNode<EdiDomNodeType.Group> {
     }
 
     this._trailer = _trailer
+  }
+
+  /** The read-only text representation of this node. */
+  get text (): string {
+    return this.header.text +
+      this.messages
+        .map(segment => segment.text)
+        .join('') +
+      this.trailer.text
   }
 
   /** Add a message to this group. */

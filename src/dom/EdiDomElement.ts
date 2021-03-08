@@ -1,5 +1,6 @@
 import { EdiDomComponent } from './EdiDomComponent'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomNode'
+import { EdiDomRoot } from './EdiDomRoot'
 import { EdiDomValue } from './EdiDomValue'
 
 /** Element types supported for detection. */
@@ -20,6 +21,21 @@ export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends 
   elements: EdiDomElement[]
   /** The value of this element. */
   value: T
+  /** The root of this instance. */
+  root: EdiDomRoot
+
+  /** The read-only text representation of this node. */
+  get text (): string {
+    if (this.elements.length > 0) {
+      return this.root.options.dataSeparator + this.elements
+        .map(element => element.text)
+        .join(this.root.options.repititionSeparator)
+    }
+
+    if (typeof this.value === 'object') {
+      return this.root.options.dataSeparator + this.value.text
+    }
+  }
 
   /** Add an element, component, or value to this node. */
   addChildNode (child: EdiDomElement | T): void {

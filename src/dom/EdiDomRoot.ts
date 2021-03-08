@@ -1,6 +1,6 @@
-import { EdiDomInterchange } from './EdiDomInterchange'
+import type { EdiDomInterchange } from './EdiDomInterchange'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomNode'
-import { EdiDomOptions } from './EdiDomTypes'
+import type { EdiDomOptions } from './EdiDomTypes'
 
 /** The document root containing one or more interchanges. */
 export class EdiDomRoot extends EdiDomNode<EdiDomNodeType.Root> {
@@ -15,7 +15,34 @@ export class EdiDomRoot extends EdiDomNode<EdiDomNodeType.Root> {
 
   /** Options for parsing/reconstructing an EDI document. */
   options: EdiDomOptions
+  /** The child interchanges for this document. */
   interchanges: EdiDomInterchange[]
+  /** Recursive self-reference for consistency. */
+  root: EdiDomRoot
+  /** Recursive self-reference for consistency. */
+  parent: EdiDomRoot
+
+  /** The read-only text representation of this node. */
+  get text (): string {
+    return this.interchanges.map(interchange => interchange.text).join('')
+  }
+
+  /** Creates an UNA Service String Advice from options. */
+  createUNAString (): string {
+    const contents = 'UNA' +
+      this.options.componentSeparator +
+      this.options.dataSeparator +
+      this.options.decimalMark ?? '.' +
+      this.options.releaseIndicator ?? '?' +
+      this.options.repititionSeparator ?? ' ' +
+      this.options.segmentTerminator
+
+    if (typeof this.options.endOfLine === 'string') {
+      return contents + this.options.endOfLine
+    }
+
+    return contents
+  }
 
   /** Add an interchange to this document. */
   addChildNode (child: EdiDomInterchange) {

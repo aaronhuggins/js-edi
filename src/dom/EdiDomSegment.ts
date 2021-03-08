@@ -1,5 +1,6 @@
-import { EdiDomElement } from './EdiDomElement'
+import type { EdiDomElement } from './EdiDomElement'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomNode'
+import type { EdiDomRoot } from './EdiDomRoot'
 
 /** The segment of an EDI document. */
 export class EdiDomSegment<T extends string = string> extends EdiDomNode<EdiDomNodeType.Segment> {
@@ -10,8 +11,26 @@ export class EdiDomSegment<T extends string = string> extends EdiDomNode<EdiDomN
     this.elements = []
   }
 
+  /** The tag for this node. */
   tag: T
+  /** The child elements of this node. */
   elements: EdiDomElement[]
+  /** The root of this instance. */
+  root: EdiDomRoot
+
+  /** The read-only text representation of this node. */
+  get text (): string {
+    const contents = this.tag + this.elements
+      .map(element => element.text)
+      .join('') +
+      this.root.options.segmentTerminator
+
+    if (typeof this.root.options.endOfLine === 'string') {
+      return contents + this.root.options.endOfLine
+    }
+
+    return contents
+  }
 
   addChildNode (child: EdiDomElement): void {
     if (child.nodeType === EdiDomNodeType.Element) {

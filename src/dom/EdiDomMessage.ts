@@ -1,20 +1,21 @@
 import { EdiDomNode, EdiDomNodeType } from './EdiDomNode'
-import { EdiDomSegment } from './EdiDomSegment'
+import type { EdiDomRoot } from './EdiDomRoot'
+import type { EdiDomSegment } from './EdiDomSegment'
 
 /** An EDIFACT UNH message or an X12 ST transaction. */
 export class EdiDomMessage extends EdiDomNode<EdiDomNodeType.Message> {
   constructor () {
     super()
     this.nodeType = EdiDomNodeType.Message
-    this.header = new EdiDomSegment()
     this.segments = []
-    this.trailer = new EdiDomSegment()
   }
 
   /** The header of this message. */
   protected _header: EdiDomSegment<'UNH'|'ST'>
   /** The segments contained in this message. */
   segments: EdiDomSegment[]
+  /** The root of this instance. */
+  root: EdiDomRoot
   /** The trailer of this message. */
   protected _trailer: EdiDomSegment<'UNT'|'SE'>
 
@@ -48,6 +49,15 @@ export class EdiDomMessage extends EdiDomNode<EdiDomNodeType.Message> {
     }
 
     this._trailer = _trailer
+  }
+
+  /** The read-only text representation of this node. */
+  get text (): string {
+    return this.header.text +
+      this.segments
+        .map(segment => segment.text)
+        .join('') +
+      this.trailer.text
   }
 
   /** Add a segment to this message. */

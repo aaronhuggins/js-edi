@@ -1,5 +1,6 @@
 import { EdiDomNode, EdiDomNodeType } from './EdiDomNode'
-import { EdiDomValue } from './EdiDomValue'
+import type { EdiDomRoot } from './EdiDomRoot'
+import type { EdiDomValue } from './EdiDomValue'
 
 /** An intermediate value type in the object model, holding an array of values. */
 export class EdiDomComponent extends EdiDomNode<EdiDomNodeType.Component> {
@@ -11,6 +12,15 @@ export class EdiDomComponent extends EdiDomNode<EdiDomNodeType.Component> {
 
   /** One or more values of the component value. */
   values: EdiDomValue[]
+  /** The root of this instance. */
+  root: EdiDomRoot
+
+  /** The read-only text representation of this node. */
+  get text (): string {
+    return this.values
+      .map(value => value.text)
+      .join(this.root.options.componentSeparator)
+  }
 
   /** Add a value to this componenet. */
   addChildNode (child: EdiDomValue): void {

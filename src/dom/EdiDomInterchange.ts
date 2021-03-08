@@ -1,18 +1,15 @@
-import { EdiDomGroup } from './EdiDomGroup'
-import { EdiDomMessage } from './EdiDomMessage'
+import type { EdiDomGroup } from './EdiDomGroup'
+import type { EdiDomMessage } from './EdiDomMessage'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomNode'
-import { EdiDomSegment } from './EdiDomSegment'
+import type { EdiDomRoot } from './EdiDomRoot'
+import type { EdiDomSegment } from './EdiDomSegment'
 
 export class EdiDomInterchange extends EdiDomNode<EdiDomNodeType.Interchange> {
   constructor () {
     super()
     this.nodeType = EdiDomNodeType.Interchange
-    /** Set a placeholder value of undefined. */
-    this._header = undefined
     this.groups = []
     this.messages = []
-    /** Set a placeholder value of undefined. */
-    this._trailer = undefined
   }
 
   protected _header: EdiDomSegment<'UNB'|'ISA'>
@@ -20,6 +17,8 @@ export class EdiDomInterchange extends EdiDomNode<EdiDomNodeType.Interchange> {
   groups: EdiDomGroup[]
   /** The child messages of this interchange; applies to EDIFACT. */
   messages: EdiDomMessage[]
+  /** The root of this instance. */
+  root: EdiDomRoot
   protected _trailer: EdiDomSegment<'UNZ'|'IEA'>
 
   /** The header of this interchange. */
@@ -52,6 +51,32 @@ export class EdiDomInterchange extends EdiDomNode<EdiDomNodeType.Interchange> {
     }
 
     this._trailer = _trailer
+  }
+
+  /** The read-only text representation of this node. */
+  get text (): string {
+    const handleUNA = () => {
+      return this.header.tag === 'UNB'
+        ? this.root.createUNAString()
+        : ''
+    }
+
+    // Prefer groups.
+    if (this.groups.length > 0) {
+      return handleUNA() +
+        this.header.text +
+        this.groups
+          .map(segment => segment.text)
+          .join('') +
+        this.trailer.text
+    }
+
+    return handleUNA() +
+      this.header.text +
+      this.messages
+        .map(segment => segment.text)
+        .join('') +
+      this.trailer.text
   }
 
   /** Add a group or message to this interchange. */
