@@ -7,7 +7,9 @@ import {
   GroupTrailerContext,
   InterchangeHeaderContext,
   InterchangeTrailerContext,
+  RepeatedElementContext,
   RepititionCharElementContext,
+  RepititionContext,
   SegmentContext,
   StrictElementContext,
   TransactionHeaderContext,
@@ -23,6 +25,26 @@ import { EdiDomMessage } from './EdiDomMessage'
 import { EdiDomRoot } from './EdiDomRoot'
 import { EdiDomSegment } from './EdiDomSegment'
 import { EdiDomValue } from './EdiDomValue'
+
+function contextToElement (ctx: ElementContext | RepeatedElementContext): EdiDomElement {
+  const domElement = new EdiDomElement()
+  const ctxComponents = ctx.component()
+  const ctxValues = ctx.value()
+
+  if (Array.isArray(ctxComponents) && ctxComponents.length > 0) {
+    const domComponent = new EdiDomComponent()
+
+    for (const ctxComponent of ctxComponents) {
+      domComponent.addChildNode(value(ctxComponent.value()))
+    }
+
+    domElement.addChildNode(domComponent)
+  } else {
+    domElement.addChildNode(value(ctxValues))
+  }
+
+  return domElement
+}
 
 function controlCharElement (ctx: RepititionCharElementContext | ComponentCharElementContext): EdiDomValue {
   const domValue = new EdiDomValue()
@@ -135,26 +157,23 @@ export class EdiDomX12Listener implements EdiX12ParserListener {
     this.segment.addChildNode(this.repitition)
   }
 
-  exitRepitition (): void {
+  exitRepitition (ctx: RepititionContext) {
+    const element = this.repitition ?? new EdiDomElement('repeated')
+    const ctxRepititions = ctx.repeatedElement()
+
+    if (Array.isArray(ctxRepititions) && ctxRepititions.length > 0) {
+      for (const ctxRepitition of ctxRepititions) {
+        const subElement = contextToElement(ctxRepitition)
+
+        element.addChildNode(subElement)
+      }
+    }
+
     this.repitition = undefined
   }
 
   exitElement (ctx: ElementContext): void {
-    const element = new EdiDomElement()
-    const ctxComponents = ctx.component()
-    const ctxValues = ctx.value()
-
-    if (Array.isArray(ctxComponents) && ctxComponents.length > 0) {
-      const domComponent = new EdiDomComponent()
-
-      for (const ctxComponent of ctxComponents) {
-        domComponent.addChildNode(value(ctxComponent.value()))
-      }
-
-      element.addChildNode(domComponent)
-    } else {
-      element.addChildNode(value(ctxValues))
-    }
+    const element = contextToElement(ctx)
 
     if (typeof this.repitition === 'object') {
       this.repitition.addChildNode(element)
