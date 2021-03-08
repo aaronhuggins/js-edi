@@ -22,6 +22,7 @@ Data exchanged via Electronic Data Interchange (EDI) formats uses a hierarchical
 2. No missing methods.
 3. Always return a legal value, `undefined`, or throw an `Error`.
 4. No side-effects
+5. All nodes provide a `text` property
 
 ### Expectations
 
@@ -35,3 +36,5 @@ This means developers should expect:
   > Return `undefined` for missing, non-existent, non-primitive values, or an empty `string` for missing data.
 - An unexpected or malformed DOM will throw an `Error` to prevent undesired side-effects.
   > All scenarios during DOM construction not meeting expectations should throw.
+- A single node can be re-serialized simply by accessing the `text` getter on the node.
+  > This means the document root can implicitly provide the entire contents in EDIFACT or EDIX12 format.
