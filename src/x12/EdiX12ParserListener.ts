@@ -15,13 +15,14 @@ import { GroupTrailerContext } from "./EdiX12Parser";
 import { TransactionHeaderContext } from "./EdiX12Parser";
 import { TransactionTrailerContext } from "./EdiX12Parser";
 import { SegmentEndContext } from "./EdiX12Parser";
+import { RepititionContext } from "./EdiX12Parser";
 import { ElementContext } from "./EdiX12Parser";
 import { InterchangeElementContext } from "./EdiX12Parser";
 import { StrictElementContext } from "./EdiX12Parser";
 import { DataCharElementContext } from "./EdiX12Parser";
 import { RepititionCharElementContext } from "./EdiX12Parser";
 import { ComponentCharElementContext } from "./EdiX12Parser";
-import { RepititionContext } from "./EdiX12Parser";
+import { RepeatedElementContext } from "./EdiX12Parser";
 import { ComponentContext } from "./EdiX12Parser";
 import { ValueContext } from "./EdiX12Parser";
 
@@ -164,6 +165,17 @@ export interface EdiX12ParserListener extends ParseTreeListener {
 	exitSegmentEnd?: (ctx: SegmentEndContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `EdiX12Parser.repitition`.
+	 * @param ctx the parse tree
+	 */
+	enterRepitition?: (ctx: RepititionContext) => void;
+	/**
+	 * Exit a parse tree produced by `EdiX12Parser.repitition`.
+	 * @param ctx the parse tree
+	 */
+	exitRepitition?: (ctx: RepititionContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `EdiX12Parser.element`.
 	 * @param ctx the parse tree
 	 */
@@ -230,15 +242,15 @@ export interface EdiX12ParserListener extends ParseTreeListener {
 	exitComponentCharElement?: (ctx: ComponentCharElementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `EdiX12Parser.repitition`.
+	 * Enter a parse tree produced by `EdiX12Parser.repeatedElement`.
 	 * @param ctx the parse tree
 	 */
-	enterRepitition?: (ctx: RepititionContext) => void;
+	enterRepeatedElement?: (ctx: RepeatedElementContext) => void;
 	/**
-	 * Exit a parse tree produced by `EdiX12Parser.repitition`.
+	 * Exit a parse tree produced by `EdiX12Parser.repeatedElement`.
 	 * @param ctx the parse tree
 	 */
-	exitRepitition?: (ctx: RepititionContext) => void;
+	exitRepeatedElement?: (ctx: RepeatedElementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `EdiX12Parser.component`.

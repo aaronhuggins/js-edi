@@ -15,13 +15,14 @@ import { GroupTrailerContext } from "./EdiX12Parser";
 import { TransactionHeaderContext } from "./EdiX12Parser";
 import { TransactionTrailerContext } from "./EdiX12Parser";
 import { SegmentEndContext } from "./EdiX12Parser";
+import { RepititionContext } from "./EdiX12Parser";
 import { ElementContext } from "./EdiX12Parser";
 import { InterchangeElementContext } from "./EdiX12Parser";
 import { StrictElementContext } from "./EdiX12Parser";
 import { DataCharElementContext } from "./EdiX12Parser";
 import { RepititionCharElementContext } from "./EdiX12Parser";
 import { ComponentCharElementContext } from "./EdiX12Parser";
-import { RepititionContext } from "./EdiX12Parser";
+import { RepeatedElementContext } from "./EdiX12Parser";
 import { ComponentContext } from "./EdiX12Parser";
 import { ValueContext } from "./EdiX12Parser";
 
@@ -119,6 +120,13 @@ export interface EdiX12ParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitSegmentEnd?: (ctx: SegmentEndContext) => Result;
 
 	/**
+	 * Visit a parse tree produced by `EdiX12Parser.repitition`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitRepitition?: (ctx: RepititionContext) => Result;
+
+	/**
 	 * Visit a parse tree produced by `EdiX12Parser.element`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -161,11 +169,11 @@ export interface EdiX12ParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitComponentCharElement?: (ctx: ComponentCharElementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `EdiX12Parser.repitition`.
+	 * Visit a parse tree produced by `EdiX12Parser.repeatedElement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitRepitition?: (ctx: RepititionContext) => Result;
+	visitRepeatedElement?: (ctx: RepeatedElementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `EdiX12Parser.component`.

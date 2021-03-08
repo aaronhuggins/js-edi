@@ -25,7 +25,7 @@ transaction:
 
 segment:
   Tag
-    element+
+    (element|repitition)+
   segmentEnd;
 
 // Segment header and trailer statements.
@@ -97,7 +97,8 @@ transactionTrailer:
 // X12 components.
 segmentEnd: ControlChar ControlChar | ControlChar | SegmentTerminator EndOfLine | SegmentTerminator;
 
-element: DataSeparator (value|component|repitition)*;
+repitition: element repeatedElement+;
+element: DataSeparator (value|component)*;
 
 interchangeElement: dataCharElement | strictElement | repititionCharElement | componentCharElement;
 strictElement: DataSeparator value+;
@@ -105,7 +106,7 @@ dataCharElement: (ControlChar | DataSeparator) value+;
 repititionCharElement: DataSeparator (ControlChar | RepititionSeparator | value);
 componentCharElement: DataSeparator (ControlChar | ComponentSeparator);
 
-repitition: (value|component)* (RepititionSeparator (value|component)*)+;
+repeatedElement: RepititionSeparator (value|component)*;
 
 component: value* (ComponentSeparator value*)+;
 
