@@ -8,17 +8,51 @@ export class EdiDomInterchange extends EdiDomNode<EdiDomNodeType.Interchange> {
     super()
     this.nodeType = EdiDomNodeType.Interchange
     /** Set a placeholder value of undefined. */
-    this.header = undefined
+    this._header = undefined
     this.groups = []
     this.messages = []
     /** Set a placeholder value of undefined. */
-    this.trailer = undefined
+    this._trailer = undefined
   }
 
-  header: EdiDomSegment<'UNB'|'ISA'>
+  protected _header: EdiDomSegment<'UNB'|'ISA'>
+  /** The child groups of this interchange. */
   groups: EdiDomGroup[]
+  /** The child messages of this interchange; applies to EDIFACT. */
   messages: EdiDomMessage[]
-  trailer: EdiDomSegment<'UNZ'|'IEA'>
+  protected _trailer: EdiDomSegment<'UNZ'|'IEA'>
+
+  /** The header of this interchange. */
+  get header (): EdiDomSegment<'UNB'|'ISA'> {
+    return this._header
+  }
+
+  /** The header of this interchange. */
+  set header (_header: EdiDomSegment<'UNB'|'ISA'>) {
+    _header.parent = this
+
+    for (const node of _header.walk()) {
+      node.root = this.root
+    }
+
+    this._header = _header
+  }
+
+  /** The trailer of this interchange. */
+  get trailer (): EdiDomSegment<'UNZ'|'IEA'> {
+    return this._trailer
+  }
+
+  /** The trailer of this interchange. */
+  set trailer (_trailer: EdiDomSegment<'UNZ'|'IEA'>) {
+    _trailer.parent = this
+
+    for (const node of _trailer.walk()) {
+      node.root = this.root
+    }
+
+    this._trailer = _trailer
+  }
 
   /** Add a group or message to this interchange. */
   addChildNode (child: EdiDomGroup | EdiDomMessage) {

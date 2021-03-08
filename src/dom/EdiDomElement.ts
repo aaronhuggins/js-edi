@@ -64,4 +64,12 @@ export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends 
 
     if (typeof this.value !== 'undefined') yield this.value
   }
+
+  toJSON (): Partial<this> {
+    const result = super.toJSON()
+
+    if (result.elements.length === 0) delete result.elements
+
+    return result
+  }
 }

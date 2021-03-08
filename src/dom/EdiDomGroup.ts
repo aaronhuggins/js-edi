@@ -12,12 +12,42 @@ export class EdiDomGroup extends EdiDomNode<EdiDomNodeType.Group> {
     this.trailer = new EdiDomSegment()
   }
 
-  /** The header of this group. */
-  header: EdiDomSegment<'UNG'|'GS'>
+  protected _header: EdiDomSegment<'UNG'|'GS'>
   /** The messages contained in this group. */
   messages: EdiDomMessage[]
+  protected _trailer: EdiDomSegment<'UNE'|'GE'>
+
+  /** The header of this group. */
+  get header (): EdiDomSegment<'UNG'|'GS'> {
+    return this._header
+  }
+
+  /** The header of this group. */
+  set header (_header: EdiDomSegment<'UNG'|'GS'>) {
+    _header.parent = this
+
+    for (const node of _header.walk()) {
+      node.root = this.root
+    }
+
+    this._header = _header
+  }
+
   /** The trailer of this group. */
-  trailer: EdiDomSegment<'UNE'|'GE'>
+  get trailer (): EdiDomSegment<'UNE'|'GE'> {
+    return this._trailer
+  }
+
+  /** The trailer of this group. */
+  set trailer (_trailer: EdiDomSegment<'UNE'|'GE'>) {
+    _trailer.parent = this
+
+    for (const node of _trailer.walk()) {
+      node.root = this.root
+    }
+
+    this._trailer = _trailer
+  }
 
   /** Add a message to this group. */
   addChildNode (child: EdiDomMessage): void {
