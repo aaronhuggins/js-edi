@@ -9,7 +9,7 @@ export enum EdiDomNodeType {
   Value = 'Value'
 }
 
-export class EdiDomNode<T extends EdiDomNodeType = any> {
+export abstract class EdiDomNode<T extends EdiDomNodeType = any> {
   nodeType: T
   parent?: EdiDomNode
   root: EdiDomNode<EdiDomNodeType.Root>
