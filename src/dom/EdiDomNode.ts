@@ -12,6 +12,7 @@ export enum EdiDomNodeType {
 export class EdiDomNode<T extends EdiDomNodeType = any> {
   nodeType: T
   parent?: EdiDomNode
+  root: EdiDomNode<EdiDomNodeType.Root>
 
   /** Add a child node to the dom. On value nodes, this is a no-op. */
   addChildNode (child: EdiDomNode) {}
@@ -19,12 +20,16 @@ export class EdiDomNode<T extends EdiDomNodeType = any> {
   /** Remove a child node from the dom. On value nodes, this is a no-op. */
   removeChildNode (child: EdiDomNode) {}
 
-  /** Return a cleaned EdiDomNode for serialization. */
+  /** Sequentially walk the Document Object Model starting with this node. */
+  * walk (): Generator<EdiDomNode> {}
+
+  /** Return a cleaned EdiDomNode for serialization; removes circular references and verbose node types. */
   toJSON (): Omit<this, 'nodeType'> {
     const result = { ...this }
 
     delete result.nodeType
     delete result.parent
+    delete result.root
 
     return result
   }

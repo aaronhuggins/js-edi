@@ -15,7 +15,23 @@ export class EdiDomSegment<T extends string = string> extends EdiDomNode<EdiDomN
 
   addChildNode (child: EdiDomElement): void {
     if (child.nodeType === EdiDomNodeType.Element) {
+      child.parent = this
+
+      for (const node of child.walk()) {
+        node.root = this.root
+      }
+
       this.elements.push(child)
+    }
+  }
+
+  * walk (): Generator<EdiDomNode> {
+    yield this
+
+    for (const element of this.elements) {
+      for (const node of element.walk()) {
+        yield node
+      }
     }
   }
 }

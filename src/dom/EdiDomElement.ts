@@ -23,19 +23,47 @@ export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends 
 
   /** Add an element, component, or value to this node. */
   addChildNode (child: EdiDomElement | T): void {
+    const setRels = () => {
+      child.parent = this
+
+      for (const node of child.walk()) {
+        node.root = this.root
+      }
+    }
+
     switch (child.nodeType) {
       case EdiDomNodeType.Component:
         this.type = 'component'
         this.value = child
+
+        setRels()
         break
       case EdiDomNodeType.Element:
         this.type = 'repeated'
         this.elements.push(child)
+
+        setRels()
         break
       case EdiDomNodeType.Value:
         this.type = 'value'
         this.value = child
+
+        setRels()
         break
+    }
+  }
+
+  * walk (): Generator<EdiDomNode> {
+    yield this
+
+    for (const element of this.elements) {
+      for (const node of element.walk()) {
+        yield node
+      }
+    }
+
+    if (typeof this.value !== 'undefined') {
+      yield this.value
     }
   }
 }

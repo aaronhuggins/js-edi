@@ -16,4 +16,8 @@ export class EdiDomValue extends EdiDomNode<EdiDomNodeType.Value> {
   type: EdiDomValueType
   /** The string contents of the value. */
   text: string
+
+  * walk (): Generator<EdiDomNode> {
+    yield this
+  }
 }

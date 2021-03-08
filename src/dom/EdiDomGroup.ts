@@ -22,7 +22,26 @@ export class EdiDomGroup extends EdiDomNode<EdiDomNodeType.Group> {
   /** Add a message to this group. */
   addChildNode (child: EdiDomMessage): void {
     if (child.nodeType === EdiDomNodeType.Message) {
+      child.parent = this
+
+      for (const node of child.walk()) {
+        node.root = this.root
+      }
+
       this.messages.push(child)
     }
+  }
+
+  * walk (): Generator<EdiDomNode> {
+    yield this
+    yield this.header
+
+    for (const message of this.messages) {
+      for (const node of message.walk()) {
+        yield node
+      }
+    }
+
+    yield this.trailer
   }
 }

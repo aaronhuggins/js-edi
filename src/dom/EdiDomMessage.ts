@@ -21,7 +21,26 @@ export class EdiDomMessage extends EdiDomNode<EdiDomNodeType.Message> {
   /** Add a segment to this message. */
   addChildNode (child: EdiDomSegment): void {
     if (child.nodeType === EdiDomNodeType.Segment) {
+      child.parent = this
+
+      for (const node of child.walk()) {
+        node.root = this.root
+      }
+
       this.segments.push(child)
     }
+  }
+
+  * walk (): Generator<EdiDomNode> {
+    yield this
+    yield this.header
+
+    for (const segment of this.segments) {
+      for (const node of segment.walk()) {
+        yield node
+      }
+    }
+
+    yield this.trailer
   }
 }
