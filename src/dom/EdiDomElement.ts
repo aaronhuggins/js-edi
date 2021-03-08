@@ -1,7 +1,8 @@
-import { EdiDomComponent } from './EdiDomComponent'
+import type { EdiDomComponent } from './EdiDomComponent'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomNode'
-import { EdiDomRoot } from './EdiDomRoot'
-import { EdiDomValue } from './EdiDomValue'
+import type { EdiDomRoot } from './EdiDomRoot'
+import type { EdiDomSegment } from './EdiDomSegment'
+import type { EdiDomValue } from './EdiDomValue'
 
 /** Element types supported for detection. */
 export type EdiDomElementType= 'repeated' | 'component' | 'value'
@@ -23,6 +24,8 @@ export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends 
   value: T
   /** The root of this instance. */
   root: EdiDomRoot
+  /** The parent of this instance. */
+  parent: EdiDomSegment | EdiDomElement
 
   /** The read-only text representation of this node. */
   get text (): string {
@@ -33,6 +36,10 @@ export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends 
     }
 
     if (typeof this.value === 'object') {
+      if (this.parent.nodeType === EdiDomNodeType.Element && this.parent.type === 'repeated') {
+        return this.value.text
+      }
+
       return this.root.options.dataSeparator + this.value.text
     }
   }
