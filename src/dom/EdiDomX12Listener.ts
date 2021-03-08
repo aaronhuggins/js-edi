@@ -8,6 +8,7 @@ import {
   InterchangeHeaderContext,
   InterchangeTrailerContext,
   RepititionCharElementContext,
+  SegmentContext,
   StrictElementContext,
   TransactionHeaderContext,
   TransactionTrailerContext,
@@ -123,6 +124,10 @@ export class EdiDomX12Listener implements EdiX12ParserListener {
   enterSegment (): void {
     this.segment = new EdiDomSegment()
     this.message.addChildNode(this.segment)
+  }
+
+  exitSegment (ctx: SegmentContext): void {
+    this.segment.tag = ctx.Tag().text
   }
 
   enterRepitition (): void {
