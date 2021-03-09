@@ -34,6 +34,8 @@ function contextToElement (ctx: ElementContext | RepeatedElementContext): EdiDom
   if (Array.isArray(ctxComponents) && ctxComponents.length > 0) {
     const domComponent = new EdiDomComponent()
 
+    domComponent.addChildNode(value(ctxValues))
+
     for (const ctxComponent of ctxComponents) {
       domComponent.addChildNode(value(ctxComponent.value()))
     }

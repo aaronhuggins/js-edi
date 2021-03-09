@@ -59,7 +59,7 @@ describe('EdiParser', () => {
       contents
     })
     console.time(parseLabel)
-    const result = parser.parse()
+    const result = parser.documentRoot()
     console.timeEnd(parseLabel)
 
     // Document successfully returned.
@@ -68,8 +68,8 @@ describe('EdiParser', () => {
     strictEqual(result.text, contents.toString('utf8'))
   })
 
-  it('should parse an EDIX12 version 4010 document', () => {
-    const fileName = './test/data/850.edi'
+  it('should parse an EDIX12 version 4010 document and return a matching EDI DOM', () => {
+    const fileName = './test/data/850_2.edi'
     const contents = readFileSync(fileName)
     const parser = new EdiParser({
       ediType: 'EDIX12',
@@ -82,10 +82,14 @@ describe('EdiParser', () => {
     const result = parser.parse()
     console.timeEnd(parseLabel)
 
+    const document = parser.documentRoot()
+
     // Document successfully returned.
     strictEqual(typeof result, 'object')
     // Parsed document tree matches original input.
     strictEqual(result.text, contents.toString('utf8'))
+    // Constructed EDI DOM matches original input.
+    strictEqual(document.text, contents.toString('utf8'))
   })
 
   it('should parse an EDIX12 fat document', () => {
