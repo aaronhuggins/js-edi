@@ -74,8 +74,12 @@ export abstract class X12BaseLexer extends Lexer {
       case this.isEndOfLine:
         // Only pick this up if end of line is a real formatting mark.
         if (this.text === '\r\n' || this.text === '\r' || this.text === '\n') {
-          this.ControlCharMap.set(this.text, ControlChar.EndOfLine)
-          // this.type = lexer[ControlChar.EndOfLine]
+          // If there is no segment terminator already found, then end of line is the terminator.
+          if (Array.from(this.ControlCharMap.values()).includes(ControlChar.SegmentTerminator)) {
+            this.ControlCharMap.set(this.text, ControlChar.EndOfLine)
+          } else {
+            this.ControlCharMap.set(this.text, ControlChar.SegmentTerminator)
+          }
         }
         break
       default:
