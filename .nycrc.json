@@ -4,6 +4,7 @@
   "include": ["src/**/*.ts"],
   "exclude": [
     "src/fact/EdiFact*.ts",
+    "src/query/ElementSelector*.ts",
     "src/x12/EdiX12*.ts"
   ],
   "require": ["source-map-support/register"],
