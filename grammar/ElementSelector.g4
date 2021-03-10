@@ -33,7 +33,7 @@ loopPathSelector: SegmentID '^' SegmentID '-' ElementReference;
 // Element at HL path selector.
 hlPathSelector: HLPath '-' ElementReference;
 // Element at parent segment path selector.
-parentSegmentSelector: SegmentID '-' ElementReference;
+parentSegmentSelector: (SegmentID '-')+ ElementReference;
 // Element reference selector.
 elementSelector: ElementReference;
 
