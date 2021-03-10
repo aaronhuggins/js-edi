@@ -12,30 +12,30 @@ selector:
 
 // Element reference adjacent to selector.
 elementAdjacentSelector:
-  (elementSelector | hlPathSelector | parentSegmentSelector | loopPathSelector)
+  (ElementReference | hlPathSelector | parentSegmentSelector | loopPathSelector)
   '~'
-  (SegmentID ElementID | elementValueSelector | elementNotValueSelector | elementContainsValueSelector)
+  (ElementReference | elementValueSelector | elementNotValueSelector | elementContainsValueSelector)
   ;
 // Element reference precedent to selector.
 elementPrecedentSelector:
-  (elementSelector | hlPathSelector | parentSegmentSelector | loopPathSelector)
+  (ElementReference | hlPathSelector | parentSegmentSelector | loopPathSelector)
   ':'
-  (SegmentID ElementID | elementValueSelector | elementNotValueSelector | elementContainsValueSelector)
+  (ElementReference | elementValueSelector | elementNotValueSelector | elementContainsValueSelector)
   ;
 // Element not value selector.
-elementContainsValueSelector: SegmentID ElementID '*' ElementValue;
+elementContainsValueSelector: ElementReference '*' ElementValue;
 // Element not value selector.
-elementNotValueSelector: SegmentID ElementID '!' ElementValue;
+elementNotValueSelector: ElementReference '!' ElementValue;
 // Element value selector.
-elementValueSelector: SegmentID ElementID ElementValue;
+elementValueSelector: ElementReference ElementValue;
 // Loop path selector.
-loopPathSelector: SegmentID '^' SegmentID '-' SegmentID ElementID;
+loopPathSelector: SegmentID '^' SegmentID '-' ElementReference;
 // Element at HL path selector.
-hlPathSelector: HLPath '-' SegmentID ElementID;
+hlPathSelector: HLPath '-' ElementReference;
 // Element at parent segment path selector.
-parentSegmentSelector: SegmentID '-' SegmentID ElementID;
+parentSegmentSelector: SegmentID '-' ElementReference;
 // Element reference selector.
-elementSelector: SegmentID ElementID;
+elementSelector: ElementReference;
 
 // Fragments for printable character detection.
 fragment Number: '\u0030'..'\u0039';
@@ -44,17 +44,16 @@ fragment Special: '\u0020'..'\u002F' | '\u003A'..'\u0040' | '\u005B'..'\u0060' |
 fragment AlphaNumeric: Number | Letter;
 fragment SegmentID2: Letter AlphaNumeric;
 fragment SegmentID3: Letter AlphaNumeric AlphaNumeric;
-fragment SegmentID4: Letter AlphaNumeric AlphaNumeric AlphaNumeric;
-fragment ElementID2: Number Number;
-fragment ElementID3: Number Number Number;
 
 // HL path identifier.
 HLPath: 'HL' ('+' AnyCharacter)+;
-// Segment identifier.
-SegmentID: SegmentID2 | SegmentID3 | SegmentID4;
-// Element identifier.
-ElementID: ElementID2 | ElementID3;
 // Value identifier
 ElementValue: '[' ['"] AnyCharacter* ['"] ']';
+// Element reference
+ElementReference: SegmentID ElementID;
+// Element identifier.
+ElementID: Number Number;
+// Segment identifier.
+SegmentID: SegmentID2 | SegmentID3;
 // Any single unicode character.
 AnyCharacter: '\u0000'..'\uFFFF';

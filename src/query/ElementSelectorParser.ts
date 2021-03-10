@@ -35,10 +35,11 @@ export class ElementSelectorParser extends Parser {
 	public static readonly T__4 = 5;
 	public static readonly T__5 = 6;
 	public static readonly HLPath = 7;
-	public static readonly SegmentID = 8;
-	public static readonly ElementID = 9;
-	public static readonly ElementValue = 10;
-	public static readonly AnyCharacter = 11;
+	public static readonly ElementValue = 8;
+	public static readonly ElementReference = 9;
+	public static readonly ElementID = 10;
+	public static readonly SegmentID = 11;
+	public static readonly AnyCharacter = 12;
 	public static readonly RULE_selector = 0;
 	public static readonly RULE_elementAdjacentSelector = 1;
 	public static readonly RULE_elementPrecedentSelector = 2;
@@ -61,7 +62,8 @@ export class ElementSelectorParser extends Parser {
 	];
 	private static readonly _SYMBOLIC_NAMES: Array<string | undefined> = [
 		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
-		"HLPath", "SegmentID", "ElementID", "ElementValue", "AnyCharacter",
+		"HLPath", "ElementValue", "ElementReference", "ElementID", "SegmentID", 
+		"AnyCharacter",
 	];
 	public static readonly VOCABULARY: Vocabulary = new VocabularyImpl(ElementSelectorParser._LITERAL_NAMES, ElementSelectorParser._SYMBOLIC_NAMES, []);
 
@@ -181,7 +183,7 @@ export class ElementSelectorParser extends Parser {
 			case 1:
 				{
 				this.state = 29;
-				this.elementSelector();
+				this.match(ElementSelectorParser.ElementReference);
 				}
 				break;
 
@@ -208,35 +210,33 @@ export class ElementSelectorParser extends Parser {
 			}
 			this.state = 35;
 			this.match(ElementSelectorParser.T__0);
-			this.state = 41;
+			this.state = 40;
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 2, this._ctx) ) {
 			case 1:
 				{
 				this.state = 36;
-				this.match(ElementSelectorParser.SegmentID);
-				this.state = 37;
-				this.match(ElementSelectorParser.ElementID);
+				this.match(ElementSelectorParser.ElementReference);
 				}
 				break;
 
 			case 2:
 				{
-				this.state = 38;
+				this.state = 37;
 				this.elementValueSelector();
 				}
 				break;
 
 			case 3:
 				{
-				this.state = 39;
+				this.state = 38;
 				this.elementNotValueSelector();
 				}
 				break;
 
 			case 4:
 				{
-				this.state = 40;
+				this.state = 39;
 				this.elementContainsValueSelector();
 				}
 				break;
@@ -264,68 +264,66 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 47;
+			this.state = 46;
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 3, this._ctx) ) {
 			case 1:
 				{
-				this.state = 43;
-				this.elementSelector();
+				this.state = 42;
+				this.match(ElementSelectorParser.ElementReference);
 				}
 				break;
 
 			case 2:
 				{
-				this.state = 44;
+				this.state = 43;
 				this.hlPathSelector();
 				}
 				break;
 
 			case 3:
 				{
-				this.state = 45;
+				this.state = 44;
 				this.parentSegmentSelector();
 				}
 				break;
 
 			case 4:
 				{
-				this.state = 46;
+				this.state = 45;
 				this.loopPathSelector();
 				}
 				break;
 			}
-			this.state = 49;
+			this.state = 48;
 			this.match(ElementSelectorParser.T__1);
-			this.state = 55;
+			this.state = 53;
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 4, this._ctx) ) {
 			case 1:
 				{
-				this.state = 50;
-				this.match(ElementSelectorParser.SegmentID);
-				this.state = 51;
-				this.match(ElementSelectorParser.ElementID);
+				this.state = 49;
+				this.match(ElementSelectorParser.ElementReference);
 				}
 				break;
 
 			case 2:
 				{
-				this.state = 52;
+				this.state = 50;
 				this.elementValueSelector();
 				}
 				break;
 
 			case 3:
 				{
-				this.state = 53;
+				this.state = 51;
 				this.elementNotValueSelector();
 				}
 				break;
 
 			case 4:
 				{
-				this.state = 54;
+				this.state = 52;
 				this.elementContainsValueSelector();
 				}
 				break;
@@ -353,13 +351,11 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 57;
-			this.match(ElementSelectorParser.SegmentID);
-			this.state = 58;
-			this.match(ElementSelectorParser.ElementID);
-			this.state = 59;
+			this.state = 55;
+			this.match(ElementSelectorParser.ElementReference);
+			this.state = 56;
 			this.match(ElementSelectorParser.T__2);
-			this.state = 60;
+			this.state = 57;
 			this.match(ElementSelectorParser.ElementValue);
 			}
 		}
@@ -384,13 +380,11 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 62;
-			this.match(ElementSelectorParser.SegmentID);
-			this.state = 63;
-			this.match(ElementSelectorParser.ElementID);
-			this.state = 64;
+			this.state = 59;
+			this.match(ElementSelectorParser.ElementReference);
+			this.state = 60;
 			this.match(ElementSelectorParser.T__3);
-			this.state = 65;
+			this.state = 61;
 			this.match(ElementSelectorParser.ElementValue);
 			}
 		}
@@ -415,11 +409,9 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 67;
-			this.match(ElementSelectorParser.SegmentID);
-			this.state = 68;
-			this.match(ElementSelectorParser.ElementID);
-			this.state = 69;
+			this.state = 63;
+			this.match(ElementSelectorParser.ElementReference);
+			this.state = 64;
 			this.match(ElementSelectorParser.ElementValue);
 			}
 		}
@@ -444,18 +436,16 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 71;
+			this.state = 66;
 			this.match(ElementSelectorParser.SegmentID);
-			this.state = 72;
+			this.state = 67;
 			this.match(ElementSelectorParser.T__4);
-			this.state = 73;
+			this.state = 68;
 			this.match(ElementSelectorParser.SegmentID);
-			this.state = 74;
+			this.state = 69;
 			this.match(ElementSelectorParser.T__5);
-			this.state = 75;
-			this.match(ElementSelectorParser.SegmentID);
-			this.state = 76;
-			this.match(ElementSelectorParser.ElementID);
+			this.state = 70;
+			this.match(ElementSelectorParser.ElementReference);
 			}
 		}
 		catch (re) {
@@ -479,14 +469,12 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 78;
+			this.state = 72;
 			this.match(ElementSelectorParser.HLPath);
-			this.state = 79;
+			this.state = 73;
 			this.match(ElementSelectorParser.T__5);
-			this.state = 80;
-			this.match(ElementSelectorParser.SegmentID);
-			this.state = 81;
-			this.match(ElementSelectorParser.ElementID);
+			this.state = 74;
+			this.match(ElementSelectorParser.ElementReference);
 			}
 		}
 		catch (re) {
@@ -510,14 +498,12 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 83;
+			this.state = 76;
 			this.match(ElementSelectorParser.SegmentID);
-			this.state = 84;
+			this.state = 77;
 			this.match(ElementSelectorParser.T__5);
-			this.state = 85;
-			this.match(ElementSelectorParser.SegmentID);
-			this.state = 86;
-			this.match(ElementSelectorParser.ElementID);
+			this.state = 78;
+			this.match(ElementSelectorParser.ElementReference);
 			}
 		}
 		catch (re) {
@@ -541,10 +527,8 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 88;
-			this.match(ElementSelectorParser.SegmentID);
-			this.state = 89;
-			this.match(ElementSelectorParser.ElementID);
+			this.state = 80;
+			this.match(ElementSelectorParser.ElementReference);
 			}
 		}
 		catch (re) {
@@ -563,44 +547,42 @@ export class ElementSelectorParser extends Parser {
 	}
 
 	public static readonly _serializedATN: string =
-		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03\r^\x04\x02\t" +
-		"\x02\x04\x03\t\x03\x04\x04\t\x04\x04\x05\t\x05\x04\x06\t\x06\x04\x07\t" +
-		"\x07\x04\b\t\b\x04\t\t\t\x04\n\t\n\x04\v\t\v\x03\x02\x03\x02\x03\x02\x03" +
-		"\x02\x03\x02\x03\x02\x03\x02\x05\x02\x1E\n\x02\x03\x03\x03\x03\x03\x03" +
-		"\x03\x03\x05\x03$\n\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03" +
-		"\x05\x03,\n\x03\x03\x04\x03\x04\x03\x04\x03\x04\x05\x042\n\x04\x03\x04" +
-		"\x03\x04\x03\x04\x03\x04\x03\x04\x03\x04\x05\x04:\n\x04\x03\x05\x03\x05" +
-		"\x03\x05\x03\x05\x03\x05\x03\x06\x03\x06\x03\x06\x03\x06\x03\x06\x03\x07" +
-		"\x03\x07\x03\x07\x03\x07\x03\b\x03\b\x03\b\x03\b\x03\b\x03\b\x03\b\x03" +
-		"\t\x03\t\x03\t\x03\t\x03\t\x03\n\x03\n\x03\n\x03\n\x03\n\x03\v\x03\v\x03" +
-		"\v\x03\v\x02\x02\x02\f\x02\x02\x04\x02\x06\x02\b\x02\n\x02\f\x02\x0E\x02" +
-		"\x10\x02\x12\x02\x14\x02\x02\x02\x02e\x02\x1D\x03\x02\x02\x02\x04#\x03" +
-		"\x02\x02\x02\x061\x03\x02\x02\x02\b;\x03\x02\x02\x02\n@\x03\x02\x02\x02" +
-		"\fE\x03\x02\x02\x02\x0EI\x03\x02\x02\x02\x10P\x03\x02\x02\x02\x12U\x03" +
-		"\x02\x02\x02\x14Z\x03\x02\x02\x02\x16\x1E\x05\x14\v\x02\x17\x1E\x05\x12" +
-		"\n\x02\x18\x1E\x05\x10\t\x02\x19\x1E\x05\x0E\b\x02\x1A\x1E\x05\b\x05\x02" +
-		"\x1B\x1E\x05\x06\x04\x02\x1C\x1E\x05\x04\x03\x02\x1D\x16\x03\x02\x02\x02" +
-		"\x1D\x17\x03\x02\x02\x02\x1D\x18\x03\x02\x02\x02\x1D\x19\x03\x02\x02\x02" +
-		"\x1D\x1A\x03\x02\x02\x02\x1D\x1B\x03\x02\x02\x02\x1D\x1C\x03\x02\x02\x02" +
-		"\x1E\x03\x03\x02\x02\x02\x1F$\x05\x14\v\x02 $\x05\x10\t\x02!$\x05\x12" +
-		"\n\x02\"$\x05\x0E\b\x02#\x1F\x03\x02\x02\x02# \x03\x02\x02\x02#!\x03\x02" +
-		"\x02\x02#\"\x03\x02\x02\x02$%\x03\x02\x02\x02%+\x07\x03\x02\x02&\'\x07" +
-		"\n\x02\x02\',\x07\v\x02\x02(,\x05\f\x07\x02),\x05\n\x06\x02*,\x05\b\x05" +
-		"\x02+&\x03\x02\x02\x02+(\x03\x02\x02\x02+)\x03\x02\x02\x02+*\x03\x02\x02" +
-		"\x02,\x05\x03\x02\x02\x02-2\x05\x14\v\x02.2\x05\x10\t\x02/2\x05\x12\n" +
-		"\x0202\x05\x0E\b\x021-\x03\x02\x02\x021.\x03\x02\x02\x021/\x03\x02\x02" +
-		"\x0210\x03\x02\x02\x0223\x03\x02\x02\x0239\x07\x04\x02\x0245\x07\n\x02" +
-		"\x025:\x07\v\x02\x026:\x05\f\x07\x027:\x05\n\x06\x028:\x05\b\x05\x029" +
-		"4\x03\x02\x02\x0296\x03\x02\x02\x0297\x03\x02\x02\x0298\x03\x02\x02\x02" +
-		":\x07\x03\x02\x02\x02;<\x07\n\x02\x02<=\x07\v\x02\x02=>\x07\x05\x02\x02" +
-		">?\x07\f\x02\x02?\t\x03\x02\x02\x02@A\x07\n\x02\x02AB\x07\v\x02\x02BC" +
-		"\x07\x06\x02\x02CD\x07\f\x02\x02D\v\x03\x02\x02\x02EF\x07\n\x02\x02FG" +
-		"\x07\v\x02\x02GH\x07\f\x02\x02H\r\x03\x02\x02\x02IJ\x07\n\x02\x02JK\x07" +
-		"\x07\x02\x02KL\x07\n\x02\x02LM\x07\b\x02\x02MN\x07\n\x02\x02NO\x07\v\x02" +
-		"\x02O\x0F\x03\x02\x02\x02PQ\x07\t\x02\x02QR\x07\b\x02\x02RS\x07\n\x02" +
-		"\x02ST\x07\v\x02\x02T\x11\x03\x02\x02\x02UV\x07\n\x02\x02VW\x07\b\x02" +
-		"\x02WX\x07\n\x02\x02XY\x07\v\x02\x02Y\x13\x03\x02\x02\x02Z[\x07\n\x02" +
-		"\x02[\\\x07\v\x02\x02\\\x15\x03\x02\x02\x02\x07\x1D#+19";
+		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03\x0EU\x04\x02" +
+		"\t\x02\x04\x03\t\x03\x04\x04\t\x04\x04\x05\t\x05\x04\x06\t\x06\x04\x07" +
+		"\t\x07\x04\b\t\b\x04\t\t\t\x04\n\t\n\x04\v\t\v\x03\x02\x03\x02\x03\x02" +
+		"\x03\x02\x03\x02\x03\x02\x03\x02\x05\x02\x1E\n\x02\x03\x03\x03\x03\x03" +
+		"\x03\x03\x03\x05\x03$\n\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x05" +
+		"\x03+\n\x03\x03\x04\x03\x04\x03\x04\x03\x04\x05\x041\n\x04\x03\x04\x03" +
+		"\x04\x03\x04\x03\x04\x03\x04\x05\x048\n\x04\x03\x05\x03\x05\x03\x05\x03" +
+		"\x05\x03\x06\x03\x06\x03\x06\x03\x06\x03\x07\x03\x07\x03\x07\x03\b\x03" +
+		"\b\x03\b\x03\b\x03\b\x03\b\x03\t\x03\t\x03\t\x03\t\x03\n\x03\n\x03\n\x03" +
+		"\n\x03\v\x03\v\x03\v\x02\x02\x02\f\x02\x02\x04\x02\x06\x02\b\x02\n\x02" +
+		"\f\x02\x0E\x02\x10\x02\x12\x02\x14\x02\x02\x02\x02\\\x02\x1D\x03\x02\x02" +
+		"\x02\x04#\x03\x02\x02\x02\x060\x03\x02\x02\x02\b9\x03\x02\x02\x02\n=\x03" +
+		"\x02\x02\x02\fA\x03\x02\x02\x02\x0ED\x03\x02\x02\x02\x10J\x03\x02\x02" +
+		"\x02\x12N\x03\x02\x02\x02\x14R\x03\x02\x02\x02\x16\x1E\x05\x14\v\x02\x17" +
+		"\x1E\x05\x12\n\x02\x18\x1E\x05\x10\t\x02\x19\x1E\x05\x0E\b\x02\x1A\x1E" +
+		"\x05\b\x05\x02\x1B\x1E\x05\x06\x04\x02\x1C\x1E\x05\x04\x03\x02\x1D\x16" +
+		"\x03\x02\x02\x02\x1D\x17\x03\x02\x02\x02\x1D\x18\x03\x02\x02\x02\x1D\x19" +
+		"\x03\x02\x02\x02\x1D\x1A\x03\x02\x02\x02\x1D\x1B\x03\x02\x02\x02\x1D\x1C" +
+		"\x03\x02\x02\x02\x1E\x03\x03\x02\x02\x02\x1F$\x07\v\x02\x02 $\x05\x10" +
+		"\t\x02!$\x05\x12\n\x02\"$\x05\x0E\b\x02#\x1F\x03\x02\x02\x02# \x03\x02" +
+		"\x02\x02#!\x03\x02\x02\x02#\"\x03\x02\x02\x02$%\x03\x02\x02\x02%*\x07" +
+		"\x03\x02\x02&+\x07\v\x02\x02\'+\x05\f\x07\x02(+\x05\n\x06\x02)+\x05\b" +
+		"\x05\x02*&\x03\x02\x02\x02*\'\x03\x02\x02\x02*(\x03\x02\x02\x02*)\x03" +
+		"\x02\x02\x02+\x05\x03\x02\x02\x02,1\x07\v\x02\x02-1\x05\x10\t\x02.1\x05" +
+		"\x12\n\x02/1\x05\x0E\b\x020,\x03\x02\x02\x020-\x03\x02\x02\x020.\x03\x02" +
+		"\x02\x020/\x03\x02\x02\x0212\x03\x02\x02\x0227\x07\x04\x02\x0238\x07\v" +
+		"\x02\x0248\x05\f\x07\x0258\x05\n\x06\x0268\x05\b\x05\x0273\x03\x02\x02" +
+		"\x0274\x03\x02\x02\x0275\x03\x02\x02\x0276\x03\x02\x02\x028\x07\x03\x02" +
+		"\x02\x029:\x07\v\x02\x02:;\x07\x05\x02\x02;<\x07\n\x02\x02<\t\x03\x02" +
+		"\x02\x02=>\x07\v\x02\x02>?\x07\x06\x02\x02?@\x07\n\x02\x02@\v\x03\x02" +
+		"\x02\x02AB\x07\v\x02\x02BC\x07\n\x02\x02C\r\x03\x02\x02\x02DE\x07\r\x02" +
+		"\x02EF\x07\x07\x02\x02FG\x07\r\x02\x02GH\x07\b\x02\x02HI\x07\v\x02\x02" +
+		"I\x0F\x03\x02\x02\x02JK\x07\t\x02\x02KL\x07\b\x02\x02LM\x07\v\x02\x02" +
+		"M\x11\x03\x02\x02\x02NO\x07\r\x02\x02OP\x07\b\x02\x02PQ\x07\v\x02\x02" +
+		"Q\x13\x03\x02\x02\x02RS\x07\v\x02\x02S\x15\x03\x02\x02\x02\x07\x1D#*0" +
+		"7";
 	public static __ATN: ATN;
 	public static get _ATN(): ATN {
 		if (!ElementSelectorParser.__ATN) {
@@ -663,8 +645,14 @@ export class SelectorContext extends ParserRuleContext {
 
 
 export class ElementAdjacentSelectorContext extends ParserRuleContext {
-	public elementSelector(): ElementSelectorContext | undefined {
-		return this.tryGetRuleContext(0, ElementSelectorContext);
+	public ElementReference(): TerminalNode[];
+	public ElementReference(i: number): TerminalNode;
+	public ElementReference(i?: number): TerminalNode | TerminalNode[] {
+		if (i === undefined) {
+			return this.getTokens(ElementSelectorParser.ElementReference);
+		} else {
+			return this.getToken(ElementSelectorParser.ElementReference, i);
+		}
 	}
 	public hlPathSelector(): HlPathSelectorContext | undefined {
 		return this.tryGetRuleContext(0, HlPathSelectorContext);
@@ -675,8 +663,6 @@ export class ElementAdjacentSelectorContext extends ParserRuleContext {
 	public loopPathSelector(): LoopPathSelectorContext | undefined {
 		return this.tryGetRuleContext(0, LoopPathSelectorContext);
 	}
-	public SegmentID(): TerminalNode | undefined { return this.tryGetToken(ElementSelectorParser.SegmentID, 0); }
-	public ElementID(): TerminalNode | undefined { return this.tryGetToken(ElementSelectorParser.ElementID, 0); }
 	public elementValueSelector(): ElementValueSelectorContext | undefined {
 		return this.tryGetRuleContext(0, ElementValueSelectorContext);
 	}
@@ -715,8 +701,14 @@ export class ElementAdjacentSelectorContext extends ParserRuleContext {
 
 
 export class ElementPrecedentSelectorContext extends ParserRuleContext {
-	public elementSelector(): ElementSelectorContext | undefined {
-		return this.tryGetRuleContext(0, ElementSelectorContext);
+	public ElementReference(): TerminalNode[];
+	public ElementReference(i: number): TerminalNode;
+	public ElementReference(i?: number): TerminalNode | TerminalNode[] {
+		if (i === undefined) {
+			return this.getTokens(ElementSelectorParser.ElementReference);
+		} else {
+			return this.getToken(ElementSelectorParser.ElementReference, i);
+		}
 	}
 	public hlPathSelector(): HlPathSelectorContext | undefined {
 		return this.tryGetRuleContext(0, HlPathSelectorContext);
@@ -727,8 +719,6 @@ export class ElementPrecedentSelectorContext extends ParserRuleContext {
 	public loopPathSelector(): LoopPathSelectorContext | undefined {
 		return this.tryGetRuleContext(0, LoopPathSelectorContext);
 	}
-	public SegmentID(): TerminalNode | undefined { return this.tryGetToken(ElementSelectorParser.SegmentID, 0); }
-	public ElementID(): TerminalNode | undefined { return this.tryGetToken(ElementSelectorParser.ElementID, 0); }
 	public elementValueSelector(): ElementValueSelectorContext | undefined {
 		return this.tryGetRuleContext(0, ElementValueSelectorContext);
 	}
@@ -767,8 +757,7 @@ export class ElementPrecedentSelectorContext extends ParserRuleContext {
 
 
 export class ElementContainsValueSelectorContext extends ParserRuleContext {
-	public SegmentID(): TerminalNode { return this.getToken(ElementSelectorParser.SegmentID, 0); }
-	public ElementID(): TerminalNode { return this.getToken(ElementSelectorParser.ElementID, 0); }
+	public ElementReference(): TerminalNode { return this.getToken(ElementSelectorParser.ElementReference, 0); }
 	public ElementValue(): TerminalNode { return this.getToken(ElementSelectorParser.ElementValue, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
@@ -799,8 +788,7 @@ export class ElementContainsValueSelectorContext extends ParserRuleContext {
 
 
 export class ElementNotValueSelectorContext extends ParserRuleContext {
-	public SegmentID(): TerminalNode { return this.getToken(ElementSelectorParser.SegmentID, 0); }
-	public ElementID(): TerminalNode { return this.getToken(ElementSelectorParser.ElementID, 0); }
+	public ElementReference(): TerminalNode { return this.getToken(ElementSelectorParser.ElementReference, 0); }
 	public ElementValue(): TerminalNode { return this.getToken(ElementSelectorParser.ElementValue, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
@@ -831,8 +819,7 @@ export class ElementNotValueSelectorContext extends ParserRuleContext {
 
 
 export class ElementValueSelectorContext extends ParserRuleContext {
-	public SegmentID(): TerminalNode { return this.getToken(ElementSelectorParser.SegmentID, 0); }
-	public ElementID(): TerminalNode { return this.getToken(ElementSelectorParser.ElementID, 0); }
+	public ElementReference(): TerminalNode { return this.getToken(ElementSelectorParser.ElementReference, 0); }
 	public ElementValue(): TerminalNode { return this.getToken(ElementSelectorParser.ElementValue, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
@@ -872,7 +859,7 @@ export class LoopPathSelectorContext extends ParserRuleContext {
 			return this.getToken(ElementSelectorParser.SegmentID, i);
 		}
 	}
-	public ElementID(): TerminalNode { return this.getToken(ElementSelectorParser.ElementID, 0); }
+	public ElementReference(): TerminalNode { return this.getToken(ElementSelectorParser.ElementReference, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
@@ -903,8 +890,7 @@ export class LoopPathSelectorContext extends ParserRuleContext {
 
 export class HlPathSelectorContext extends ParserRuleContext {
 	public HLPath(): TerminalNode { return this.getToken(ElementSelectorParser.HLPath, 0); }
-	public SegmentID(): TerminalNode { return this.getToken(ElementSelectorParser.SegmentID, 0); }
-	public ElementID(): TerminalNode { return this.getToken(ElementSelectorParser.ElementID, 0); }
+	public ElementReference(): TerminalNode { return this.getToken(ElementSelectorParser.ElementReference, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
@@ -934,16 +920,8 @@ export class HlPathSelectorContext extends ParserRuleContext {
 
 
 export class ParentSegmentSelectorContext extends ParserRuleContext {
-	public SegmentID(): TerminalNode[];
-	public SegmentID(i: number): TerminalNode;
-	public SegmentID(i?: number): TerminalNode | TerminalNode[] {
-		if (i === undefined) {
-			return this.getTokens(ElementSelectorParser.SegmentID);
-		} else {
-			return this.getToken(ElementSelectorParser.SegmentID, i);
-		}
-	}
-	public ElementID(): TerminalNode { return this.getToken(ElementSelectorParser.ElementID, 0); }
+	public SegmentID(): TerminalNode { return this.getToken(ElementSelectorParser.SegmentID, 0); }
+	public ElementReference(): TerminalNode { return this.getToken(ElementSelectorParser.ElementReference, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
@@ -973,8 +951,7 @@ export class ParentSegmentSelectorContext extends ParserRuleContext {
 
 
 export class ElementSelectorContext extends ParserRuleContext {
-	public SegmentID(): TerminalNode { return this.getToken(ElementSelectorParser.SegmentID, 0); }
-	public ElementID(): TerminalNode { return this.getToken(ElementSelectorParser.ElementID, 0); }
+	public ElementReference(): TerminalNode { return this.getToken(ElementSelectorParser.ElementReference, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
