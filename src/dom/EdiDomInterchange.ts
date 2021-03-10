@@ -100,7 +100,11 @@ export class EdiDomInterchange extends EdiDomAbstractNode<EdiDomNodeType.Interch
 
   * walk (): Generator<EdiDomNode> {
     yield this
-    if (typeof this.header !== 'undefined') yield this.header
+    if (typeof this.header === 'object') {
+      for (const node of this.header.walk()) {
+        yield node
+      }
+    }
 
     for (const group of this.groups) {
       for (const node of group.walk()) {
@@ -114,6 +118,10 @@ export class EdiDomInterchange extends EdiDomAbstractNode<EdiDomNodeType.Interch
       }
     }
 
-    if (typeof this.trailer !== 'undefined') yield this.trailer
+    if (typeof this.trailer === 'object') {
+      for (const node of this.trailer.walk()) {
+        yield node
+      }
+    }
   }
 }

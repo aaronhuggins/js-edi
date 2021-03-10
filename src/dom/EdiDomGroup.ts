@@ -75,7 +75,11 @@ export class EdiDomGroup extends EdiDomAbstractNode<EdiDomNodeType.Group> {
 
   * walk (): Generator<EdiDomNode> {
     yield this
-    if (typeof this.header !== 'undefined') yield this.header
+    if (typeof this.header === 'object') {
+      for (const node of this.header.walk()) {
+        yield node
+      }
+    }
 
     for (const message of this.messages) {
       for (const node of message.walk()) {
@@ -83,6 +87,10 @@ export class EdiDomGroup extends EdiDomAbstractNode<EdiDomNodeType.Group> {
       }
     }
 
-    if (typeof this.trailer !== 'undefined') yield this.trailer
+    if (typeof this.trailer === 'object') {
+      for (const node of this.trailer.walk()) {
+        yield node
+      }
+    }
   }
 }
