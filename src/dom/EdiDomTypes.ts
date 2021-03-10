@@ -36,6 +36,8 @@ export interface EdiDomNode<T extends EdiDomNodeType = any> {
   nodeType: T
   parent?: EdiDomNode
   root: EdiDomNode<EdiDomNodeType.Root>
+  tag: T extends EdiDomNodeType.Segment ? string : undefined
+  text: string
 
   /** Add a child node to the dom. On value nodes, this is undefined. */
   addChildNode?: (child: EdiDomNode) => void

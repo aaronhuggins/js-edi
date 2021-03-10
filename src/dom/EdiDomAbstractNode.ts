@@ -1,12 +1,16 @@
+import { QuerySelector } from '../query/QuerySelector'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
 
 export abstract class EdiDomAbstractNode<T extends EdiDomNodeType = any> implements EdiDomNode<T> {
   nodeType: T
   parent?: EdiDomNode
   root: EdiDomNode<EdiDomNodeType.Root>
+  tag: T extends EdiDomNodeType.Segment ? string : undefined
   protected _header?: EdiDomNode<EdiDomNodeType.Segment>
   protected _trailer?: EdiDomNode<EdiDomNodeType.Segment>
   protected _text?: string
+
+  abstract get text (): string
 
   /** Add a child node to the dom. On value nodes, this is undefined. */
   addChildNode (child: EdiDomNode) {}
@@ -19,12 +23,23 @@ export abstract class EdiDomAbstractNode<T extends EdiDomNodeType = any> impleme
   
   /** Returns the first element that is a descendant of node that matches selectors. */
   querySelector (selector: string): EdiDomNode<EdiDomNodeType.Element> {
-    return
+    const query = new QuerySelector(selector, this)
+    const evaluate = query.evaluate()
+    const { value } = evaluate.next()
+
+    return value
   }
 
   /** Returns all element descendants of node that match selectors. */
   querySelectorAll (selector: string): EdiDomNode<EdiDomNodeType.Element>[] {
-    return
+    const query = new QuerySelector(selector, this)
+    const values: EdiDomNode<EdiDomNodeType.Element>[] = []
+
+    for (const value of query.evaluate()) {
+      values.push(value)
+    }
+
+    return values
   }
 
   /** Return a cleaned EdiDomNode for serialization; removes circular references and verbose node types. */
