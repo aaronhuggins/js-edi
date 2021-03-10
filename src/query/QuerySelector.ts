@@ -2,7 +2,7 @@ import { CharStreams, CommonTokenStream } from 'antlr4ts'
 import { TerminalNode } from 'antlr4ts/tree'
 import { EdiDomNode, EdiDomNodeType } from '../dom/EdiDomTypes'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
-import { ElementSelectorParser } from './ElementSelectorParser'
+import { ElementSelectorContext, ElementSelectorParser } from './ElementSelectorParser'
 
 class ElementReference {
   constructor (ref: TerminalNode) {
@@ -27,6 +27,7 @@ export class QuerySelector {
 
   private readonly node: EdiDomNode
   private readonly selector: string
+  private walker: Generator<EdiDomNode<any>>
 
   * evaluate (): Generator<EdiDomNode<EdiDomNodeType.Element>> {
     const charStream = CharStreams.fromString(this.selector, 'selector')
@@ -34,27 +35,38 @@ export class QuerySelector {
     const tokens = new CommonTokenStream(lexer)
     const parser = new ElementSelectorParser(tokens)
     const selector = parser.selector()
+    this.walker = this.node.walk()
 
     if (typeof selector.elementSelector() === 'object') {
-      const ref = new ElementReference(selector.elementSelector().ElementReference())
-      const { segmentId, elementId } = ref
-      let elementCounter = 1
-
-      for (const node of this.node.walk()) {
-        if (
-          node.nodeType === EdiDomNodeType.Element &&
-          node.parent.nodeType === EdiDomNodeType.Segment &&
-          node.parent.tag === segmentId
-        ) {
-          if (elementCounter === elementId) {
-            yield node
-          }
-
-          elementCounter += 1
-        }
+      for (const node of this.elementSelector(selector.elementSelector())) {
+        yield node
       }
     } else if (typeof selector.elementAdjacentSelector() === 'object') {
       console.log('elementAdjacentSelector')
+    }
+  }
+
+  * elementSelector (selector: ElementSelectorContext): Generator<EdiDomNode<EdiDomNodeType.Element>> {
+    const ref = new ElementReference(selector.ElementReference())
+    const { segmentId, elementId } = ref
+    let elementCounter = 1
+
+    for (const node of this.walker) {
+      if (
+        node.nodeType === EdiDomNodeType.Element &&
+        node.parent.nodeType === EdiDomNodeType.Segment &&
+        node.parent.tag === segmentId
+      ) {
+        if (elementCounter === elementId) {
+          yield node
+        }
+
+        elementCounter += 1
+      }
+
+      if (node.parent.nodeType === EdiDomNodeType.Segment) {
+        elementCounter = 1
+      }
     }
   }
 }
