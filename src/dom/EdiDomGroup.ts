@@ -1,10 +1,11 @@
 import type { EdiDomMessage } from './EdiDomMessage'
-import { EdiDomNode, EdiDomNodeType } from './EdiDomNode'
+import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
+import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
 
 /** An EDIFACT UNG message or an X12 ST transaction. */
-export class EdiDomGroup extends EdiDomNode<EdiDomNodeType.Group> {
+export class EdiDomGroup extends EdiDomAbstractNode<EdiDomNodeType.Group> {
   constructor () {
     super()
     this.nodeType = EdiDomNodeType.Group

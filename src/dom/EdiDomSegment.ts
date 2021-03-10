@@ -1,9 +1,10 @@
 import type { EdiDomElement } from './EdiDomElement'
-import { EdiDomNode, EdiDomNodeType } from './EdiDomNode'
+import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomRoot } from './EdiDomRoot'
+import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
 
 /** The segment of an EDI document. */
-export class EdiDomSegment<T extends string = string> extends EdiDomNode<EdiDomNodeType.Segment> {
+export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode<EdiDomNodeType.Segment> {
   constructor (tag?: T) {
     super()
     this.nodeType = EdiDomNodeType.Segment

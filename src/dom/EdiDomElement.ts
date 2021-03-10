@@ -1,14 +1,15 @@
 import type { EdiDomComponent } from './EdiDomComponent'
-import { EdiDomNode, EdiDomNodeType } from './EdiDomNode'
+import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
 import type { EdiDomValue } from './EdiDomValue'
+import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
 
 /** Element types supported for detection. */
 export type EdiDomElementType= 'repeated' | 'component' | 'value'
 
 /** An element containing one or more repeated elements, a component, or a value. */
-export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends EdiDomNode<EdiDomNodeType.Element> {
+export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends EdiDomAbstractNode<EdiDomNodeType.Element> {
   constructor (type?: EdiDomElementType) {
     super()
     this.nodeType = EdiDomNodeType.Element

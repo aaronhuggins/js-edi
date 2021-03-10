@@ -1,9 +1,10 @@
-import { EdiDomNode, EdiDomNodeType } from './EdiDomNode'
+import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomRoot } from './EdiDomRoot'
+import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
 import type { EdiDomValue } from './EdiDomValue'
 
 /** An intermediate value type in the object model, holding an array of values. */
-export class EdiDomComponent extends EdiDomNode<EdiDomNodeType.Component> {
+export class EdiDomComponent extends EdiDomAbstractNode<EdiDomNodeType.Component> {
   constructor () {
     super()
     this.nodeType = EdiDomNodeType.Component

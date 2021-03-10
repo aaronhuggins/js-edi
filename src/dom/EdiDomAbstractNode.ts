@@ -1,15 +1,6 @@
-export enum EdiDomNodeType {
-  Root = 'Root',
-  Interchange = 'Interchange',
-  Group = 'Group',
-  Message = 'Message',
-  Segment = 'Segment',
-  Element = 'Element',
-  Component = 'Component',
-  Value = 'Value'
-}
+import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
 
-export abstract class EdiDomNode<T extends EdiDomNodeType = any> {
+export abstract class EdiDomAbstractNode<T extends EdiDomNodeType = any> implements EdiDomNode<T> {
   nodeType: T
   parent?: EdiDomNode
   root: EdiDomNode<EdiDomNodeType.Root>
@@ -17,10 +8,10 @@ export abstract class EdiDomNode<T extends EdiDomNodeType = any> {
   protected _trailer?: EdiDomNode<EdiDomNodeType.Segment>
   protected _text?: string
 
-  /** Add a child node to the dom. On value nodes, this is a no-op. */
+  /** Add a child node to the dom. On value nodes, this is undefined. */
   addChildNode (child: EdiDomNode) {}
 
-  /** Remove a child node from the dom. On value nodes, this is a no-op. */
+  /** Remove a child node from the dom. On value nodes, this is undefined. */
   removeChildNode (child: EdiDomNode) {}
 
   /** Sequentially walk the Document Object Model starting with this node. */

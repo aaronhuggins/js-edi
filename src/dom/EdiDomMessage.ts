@@ -1,9 +1,10 @@
-import { EdiDomNode, EdiDomNodeType } from './EdiDomNode'
+import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
+import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
 
 /** An EDIFACT UNH message or an X12 ST transaction. */
-export class EdiDomMessage extends EdiDomNode<EdiDomNodeType.Message> {
+export class EdiDomMessage extends EdiDomAbstractNode<EdiDomNodeType.Message> {
   constructor () {
     super()
     this.nodeType = EdiDomNodeType.Message
