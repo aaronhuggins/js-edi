@@ -46,6 +46,12 @@ export interface EdiDomNode<T extends EdiDomNodeType = any> {
   /** Sequentially walk the Document Object Model starting with this node. */
   walk: () => Generator<EdiDomNode>
 
+  /** Returns the first element that is a descendant of node that matches selectors. */
+  querySelector: (selector: string) => EdiDomNode<EdiDomNodeType.Element>
+
+  /** Returns all element descendants of node that match selectors. */
+  querySelectorAll: (selector: string) => EdiDomNode<EdiDomNodeType.Element>[]
+
   /** Return a cleaned EdiDomNode for serialization; removes circular references and verbose node types. */
   toJSON: () => Partial<this>
 }
