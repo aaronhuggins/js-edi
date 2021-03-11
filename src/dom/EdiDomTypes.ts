@@ -1,7 +1,7 @@
-import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomComponent } from './EdiDomComponent'
 import { EdiDomElement } from './EdiDomElement'
 import { EdiDomGroup } from './EdiDomGroup'
+import { EdiDomHierarchical } from './EdiDomHierarchical'
 import { EdiDomInterchange } from './EdiDomInterchange'
 import { EdiDomMessage } from './EdiDomMessage'
 import { EdiDomRoot } from './EdiDomRoot'
@@ -14,6 +14,7 @@ export enum EdiDomNodeType {
   Interchange = 'Interchange',
   Group = 'Group',
   Message = 'Message',
+  Hierarchical = 'Hierarchical',
   Segment = 'Segment',
   Element = 'Element',
   Component = 'Component',
@@ -42,5 +43,15 @@ export enum EdiDomNodeType {
   endOfLine?: string
 }
 
-export type EdiDomNode = EdiDomRoot | EdiDomInterchange | EdiDomGroup | EdiDomMessage | EdiDomSegment | EdiDomElement | EdiDomComponent | EdiDomValue
+export type EdiDomNode = 
+  | EdiDomRoot
+  | EdiDomInterchange
+  | EdiDomGroup
+  | EdiDomMessage
+  | EdiDomHierarchical
+  | EdiDomSegment
+  | EdiDomElement
+  | EdiDomComponent
+  | EdiDomValue
 
+export type EdiDomDocumentType = 'EDIFACT' | 'EDIX12'

@@ -1,6 +1,6 @@
 import type { EdiDomInterchange } from './EdiDomInterchange'
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
-import { EdiDomNode, EdiDomNodeType, EdiDomOptions } from './EdiDomTypes'
+import { EdiDomDocumentType, EdiDomNode, EdiDomNodeType, EdiDomOptions } from './EdiDomTypes'
 
 /** The document root containing one or more interchanges. */
 export class EdiDomRoot extends EdiDomAbstractNode {
@@ -26,6 +26,25 @@ export class EdiDomRoot extends EdiDomAbstractNode {
   /** The read-only text representation of this node. */
   get text (): string {
     return this.interchanges.map(interchange => interchange.text).join('')
+  }
+
+  get documentType (): EdiDomDocumentType {
+    const interchange = this.interchanges[0]
+
+    if (typeof interchange === 'object') {
+      const header = interchange.header
+
+      if (typeof header === 'object') {
+        const tag = header.tag
+
+        switch (tag) {
+          case 'ISA':
+            return 'EDIX12'
+          case 'UNB':
+            return 'EDIFACT'
+        }
+      }
+    }
   }
 
   /** Creates an UNA Service String Advice from options. */
