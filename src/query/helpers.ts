@@ -3,6 +3,8 @@ import { ElementReference } from './QueryEngineTypes'
 
 /** Transform an element reference terminal node into ElementReference object. */
 export function elementReference (ref: TerminalNode): ElementReference {
+  if (typeof ref === 'undefined') return
+
   const index = ref.text.length === 5 ? 3 : 2
 
   return {
@@ -12,5 +14,7 @@ export function elementReference (ref: TerminalNode): ElementReference {
 }
 
 export function elementValue (ref: TerminalNode): string {
+  if (typeof ref === 'undefined') return
+
   return ref.text.substring(2, ref.text.length - 2)
 }

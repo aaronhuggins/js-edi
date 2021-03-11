@@ -4,7 +4,7 @@ import type { EdiDomElement } from '../dom/EdiDomElement'
 import type { EdiDomSegment } from '../dom/EdiDomSegment'
 import { EdiDomNode, EdiDomNodeType } from '../dom/EdiDomTypes'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
-import { ElementSelectorContext, ElementSelectorParser, SelectorContext } from './ElementSelectorParser'
+import { ElementSelectorContext, ElementSelectorParser, ParentSegmentSelectorContext, SelectorContext } from './ElementSelectorParser'
 import { elementReference, elementValue } from './helpers'
 import { QueryDomWalker } from './QueryDomWalker'
 import { ElementReference } from './QueryEngineTypes'
@@ -76,8 +76,8 @@ export class QuerySelector {
   }
 
   /** Follow a path of adjacent segments and select the first element at the end of the path. */
-  private *parentSegmentSelector (): Generator<EdiDomElement> {
-    const selector = this.parsed.parentSegmentSelector()
+  private *parentSegmentSelector (ctx?: ParentSegmentSelectorContext): Generator<EdiDomElement> {
+    const selector = typeof ctx === 'undefined' ? this.parsed.parentSegmentSelector() : ctx
     const ref = elementReference(selector.ElementReference())
     const segmentIds = selector.SegmentID().map(segmentId => segmentId.text.toUpperCase())
     let counter = 0
@@ -108,8 +108,9 @@ export class QuerySelector {
   /** Follow a path of hierarchical levels and select the first element at the end of the path. */
   private *hlPathSelector (): Generator<EdiDomElement> {
     const selector = this.parsed.hlPathSelector()
-    const ref = elementReference(selector.ElementReference())
     const hlCodes = selector.AnyCharacter().map(hlCode => hlCode.text)
+    const ref = elementReference(selector.ElementReference())
+    const parentSegmentPath = selector.parentSegmentSelector()
     let codeIndex = 0
     let lastHlParent = 0
 
@@ -130,10 +131,14 @@ export class QuerySelector {
         }
 
         if (codeIndex === hlCodes.length && lastHlParent === hlParent) {
-          if (ref.segmentId === 'HL') {
-            yield node.getChildNode(ref.elementId)
+          if (typeof ref === 'object') {
+            if (ref.segmentId === 'HL') {
+              yield node.getChildNode(ref.elementId)
+            } else {
+              yield this.elementSelector(ref).next().value
+            }
           } else {
-            yield this.elementSelector(ref).next().value
+            yield this.parentSegmentSelector(parentSegmentPath).next().value
           }
         }
       }
@@ -144,6 +149,7 @@ export class QuerySelector {
   private *loopPathSelector (): Generator<EdiDomElement> {
     const selector = this.parsed.loopPathSelector()
     const ref = elementReference(selector.ElementReference())
+    const parentSegmentPath = selector.parentSegmentSelector()
     const [startTag, endTag] = selector.SegmentID().map(segmentId => segmentId.text.toUpperCase())
     let loopNodes: EdiDomSegment[] = []
     let inLoop = false
@@ -152,7 +158,21 @@ export class QuerySelector {
       if (node.nodeType === EdiDomNodeType.Segment) {
         if (node.tag === startTag) inLoop = true
         
-        if (inLoop) loopNodes.push(node)
+        if (inLoop) {
+          if (typeof ref === 'object') {
+            loopNodes.push(node)
+          } else {
+            const element: EdiDomElement = this.parentSegmentSelector(parentSegmentPath).next().value
+
+            if (typeof element === 'object') {
+              if (element.parent.nodeType === EdiDomNodeType.Segment && element.parent.tag === endTag) {
+                inLoop = false
+              }
+
+              yield element
+            }
+          }
+        }
 
         if (node.tag === endTag) {
           inLoop = false
