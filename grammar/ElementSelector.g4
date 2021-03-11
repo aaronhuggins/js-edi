@@ -1,7 +1,9 @@
 grammar ElementSelector;
 
 selector:
-    elementSelector
+    universalSelector
+  | segmentTag
+  | elementSelector
   | parentSegmentSelector
   | hlPathSelector
   | loopPathSelector
@@ -36,6 +38,10 @@ hlPathSelector: 'HL' ('+' AnyCharacter)+ '-' (ElementReference | parentSegmentSe
 parentSegmentSelector: (SegmentID '-')+ ElementReference;
 // Element reference selector.
 elementSelector: ElementReference;
+// Segment tag selector.
+segmentTag: SegmentID;
+// Universal selector.
+universalSelector: '*';
 
 // Fragments for printable character detection.
 fragment Number: '\u0030'..'\u0039';

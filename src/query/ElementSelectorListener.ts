@@ -13,6 +13,8 @@ import { LoopPathSelectorContext } from "./ElementSelectorParser";
 import { HlPathSelectorContext } from "./ElementSelectorParser";
 import { ParentSegmentSelectorContext } from "./ElementSelectorParser";
 import { ElementSelectorContext } from "./ElementSelectorParser";
+import { SegmentTagContext } from "./ElementSelectorParser";
+import { UniversalSelectorContext } from "./ElementSelectorParser";
 
 
 /**
@@ -129,5 +131,27 @@ export interface ElementSelectorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitElementSelector?: (ctx: ElementSelectorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ElementSelectorParser.segmentTag`.
+	 * @param ctx the parse tree
+	 */
+	enterSegmentTag?: (ctx: SegmentTagContext) => void;
+	/**
+	 * Exit a parse tree produced by `ElementSelectorParser.segmentTag`.
+	 * @param ctx the parse tree
+	 */
+	exitSegmentTag?: (ctx: SegmentTagContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ElementSelectorParser.universalSelector`.
+	 * @param ctx the parse tree
+	 */
+	enterUniversalSelector?: (ctx: UniversalSelectorContext) => void;
+	/**
+	 * Exit a parse tree produced by `ElementSelectorParser.universalSelector`.
+	 * @param ctx the parse tree
+	 */
+	exitUniversalSelector?: (ctx: UniversalSelectorContext) => void;
 }
 

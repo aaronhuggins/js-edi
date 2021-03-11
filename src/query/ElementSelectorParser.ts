@@ -51,11 +51,14 @@ export class ElementSelectorParser extends Parser {
 	public static readonly RULE_hlPathSelector = 7;
 	public static readonly RULE_parentSegmentSelector = 8;
 	public static readonly RULE_elementSelector = 9;
+	public static readonly RULE_segmentTag = 10;
+	public static readonly RULE_universalSelector = 11;
 	// tslint:disable:no-trailing-whitespace
 	public static readonly ruleNames: string[] = [
 		"selector", "elementAdjacentSelector", "elementPrecedentSelector", "elementContainsValueSelector", 
 		"elementNotValueSelector", "elementValueSelector", "loopPathSelector", 
-		"hlPathSelector", "parentSegmentSelector", "elementSelector",
+		"hlPathSelector", "parentSegmentSelector", "elementSelector", "segmentTag", 
+		"universalSelector",
 	];
 
 	private static readonly _LITERAL_NAMES: Array<string | undefined> = [
@@ -97,61 +100,77 @@ export class ElementSelectorParser extends Parser {
 		let _localctx: SelectorContext = new SelectorContext(this._ctx, this.state);
 		this.enterRule(_localctx, 0, ElementSelectorParser.RULE_selector);
 		try {
-			this.state = 27;
+			this.state = 33;
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 0, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 20;
-				this.elementSelector();
+				this.state = 24;
+				this.universalSelector();
 				}
 				break;
 
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 21;
-				this.parentSegmentSelector();
+				this.state = 25;
+				this.segmentTag();
 				}
 				break;
 
 			case 3:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 22;
-				this.hlPathSelector();
+				this.state = 26;
+				this.elementSelector();
 				}
 				break;
 
 			case 4:
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 23;
-				this.loopPathSelector();
+				this.state = 27;
+				this.parentSegmentSelector();
 				}
 				break;
 
 			case 5:
 				this.enterOuterAlt(_localctx, 5);
 				{
-				this.state = 24;
-				this.elementContainsValueSelector();
+				this.state = 28;
+				this.hlPathSelector();
 				}
 				break;
 
 			case 6:
 				this.enterOuterAlt(_localctx, 6);
 				{
-				this.state = 25;
-				this.elementPrecedentSelector();
+				this.state = 29;
+				this.loopPathSelector();
 				}
 				break;
 
 			case 7:
 				this.enterOuterAlt(_localctx, 7);
 				{
-				this.state = 26;
+				this.state = 30;
+				this.elementContainsValueSelector();
+				}
+				break;
+
+			case 8:
+				this.enterOuterAlt(_localctx, 8);
+				{
+				this.state = 31;
+				this.elementPrecedentSelector();
+				}
+				break;
+
+			case 9:
+				this.enterOuterAlt(_localctx, 9);
+				{
+				this.state = 32;
 				this.elementAdjacentSelector();
 				}
 				break;
@@ -178,66 +197,66 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 33;
+			this.state = 39;
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 1, this._ctx) ) {
 			case 1:
 				{
-				this.state = 29;
+				this.state = 35;
 				this.match(ElementSelectorParser.ElementReference);
 				}
 				break;
 
 			case 2:
 				{
-				this.state = 30;
+				this.state = 36;
 				this.hlPathSelector();
 				}
 				break;
 
 			case 3:
 				{
-				this.state = 31;
+				this.state = 37;
 				this.parentSegmentSelector();
 				}
 				break;
 
 			case 4:
 				{
-				this.state = 32;
+				this.state = 38;
 				this.loopPathSelector();
 				}
 				break;
 			}
-			this.state = 35;
+			this.state = 41;
 			this.match(ElementSelectorParser.T__0);
-			this.state = 40;
+			this.state = 46;
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 2, this._ctx) ) {
 			case 1:
 				{
-				this.state = 36;
+				this.state = 42;
 				this.match(ElementSelectorParser.ElementReference);
 				}
 				break;
 
 			case 2:
 				{
-				this.state = 37;
+				this.state = 43;
 				this.elementValueSelector();
 				}
 				break;
 
 			case 3:
 				{
-				this.state = 38;
+				this.state = 44;
 				this.elementNotValueSelector();
 				}
 				break;
 
 			case 4:
 				{
-				this.state = 39;
+				this.state = 45;
 				this.elementContainsValueSelector();
 				}
 				break;
@@ -265,66 +284,66 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 46;
+			this.state = 52;
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 3, this._ctx) ) {
 			case 1:
 				{
-				this.state = 42;
+				this.state = 48;
 				this.match(ElementSelectorParser.ElementReference);
 				}
 				break;
 
 			case 2:
 				{
-				this.state = 43;
+				this.state = 49;
 				this.hlPathSelector();
 				}
 				break;
 
 			case 3:
 				{
-				this.state = 44;
+				this.state = 50;
 				this.parentSegmentSelector();
 				}
 				break;
 
 			case 4:
 				{
-				this.state = 45;
+				this.state = 51;
 				this.loopPathSelector();
 				}
 				break;
 			}
-			this.state = 48;
+			this.state = 54;
 			this.match(ElementSelectorParser.T__1);
-			this.state = 53;
+			this.state = 59;
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 4, this._ctx) ) {
 			case 1:
 				{
-				this.state = 49;
+				this.state = 55;
 				this.match(ElementSelectorParser.ElementReference);
 				}
 				break;
 
 			case 2:
 				{
-				this.state = 50;
+				this.state = 56;
 				this.elementValueSelector();
 				}
 				break;
 
 			case 3:
 				{
-				this.state = 51;
+				this.state = 57;
 				this.elementNotValueSelector();
 				}
 				break;
 
 			case 4:
 				{
-				this.state = 52;
+				this.state = 58;
 				this.elementContainsValueSelector();
 				}
 				break;
@@ -352,11 +371,11 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 55;
+			this.state = 61;
 			this.match(ElementSelectorParser.ElementReference);
-			this.state = 56;
+			this.state = 62;
 			this.match(ElementSelectorParser.T__2);
-			this.state = 57;
+			this.state = 63;
 			this.match(ElementSelectorParser.ElementValue);
 			}
 		}
@@ -381,11 +400,11 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 59;
+			this.state = 65;
 			this.match(ElementSelectorParser.ElementReference);
-			this.state = 60;
+			this.state = 66;
 			this.match(ElementSelectorParser.T__3);
-			this.state = 61;
+			this.state = 67;
 			this.match(ElementSelectorParser.ElementValue);
 			}
 		}
@@ -410,9 +429,9 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 63;
+			this.state = 69;
 			this.match(ElementSelectorParser.ElementReference);
-			this.state = 64;
+			this.state = 70;
 			this.match(ElementSelectorParser.ElementValue);
 			}
 		}
@@ -437,26 +456,26 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 66;
-			this.match(ElementSelectorParser.SegmentID);
-			this.state = 67;
-			this.match(ElementSelectorParser.T__4);
-			this.state = 68;
-			this.match(ElementSelectorParser.SegmentID);
-			this.state = 69;
-			this.match(ElementSelectorParser.T__5);
 			this.state = 72;
+			this.match(ElementSelectorParser.SegmentID);
+			this.state = 73;
+			this.match(ElementSelectorParser.T__4);
+			this.state = 74;
+			this.match(ElementSelectorParser.SegmentID);
+			this.state = 75;
+			this.match(ElementSelectorParser.T__5);
+			this.state = 78;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case ElementSelectorParser.ElementReference:
 				{
-				this.state = 70;
+				this.state = 76;
 				this.match(ElementSelectorParser.ElementReference);
 				}
 				break;
 			case ElementSelectorParser.SegmentID:
 				{
-				this.state = 71;
+				this.state = 77;
 				this.parentSegmentSelector();
 				}
 				break;
@@ -487,38 +506,38 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 74;
+			this.state = 80;
 			this.match(ElementSelectorParser.T__6);
-			this.state = 77;
+			this.state = 83;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			do {
 				{
 				{
-				this.state = 75;
+				this.state = 81;
 				this.match(ElementSelectorParser.T__7);
-				this.state = 76;
+				this.state = 82;
 				this.match(ElementSelectorParser.AnyCharacter);
 				}
 				}
-				this.state = 79;
+				this.state = 85;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			} while (_la === ElementSelectorParser.T__7);
-			this.state = 81;
+			this.state = 87;
 			this.match(ElementSelectorParser.T__5);
-			this.state = 84;
+			this.state = 90;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case ElementSelectorParser.ElementReference:
 				{
-				this.state = 82;
+				this.state = 88;
 				this.match(ElementSelectorParser.ElementReference);
 				}
 				break;
 			case ElementSelectorParser.SegmentID:
 				{
-				this.state = 83;
+				this.state = 89;
 				this.parentSegmentSelector();
 				}
 				break;
@@ -549,23 +568,23 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 88;
+			this.state = 94;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			do {
 				{
 				{
-				this.state = 86;
+				this.state = 92;
 				this.match(ElementSelectorParser.SegmentID);
-				this.state = 87;
+				this.state = 93;
 				this.match(ElementSelectorParser.T__5);
 				}
 				}
-				this.state = 90;
+				this.state = 96;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			} while (_la === ElementSelectorParser.SegmentID);
-			this.state = 92;
+			this.state = 98;
 			this.match(ElementSelectorParser.ElementReference);
 			}
 		}
@@ -590,8 +609,58 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 94;
+			this.state = 100;
 			this.match(ElementSelectorParser.ElementReference);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public segmentTag(): SegmentTagContext {
+		let _localctx: SegmentTagContext = new SegmentTagContext(this._ctx, this.state);
+		this.enterRule(_localctx, 20, ElementSelectorParser.RULE_segmentTag);
+		try {
+			this.enterOuterAlt(_localctx, 1);
+			{
+			this.state = 102;
+			this.match(ElementSelectorParser.SegmentID);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public universalSelector(): UniversalSelectorContext {
+		let _localctx: UniversalSelectorContext = new UniversalSelectorContext(this._ctx, this.state);
+		this.enterRule(_localctx, 22, ElementSelectorParser.RULE_universalSelector);
+		try {
+			this.enterOuterAlt(_localctx, 1);
+			{
+			this.state = 104;
+			this.match(ElementSelectorParser.T__2);
 			}
 		}
 		catch (re) {
@@ -610,47 +679,50 @@ export class ElementSelectorParser extends Parser {
 	}
 
 	public static readonly _serializedATN: string =
-		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03\x0Fc\x04\x02" +
+		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03\x0Fm\x04\x02" +
 		"\t\x02\x04\x03\t\x03\x04\x04\t\x04\x04\x05\t\x05\x04\x06\t\x06\x04\x07" +
-		"\t\x07\x04\b\t\b\x04\t\t\t\x04\n\t\n\x04\v\t\v\x03\x02\x03\x02\x03\x02" +
-		"\x03\x02\x03\x02\x03\x02\x03\x02\x05\x02\x1E\n\x02\x03\x03\x03\x03\x03" +
-		"\x03\x03\x03\x05\x03$\n\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x05" +
-		"\x03+\n\x03\x03\x04\x03\x04\x03\x04\x03\x04\x05\x041\n\x04\x03\x04\x03" +
-		"\x04\x03\x04\x03\x04\x03\x04\x05\x048\n\x04\x03\x05\x03\x05\x03\x05\x03" +
-		"\x05\x03\x06\x03\x06\x03\x06\x03\x06\x03\x07\x03\x07\x03\x07\x03\b\x03" +
-		"\b\x03\b\x03\b\x03\b\x03\b\x05\bK\n\b\x03\t\x03\t\x03\t\x06\tP\n\t\r\t" +
-		"\x0E\tQ\x03\t\x03\t\x03\t\x05\tW\n\t\x03\n\x03\n\x06\n[\n\n\r\n\x0E\n" +
-		"\\\x03\n\x03\n\x03\v\x03\v\x03\v\x02\x02\x02\f\x02\x02\x04\x02\x06\x02" +
-		"\b\x02\n\x02\f\x02\x0E\x02\x10\x02\x12\x02\x14\x02\x02\x02\x02n\x02\x1D" +
-		"\x03\x02\x02\x02\x04#\x03\x02\x02\x02\x060\x03\x02\x02\x02\b9\x03\x02" +
-		"\x02\x02\n=\x03\x02\x02\x02\fA\x03\x02\x02\x02\x0ED\x03\x02\x02\x02\x10" +
-		"L\x03\x02\x02\x02\x12Z\x03\x02\x02\x02\x14`\x03\x02\x02\x02\x16\x1E\x05" +
-		"\x14\v\x02\x17\x1E\x05\x12\n\x02\x18\x1E\x05\x10\t\x02\x19\x1E\x05\x0E" +
-		"\b\x02\x1A\x1E\x05\b\x05\x02\x1B\x1E\x05\x06\x04\x02\x1C\x1E\x05\x04\x03" +
-		"\x02\x1D\x16\x03\x02\x02\x02\x1D\x17\x03\x02\x02\x02\x1D\x18\x03\x02\x02" +
-		"\x02\x1D\x19\x03\x02\x02\x02\x1D\x1A\x03\x02\x02\x02\x1D\x1B\x03\x02\x02" +
-		"\x02\x1D\x1C\x03\x02\x02\x02\x1E\x03\x03\x02\x02\x02\x1F$\x07\f\x02\x02" +
-		" $\x05\x10\t\x02!$\x05\x12\n\x02\"$\x05\x0E\b\x02#\x1F\x03\x02\x02\x02" +
-		"# \x03\x02\x02\x02#!\x03\x02\x02\x02#\"\x03\x02\x02\x02$%\x03\x02\x02" +
-		"\x02%*\x07\x03\x02\x02&+\x07\f\x02\x02\'+\x05\f\x07\x02(+\x05\n\x06\x02" +
-		")+\x05\b\x05\x02*&\x03\x02\x02\x02*\'\x03\x02\x02\x02*(\x03\x02\x02\x02" +
-		"*)\x03\x02\x02\x02+\x05\x03\x02\x02\x02,1\x07\f\x02\x02-1\x05\x10\t\x02" +
-		".1\x05\x12\n\x02/1\x05\x0E\b\x020,\x03\x02\x02\x020-\x03\x02\x02\x020" +
-		".\x03\x02\x02\x020/\x03\x02\x02\x0212\x03\x02\x02\x0227\x07\x04\x02\x02" +
-		"38\x07\f\x02\x0248\x05\f\x07\x0258\x05\n\x06\x0268\x05\b\x05\x0273\x03" +
-		"\x02\x02\x0274\x03\x02\x02\x0275\x03\x02\x02\x0276\x03\x02\x02\x028\x07" +
-		"\x03\x02\x02\x029:\x07\f\x02\x02:;\x07\x05\x02\x02;<\x07\v\x02\x02<\t" +
-		"\x03\x02\x02\x02=>\x07\f\x02\x02>?\x07\x06\x02\x02?@\x07\v\x02\x02@\v" +
-		"\x03\x02\x02\x02AB\x07\f\x02\x02BC\x07\v\x02\x02C\r\x03\x02\x02\x02DE" +
-		"\x07\x0E\x02\x02EF\x07\x07\x02\x02FG\x07\x0E\x02\x02GJ\x07\b\x02\x02H" +
-		"K\x07\f\x02\x02IK\x05\x12\n\x02JH\x03\x02\x02\x02JI\x03\x02\x02\x02K\x0F" +
-		"\x03\x02\x02\x02LO\x07\t\x02\x02MN\x07\n\x02\x02NP\x07\x0F\x02\x02OM\x03" +
-		"\x02\x02\x02PQ\x03\x02\x02\x02QO\x03\x02\x02\x02QR\x03\x02\x02\x02RS\x03" +
-		"\x02\x02\x02SV\x07\b\x02\x02TW\x07\f\x02\x02UW\x05\x12\n\x02VT\x03\x02" +
-		"\x02\x02VU\x03\x02\x02\x02W\x11\x03\x02\x02\x02XY\x07\x0E\x02\x02Y[\x07" +
-		"\b\x02\x02ZX\x03\x02\x02\x02[\\\x03\x02\x02\x02\\Z\x03\x02\x02\x02\\]" +
-		"\x03\x02\x02\x02]^\x03\x02\x02\x02^_\x07\f\x02\x02_\x13\x03\x02\x02\x02" +
-		"`a\x07\f\x02\x02a\x15\x03\x02\x02\x02\v\x1D#*07JQV\\";
+		"\t\x07\x04\b\t\b\x04\t\t\t\x04\n\t\n\x04\v\t\v\x04\f\t\f\x04\r\t\r\x03" +
+		"\x02\x03\x02\x03\x02\x03\x02\x03\x02\x03\x02\x03\x02\x03\x02\x03\x02\x05" +
+		"\x02$\n\x02\x03\x03\x03\x03\x03\x03\x03\x03\x05\x03*\n\x03\x03\x03\x03" +
+		"\x03\x03\x03\x03\x03\x03\x03\x05\x031\n\x03\x03\x04\x03\x04\x03\x04\x03" +
+		"\x04\x05\x047\n\x04\x03\x04\x03\x04\x03\x04\x03\x04\x03\x04\x05\x04>\n" +
+		"\x04\x03\x05\x03\x05\x03\x05\x03\x05\x03\x06\x03\x06\x03\x06\x03\x06\x03" +
+		"\x07\x03\x07\x03\x07\x03\b\x03\b\x03\b\x03\b\x03\b\x03\b\x05\bQ\n\b\x03" +
+		"\t\x03\t\x03\t\x06\tV\n\t\r\t\x0E\tW\x03\t\x03\t\x03\t\x05\t]\n\t\x03" +
+		"\n\x03\n\x06\na\n\n\r\n\x0E\nb\x03\n\x03\n\x03\v\x03\v\x03\f\x03\f\x03" +
+		"\r\x03\r\x03\r\x02\x02\x02\x0E\x02\x02\x04\x02\x06\x02\b\x02\n\x02\f\x02" +
+		"\x0E\x02\x10\x02\x12\x02\x14\x02\x16\x02\x18\x02\x02\x02\x02x\x02#\x03" +
+		"\x02\x02\x02\x04)\x03\x02\x02\x02\x066\x03\x02\x02\x02\b?\x03\x02\x02" +
+		"\x02\nC\x03\x02\x02\x02\fG\x03\x02\x02\x02\x0EJ\x03\x02\x02\x02\x10R\x03" +
+		"\x02\x02\x02\x12`\x03\x02\x02\x02\x14f\x03\x02\x02\x02\x16h\x03\x02\x02" +
+		"\x02\x18j\x03\x02\x02\x02\x1A$\x05\x18\r\x02\x1B$\x05\x16\f\x02\x1C$\x05" +
+		"\x14\v\x02\x1D$\x05\x12\n\x02\x1E$\x05\x10\t\x02\x1F$\x05\x0E\b\x02 $" +
+		"\x05\b\x05\x02!$\x05\x06\x04\x02\"$\x05\x04\x03\x02#\x1A\x03\x02\x02\x02" +
+		"#\x1B\x03\x02\x02\x02#\x1C\x03\x02\x02\x02#\x1D\x03\x02\x02\x02#\x1E\x03" +
+		"\x02\x02\x02#\x1F\x03\x02\x02\x02# \x03\x02\x02\x02#!\x03\x02\x02\x02" +
+		"#\"\x03\x02\x02\x02$\x03\x03\x02\x02\x02%*\x07\f\x02\x02&*\x05\x10\t\x02" +
+		"\'*\x05\x12\n\x02(*\x05\x0E\b\x02)%\x03\x02\x02\x02)&\x03\x02\x02\x02" +
+		")\'\x03\x02\x02\x02)(\x03\x02\x02\x02*+\x03\x02\x02\x02+0\x07\x03\x02" +
+		"\x02,1\x07\f\x02\x02-1\x05\f\x07\x02.1\x05\n\x06\x02/1\x05\b\x05\x020" +
+		",\x03\x02\x02\x020-\x03\x02\x02\x020.\x03\x02\x02\x020/\x03\x02\x02\x02" +
+		"1\x05\x03\x02\x02\x0227\x07\f\x02\x0237\x05\x10\t\x0247\x05\x12\n\x02" +
+		"57\x05\x0E\b\x0262\x03\x02\x02\x0263\x03\x02\x02\x0264\x03\x02\x02\x02" +
+		"65\x03\x02\x02\x0278\x03\x02\x02\x028=\x07\x04\x02\x029>\x07\f\x02\x02" +
+		":>\x05\f\x07\x02;>\x05\n\x06\x02<>\x05\b\x05\x02=9\x03\x02\x02\x02=:\x03" +
+		"\x02\x02\x02=;\x03\x02\x02\x02=<\x03\x02\x02\x02>\x07\x03\x02\x02\x02" +
+		"?@\x07\f\x02\x02@A\x07\x05\x02\x02AB\x07\v\x02\x02B\t\x03\x02\x02\x02" +
+		"CD\x07\f\x02\x02DE\x07\x06\x02\x02EF\x07\v\x02\x02F\v\x03\x02\x02\x02" +
+		"GH\x07\f\x02\x02HI\x07\v\x02\x02I\r\x03\x02\x02\x02JK\x07\x0E\x02\x02" +
+		"KL\x07\x07\x02\x02LM\x07\x0E\x02\x02MP\x07\b\x02\x02NQ\x07\f\x02\x02O" +
+		"Q\x05\x12\n\x02PN\x03\x02\x02\x02PO\x03\x02\x02\x02Q\x0F\x03\x02\x02\x02" +
+		"RU\x07\t\x02\x02ST\x07\n\x02\x02TV\x07\x0F\x02\x02US\x03\x02\x02\x02V" +
+		"W\x03\x02\x02\x02WU\x03\x02\x02\x02WX\x03\x02\x02\x02XY\x03\x02\x02\x02" +
+		"Y\\\x07\b\x02\x02Z]\x07\f\x02\x02[]\x05\x12\n\x02\\Z\x03\x02\x02\x02\\" +
+		"[\x03\x02\x02\x02]\x11\x03\x02\x02\x02^_\x07\x0E\x02\x02_a\x07\b\x02\x02" +
+		"`^\x03\x02\x02\x02ab\x03\x02\x02\x02b`\x03\x02\x02\x02bc\x03\x02\x02\x02" +
+		"cd\x03\x02\x02\x02de\x07\f\x02\x02e\x13\x03\x02\x02\x02fg\x07\f\x02\x02" +
+		"g\x15\x03\x02\x02\x02hi\x07\x0E\x02\x02i\x17\x03\x02\x02\x02jk\x07\x05" +
+		"\x02\x02k\x19\x03\x02\x02\x02\v#)06=PW\\b";
 	public static __ATN: ATN;
 	public static get _ATN(): ATN {
 		if (!ElementSelectorParser.__ATN) {
@@ -663,6 +735,12 @@ export class ElementSelectorParser extends Parser {
 }
 
 export class SelectorContext extends ParserRuleContext {
+	public universalSelector(): UniversalSelectorContext | undefined {
+		return this.tryGetRuleContext(0, UniversalSelectorContext);
+	}
+	public segmentTag(): SegmentTagContext | undefined {
+		return this.tryGetRuleContext(0, SegmentTagContext);
+	}
 	public elementSelector(): ElementSelectorContext | undefined {
 		return this.tryGetRuleContext(0, ElementSelectorContext);
 	}
@@ -1063,6 +1141,65 @@ export class ElementSelectorContext extends ParserRuleContext {
 	public accept<Result>(visitor: ElementSelectorVisitor<Result>): Result {
 		if (visitor.visitElementSelector) {
 			return visitor.visitElementSelector(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class SegmentTagContext extends ParserRuleContext {
+	public SegmentID(): TerminalNode { return this.getToken(ElementSelectorParser.SegmentID, 0); }
+	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+		super(parent, invokingState);
+	}
+	// @Override
+	public get ruleIndex(): number { return ElementSelectorParser.RULE_segmentTag; }
+	// @Override
+	public enterRule(listener: ElementSelectorListener): void {
+		if (listener.enterSegmentTag) {
+			listener.enterSegmentTag(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: ElementSelectorListener): void {
+		if (listener.exitSegmentTag) {
+			listener.exitSegmentTag(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: ElementSelectorVisitor<Result>): Result {
+		if (visitor.visitSegmentTag) {
+			return visitor.visitSegmentTag(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class UniversalSelectorContext extends ParserRuleContext {
+	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+		super(parent, invokingState);
+	}
+	// @Override
+	public get ruleIndex(): number { return ElementSelectorParser.RULE_universalSelector; }
+	// @Override
+	public enterRule(listener: ElementSelectorListener): void {
+		if (listener.enterUniversalSelector) {
+			listener.enterUniversalSelector(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: ElementSelectorListener): void {
+		if (listener.exitUniversalSelector) {
+			listener.exitUniversalSelector(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: ElementSelectorVisitor<Result>): Result {
+		if (visitor.visitUniversalSelector) {
+			return visitor.visitUniversalSelector(this);
 		} else {
 			return visitor.visitChildren(this);
 		}
