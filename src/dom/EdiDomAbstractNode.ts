@@ -1,4 +1,4 @@
-import { QuerySelector } from '../query/QuerySelector'
+import { QuerySelector } from '../query/QueryEngine'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
 
 export abstract class EdiDomAbstractNode<T extends EdiDomNodeType = any> implements EdiDomNode<T> {

@@ -1,5 +1,5 @@
 import { TerminalNode } from 'antlr4ts/tree'
-import { ElementReference } from './QuerySelectorTypes'
+import { ElementReference } from './QueryEngineTypes'
 
 /** Transform an element reference terminal node into ElementReference object. */
 export function elementReference (ref: TerminalNode): ElementReference {

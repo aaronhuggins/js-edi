@@ -3,7 +3,7 @@ import { EdiDomNode, EdiDomNodeType } from '../dom/EdiDomTypes'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
 import { ElementSelectorContext, ElementSelectorParser, ParentSegmentSelectorContext, SelectorContext } from './ElementSelectorParser'
 import { elementReference } from './helpers'
-import { ElementReference } from './QuerySelectorTypes'
+import { ElementReference } from './QueryEngineTypes'
 
 export class QuerySelector {
   constructor (selector: string, node: EdiDomNode) {
