@@ -5,7 +5,7 @@ import type { EdiDomSegment } from '../dom/EdiDomSegment'
 import { EdiDomNode, EdiDomNodeType } from '../dom/EdiDomTypes'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
 import { ElementSelectorContext, ElementSelectorParser, SelectorContext } from './ElementSelectorParser'
-import { elementReference } from './helpers'
+import { elementReference, elementValue } from './helpers'
 import { ElementReference } from './QueryEngineTypes'
 
 export class QuerySelector {
@@ -42,6 +42,10 @@ export class QuerySelector {
       }
     } else if (typeof this.parsed.loopPathSelector() === 'object') {
       for (const node of this.loopPathSelector()) {
+        yield node
+      }
+    } else if (typeof this.parsed.elementContainsValueSelector() === 'object') {
+      for (const node of this.elementContainsValueSelector()) {
         yield node
       }
     } else if (typeof this.parsed.elementAdjacentSelector() === 'object') {
@@ -136,7 +140,7 @@ export class QuerySelector {
   }
 
   /** Find a bounded or unbounded loop and return the first matching element in the loop. */
-  private *loopPathSelector () {
+  private *loopPathSelector (): Generator<EdiDomElement> {
     const selector = this.parsed.loopPathSelector()
     const ref = elementReference(selector.ElementReference())
     const [startTag, endTag] = selector.SegmentID().map(segmentId => segmentId.text.toUpperCase())
@@ -160,6 +164,20 @@ export class QuerySelector {
 
           loopNodes = []
         }
+      }
+    }
+  }
+
+  private *elementContainsValueSelector (): Generator<EdiDomElement> {
+    const selector = this.parsed.elementContainsValueSelector()
+    const ref = elementReference(selector.ElementReference())
+    const value = elementValue(selector.ElementValue())
+
+    console.log(value)
+
+    for (const node of this.elementSelector(ref)) {
+      if (typeof node === 'object' && typeof node.text === 'string' && node.text.includes(value)) {
+        yield node
       }
     }
   }

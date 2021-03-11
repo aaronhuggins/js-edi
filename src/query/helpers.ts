@@ -10,3 +10,7 @@ export function elementReference (ref: TerminalNode): ElementReference {
     elementId: parseFloat(ref.text.substring(index))
   }
 }
+
+export function elementValue (ref: TerminalNode): string {
+  return ref.text.substring(2, ref.text.length - 2)
+}
