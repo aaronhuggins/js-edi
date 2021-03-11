@@ -29,9 +29,9 @@ elementNotValueSelector: ElementReference '!' ElementValue;
 // Element value selector.
 elementValueSelector: ElementReference ElementValue;
 // Loop path selector.
-loopPathSelector: SegmentID '^' SegmentID '-' ElementReference;
+loopPathSelector: SegmentID '^' SegmentID '-' (ElementReference | parentSegmentSelector);
 // Element at HL path selector.
-hlPathSelector: 'HL' ('+' AnyCharacter)+ '-' ElementReference;
+hlPathSelector: 'HL' ('+' AnyCharacter)+ '-' (ElementReference | parentSegmentSelector);
 // Element at parent segment path selector.
 parentSegmentSelector: (SegmentID '-')+ ElementReference;
 // Element reference selector.
