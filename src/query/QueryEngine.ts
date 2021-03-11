@@ -1,11 +1,12 @@
 import { CharStreams, CommonTokenStream } from 'antlr4ts'
-import { EdiDomAbstractNode } from '../dom/EdiDomAbstractNode'
-import { EdiDomElement } from '../dom/EdiDomElement'
+import type { EdiDomAbstractNode } from '../dom/EdiDomAbstractNode'
+import type { EdiDomElement } from '../dom/EdiDomElement'
+import type { EdiDomSegment } from '../dom/EdiDomSegment'
 import { EdiDomNode, EdiDomNodeType } from '../dom/EdiDomTypes'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
-import { ElementSelectorContext, ElementSelectorParser, ParentSegmentSelectorContext, SelectorContext } from './ElementSelectorParser'
+import { ElementSelectorContext, ElementSelectorParser, SelectorContext } from './ElementSelectorParser'
 import { elementReference } from './helpers'
-import { ElementReference, QueryCaller } from './QueryEngineTypes'
+import { ElementReference } from './QueryEngineTypes'
 
 export class QuerySelector {
   constructor (selector: string, node: EdiDomNode | EdiDomAbstractNode) {
@@ -37,6 +38,10 @@ export class QuerySelector {
       }
     } else if (typeof this.parsed.hlPathSelector() === 'object') {
       for (const node of this.hlPathSelector()) {
+        yield node
+      }
+    } else if (typeof this.parsed.loopPathSelector() === 'object') {
+      for (const node of this.loopPathSelector()) {
         yield node
       }
     } else if (typeof this.parsed.elementAdjacentSelector() === 'object') {
@@ -125,6 +130,35 @@ export class QuerySelector {
           } else {
             yield this.elementSelector(ref).next().value
           }
+        }
+      }
+    }
+  }
+
+  /** Find a bounded or unbounded loop and return the first matching element in the loop. */
+  private *loopPathSelector () {
+    const selector = this.parsed.loopPathSelector()
+    const ref = elementReference(selector.ElementReference())
+    const [startTag, endTag] = selector.SegmentID().map(segmentId => segmentId.text.toUpperCase())
+    let loopNodes: EdiDomSegment[] = []
+    let inLoop = false
+
+    for (const node of this.walker) {
+      if (node.nodeType === EdiDomNodeType.Segment) {
+        if (node.tag === startTag) inLoop = true
+        
+        if (inLoop) loopNodes.push(node)
+
+        if (node.tag === endTag) {
+          inLoop = false
+
+          for (const loopNode of loopNodes) {
+            if (loopNode.tag === ref.segmentId) {
+              yield loopNode.getChildNode(ref.elementId)
+            }
+          }
+
+          loopNodes = []
         }
       }
     }
