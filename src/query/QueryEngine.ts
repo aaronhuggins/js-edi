@@ -47,23 +47,14 @@ export class QuerySelector {
       ? reference
       : elementReference(selector.ElementReference())
     const { segmentId, elementId } = ref
-    let elementCounter = 1
 
     for (const node of this.walker) {
-      if (
-        node.nodeType === EdiDomNodeType.Element &&
-        node.parent.nodeType === EdiDomNodeType.Segment &&
-        node.parent.tag === segmentId
-      ) {
-        if (elementCounter === elementId) {
-          yield node
+      if (node.nodeType === EdiDomNodeType.Segment && node.parent.tag === segmentId) {
+        const element = node.getChildNode(elementId)
+
+        if (typeof element === 'object') {
+          yield element
         }
-
-        elementCounter += 1
-      }
-
-      if (node.parent.nodeType === EdiDomNodeType.Segment) {
-        elementCounter = 1
       }
     }
   }
@@ -80,15 +71,33 @@ export class QuerySelector {
     for (const node of this.walker) {
       if (node.nodeType === EdiDomNodeType.Segment && node.tag === segmentIds[counter]) {
         if (node.tag === ref.segmentId) {
-          const { value } = this.elementSelector(ref).next()
-          counter = 0
+          const element = node.getChildNode(ref.elementId)
 
-          yield value
+          if (typeof element === 'object') {
+            counter = 0
+            yield element
+          }
         } else {
           counter += 1
         }
       } else {
         counter = 0
+      }
+    }
+  }
+
+  * hlPathSelector (): Generator<EdiDomNode<EdiDomNodeType.Element>> {
+    const selector = this.parsed.hlPathSelector()
+    const ref = elementReference(selector.ElementReference())
+    const hlCodes = selector.AnyCharacter().map(hlCode => hlCode.text)
+    const defaultValue = { text: '-1' }
+    let qualified = false
+    let lastParentIndex = -1
+
+    for (const node of this.walker) {
+      if (qualified && node.nodeType === EdiDomNodeType.Segment && node.tag === 'HL') {
+        const hlIdElement = node.getChildNode(2) ?? defaultValue
+        const parentIndex = parseFloat(hlId.)
       }
     }
   }

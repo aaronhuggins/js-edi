@@ -42,6 +42,9 @@ export interface EdiDomNode<T extends EdiDomNodeType = any> {
   /** Add a child node to the dom. On value nodes, this is undefined. */
   addChildNode?: (child: EdiDomNode) => void
 
+  /** Get a child node of this node. */
+  getChildNode?: (pos: string | number) => EdiDomNode
+
   /** Remove a child node from the dom. On value nodes, this is undefined. */
   removeChildNode?: (child: EdiDomNode) => void
 

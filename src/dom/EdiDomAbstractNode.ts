@@ -13,10 +13,10 @@ export abstract class EdiDomAbstractNode<T extends EdiDomNodeType = any> impleme
   abstract get text (): string
 
   /** Add a child node to the dom. On value nodes, this is undefined. */
-  addChildNode (child: EdiDomNode) {}
+  addChildNode (child: EdiDomNode): void {}
 
   /** Remove a child node from the dom. On value nodes, this is undefined. */
-  removeChildNode (child: EdiDomNode) {}
+  removeChildNode (child: EdiDomNode): void {}
 
   /** Sequentially walk the Document Object Model starting with this node. */
   * walk (): Generator<EdiDomNode> {}

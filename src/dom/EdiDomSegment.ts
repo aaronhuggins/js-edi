@@ -45,6 +45,13 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
     }
   }
 
+  /** Get an element at a 1-based position. */
+  getChildNode (position: string | number): EdiDomElement {
+    const index = typeof position === 'string' ? parseFloat(position) - 1 : position - 1
+
+    return this.elements[index]
+  }
+
   * walk (): Generator<EdiDomNode> {
     yield this
 
