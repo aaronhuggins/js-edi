@@ -23,11 +23,11 @@ elementPrecedentSelector:
   (ElementReference | elementValueSelector | elementNotValueSelector | elementContainsValueSelector)
   ;
 // Element not value selector.
-elementContainsValueSelector: ElementReference '*' elementValue;
+elementContainsValueSelector: ElementReference '*' ElementValue;
 // Element not value selector.
-elementNotValueSelector: ElementReference '!' elementValue;
+elementNotValueSelector: ElementReference '!' ElementValue;
 // Element value selector.
-elementValueSelector: ElementReference elementValue;
+elementValueSelector: ElementReference ElementValue;
 // Loop path selector.
 loopPathSelector: SegmentID '^' SegmentID '-' (ElementReference | parentSegmentSelector);
 // Element at HL path selector.
@@ -36,8 +36,6 @@ hlPathSelector: 'HL' ('+' AnyCharacter)+ '-' (ElementReference | parentSegmentSe
 parentSegmentSelector: (SegmentID '-')+ ElementReference;
 // Element reference selector.
 elementSelector: ElementReference;
-// Value selector.
-elementValue: ElementValueOpen AnyCharacter* ElementValueClose;
 
 // Fragments for printable character detection.
 fragment Number: '\u0030'..'\u0039';
@@ -47,10 +45,8 @@ fragment AlphaNumeric: Number | Letter;
 fragment SegmentID2: Letter AlphaNumeric;
 fragment SegmentID3: Letter AlphaNumeric AlphaNumeric;
 
-// Value open identifier
-ElementValueOpen: '[' ['"];
-// Value close identifier
-ElementValueClose: ['"] ']';
+// Value identifier
+ElementValue: '[' ['"] (AnyCharacter|ElementID|SegmentID|ElementReference)* ['"] ']';
 // Element reference
 ElementReference: SegmentID ElementID;
 // Element identifier.
