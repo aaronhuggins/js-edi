@@ -1,8 +1,7 @@
 grammar ElementSelector;
 
 selector:
-    universalSelector
-  | segmentTag
+    segmentTag
   | elementSelector
   | parentSegmentSelector
   | hlPathSelector
@@ -40,8 +39,6 @@ parentSegmentSelector: (SegmentID '-')+ ElementReference;
 elementSelector: ElementReference;
 // Segment tag selector.
 segmentTag: SegmentID;
-// Universal selector.
-universalSelector: '*';
 
 // Fragments for printable character detection.
 fragment Number: '\u0030'..'\u0039';
