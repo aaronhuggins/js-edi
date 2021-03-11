@@ -10,7 +10,7 @@ import {
   ParentSegmentSelectorContext,
   SelectorContext
 } from './ElementSelectorParser'
-import { elementReference, elementValue, isNodeTag } from './helpers'
+import { elementReference, elementValue, isNodeTag, isSegmentTag } from './helpers'
 import { QueryDomWalker } from './QueryDomWalker'
 import type { ElementReference } from './QueryEngineTypes'
 
@@ -36,6 +36,12 @@ export class QuerySelector {
       } else {
         for (const node of this.walker.descend()) {
           if (node.nodeType === nodeType) yield node
+        }
+      }
+    } else if (isSegmentTag(this.selector)) {
+      for (const node of this.walker.descend()) {
+        if ('tag' in node && node.tag === this.selector) {
+          yield node
         }
       }
     } else {

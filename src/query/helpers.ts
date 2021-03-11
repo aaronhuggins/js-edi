@@ -23,3 +23,18 @@ export function elementValue (ref: TerminalNode): string {
 export function isNodeTag<K extends keyof EdiDomNodeTagMap> (selector: K | string): selector is K {
   return selector in EdiDomNodeAlias
 }
+
+export function isSegmentTag<T extends string> (tag: T | string): tag is T {
+  const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  const alphanumeric = alpha + '0123456789'
+
+  if (tag.length === 2) {
+    return alpha.includes(tag.charAt(0)) && alphanumeric.includes(tag.charAt(1))
+  } else if (tag.length === 3) {
+    return alpha.includes(tag.charAt(0)) &&
+      alphanumeric.includes(tag.charAt(1)) &&
+      alphanumeric.includes(tag.charAt(2))
+  }
+
+  return false
+}
