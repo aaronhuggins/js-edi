@@ -4,10 +4,15 @@ import type { EdiDomElement } from '../dom/EdiDomElement'
 import type { EdiDomSegment } from '../dom/EdiDomSegment'
 import { EdiDomNode, EdiDomNodeType } from '../dom/EdiDomTypes'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
-import { ElementSelectorContext, ElementSelectorParser, ParentSegmentSelectorContext, SelectorContext } from './ElementSelectorParser'
+import {
+  ElementSelectorContext,
+  ElementSelectorParser,
+  ParentSegmentSelectorContext,
+  SelectorContext
+} from './ElementSelectorParser'
 import { elementReference, elementValue } from './helpers'
 import { QueryDomWalker } from './QueryDomWalker'
-import { ElementReference } from './QueryEngineTypes'
+import type { ElementReference } from './QueryEngineTypes'
 
 export class QuerySelector {
   constructor (selector: string, node: EdiDomNode | EdiDomAbstractNode) {
