@@ -6,18 +6,20 @@ import { EdiDomNode, EdiDomNodeType } from '../dom/EdiDomTypes'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
 import { ElementSelectorContext, ElementSelectorParser, SelectorContext } from './ElementSelectorParser'
 import { elementReference, elementValue } from './helpers'
+import { QueryDomWalker } from './QueryDomWalker'
 import { ElementReference } from './QueryEngineTypes'
 
 export class QuerySelector {
   constructor (selector: string, node: EdiDomNode | EdiDomAbstractNode) {
     this.node = node
     this.selector = selector
+    this.walker = new QueryDomWalker (this.node.walk())
   }
 
   private readonly node: EdiDomNode | EdiDomAbstractNode
   private readonly selector: string
   private parsed: SelectorContext
-  private walker: Generator<EdiDomNode>
+  private walker: QueryDomWalker
 
   /** Evaluate an element selector and return each element found. */
   *evaluate (): Generator<EdiDomElement> {
@@ -26,7 +28,6 @@ export class QuerySelector {
     const tokens = new CommonTokenStream(lexer)
     const parser = new ElementSelectorParser(tokens)
     this.parsed = parser.selector()
-    this.walker = this.node.walk()
 
     if (typeof this.parsed.elementSelector() === 'object') {
       for (const node of this.elementSelector()) {
@@ -63,7 +64,7 @@ export class QuerySelector {
       : reference
     const { segmentId, elementId } = ref
 
-    for (const node of this.walker) {
+    for (const node of this.walker.descend()) {
       if (node.nodeType === EdiDomNodeType.Segment && node.tag === segmentId) {
         const element = node.getChildNode(elementId)
 
@@ -83,7 +84,7 @@ export class QuerySelector {
 
     segmentIds.push(ref.segmentId)
 
-    for (const node of this.walker) {
+    for (const node of this.walker.descend()) {
       if (node.nodeType === EdiDomNodeType.Segment) {
         if (node.tag === segmentIds[counter]) {
           if (node.tag === ref.segmentId) {
@@ -112,7 +113,7 @@ export class QuerySelector {
     let codeIndex = 0
     let lastHlParent = 0
 
-    for (const node of this.walker) {
+    for (const node of this.walker.descend()) {
       if (node.nodeType === EdiDomNodeType.Segment && node.tag === 'HL') {
         const hlParentElement = node.getChildNode(2)
         const hlCodeElement = node.getChildNode(3)
@@ -147,7 +148,7 @@ export class QuerySelector {
     let loopNodes: EdiDomSegment[] = []
     let inLoop = false
 
-    for (const node of this.walker) {
+    for (const node of this.walker.descend()) {
       if (node.nodeType === EdiDomNodeType.Segment) {
         if (node.tag === startTag) inLoop = true
         
