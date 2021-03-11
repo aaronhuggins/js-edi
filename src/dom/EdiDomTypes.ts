@@ -10,6 +10,7 @@ import { EdiDomValue } from './EdiDomValue'
 
 /** Node types for each node class. */
 export enum EdiDomNodeType {
+  All = 'All',
   Root = 'Root',
   Interchange = 'Interchange',
   Group = 'Group',
@@ -55,3 +56,50 @@ export type EdiDomNode =
   | EdiDomValue
 
 export type EdiDomDocumentType = 'EDIFACT' | 'EDIX12'
+
+export interface EdiDomNodeTagMap extends Record<EdiDomNodeType, EdiDomNode> {
+  '*': EdiDomNode
+  All: EdiDomNode
+  Root: EdiDomRoot
+  Interchange: EdiDomInterchange
+  Group: EdiDomGroup
+  Message: EdiDomMessage
+  Transaction: EdiDomMessage
+  Hierarchical: EdiDomHierarchical
+  Segment: EdiDomSegment
+  Element: EdiDomElement
+  Component: EdiDomComponent
+  Value: EdiDomValue
+  ISA: EdiDomInterchange
+  GS: EdiDomGroup
+  ST: EdiDomMessage
+  UNB: EdiDomInterchange
+  UNE: EdiDomGroup
+  UNH: EdiDomMessage
+}
+
+export const EdiDomNodeAlias: Record<keyof EdiDomNodeTagMap, EdiDomNodeType> = {
+  // Universal selector.
+  '*': EdiDomNodeType.All,
+  'All': EdiDomNodeType.All,
+  // Interchange aliases.
+  Interchange: EdiDomNodeType.Interchange,
+  ISA: EdiDomNodeType.Interchange,
+  UNB: EdiDomNodeType.Interchange,
+  // Functional group aliases.
+  Group: EdiDomNodeType.Group,
+  GS: EdiDomNodeType.Group,
+  UNE: EdiDomNodeType.Group,
+  // Message aliases.
+  Message: EdiDomNodeType.Message,
+  Transaction: EdiDomNodeType.Message,
+  ST: EdiDomNodeType.Message,
+  UNH: EdiDomNodeType.Message,
+  // EDI DOM Node aliases.
+  Root: EdiDomNodeType.Root,
+  Hierarchical: EdiDomNodeType.Hierarchical,
+  Segment: EdiDomNodeType.Segment,
+  Element: EdiDomNodeType.Element,
+  Component: EdiDomNodeType.Component,
+  Value: EdiDomNodeType.Value
+}

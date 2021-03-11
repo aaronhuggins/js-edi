@@ -2,7 +2,7 @@ import { CharStreams, CommonTokenStream } from 'antlr4ts'
 import type { EdiDomAbstractNode } from '../dom/EdiDomAbstractNode'
 import type { EdiDomElement } from '../dom/EdiDomElement'
 import type { EdiDomSegment } from '../dom/EdiDomSegment'
-import { EdiDomNode, EdiDomNodeType } from '../dom/EdiDomTypes'
+import { EdiDomNode, EdiDomNodeAlias, EdiDomNodeType } from '../dom/EdiDomTypes'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
 import {
   ElementSelectorContext,
@@ -10,7 +10,7 @@ import {
   ParentSegmentSelectorContext,
   SelectorContext
 } from './ElementSelectorParser'
-import { elementReference, elementValue } from './helpers'
+import { elementReference, elementValue, isNodeTag } from './helpers'
 import { QueryDomWalker } from './QueryDomWalker'
 import type { ElementReference } from './QueryEngineTypes'
 
@@ -27,37 +27,49 @@ export class QuerySelector {
   private walker: QueryDomWalker
 
   /** Evaluate an element selector and return each element found. */
-  *evaluate (): Generator<EdiDomElement> {
-    const charStream = CharStreams.fromString(this.selector, 'selector')
-    const lexer = new ElementSelectorLexer(charStream)
-    const tokens = new CommonTokenStream(lexer)
-    const parser = new ElementSelectorParser(tokens)
-    this.parsed = parser.selector()
+  *evaluate (): Generator<EdiDomNode> {
+    if (isNodeTag(this.selector)) {
+      const nodeType = EdiDomNodeAlias[this.selector]
 
-    if (typeof this.parsed.elementSelector() === 'object') {
-      for (const node of this.elementSelector()) {
-        yield node
+      if (nodeType === EdiDomNodeType.All) {
+        for (const node of this.walker.descend()) yield node  
+      } else {
+        for (const node of this.walker.descend()) {
+          if (node.nodeType === nodeType) yield node
+        }
       }
-    } else if (typeof this.parsed.parentSegmentSelector() === 'object') {
-      for (const node of this.parentSegmentSelector()) {
-        yield node
+    } else {
+      const charStream = CharStreams.fromString(this.selector, 'selector')
+      const lexer = new ElementSelectorLexer(charStream)
+      const tokens = new CommonTokenStream(lexer)
+      const parser = new ElementSelectorParser(tokens)
+      this.parsed = parser.selector()
+  
+      if (typeof this.parsed.elementSelector() === 'object') {
+        for (const node of this.elementSelector()) {
+          yield node
+        }
+      } else if (typeof this.parsed.parentSegmentSelector() === 'object') {
+        for (const node of this.parentSegmentSelector()) {
+          yield node
+        }
+      } else if (typeof this.parsed.hlPathSelector() === 'object') {
+        for (const node of this.hlPathSelector()) {
+          yield node
+        }
+      } else if (typeof this.parsed.loopPathSelector() === 'object') {
+        for (const node of this.loopPathSelector()) {
+          yield node
+        }
+      } else if (typeof this.parsed.elementContainsValueSelector() === 'object') {
+        for (const node of this.elementContainsValueSelector()) {
+          yield node
+        }
+      } else if (typeof this.parsed.elementAdjacentSelector() === 'object') {
+        console.log('elementAdjacentSelector')
+      } else if (typeof this.parsed.elementPrecedentSelector() === 'object') {
+        console.log('elementAdjacentSelector')
       }
-    } else if (typeof this.parsed.hlPathSelector() === 'object') {
-      for (const node of this.hlPathSelector()) {
-        yield node
-      }
-    } else if (typeof this.parsed.loopPathSelector() === 'object') {
-      for (const node of this.loopPathSelector()) {
-        yield node
-      }
-    } else if (typeof this.parsed.elementContainsValueSelector() === 'object') {
-      for (const node of this.elementContainsValueSelector()) {
-        yield node
-      }
-    } else if (typeof this.parsed.elementAdjacentSelector() === 'object') {
-      console.log('elementAdjacentSelector')
-    } else if (typeof this.parsed.elementPrecedentSelector() === 'object') {
-      console.log('elementAdjacentSelector')
     }
   }
 

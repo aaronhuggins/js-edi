@@ -2,7 +2,7 @@ import { QuerySelector } from '../query/QueryEngine'
 import { EdiDomElement } from './EdiDomElement'
 import { EdiDomRoot } from './EdiDomRoot'
 import { EdiDomSegment } from './EdiDomSegment'
-import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
+import { EdiDomNode, EdiDomNodeTagMap, EdiDomNodeType } from './EdiDomTypes'
 
 export abstract class EdiDomAbstractNode {
   abstract nodeType: EdiDomNodeType
@@ -29,7 +29,9 @@ export abstract class EdiDomAbstractNode {
   * walk (): Generator<EdiDomNode> {}
   
   /** Returns the first element that is a descendant of node that matches selectors. */
-  querySelector (selector: string): EdiDomElement {
+  querySelector<K extends keyof EdiDomNodeTagMap> (selector: K): EdiDomNodeTagMap[K]
+  querySelector<E extends EdiDomElement = EdiDomElement> (selector: string): E
+  querySelector (selector: string): EdiDomNode {
     const query = new QuerySelector(selector, this)
     const evaluate = query.evaluate()
     const { value } = evaluate.next()
@@ -38,9 +40,11 @@ export abstract class EdiDomAbstractNode {
   }
 
   /** Returns all element descendants of node that match selectors. */
-  querySelectorAll (selector: string): EdiDomElement[] {
+  querySelectorAll<K extends keyof EdiDomNodeTagMap> (selector: K): Array<EdiDomNodeTagMap[K]>
+  querySelectorAll<E extends EdiDomElement = EdiDomElement> (selector: string): Array<E>
+  querySelectorAll (selector: string): EdiDomNode[] {
     const query = new QuerySelector(selector, this)
-    const values: EdiDomElement[] = []
+    const values: EdiDomNode[] = []
 
     for (const value of query.evaluate()) {
       values.push(value)
