@@ -1,19 +1,26 @@
 import { QuerySelector } from '../query/QueryEngine'
+import { EdiDomElement } from './EdiDomElement'
+import { EdiDomRoot } from './EdiDomRoot'
+import { EdiDomSegment } from './EdiDomSegment'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
 
-export abstract class EdiDomAbstractNode<T extends EdiDomNodeType = any> implements EdiDomNode<T> {
-  nodeType: T
-  parent?: EdiDomNode
-  root: EdiDomNode<EdiDomNodeType.Root>
-  tag: T extends EdiDomNodeType.Segment ? string : undefined
-  protected _header?: EdiDomNode<EdiDomNodeType.Segment>
-  protected _trailer?: EdiDomNode<EdiDomNodeType.Segment>
+export abstract class EdiDomAbstractNode {
+  abstract nodeType: EdiDomNodeType
+  abstract parent: EdiDomNode
+  root: EdiDomRoot
+  protected _header?: EdiDomSegment
+  protected _trailer?: EdiDomSegment
   protected _text?: string
 
   abstract get text (): string
 
   /** Add a child node to the dom. On value nodes, this is undefined. */
   addChildNode (child: EdiDomNode): void {}
+
+  /** Get a child node from this node. */
+  getChildNode (position: string | number): EdiDomNode {
+    return
+  }
 
   /** Remove a child node from the dom. On value nodes, this is undefined. */
   removeChildNode (child: EdiDomNode): void {}
@@ -22,7 +29,7 @@ export abstract class EdiDomAbstractNode<T extends EdiDomNodeType = any> impleme
   * walk (): Generator<EdiDomNode> {}
   
   /** Returns the first element that is a descendant of node that matches selectors. */
-  querySelector (selector: string): EdiDomNode<EdiDomNodeType.Element> {
+  querySelector (selector: string): EdiDomElement {
     const query = new QuerySelector(selector, this)
     const evaluate = query.evaluate()
     const { value } = evaluate.next()
@@ -31,9 +38,9 @@ export abstract class EdiDomAbstractNode<T extends EdiDomNodeType = any> impleme
   }
 
   /** Returns all element descendants of node that match selectors. */
-  querySelectorAll (selector: string): EdiDomNode<EdiDomNodeType.Element>[] {
+  querySelectorAll (selector: string): EdiDomElement[] {
     const query = new QuerySelector(selector, this)
-    const values: EdiDomNode<EdiDomNodeType.Element>[] = []
+    const values: EdiDomElement[] = []
 
     for (const value of query.evaluate()) {
       values.push(value)

@@ -1,3 +1,13 @@
+import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import { EdiDomComponent } from './EdiDomComponent'
+import { EdiDomElement } from './EdiDomElement'
+import { EdiDomGroup } from './EdiDomGroup'
+import { EdiDomInterchange } from './EdiDomInterchange'
+import { EdiDomMessage } from './EdiDomMessage'
+import { EdiDomRoot } from './EdiDomRoot'
+import { EdiDomSegment } from './EdiDomSegment'
+import { EdiDomValue } from './EdiDomValue'
+
 /** Node types for each node class. */
 export enum EdiDomNodeType {
   Root = 'Root',
@@ -32,31 +42,5 @@ export enum EdiDomNodeType {
   endOfLine?: string
 }
 
-export interface EdiDomNode<T extends EdiDomNodeType = any> {
-  nodeType: T
-  parent?: EdiDomNode
-  root: EdiDomNode<EdiDomNodeType.Root>
-  tag: T extends EdiDomNodeType.Segment ? string : undefined
-  text: string
+export type EdiDomNode = EdiDomRoot | EdiDomInterchange | EdiDomGroup | EdiDomMessage | EdiDomSegment | EdiDomElement | EdiDomComponent | EdiDomValue
 
-  /** Add a child node to the dom. On value nodes, this is undefined. */
-  addChildNode?: (child: EdiDomNode) => void
-
-  /** Get a child node of this node. */
-  getChildNode?: (pos: string | number) => EdiDomNode
-
-  /** Remove a child node from the dom. On value nodes, this is undefined. */
-  removeChildNode?: (child: EdiDomNode) => void
-
-  /** Sequentially walk the Document Object Model starting with this node. */
-  walk: () => Generator<EdiDomNode>
-
-  /** Returns the first element that is a descendant of node that matches selectors. */
-  querySelector: (selector: string) => EdiDomNode<EdiDomNodeType.Element>
-
-  /** Returns all element descendants of node that match selectors. */
-  querySelectorAll: (selector: string) => EdiDomNode<EdiDomNodeType.Element>[]
-
-  /** Return a cleaned EdiDomNode for serialization; removes circular references and verbose node types. */
-  toJSON: () => Partial<this>
-}

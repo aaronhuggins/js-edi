@@ -9,7 +9,7 @@ import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
 export type EdiDomElementType= 'repeated' | 'component' | 'value'
 
 /** An element containing one or more repeated elements, a component, or a value. */
-export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends EdiDomAbstractNode<EdiDomNodeType.Element> {
+export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends EdiDomAbstractNode {
   constructor (type?: EdiDomElementType) {
     super()
     this.nodeType = EdiDomNodeType.Element
@@ -17,6 +17,7 @@ export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends 
     this.elements = []
   }
 
+  nodeType: EdiDomNodeType.Element
   /** The type of element: repeated, component, or value. */
   type: EdiDomElementType
   /** Used if this element represents a set of repeated elements. */

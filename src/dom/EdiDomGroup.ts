@@ -3,15 +3,18 @@ import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
+import { EdiDomInterchange } from './EdiDomInterchange'
 
 /** An EDIFACT UNG message or an X12 ST transaction. */
-export class EdiDomGroup extends EdiDomAbstractNode<EdiDomNodeType.Group> {
+export class EdiDomGroup extends EdiDomAbstractNode {
   constructor () {
     super()
     this.nodeType = EdiDomNodeType.Group
     this.messages = []
   }
 
+  nodeType: EdiDomNodeType.Group
+  parent: EdiDomInterchange
   protected _header: EdiDomSegment<'UNG'|'GS'>
   /** The messages contained in this group. */
   messages: EdiDomMessage[]

@@ -2,9 +2,12 @@ import type { EdiDomElement } from './EdiDomElement'
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomRoot } from './EdiDomRoot'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
+import { EdiDomInterchange } from './EdiDomInterchange'
+import { EdiDomGroup } from './EdiDomGroup'
+import { EdiDomMessage } from './EdiDomMessage'
 
 /** The segment of an EDI document. */
-export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode<EdiDomNodeType.Segment> {
+export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode {
   constructor (tag?: T) {
     super()
     this.nodeType = EdiDomNodeType.Segment
@@ -12,6 +15,8 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
     this.elements = []
   }
 
+  nodeType: EdiDomNodeType.Segment
+  parent: EdiDomInterchange | EdiDomGroup | EdiDomMessage
   /** The tag for this node. */
   tag: T
   /** The child elements of this node. */

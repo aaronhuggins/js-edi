@@ -5,7 +5,7 @@ import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
 
-export class EdiDomInterchange extends EdiDomAbstractNode<EdiDomNodeType.Interchange> {
+export class EdiDomInterchange extends EdiDomAbstractNode {
   constructor () {
     super()
     this.nodeType = EdiDomNodeType.Interchange
@@ -13,6 +13,8 @@ export class EdiDomInterchange extends EdiDomAbstractNode<EdiDomNodeType.Interch
     this.messages = []
   }
 
+  nodeType: EdiDomNodeType.Interchange
+  parent: EdiDomRoot
   protected _header: EdiDomSegment<'UNB'|'ISA'>
   /** The child groups of this interchange. */
   groups: EdiDomGroup[]

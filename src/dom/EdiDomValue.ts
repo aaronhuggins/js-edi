@@ -1,11 +1,14 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import type { EdiDomComponent } from './EdiDomComponent'
+import type { EdiDomElement } from './EdiDomElement'
+import type { EdiDomRoot } from './EdiDomRoot'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
 
 /** Value types supported for detection. */
 export type EdiDomValueType = 'alpha' | 'numeric' | 'alphanumeric'
 
 /** The base value in the object model. */
-export class EdiDomValue extends EdiDomAbstractNode<EdiDomNodeType.Value> {
+export class EdiDomValue extends EdiDomAbstractNode {
   constructor (text?: string) {
     super()
     this.nodeType = EdiDomNodeType.Value
@@ -16,6 +19,9 @@ export class EdiDomValue extends EdiDomAbstractNode<EdiDomNodeType.Value> {
     delete this.removeChildNode
   }
 
+  nodeType: EdiDomNodeType.Value
+  parent: EdiDomComponent | EdiDomElement
+  root: EdiDomRoot
   /** A type derived from the contents of the value. */
   type: EdiDomValueType
   addChildNode: never

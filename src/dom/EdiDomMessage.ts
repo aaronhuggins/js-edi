@@ -1,16 +1,20 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import type { EdiDomGroup } from './EdiDomGroup'
+import type { EdiDomInterchange } from './EdiDomInterchange'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
 
 /** An EDIFACT UNH message or an X12 ST transaction. */
-export class EdiDomMessage extends EdiDomAbstractNode<EdiDomNodeType.Message> {
+export class EdiDomMessage extends EdiDomAbstractNode {
   constructor () {
     super()
     this.nodeType = EdiDomNodeType.Message
     this.segments = []
   }
 
+  nodeType: EdiDomNodeType.Message
+  parent: EdiDomInterchange | EdiDomGroup
   /** The header of this message. */
   protected _header: EdiDomSegment<'UNH'|'ST'>
   /** The segments contained in this message. */

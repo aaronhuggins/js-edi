@@ -1,16 +1,19 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
 import type { EdiDomValue } from './EdiDomValue'
 
 /** An intermediate value type in the object model, holding an array of values. */
-export class EdiDomComponent extends EdiDomAbstractNode<EdiDomNodeType.Component> {
+export class EdiDomComponent extends EdiDomAbstractNode {
   constructor () {
     super()
     this.nodeType = EdiDomNodeType.Component
     this.values = []
   }
 
+  nodeType: EdiDomNodeType.Component
+  parent: EdiDomElement
   /** One or more values of the component value. */
   values: EdiDomValue[]
   /** The root of this instance. */

@@ -1,4 +1,6 @@
 import { CharStreams, CommonTokenStream } from 'antlr4ts'
+import { EdiDomAbstractNode } from '../dom/EdiDomAbstractNode'
+import { EdiDomElement } from '../dom/EdiDomElement'
 import { EdiDomNode, EdiDomNodeType } from '../dom/EdiDomTypes'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
 import { ElementSelectorContext, ElementSelectorParser, ParentSegmentSelectorContext, SelectorContext } from './ElementSelectorParser'
@@ -6,18 +8,18 @@ import { elementReference } from './helpers'
 import { ElementReference } from './QueryEngineTypes'
 
 export class QuerySelector {
-  constructor (selector: string, node: EdiDomNode) {
+  constructor (selector: string, node: EdiDomNode | EdiDomAbstractNode) {
     this.node = node
     this.selector = selector
   }
 
-  private readonly node: EdiDomNode
+  private readonly node: EdiDomNode | EdiDomAbstractNode
   private readonly selector: string
   private parsed: SelectorContext
   private walker: Generator<EdiDomNode>
 
   /** Evaluate an element selector and return each element found. */
-  * evaluate (): Generator<EdiDomNode<EdiDomNodeType.Element>> {
+  * evaluate (): Generator<EdiDomElement> {
     const charStream = CharStreams.fromString(this.selector, 'selector')
     const lexer = new ElementSelectorLexer(charStream)
     const tokens = new CommonTokenStream(lexer)
@@ -41,7 +43,7 @@ export class QuerySelector {
   }
 
   /** Walk the node tree from the current position and select the elements matching the reference. */
-  * elementSelector (reference?: ElementReference): Generator<EdiDomNode<EdiDomNodeType.Element>> {
+  * elementSelector (reference?: ElementReference): Generator<EdiDomElement> {
     const selector = this.parsed.elementSelector()
     const ref = typeof reference === 'undefined'
       ? reference
@@ -49,7 +51,7 @@ export class QuerySelector {
     const { segmentId, elementId } = ref
 
     for (const node of this.walker) {
-      if (node.nodeType === EdiDomNodeType.Segment && node.parent.tag === segmentId) {
+      if (node.nodeType === EdiDomNodeType.Segment && node.tag === segmentId) {
         const element = node.getChildNode(elementId)
 
         if (typeof element === 'object') {
@@ -60,7 +62,7 @@ export class QuerySelector {
   }
 
   /** Follow a path of adjacent segments and select the first element at the end of the path. */
-  * parentSegmentSelector (): Generator<EdiDomNode<EdiDomNodeType.Element>> {
+  * parentSegmentSelector (): Generator<EdiDomElement> {
     const selector = this.parsed.parentSegmentSelector()
     const ref = elementReference(selector.ElementReference())
     const segmentIds = selector.SegmentID().map(segmentId => segmentId.text.toUpperCase())
@@ -86,23 +88,23 @@ export class QuerySelector {
     }
   }
 
-  * hlPathSelector (): Generator<EdiDomNode<EdiDomNodeType.Element>> {
+  * hlPathSelector (): Generator<EdiDomElement> {
     const selector = this.parsed.hlPathSelector()
     const ref = elementReference(selector.ElementReference())
     const hlCodes = selector.AnyCharacter().map(hlCode => hlCode.text)
-    const defaultValue = { text: '-1' }
+    const defaultValue = { value: { text: '-1' } }
     let qualified = false
     let lastParentIndex = -1
 
     for (const node of this.walker) {
       if (qualified && node.nodeType === EdiDomNodeType.Segment && node.tag === 'HL') {
         const hlIdElement = node.getChildNode(2) ?? defaultValue
-        const parentIndex = parseFloat(hlId.)
+        const parentIndex = parseFloat(hlIdElement.value.text)
       }
     }
   }
 
-  * elementPrecedentSelector (selector: ElementSelectorContext): Generator<EdiDomNode<EdiDomNodeType.Element>> {}
+  * elementPrecedentSelector (selector: ElementSelectorContext): Generator<EdiDomElement> {}
 
-  * elementAdjacentSelector (selector: ElementSelectorContext): Generator<EdiDomNode<EdiDomNodeType.Element>> {}
+  * elementAdjacentSelector (selector: ElementSelectorContext): Generator<EdiDomElement> {}
 }
