@@ -13,6 +13,7 @@ import { LoopPathSelectorContext } from "./ElementSelectorParser";
 import { HlPathSelectorContext } from "./ElementSelectorParser";
 import { ParentSegmentSelectorContext } from "./ElementSelectorParser";
 import { ElementSelectorContext } from "./ElementSelectorParser";
+import { ElementValueContext } from "./ElementSelectorParser";
 
 
 /**
@@ -129,5 +130,16 @@ export interface ElementSelectorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitElementSelector?: (ctx: ElementSelectorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ElementSelectorParser.elementValue`.
+	 * @param ctx the parse tree
+	 */
+	enterElementValue?: (ctx: ElementValueContext) => void;
+	/**
+	 * Exit a parse tree produced by `ElementSelectorParser.elementValue`.
+	 * @param ctx the parse tree
+	 */
+	exitElementValue?: (ctx: ElementValueContext) => void;
 }
 
