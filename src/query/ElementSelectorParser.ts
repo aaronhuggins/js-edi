@@ -34,12 +34,13 @@ export class ElementSelectorParser extends Parser {
 	public static readonly T__3 = 4;
 	public static readonly T__4 = 5;
 	public static readonly T__5 = 6;
-	public static readonly HLPath = 7;
-	public static readonly ElementValue = 8;
-	public static readonly ElementReference = 9;
-	public static readonly ElementID = 10;
-	public static readonly SegmentID = 11;
-	public static readonly AnyCharacter = 12;
+	public static readonly T__6 = 7;
+	public static readonly T__7 = 8;
+	public static readonly ElementValue = 9;
+	public static readonly ElementReference = 10;
+	public static readonly ElementID = 11;
+	public static readonly SegmentID = 12;
+	public static readonly AnyCharacter = 13;
 	public static readonly RULE_selector = 0;
 	public static readonly RULE_elementAdjacentSelector = 1;
 	public static readonly RULE_elementPrecedentSelector = 2;
@@ -58,12 +59,12 @@ export class ElementSelectorParser extends Parser {
 	];
 
 	private static readonly _LITERAL_NAMES: Array<string | undefined> = [
-		undefined, "'~'", "':'", "'*'", "'!'", "'^'", "'-'",
+		undefined, "'~'", "':'", "'*'", "'!'", "'^'", "'-'", "'HL'", "'+'",
 	];
 	private static readonly _SYMBOLIC_NAMES: Array<string | undefined> = [
 		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
-		"HLPath", "ElementValue", "ElementReference", "ElementID", "SegmentID", 
-		"AnyCharacter",
+		undefined, undefined, "ElementValue", "ElementReference", "ElementID", 
+		"SegmentID", "AnyCharacter",
 	];
 	public static readonly VOCABULARY: Vocabulary = new VocabularyImpl(ElementSelectorParser._LITERAL_NAMES, ElementSelectorParser._SYMBOLIC_NAMES, []);
 
@@ -466,14 +467,31 @@ export class ElementSelectorParser extends Parser {
 	public hlPathSelector(): HlPathSelectorContext {
 		let _localctx: HlPathSelectorContext = new HlPathSelectorContext(this._ctx, this.state);
 		this.enterRule(_localctx, 14, ElementSelectorParser.RULE_hlPathSelector);
+		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
 			this.state = 72;
-			this.match(ElementSelectorParser.HLPath);
-			this.state = 73;
+			this.match(ElementSelectorParser.T__6);
+			this.state = 75;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			do {
+				{
+				{
+				this.state = 73;
+				this.match(ElementSelectorParser.T__7);
+				this.state = 74;
+				this.match(ElementSelectorParser.AnyCharacter);
+				}
+				}
+				this.state = 77;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+			} while (_la === ElementSelectorParser.T__7);
+			this.state = 79;
 			this.match(ElementSelectorParser.T__5);
-			this.state = 74;
+			this.state = 80;
 			this.match(ElementSelectorParser.ElementReference);
 			}
 		}
@@ -499,23 +517,23 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 78;
+			this.state = 84;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			do {
 				{
 				{
-				this.state = 76;
+				this.state = 82;
 				this.match(ElementSelectorParser.SegmentID);
-				this.state = 77;
+				this.state = 83;
 				this.match(ElementSelectorParser.T__5);
 				}
 				}
-				this.state = 80;
+				this.state = 86;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			} while (_la === ElementSelectorParser.SegmentID);
-			this.state = 82;
+			this.state = 88;
 			this.match(ElementSelectorParser.ElementReference);
 			}
 		}
@@ -540,7 +558,7 @@ export class ElementSelectorParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 84;
+			this.state = 90;
 			this.match(ElementSelectorParser.ElementReference);
 			}
 		}
@@ -560,7 +578,7 @@ export class ElementSelectorParser extends Parser {
 	}
 
 	public static readonly _serializedATN: string =
-		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03\x0EY\x04\x02" +
+		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03\x0F_\x04\x02" +
 		"\t\x02\x04\x03\t\x03\x04\x04\t\x04\x04\x05\t\x05\x04\x06\t\x06\x04\x07" +
 		"\t\x07\x04\b\t\b\x04\t\t\t\x04\n\t\n\x04\v\t\v\x03\x02\x03\x02\x03\x02" +
 		"\x03\x02\x03\x02\x03\x02\x03\x02\x05\x02\x1E\n\x02\x03\x03\x03\x03\x03" +
@@ -568,35 +586,37 @@ export class ElementSelectorParser extends Parser {
 		"\x03+\n\x03\x03\x04\x03\x04\x03\x04\x03\x04\x05\x041\n\x04\x03\x04\x03" +
 		"\x04\x03\x04\x03\x04\x03\x04\x05\x048\n\x04\x03\x05\x03\x05\x03\x05\x03" +
 		"\x05\x03\x06\x03\x06\x03\x06\x03\x06\x03\x07\x03\x07\x03\x07\x03\b\x03" +
-		"\b\x03\b\x03\b\x03\b\x03\b\x03\t\x03\t\x03\t\x03\t\x03\n\x03\n\x06\nQ" +
-		"\n\n\r\n\x0E\nR\x03\n\x03\n\x03\v\x03\v\x03\v\x02\x02\x02\f\x02\x02\x04" +
-		"\x02\x06\x02\b\x02\n\x02\f\x02\x0E\x02\x10\x02\x12\x02\x14\x02\x02\x02" +
-		"\x02a\x02\x1D\x03\x02\x02\x02\x04#\x03\x02\x02\x02\x060\x03\x02\x02\x02" +
-		"\b9\x03\x02\x02\x02\n=\x03\x02\x02\x02\fA\x03\x02\x02\x02\x0ED\x03\x02" +
-		"\x02\x02\x10J\x03\x02\x02\x02\x12P\x03\x02\x02\x02\x14V\x03\x02\x02\x02" +
-		"\x16\x1E\x05\x14\v\x02\x17\x1E\x05\x12\n\x02\x18\x1E\x05\x10\t\x02\x19" +
-		"\x1E\x05\x0E\b\x02\x1A\x1E\x05\b\x05\x02\x1B\x1E\x05\x06\x04\x02\x1C\x1E" +
-		"\x05\x04\x03\x02\x1D\x16\x03\x02\x02\x02\x1D\x17\x03\x02\x02\x02\x1D\x18" +
-		"\x03\x02\x02\x02\x1D\x19\x03\x02\x02\x02\x1D\x1A\x03\x02\x02\x02\x1D\x1B" +
-		"\x03\x02\x02\x02\x1D\x1C\x03\x02\x02\x02\x1E\x03\x03\x02\x02\x02\x1F$" +
-		"\x07\v\x02\x02 $\x05\x10\t\x02!$\x05\x12\n\x02\"$\x05\x0E\b\x02#\x1F\x03" +
-		"\x02\x02\x02# \x03\x02\x02\x02#!\x03\x02\x02\x02#\"\x03\x02\x02\x02$%" +
-		"\x03\x02\x02\x02%*\x07\x03\x02\x02&+\x07\v\x02\x02\'+\x05\f\x07\x02(+" +
-		"\x05\n\x06\x02)+\x05\b\x05\x02*&\x03\x02\x02\x02*\'\x03\x02\x02\x02*(" +
-		"\x03\x02\x02\x02*)\x03\x02\x02\x02+\x05\x03\x02\x02\x02,1\x07\v\x02\x02" +
-		"-1\x05\x10\t\x02.1\x05\x12\n\x02/1\x05\x0E\b\x020,\x03\x02\x02\x020-\x03" +
-		"\x02\x02\x020.\x03\x02\x02\x020/\x03\x02\x02\x0212\x03\x02\x02\x0227\x07" +
-		"\x04\x02\x0238\x07\v\x02\x0248\x05\f\x07\x0258\x05\n\x06\x0268\x05\b\x05" +
-		"\x0273\x03\x02\x02\x0274\x03\x02\x02\x0275\x03\x02\x02\x0276\x03\x02\x02" +
-		"\x028\x07\x03\x02\x02\x029:\x07\v\x02\x02:;\x07\x05\x02\x02;<\x07\n\x02" +
-		"\x02<\t\x03\x02\x02\x02=>\x07\v\x02\x02>?\x07\x06\x02\x02?@\x07\n\x02" +
-		"\x02@\v\x03\x02\x02\x02AB\x07\v\x02\x02BC\x07\n\x02\x02C\r\x03\x02\x02" +
-		"\x02DE\x07\r\x02\x02EF\x07\x07\x02\x02FG\x07\r\x02\x02GH\x07\b\x02\x02" +
-		"HI\x07\v\x02\x02I\x0F\x03\x02\x02\x02JK\x07\t\x02\x02KL\x07\b\x02\x02" +
-		"LM\x07\v\x02\x02M\x11\x03\x02\x02\x02NO\x07\r\x02\x02OQ\x07\b\x02\x02" +
-		"PN\x03\x02\x02\x02QR\x03\x02\x02\x02RP\x03\x02\x02\x02RS\x03\x02\x02\x02" +
-		"ST\x03\x02\x02\x02TU\x07\v\x02\x02U\x13\x03\x02\x02\x02VW\x07\v\x02\x02" +
-		"W\x15\x03\x02\x02\x02\b\x1D#*07R";
+		"\b\x03\b\x03\b\x03\b\x03\b\x03\t\x03\t\x03\t\x06\tN\n\t\r\t\x0E\tO\x03" +
+		"\t\x03\t\x03\t\x03\n\x03\n\x06\nW\n\n\r\n\x0E\nX\x03\n\x03\n\x03\v\x03" +
+		"\v\x03\v\x02\x02\x02\f\x02\x02\x04\x02\x06\x02\b\x02\n\x02\f\x02\x0E\x02" +
+		"\x10\x02\x12\x02\x14\x02\x02\x02\x02h\x02\x1D\x03\x02\x02\x02\x04#\x03" +
+		"\x02\x02\x02\x060\x03\x02\x02\x02\b9\x03\x02\x02\x02\n=\x03\x02\x02\x02" +
+		"\fA\x03\x02\x02\x02\x0ED\x03\x02\x02\x02\x10J\x03\x02\x02\x02\x12V\x03" +
+		"\x02\x02\x02\x14\\\x03\x02\x02\x02\x16\x1E\x05\x14\v\x02\x17\x1E\x05\x12" +
+		"\n\x02\x18\x1E\x05\x10\t\x02\x19\x1E\x05\x0E\b\x02\x1A\x1E\x05\b\x05\x02" +
+		"\x1B\x1E\x05\x06\x04\x02\x1C\x1E\x05\x04\x03\x02\x1D\x16\x03\x02\x02\x02" +
+		"\x1D\x17\x03\x02\x02\x02\x1D\x18\x03\x02\x02\x02\x1D\x19\x03\x02\x02\x02" +
+		"\x1D\x1A\x03\x02\x02\x02\x1D\x1B\x03\x02\x02\x02\x1D\x1C\x03\x02\x02\x02" +
+		"\x1E\x03\x03\x02\x02\x02\x1F$\x07\f\x02\x02 $\x05\x10\t\x02!$\x05\x12" +
+		"\n\x02\"$\x05\x0E\b\x02#\x1F\x03\x02\x02\x02# \x03\x02\x02\x02#!\x03\x02" +
+		"\x02\x02#\"\x03\x02\x02\x02$%\x03\x02\x02\x02%*\x07\x03\x02\x02&+\x07" +
+		"\f\x02\x02\'+\x05\f\x07\x02(+\x05\n\x06\x02)+\x05\b\x05\x02*&\x03\x02" +
+		"\x02\x02*\'\x03\x02\x02\x02*(\x03\x02\x02\x02*)\x03\x02\x02\x02+\x05\x03" +
+		"\x02\x02\x02,1\x07\f\x02\x02-1\x05\x10\t\x02.1\x05\x12\n\x02/1\x05\x0E" +
+		"\b\x020,\x03\x02\x02\x020-\x03\x02\x02\x020.\x03\x02\x02\x020/\x03\x02" +
+		"\x02\x0212\x03\x02\x02\x0227\x07\x04\x02\x0238\x07\f\x02\x0248\x05\f\x07" +
+		"\x0258\x05\n\x06\x0268\x05\b\x05\x0273\x03\x02\x02\x0274\x03\x02\x02\x02" +
+		"75\x03\x02\x02\x0276\x03\x02\x02\x028\x07\x03\x02\x02\x029:\x07\f\x02" +
+		"\x02:;\x07\x05\x02\x02;<\x07\v\x02\x02<\t\x03\x02\x02\x02=>\x07\f\x02" +
+		"\x02>?\x07\x06\x02\x02?@\x07\v\x02\x02@\v\x03\x02\x02\x02AB\x07\f\x02" +
+		"\x02BC\x07\v\x02\x02C\r\x03\x02\x02\x02DE\x07\x0E\x02\x02EF\x07\x07\x02" +
+		"\x02FG\x07\x0E\x02\x02GH\x07\b\x02\x02HI\x07\f\x02\x02I\x0F\x03\x02\x02" +
+		"\x02JM\x07\t\x02\x02KL\x07\n\x02\x02LN\x07\x0F\x02\x02MK\x03\x02\x02\x02" +
+		"NO\x03\x02\x02\x02OM\x03\x02\x02\x02OP\x03\x02\x02\x02PQ\x03\x02\x02\x02" +
+		"QR\x07\b\x02\x02RS\x07\f\x02\x02S\x11\x03\x02\x02\x02TU\x07\x0E\x02\x02" +
+		"UW\x07\b\x02\x02VT\x03\x02\x02\x02WX\x03\x02\x02\x02XV\x03\x02\x02\x02" +
+		"XY\x03\x02\x02\x02YZ\x03\x02\x02\x02Z[\x07\f\x02\x02[\x13\x03\x02\x02" +
+		"\x02\\]\x07\f\x02\x02]\x15\x03\x02\x02\x02\t\x1D#*07OX";
 	public static __ATN: ATN;
 	public static get _ATN(): ATN {
 		if (!ElementSelectorParser.__ATN) {
@@ -903,8 +923,16 @@ export class LoopPathSelectorContext extends ParserRuleContext {
 
 
 export class HlPathSelectorContext extends ParserRuleContext {
-	public HLPath(): TerminalNode { return this.getToken(ElementSelectorParser.HLPath, 0); }
 	public ElementReference(): TerminalNode { return this.getToken(ElementSelectorParser.ElementReference, 0); }
+	public AnyCharacter(): TerminalNode[];
+	public AnyCharacter(i: number): TerminalNode;
+	public AnyCharacter(i?: number): TerminalNode | TerminalNode[] {
+		if (i === undefined) {
+			return this.getTokens(ElementSelectorParser.AnyCharacter);
+		} else {
+			return this.getToken(ElementSelectorParser.AnyCharacter, i);
+		}
+	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
