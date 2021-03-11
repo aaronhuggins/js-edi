@@ -19,8 +19,24 @@ export class EdiDomHierarchical<T extends string = string> extends EdiDomAbstrac
   tag: T
   level: number
   parentLevel: number
-  header: EdiDomSegment
   segments: Array<EdiDomSegment | EdiDomHierarchical>
+  protected _header: EdiDomSegment
+
+  /** The header of this hierarchical level. */
+  get header (): EdiDomSegment {
+    return this._header
+  }
+
+  /** The header of this hierarchical level. */
+  set header (_header: EdiDomSegment) {
+    _header.parent = this
+
+    for (const node of _header.walk()) {
+      node.root = this.root
+    }
+
+    this._header = _header
+  }
 
   /** The read-only text representation of this node. */
   get text (): string {

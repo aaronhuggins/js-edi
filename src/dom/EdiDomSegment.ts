@@ -2,9 +2,10 @@ import type { EdiDomElement } from './EdiDomElement'
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomRoot } from './EdiDomRoot'
 import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
-import { EdiDomInterchange } from './EdiDomInterchange'
-import { EdiDomGroup } from './EdiDomGroup'
-import { EdiDomMessage } from './EdiDomMessage'
+import type { EdiDomInterchange } from './EdiDomInterchange'
+import type { EdiDomGroup } from './EdiDomGroup'
+import type { EdiDomMessage } from './EdiDomMessage'
+import type { EdiDomHierarchical } from './EdiDomHierarchical'
 
 /** The segment of an EDI document. */
 export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode {
@@ -16,7 +17,7 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
   }
 
   nodeType: EdiDomNodeType.Segment
-  parent: EdiDomInterchange | EdiDomGroup | EdiDomMessage
+  parent: EdiDomInterchange | EdiDomGroup | EdiDomMessage | EdiDomHierarchical
   /** The tag for this node. */
   tag: T
   /** The child elements of this node. */
