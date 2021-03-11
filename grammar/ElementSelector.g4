@@ -29,11 +29,11 @@ elementNotValueSelector: ElementReference '!' ElementValue;
 // Element value selector.
 elementValueSelector: ElementReference ElementValue;
 // Loop path selector.
-loopPathSelector: SegmentID '^' SegmentID '-' ElementReference;
+loopPathSelector: SegmentID '^' SegmentID '-' (ElementReference | parentSegmentSelector);
 // Element at HL path selector.
-hlPathSelector: HLPath '-' ElementReference;
+hlPathSelector: 'HL' ('+' AnyCharacter)+ '-' (ElementReference | parentSegmentSelector);
 // Element at parent segment path selector.
-parentSegmentSelector: SegmentID '-' ElementReference;
+parentSegmentSelector: (SegmentID '-')+ ElementReference;
 // Element reference selector.
 elementSelector: ElementReference;
 
@@ -45,8 +45,6 @@ fragment AlphaNumeric: Number | Letter;
 fragment SegmentID2: Letter AlphaNumeric;
 fragment SegmentID3: Letter AlphaNumeric AlphaNumeric;
 
-// HL path identifier.
-HLPath: 'HL' ('+' AnyCharacter)+;
 // Value identifier
 ElementValue: '[' ['"] AnyCharacter* ['"] ']';
 // Element reference
