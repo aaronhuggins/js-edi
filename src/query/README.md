@@ -21,13 +21,12 @@ Element selectors define the nodes to which a query applies. Results are returne
 - **Syntax**: `TAG`
 - **Example**: `REF` will match any node with the tag of "REF".
 
-## Element Reference Selectors
-
 ### Element Reference selector
 - Selects all element nodes matching the reference.
 - **Syntax**: `TAG##`
 - **Example**: `ST01` will match any element node in segment "ST" at position "01"
 
+## Element Value Selectors
 ### Element Reference Value selector
 - Selects all element nodes matching the reference and which equals the value.
 - **Syntax**: `TAG##['VALUE']` Single or duoble quotes are permitted.
@@ -65,13 +64,13 @@ Element selectors define the nodes to which a query applies. Results are returne
 ### Adjacent selector
 - Selects an element reference generally adjacent to another element reference.
 - **Syntax**: Selector `~` Reference
-  - The left-hand side must be strictly a simple **Element Reference selector** or any of the **Path Selectors**.
-  - The right-hand side may be any of the **Element Reference Selectors**
+  - The left-hand side must be strictly an **Element Reference selector** or any of the **Path Selectors**.
+  - The right-hand side may be an **Element Reference selector** or any of the **Element Value Selectors**
 - **Example**: `HL+S+O+P+I-LIN03~PID05*['blue']` will match any "LIN03" within a hierarchical level where an adjacent "PID05" contains the word "blue".
 
 ### Precedent selector
 - Selects an element reference generally preceded by another element reference.
 - **Syntax**: Selector `:` Reference
-  - The left-hand side must be strictly a simple **Element Reference selector** or any of the **Path Selectors**.
-  - The right-hand side may be any of the **Element Reference Selectors**
+  - The left-hand side must be strictly an **Element Reference selector** or any of the **Path Selectors**.
+  - The right-hand side may be an **Element Reference selector** or any of the **Element Value Selectors**
 - **Example**: `N1^N4-N403~N101['SH']` will match any "N403" within a loop where a preceding "N101" equals the value "SH".
