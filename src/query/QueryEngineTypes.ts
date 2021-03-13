@@ -1,6 +1,3 @@
-import { EdiDomNode } from '../dom/EdiDomTypes'
-import { QueryEngineList } from './QueryEngineList'
-
 export interface ElementReference {
   segmentId: string
   elementId: number
