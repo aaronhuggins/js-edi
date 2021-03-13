@@ -1,9 +1,41 @@
 export class QueryEngineList<T> implements Iterable<T> {
   constructor () {
     this._nodes = []
+
+    return new Proxy(this, {
+      get (target: QueryEngineList<T>, prop: string | symbol, receiver: any): any {
+        if (typeof prop === 'string') {
+          const key = parseFloat(prop)
+
+          if (Number.isNaN(key)) {
+            return target[prop]
+          } else {
+            return target._nodes[key]
+          }
+        } else {
+          return target[prop]
+        }
+      },
+      set (target: QueryEngineList<T>, prop: string | symbol, value: any, receiver: any): boolean {
+        if (typeof prop === 'string') {
+          const key = parseFloat(prop)
+
+          if (Number.isNaN(key)) {
+            target[prop] = value
+          } else {
+            target._nodes[key] = value
+          }
+        } else {
+          target[prop] = value
+        }
+
+        return true
+      }
+    })
   }
 
   private readonly _nodes: T[]
+  [key: number]: T
 
   get size (): number {
     return this._nodes.length
