@@ -1,8 +1,10 @@
 import { CharStreams, CommonTokenStream } from 'antlr4ts'
 import type { EdiDomAbstractNode } from '../dom/EdiDomAbstractNode'
+import { EdiDomComponent } from '../dom/EdiDomComponent'
 import type { EdiDomElement } from '../dom/EdiDomElement'
 import type { EdiDomSegment } from '../dom/EdiDomSegment'
 import { EdiDomNode, EdiDomNodeAlias, EdiDomNodeType } from '../dom/EdiDomTypes'
+import { EdiDomValue } from '../dom/EdiDomValue'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
 import {
   ElementSelectorContext,
@@ -70,6 +72,14 @@ export class QueryEngine {
         }
       } else if (typeof this.parsed.loopPathSelector() === 'object') {
         for (const node of this.loopPathSelector()) {
+          yield node
+        }
+      } else if (typeof this.parsed.elementValueSelector() === 'object') {
+        for (const node of this.elementValueSelector()) {
+          yield node
+        }
+      } else if (typeof this.parsed.elementNotValueSelector() === 'object') {
+        for (const node of this.elementNotValueSelector()) {
           yield node
         }
       } else if (typeof this.parsed.elementContainsValueSelector() === 'object') {
@@ -217,12 +227,66 @@ export class QueryEngine {
     }
   }
 
+  private *elementValueSelector (): QueryIterator<EdiDomElement> {
+    const selector = this.parsed.elementValueSelector()
+    const ref = elementReference(selector.ElementReference())
+    const value = elementValue(selector.ElementValue())
+
+    for (const node of this.elementSelector(ref)) {
+      if (typeof node === 'object') {
+        switch (node.type) {
+          case 'component':
+            if (node.value instanceof EdiDomComponent && node.value.text === value) {
+              yield node
+            }
+            break
+          case 'repeated':
+            if (node.elements.map(el => el.value.text).includes(value)) {
+              yield node
+            }
+            break
+          case 'value':
+            if (node.value instanceof EdiDomValue && node.value.text === value) {
+              yield node
+            }
+            break
+        }
+      }
+    }
+  }
+
+  private *elementNotValueSelector (): QueryIterator<EdiDomElement> {
+    const selector = this.parsed.elementNotValueSelector()
+    const ref = elementReference(selector.ElementReference())
+    const value = elementValue(selector.ElementValue())
+
+    for (const node of this.elementSelector(ref)) {
+      if (typeof node === 'object') {
+        switch (node.type) {
+          case 'component':
+            if (!(node.value instanceof EdiDomComponent && node.value.text === value)) {
+              yield node
+            }
+            break
+          case 'repeated':
+            if (!node.elements.map(el => el.value.text).includes(value)) {
+              yield node
+            }
+            break
+          case 'value':
+            if (!(node.value instanceof EdiDomValue && node.value.text === value)) {
+              yield node
+            }
+            break
+        }
+      }
+    }
+  }
+
   private *elementContainsValueSelector (): QueryIterator<EdiDomElement> {
     const selector = this.parsed.elementContainsValueSelector()
     const ref = elementReference(selector.ElementReference())
     const value = elementValue(selector.ElementValue())
-
-    console.log(value)
 
     for (const node of this.elementSelector(ref)) {
       if (typeof node === 'object' && typeof node.text === 'string' && node.text.includes(value)) {

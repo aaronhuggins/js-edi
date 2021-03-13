@@ -6,6 +6,8 @@ selector:
   | parentSegmentSelector
   | hlPathSelector
   | loopPathSelector
+  | elementValueSelector
+  | elementNotValueSelector
   | elementContainsValueSelector
   | elementPrecedentSelector
   | elementAdjacentSelector
