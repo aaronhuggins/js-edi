@@ -12,9 +12,10 @@ import {
 } from './ElementSelectorParser'
 import { elementReference, elementValue, isNodeTag, isSegmentTag } from './helpers'
 import { QueryDomWalker } from './QueryDomWalker'
-import type { ElementReference } from './QueryEngineTypes'
+import { QueryEngineList } from './QueryEngineList'
+import type { ElementReference, QueryIterator } from './QueryEngineTypes'
 
-export class QuerySelector {
+export class QueryEngine {
   constructor (selector: string, node: EdiDomNode | EdiDomAbstractNode) {
     this.node = node
     this.selector = selector
@@ -26,8 +27,12 @@ export class QuerySelector {
   private parsed: SelectorContext
   private walker: QueryDomWalker
 
+  list (): QueryEngineList<EdiDomNode> {
+    return new QueryEngineList(this.evaluate())
+  }
+
   /** Evaluate an element selector and return each element found. */
-  *evaluate (): Generator<EdiDomNode> {
+  *evaluate (): QueryIterator<EdiDomNode> {
     if (isNodeTag(this.selector)) {
       const nodeType = EdiDomNodeAlias[this.selector]
 
@@ -80,7 +85,7 @@ export class QuerySelector {
   }
 
   /** Walk the node tree from the current position and select the elements matching the reference. */
-  private *elementSelector (reference?: ElementReference): Generator<EdiDomElement> {
+  private *elementSelector (reference?: ElementReference): QueryIterator<EdiDomElement> {
     const selector = this.parsed.elementSelector()
     const ref = typeof reference === 'undefined'
       ? elementReference(selector.ElementReference())
@@ -99,7 +104,7 @@ export class QuerySelector {
   }
 
   /** Follow a path of adjacent segments and select the first element at the end of the path. */
-  private *parentSegmentSelector (ctx?: ParentSegmentSelectorContext): Generator<EdiDomElement> {
+  private *parentSegmentSelector (ctx?: ParentSegmentSelectorContext): QueryIterator<EdiDomElement> {
     const selector = typeof ctx === 'undefined' ? this.parsed.parentSegmentSelector() : ctx
     const ref = elementReference(selector.ElementReference())
     const segmentIds = selector.SegmentID().map(segmentId => segmentId.text.toUpperCase())
@@ -129,7 +134,7 @@ export class QuerySelector {
   }
 
   /** Follow a path of hierarchical levels and select the first element at the end of the path. */
-  private *hlPathSelector (): Generator<EdiDomElement> {
+  private *hlPathSelector (): QueryIterator<EdiDomElement> {
     const selector = this.parsed.hlPathSelector()
     const hlCodes = selector.AnyCharacter().map(hlCode => hlCode.text)
     const ref = elementReference(selector.ElementReference())
@@ -169,7 +174,7 @@ export class QuerySelector {
   }
 
   /** Find a bounded or unbounded loop and return the first matching element in the loop. */
-  private *loopPathSelector (): Generator<EdiDomElement> {
+  private *loopPathSelector (): QueryIterator<EdiDomElement> {
     const selector = this.parsed.loopPathSelector()
     const ref = elementReference(selector.ElementReference())
     const parentSegmentPath = selector.parentSegmentSelector()
@@ -212,7 +217,7 @@ export class QuerySelector {
     }
   }
 
-  private *elementContainsValueSelector (): Generator<EdiDomElement> {
+  private *elementContainsValueSelector (): QueryIterator<EdiDomElement> {
     const selector = this.parsed.elementContainsValueSelector()
     const ref = elementReference(selector.ElementReference())
     const value = elementValue(selector.ElementValue())
@@ -226,7 +231,7 @@ export class QuerySelector {
     }
   }
 
-  private *elementPrecedentSelector (selector: ElementSelectorContext): Generator<EdiDomElement> {}
+  private *elementPrecedentSelector (selector: ElementSelectorContext): QueryIterator<EdiDomElement> {}
 
-  private *elementAdjacentSelector (selector: ElementSelectorContext): Generator<EdiDomElement> {}
+  private *elementAdjacentSelector (selector: ElementSelectorContext): QueryIterator<EdiDomElement> {}
 }

@@ -1,4 +1,5 @@
-import { QuerySelector } from '../query/QueryEngine'
+import { QueryEngine } from '../query/QueryEngine'
+import { QueryEngineList } from '../query/QueryEngineList'
 import { EdiDomElement } from './EdiDomElement'
 import { EdiDomRoot } from './EdiDomRoot'
 import { EdiDomSegment } from './EdiDomSegment'
@@ -31,8 +32,8 @@ export abstract class EdiDomAbstractNode {
   /** Returns the first element that is a descendant of node that matches selectors. */
   querySelector<K extends keyof EdiDomNodeTagMap> (selector: K): EdiDomNodeTagMap[K]
   querySelector<E extends EdiDomElement = EdiDomElement> (selector: string): E
-  querySelector (selector: string): EdiDomNode {
-    const query = new QuerySelector(selector, this)
+  querySelector (selector: string): EdiDomNode | QueryEngineList<EdiDomNode> {
+    const query = new QueryEngine(selector, this)
     const evaluate = query.evaluate()
     const { value } = evaluate.next()
 
@@ -40,17 +41,12 @@ export abstract class EdiDomAbstractNode {
   }
 
   /** Returns all element descendants of node that match selectors. */
-  querySelectorAll<K extends keyof EdiDomNodeTagMap> (selector: K): Array<EdiDomNodeTagMap[K]>
-  querySelectorAll<E extends EdiDomElement = EdiDomElement> (selector: string): Array<E>
-  querySelectorAll (selector: string): EdiDomNode[] {
-    const query = new QuerySelector(selector, this)
-    const values: EdiDomNode[] = []
+  querySelectorAll<K extends keyof EdiDomNodeTagMap> (selector: K): QueryEngineList<EdiDomNodeTagMap[K]>
+  querySelectorAll<E extends EdiDomElement = EdiDomElement> (selector: string): QueryEngineList<E>
+  querySelectorAll (selector: string): QueryEngineList<EdiDomNode> {
+    const query = new QueryEngine(selector, this)
 
-    for (const value of query.evaluate()) {
-      values.push(value)
-    }
-
-    return values
+    return query.list()
   }
 
   /** Return a cleaned EdiDomNode for serialization; removes circular references and verbose node types. */
