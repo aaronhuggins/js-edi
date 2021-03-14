@@ -1,6 +1,6 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
-import type { EdiDomElement } from './EdiDomElement'
 import { EdiDomNodeType } from './EdiDomNodeType'
+import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomNode } from './EdiDomTypes'
 import type { EdiDomValue } from './EdiDomValue'

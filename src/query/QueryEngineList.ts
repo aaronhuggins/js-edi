@@ -1,4 +1,4 @@
-import { QueryIterator } from './QueryEngineTypes'
+import type { QueryIterator } from './QueryEngineTypes'
 
 /** Custom iterable for wrapping the query engine generator in a re-usable, re-iterable list. */
 export class QueryEngineList<T> implements Iterable<T> {

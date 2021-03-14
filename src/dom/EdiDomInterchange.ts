@@ -1,10 +1,10 @@
+import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomGroup } from './EdiDomGroup'
 import type { EdiDomMessage } from './EdiDomMessage'
-import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
 import type { EdiDomNode } from './EdiDomTypes'
-import { EdiDomNodeType } from './EdiDomNodeType'
 
 export class EdiDomInterchange extends EdiDomAbstractNode {
   constructor () {

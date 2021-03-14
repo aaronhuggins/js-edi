@@ -1,7 +1,7 @@
-import type { EdiDomInterchange } from './EdiDomInterchange'
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
-import type { EdiDomDocumentType, EdiDomNode, EdiDomOptions } from './EdiDomTypes'
 import { EdiDomNodeType } from './EdiDomNodeType'
+import type { EdiDomInterchange } from './EdiDomInterchange'
+import type { EdiDomDocumentType, EdiDomNode, EdiDomOptions } from './EdiDomTypes'
 
 /** The document root containing one or more interchanges. */
 export class EdiDomRoot extends EdiDomAbstractNode {

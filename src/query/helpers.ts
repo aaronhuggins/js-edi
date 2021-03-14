@@ -1,5 +1,5 @@
-import type { TerminalNode } from 'antlr4ts/tree'
 import { EdiDomNodeAlias } from '../dom/EdiDomNodeAlias'
+import type { TerminalNode } from 'antlr4ts/tree'
 import type { EdiDomNodeTagMap } from '../dom/EdiDomTypes'
 import type { ElementReference } from './QueryEngineTypes'
 

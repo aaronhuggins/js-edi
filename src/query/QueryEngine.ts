@@ -1,12 +1,15 @@
 import { CharStreams, CommonTokenStream } from 'antlr4ts'
-import type { EdiDomAbstractNode } from '../dom/EdiDomAbstractNode'
-import type { EdiDomElement } from '../dom/EdiDomElement'
 import { EdiDomNodeAlias } from '../dom/EdiDomNodeAlias'
 import { EdiDomNodeType } from '../dom/EdiDomNodeType'
-import type { EdiDomSegment } from '../dom/EdiDomSegment'
-import type { EdiDomNode } from '../dom/EdiDomTypes'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
 import { ElementSelectorParser } from './ElementSelectorParser'
+import { elementReference, elementValue, isNodeTag, isSegmentTag } from './helpers'
+import { QueryDomWalker } from './QueryDomWalker'
+import { QueryEngineList } from './QueryEngineList'
+import type { EdiDomAbstractNode } from '../dom/EdiDomAbstractNode'
+import type { EdiDomElement } from '../dom/EdiDomElement'
+import type { EdiDomSegment } from '../dom/EdiDomSegment'
+import type { EdiDomNode } from '../dom/EdiDomTypes'
 import type {
   ElementContainsValueSelectorContext,
   ElementNotValueSelectorContext,
@@ -16,9 +19,6 @@ import type {
   ParentSegmentSelectorContext,
   SelectorContext
 } from './ElementSelectorParser'
-import { elementReference, elementValue, isNodeTag, isSegmentTag } from './helpers'
-import { QueryDomWalker } from './QueryDomWalker'
-import { QueryEngineList } from './QueryEngineList'
 import type { ElementReference, QueryDirection, QueryIterator } from './QueryEngineTypes'
 
 export class QueryEngine {

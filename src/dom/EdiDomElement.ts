@@ -1,10 +1,10 @@
-import type { EdiDomComponent } from './EdiDomComponent'
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import { EdiDomNodeType } from './EdiDomNodeType'
+import type { EdiDomComponent } from './EdiDomComponent'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
 import type { EdiDomValue } from './EdiDomValue'
 import type { EdiDomNode } from './EdiDomTypes'
-import { EdiDomNodeType } from './EdiDomNodeType'
 
 /** Element types supported for detection. */
 export type EdiDomElementType= 'repeated' | 'component' | 'value'

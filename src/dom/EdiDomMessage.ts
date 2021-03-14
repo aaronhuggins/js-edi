@@ -1,7 +1,7 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomGroup } from './EdiDomGroup'
 import type { EdiDomInterchange } from './EdiDomInterchange'
-import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
 import type { EdiDomNode } from './EdiDomTypes'

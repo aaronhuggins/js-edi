@@ -1,11 +1,11 @@
-import type { EdiDomElement } from './EdiDomElement'
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import { EdiDomNodeType } from './EdiDomNodeType'
+import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomNode } from './EdiDomTypes'
 import type { EdiDomInterchange } from './EdiDomInterchange'
 import type { EdiDomGroup } from './EdiDomGroup'
 import type { EdiDomMessage } from './EdiDomMessage'
-import { EdiDomNodeType } from './EdiDomNodeType'
 
 /** The segment of an EDI document. */
 export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode {
