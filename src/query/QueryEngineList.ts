@@ -50,13 +50,13 @@ export class QueryEngineList<T> implements Iterable<T> {
       return this._values.length
     }
 
-    let size = 0
+    let size = -1
 
     for (const [index] of this.entries()) {
-      size = index + 1
+      size = index
     }
 
-    return size
+    return size + 1
   }
 
   /** Add a value to this list. */
@@ -113,7 +113,7 @@ export class QueryEngineList<T> implements Iterable<T> {
 
   /** Get the entries for this list in the form of key/value pairs. */
   *entries (): IterableIterator<[number, T]> {
-    let index = -1
+    let index = 0
     for (const node of this) yield [index++, node]
   }
 
