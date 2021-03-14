@@ -20,7 +20,6 @@ export const EdiDomNodeAlias: Record<keyof EdiDomNodeTagMap, EdiDomNodeType> = {
   UNH: EdiDomNodeType.Message,
   // EDI DOM Node aliases.
   Root: EdiDomNodeType.Root,
-  Hierarchical: EdiDomNodeType.Hierarchical,
   Segment: EdiDomNodeType.Segment,
   Element: EdiDomNodeType.Element,
   Component: EdiDomNodeType.Component,

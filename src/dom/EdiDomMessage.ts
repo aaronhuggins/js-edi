@@ -1,6 +1,5 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomGroup } from './EdiDomGroup'
-import type { EdiDomHierarchical } from './EdiDomHierarchical'
 import type { EdiDomInterchange } from './EdiDomInterchange'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomRoot } from './EdiDomRoot'
@@ -20,7 +19,7 @@ export class EdiDomMessage extends EdiDomAbstractNode {
   /** The header of this message. */
   protected _header: EdiDomSegment<'UNH'|'ST'>
   /** The segments contained in this message. */
-  segments: Array<EdiDomSegment | EdiDomHierarchical>
+  segments: Array<EdiDomSegment>
   /** The root of this instance. */
   root: EdiDomRoot
   /** The trailer of this message. */
@@ -68,8 +67,8 @@ export class EdiDomMessage extends EdiDomAbstractNode {
   }
 
   /** Add a segment to this message. */
-  addChildNode (child: EdiDomSegment | EdiDomHierarchical): void {
-    if (child.nodeType === EdiDomNodeType.Segment || child.nodeType === EdiDomNodeType.Hierarchical) {
+  addChildNode (child: EdiDomSegment): void {
+    if (child.nodeType === EdiDomNodeType.Segment) {
       child.parent = this
 
       for (const node of child.walk()) {

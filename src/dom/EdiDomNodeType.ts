@@ -5,7 +5,6 @@ export enum EdiDomNodeType {
   Interchange = 'Interchange',
   Group = 'Group',
   Message = 'Message',
-  Hierarchical = 'Hierarchical',
   Segment = 'Segment',
   Element = 'Element',
   Component = 'Component',

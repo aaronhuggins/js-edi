@@ -5,7 +5,6 @@ import type { EdiDomNode } from './EdiDomTypes'
 import type { EdiDomInterchange } from './EdiDomInterchange'
 import type { EdiDomGroup } from './EdiDomGroup'
 import type { EdiDomMessage } from './EdiDomMessage'
-import type { EdiDomHierarchical } from './EdiDomHierarchical'
 import { EdiDomNodeType } from './EdiDomNodeType'
 
 /** The segment of an EDI document. */
@@ -18,7 +17,7 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
   }
 
   nodeType: EdiDomNodeType.Segment
-  parent: EdiDomInterchange | EdiDomGroup | EdiDomMessage | EdiDomHierarchical
+  parent: EdiDomInterchange | EdiDomGroup | EdiDomMessage
   /** The tag for this node. */
   tag: T
   /** The child elements of this node. */
