@@ -32,7 +32,7 @@ export abstract class EdiDomAbstractNode {
   
   /** Returns the first element that is a descendant of node that matches selectors. */
   querySelector<K extends keyof EdiDomNodeTagMap> (selector: K): EdiDomNodeTagMap[K]
-  querySelector<E extends EdiDomElement = EdiDomElement> (selector: string): E
+  querySelector<E extends EdiDomElement | EdiDomSegment = EdiDomElement> (selector: string): E
   querySelector (selector: string): EdiDomNode | QueryEngineList<EdiDomNode> {
     const query = new QueryEngine(selector, this)
     const evaluate = query.evaluate()
@@ -43,7 +43,7 @@ export abstract class EdiDomAbstractNode {
 
   /** Returns all element descendants of node that match selectors. */
   querySelectorAll<K extends keyof EdiDomNodeTagMap> (selector: K): QueryEngineList<EdiDomNodeTagMap[K]>
-  querySelectorAll<E extends EdiDomElement = EdiDomElement> (selector: string): QueryEngineList<E>
+  querySelectorAll<E extends EdiDomElement | EdiDomSegment = EdiDomElement> (selector: string): QueryEngineList<E>
   querySelectorAll (selector: string): QueryEngineList<EdiDomNode> {
     const query = new QueryEngine(selector, this)
 
