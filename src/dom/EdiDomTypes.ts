@@ -1,26 +1,13 @@
-import { EdiDomComponent } from './EdiDomComponent'
-import { EdiDomElement } from './EdiDomElement'
-import { EdiDomGroup } from './EdiDomGroup'
-import { EdiDomHierarchical } from './EdiDomHierarchical'
-import { EdiDomInterchange } from './EdiDomInterchange'
-import { EdiDomMessage } from './EdiDomMessage'
-import { EdiDomRoot } from './EdiDomRoot'
-import { EdiDomSegment } from './EdiDomSegment'
-import { EdiDomValue } from './EdiDomValue'
-
-/** Node types for each node class. */
-export enum EdiDomNodeType {
-  All = 'All',
-  Root = 'Root',
-  Interchange = 'Interchange',
-  Group = 'Group',
-  Message = 'Message',
-  Hierarchical = 'Hierarchical',
-  Segment = 'Segment',
-  Element = 'Element',
-  Component = 'Component',
-  Value = 'Value'
-}
+import type { EdiDomComponent } from './EdiDomComponent'
+import type { EdiDomElement } from './EdiDomElement'
+import type { EdiDomGroup } from './EdiDomGroup'
+import type { EdiDomHierarchical } from './EdiDomHierarchical'
+import type { EdiDomInterchange } from './EdiDomInterchange'
+import type { EdiDomMessage } from './EdiDomMessage'
+import type { EdiDomNodeType } from './EdiDomNodeType'
+import type { EdiDomRoot } from './EdiDomRoot'
+import type { EdiDomSegment } from './EdiDomSegment'
+import type { EdiDomValue } from './EdiDomValue'
 
 /**
  * Options for parsing/reconstructing an EDI document.
@@ -76,30 +63,4 @@ export interface EdiDomNodeTagMap extends Record<EdiDomNodeType, EdiDomNode> {
   UNB: EdiDomInterchange
   UNE: EdiDomGroup
   UNH: EdiDomMessage
-}
-
-export const EdiDomNodeAlias: Record<keyof EdiDomNodeTagMap, EdiDomNodeType> = {
-  // Universal selector.
-  '*': EdiDomNodeType.All,
-  'All': EdiDomNodeType.All,
-  // Interchange aliases.
-  Interchange: EdiDomNodeType.Interchange,
-  ISA: EdiDomNodeType.Interchange,
-  UNB: EdiDomNodeType.Interchange,
-  // Functional group aliases.
-  Group: EdiDomNodeType.Group,
-  GS: EdiDomNodeType.Group,
-  UNE: EdiDomNodeType.Group,
-  // Message aliases.
-  Message: EdiDomNodeType.Message,
-  Transaction: EdiDomNodeType.Message,
-  ST: EdiDomNodeType.Message,
-  UNH: EdiDomNodeType.Message,
-  // EDI DOM Node aliases.
-  Root: EdiDomNodeType.Root,
-  Hierarchical: EdiDomNodeType.Hierarchical,
-  Segment: EdiDomNodeType.Segment,
-  Element: EdiDomNodeType.Element,
-  Component: EdiDomNodeType.Component,
-  Value: EdiDomNodeType.Value
 }

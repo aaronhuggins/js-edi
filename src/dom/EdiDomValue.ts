@@ -1,8 +1,9 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomComponent } from './EdiDomComponent'
 import type { EdiDomElement } from './EdiDomElement'
+import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomRoot } from './EdiDomRoot'
-import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
+import { EdiDomNode } from './EdiDomTypes'
 
 /** Value types supported for detection. */
 export type EdiDomValueType = 'alpha' | 'numeric' | 'alphanumeric'

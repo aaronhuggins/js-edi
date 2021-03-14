@@ -1,3 +1,5 @@
+export type QueryDirection = 'ascend' | 'descend'
+
 export interface ElementReference {
   segmentId: string
   elementId: number

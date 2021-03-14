@@ -2,8 +2,9 @@ import type { EdiDomMessage } from './EdiDomMessage'
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
-import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
-import { EdiDomInterchange } from './EdiDomInterchange'
+import type { EdiDomNode } from './EdiDomTypes'
+import type { EdiDomInterchange } from './EdiDomInterchange'
+import { EdiDomNodeType } from './EdiDomNodeType'
 
 /** An EDIFACT UNG message or an X12 ST transaction. */
 export class EdiDomGroup extends EdiDomAbstractNode {

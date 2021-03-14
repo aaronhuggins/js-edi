@@ -1,16 +1,15 @@
 import { CharStreams, CommonTokenStream } from 'antlr4ts'
 import type { EdiDomAbstractNode } from '../dom/EdiDomAbstractNode'
-import { EdiDomComponent } from '../dom/EdiDomComponent'
 import type { EdiDomElement } from '../dom/EdiDomElement'
+import { EdiDomNodeAlias } from '../dom/EdiDomNodeAlias'
+import { EdiDomNodeType } from '../dom/EdiDomNodeType'
 import type { EdiDomSegment } from '../dom/EdiDomSegment'
-import { EdiDomNode, EdiDomNodeAlias, EdiDomNodeType } from '../dom/EdiDomTypes'
-import { EdiDomValue } from '../dom/EdiDomValue'
+import type { EdiDomNode } from '../dom/EdiDomTypes'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
-import {
+import { ElementSelectorParser } from './ElementSelectorParser'
+import type {
   ElementContainsValueSelectorContext,
   ElementNotValueSelectorContext,
-  ElementSelectorContext,
-  ElementSelectorParser,
   ElementValueSelectorContext,
   HlPathSelectorContext,
   LoopPathSelectorContext,
@@ -20,9 +19,7 @@ import {
 import { elementReference, elementValue, isNodeTag, isSegmentTag } from './helpers'
 import { QueryDomWalker } from './QueryDomWalker'
 import { QueryEngineList } from './QueryEngineList'
-import type { ElementReference, QueryIterator } from './QueryEngineTypes'
-
-type QueryDirection = 'ascend' | 'descend'
+import type { ElementReference, QueryDirection, QueryIterator } from './QueryEngineTypes'
 
 export class QueryEngine {
   constructor (selector: string, node: EdiDomNode | EdiDomAbstractNode) {
@@ -259,7 +256,7 @@ export class QueryEngine {
       if (typeof node === 'object') {
         switch (node.type) {
           case 'component':
-            if (node.value instanceof EdiDomComponent && node.value.text === value) {
+            if (node.value.nodeType === EdiDomNodeType.Component && node.value.text === value) {
               yield node
             }
             break
@@ -269,7 +266,7 @@ export class QueryEngine {
             }
             break
           case 'value':
-            if (node.value instanceof EdiDomValue && node.value.text === value) {
+            if (node.value.nodeType === EdiDomNodeType.Value && node.value.text === value) {
               yield node
             }
             break
@@ -287,7 +284,7 @@ export class QueryEngine {
       if (typeof node === 'object') {
         switch (node.type) {
           case 'component':
-            if (!(node.value instanceof EdiDomComponent && node.value.text === value)) {
+            if (!(node.value.nodeType === EdiDomNodeType.Component && node.value.text === value)) {
               yield node
             }
             break
@@ -297,7 +294,7 @@ export class QueryEngine {
             }
             break
           case 'value':
-            if (!(node.value instanceof EdiDomValue && node.value.text === value)) {
+            if (!(node.value.nodeType === EdiDomNodeType.Value && node.value.text === value)) {
               yield node
             }
             break

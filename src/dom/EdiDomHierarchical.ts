@@ -1,8 +1,9 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomMessage } from './EdiDomMessage'
+import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
-import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
+import type { EdiDomNode } from './EdiDomTypes'
 
 /** Describe a hierarchical level in EDIX12 (an 'HL' segment) or EDIFACT (an explicit segment tag structured as a component). */
 export class EdiDomHierarchical<T extends string = string> extends EdiDomAbstractNode {

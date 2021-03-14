@@ -1,7 +1,8 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomElement } from './EdiDomElement'
+import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomRoot } from './EdiDomRoot'
-import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
+import type { EdiDomNode } from './EdiDomTypes'
 import type { EdiDomValue } from './EdiDomValue'
 
 /** An intermediate value type in the object model, holding an array of values. */

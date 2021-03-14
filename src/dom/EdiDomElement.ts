@@ -3,7 +3,8 @@ import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
 import type { EdiDomValue } from './EdiDomValue'
-import { EdiDomNode, EdiDomNodeType } from './EdiDomTypes'
+import type { EdiDomNode } from './EdiDomTypes'
+import { EdiDomNodeType } from './EdiDomNodeType'
 
 /** Element types supported for detection. */
 export type EdiDomElementType= 'repeated' | 'component' | 'value'

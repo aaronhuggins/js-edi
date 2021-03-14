@@ -1,6 +1,7 @@
-import { ErrorNode } from 'antlr4ts/tree'
+import type { ErrorNode } from 'antlr4ts/tree'
 import { EdiX12Lexer } from '../x12/EdiX12Lexer'
-import {
+import { RepititionCharElementContext } from '../x12/EdiX12Parser'
+import type {
   ComponentCharElementContext,
   ElementContext,
   GroupHeaderContext,
@@ -8,7 +9,6 @@ import {
   InterchangeHeaderContext,
   InterchangeTrailerContext,
   RepeatedElementContext,
-  RepititionCharElementContext,
   RepititionContext,
   SegmentContext,
   StrictElementContext,
@@ -16,7 +16,7 @@ import {
   TransactionTrailerContext,
   ValueContext
 } from '../x12/EdiX12Parser'
-import { EdiX12ParserListener } from '../x12/EdiX12ParserListener'
+import type { EdiX12ParserListener } from '../x12/EdiX12ParserListener'
 import { EdiDomComponent } from './EdiDomComponent'
 import { EdiDomElement } from './EdiDomElement'
 import { EdiDomGroup } from './EdiDomGroup'

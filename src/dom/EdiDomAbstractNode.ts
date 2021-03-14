@@ -1,9 +1,10 @@
 import { QueryEngine } from '../query/QueryEngine'
-import { QueryEngineList } from '../query/QueryEngineList'
-import { EdiDomElement } from './EdiDomElement'
-import { EdiDomRoot } from './EdiDomRoot'
-import { EdiDomSegment } from './EdiDomSegment'
-import { EdiDomNode, EdiDomNodeTagMap, EdiDomNodeType } from './EdiDomTypes'
+import type { QueryEngineList } from '../query/QueryEngineList'
+import type { EdiDomElement } from './EdiDomElement'
+import type { EdiDomNodeType } from './EdiDomNodeType'
+import type { EdiDomRoot } from './EdiDomRoot'
+import type { EdiDomSegment } from './EdiDomSegment'
+import type { EdiDomNode, EdiDomNodeTagMap } from './EdiDomTypes'
 
 export abstract class EdiDomAbstractNode {
   abstract nodeType: EdiDomNodeType

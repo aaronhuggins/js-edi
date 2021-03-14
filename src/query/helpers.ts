@@ -1,6 +1,7 @@
-import { TerminalNode } from 'antlr4ts/tree'
-import { EdiDomNodeAlias, EdiDomNodeTagMap } from '../dom/EdiDomTypes'
-import { ElementReference } from './QueryEngineTypes'
+import type { TerminalNode } from 'antlr4ts/tree'
+import { EdiDomNodeAlias } from '../dom/EdiDomNodeAlias'
+import type { EdiDomNodeTagMap } from '../dom/EdiDomTypes'
+import type { ElementReference } from './QueryEngineTypes'
 
 /** Transform an element reference terminal node into ElementReference object. */
 export function elementReference (ref: TerminalNode): ElementReference {
