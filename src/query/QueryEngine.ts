@@ -147,12 +147,11 @@ export class QueryEngine {
         if (node.tag === segmentIds[counter]) {
           if (node.tag === ref.segmentId) {
             const element = node.getChildNode(ref.elementId)
-  
+            counter = 0
+
             if (typeof element === 'object') {
               yield element
             }
-  
-            counter = 0
           } else {
             counter += 1
           }
