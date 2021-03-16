@@ -22,8 +22,6 @@ export class QueryDomWalker {
 
   /** Ascend up the array of visited nodes. */
   *ascend (): Generator<EdiDomNode> {
-    for (let i = this.position; i > 0; i -= 1) {
-      yield this.visited[i]
-    }
+    for (let i = this.position; i > -1; i -= 1) yield this.visited[i]
   }
 }
