@@ -1,10 +1,12 @@
 import { EdiDomNodeAlias } from '../dom/EdiDomNodeAlias'
 import type { TerminalNode } from 'antlr4ts/tree'
 import type { EdiDomNodeTagMap } from '../dom/EdiDomTypes'
-import type { ElementReference, ValueReference } from './QueryEngineTypes'
+import type { ElementReference, PredicateReference, ValueReference } from './QueryEngineTypes'
 import type {
+  ElementAdjacentSelectorContext,
   ElementContainsValueSelectorContext,
   ElementNotValueSelectorContext,
+  ElementPrecedentSelectorContext,
   ElementValueSelectorContext
 } from './ElementSelectorParser'
 
@@ -32,6 +34,25 @@ export function valueReference (
   return {
     ref: elementReference(selector.ElementReference()),
     value: elementValue(selector.ElementValue())
+  }
+}
+
+export function predicateReference (selector: ElementPrecedentSelectorContext | ElementAdjacentSelectorContext): PredicateReference {
+  if (typeof selector.elementValueSelector() === 'object') {
+    return {
+      ...valueReference(selector.elementValueSelector()),
+      comparison: 'equals'
+    }
+  } else if (typeof selector.elementNotValueSelector() === 'object') {
+    return {
+      ...valueReference(selector.elementValueSelector()),
+      comparison: 'not'
+    }
+  } else if (typeof selector.elementContainsValueSelector() === 'object') {
+    return {
+      ...valueReference(selector.elementValueSelector()),
+      comparison: 'contains'
+    }
   }
 }
 
