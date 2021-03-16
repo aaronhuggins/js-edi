@@ -17,13 +17,13 @@ selector:
 elementAdjacentSelector:
   (ElementReference | hlPathSelector | parentSegmentSelector | loopPathSelector)
   '~'
-  (ElementReference | elementValueSelector | elementNotValueSelector | elementContainsValueSelector)
+  (elementValueSelector | elementNotValueSelector | elementContainsValueSelector)
   ;
 // Element reference precedent to selector.
 elementPrecedentSelector:
   (ElementReference | hlPathSelector | parentSegmentSelector | loopPathSelector)
   ':'
-  (ElementReference | elementValueSelector | elementNotValueSelector | elementContainsValueSelector)
+  (elementValueSelector | elementNotValueSelector | elementContainsValueSelector)
   ;
 // Element not value selector.
 elementContainsValueSelector: ElementReference '*' ElementValue;

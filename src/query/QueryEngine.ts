@@ -2,8 +2,8 @@ import { CharStreams, CommonTokenStream } from 'antlr4ts'
 import { EdiDomNodeAlias } from '../dom/EdiDomNodeAlias'
 import { EdiDomNodeType } from '../dom/EdiDomNodeType'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
-import { ElementSelectorParser } from './ElementSelectorParser'
-import { elementReference, elementValue, isNodeTag, isSegmentTag } from './helpers'
+import { ElementAdjacentSelectorContext, ElementPrecedentSelectorContext, ElementSelectorParser } from './ElementSelectorParser'
+import { elementReference, isNodeTag, isSegmentTag, valueReference } from './helpers'
 import { QueryDomWalker } from './QueryDomWalker'
 import { QueryEngineList } from './QueryEngineList'
 import type { EdiDomAbstractNode } from '../dom/EdiDomAbstractNode'
@@ -19,7 +19,7 @@ import type {
   ParentSegmentSelectorContext,
   SelectorContext
 } from './ElementSelectorParser'
-import type { ElementReference, QueryDirection, QueryIterator } from './QueryEngineTypes'
+import type { ElementReference, QueryDirection, QueryIterator, QueryPredicate, ValueReference } from './QueryEngineTypes'
 
 export class QueryEngine {
   constructor (selector: string, node: EdiDomNode | EdiDomAbstractNode) {
@@ -246,70 +246,80 @@ export class QueryEngine {
     }
   }
 
+  private elementEqualsValue (element: EdiDomElement, value: string): boolean {
+    if (typeof element === 'object') {
+      switch (element.type) {
+        case 'component':
+          return element.value.nodeType === EdiDomNodeType.Component && element.value.text === value
+        case 'repeated':
+          return element.elements.map(el => el.value.text).includes(value)
+        case 'value':
+          return element.value.nodeType === EdiDomNodeType.Value && element.value.text === value
+      }
+    }
+
+    return false
+  }
+
   private *elementValueSelector (ctx?: ElementValueSelectorContext, direction?: QueryDirection): QueryIterator<EdiDomElement> {
     const selector = typeof ctx === 'undefined' ? this.parsed.elementValueSelector() : ctx
-    const ref = elementReference(selector.ElementReference())
-    const value = elementValue(selector.ElementValue())
+    const { ref, value } = valueReference(selector)
 
     for (const node of this.elementSelector(ref, direction)) {
-      if (typeof node === 'object') {
-        switch (node.type) {
-          case 'component':
-            if (node.value.nodeType === EdiDomNodeType.Component && node.value.text === value) {
-              yield node
-            }
-            break
-          case 'repeated':
-            if (node.elements.map(el => el.value.text).includes(value)) {
-              yield node
-            }
-            break
-          case 'value':
-            if (node.value.nodeType === EdiDomNodeType.Value && node.value.text === value) {
-              yield node
-            }
-            break
-        }
-      }
+      if (this.elementEqualsValue(node, value)) yield node
     }
   }
 
   private *elementNotValueSelector (ctx?: ElementNotValueSelectorContext, direction?: QueryDirection): QueryIterator<EdiDomElement> {
     const selector = typeof ctx === 'undefined' ? this.parsed.elementNotValueSelector() : ctx
-    const ref = elementReference(selector.ElementReference())
-    const value = elementValue(selector.ElementValue())
+    const { ref, value } = valueReference(selector)
 
     for (const node of this.elementSelector(ref, direction)) {
-      if (typeof node === 'object') {
-        switch (node.type) {
-          case 'component':
-            if (!(node.value.nodeType === EdiDomNodeType.Component && node.value.text === value)) {
-              yield node
-            }
-            break
-          case 'repeated':
-            if (!node.elements.map(el => el.value.text).includes(value)) {
-              yield node
-            }
-            break
-          case 'value':
-            if (!(node.value.nodeType === EdiDomNodeType.Value && node.value.text === value)) {
-              yield node
-            }
-            break
-        }
-      }
+      if (!this.elementEqualsValue(node, value)) yield node
     }
+  }
+
+  private elementContainsValue (element: EdiDomElement, value: string): boolean {
+    return typeof element === 'object' && typeof element.text === 'string' && element.text.includes(value)
   }
 
   private *elementContainsValueSelector (ctx?: ElementContainsValueSelectorContext, direction?: QueryDirection): QueryIterator<EdiDomElement> {
     const selector = typeof ctx === 'undefined' ? this.parsed.elementContainsValueSelector() : ctx
-    const ref = elementReference(selector.ElementReference())
-    const value = elementValue(selector.ElementValue())
+    const { ref, value } = valueReference(selector)
 
     for (const node of this.elementSelector(ref, direction)) {
-      if (typeof node === 'object' && typeof node.text === 'string' && node.text.includes(value)) {
-        yield node
+      if (this.elementContainsValue(node, value)) yield node
+    }
+  }
+
+  private getPredicateReference (selector: ElementPrecedentSelectorContext | ElementAdjacentSelectorContext): ValueReference {
+    if (typeof selector.elementValueSelector() === 'object') {
+      return valueReference(selector.elementValueSelector())
+    } else if (typeof selector.elementNotValueSelector() === 'object') {
+      return valueReference(selector.elementNotValueSelector())
+    } else if (typeof selector.elementContainsValueSelector() === 'object') {
+      return valueReference(selector.elementContainsValueSelector())
+    }
+  }
+
+  private *predicate (
+    selector: ElementPrecedentSelectorContext | ElementAdjacentSelectorContext,
+    direction: QueryDirection,
+    segments?: EdiDomSegment[]
+  ): QueryIterator<EdiDomElement> {
+    const { ref, value } = this.getPredicateReference(selector)
+
+    if (typeof selector.elementValueSelector() === 'object') {
+      for (const element of this.elementValueSelector(selector.elementValueSelector(), direction)) {
+        yield element
+      }
+    } else if (typeof selector.elementNotValueSelector() === 'object') {
+      for (const element of this.elementNotValueSelector(selector.elementNotValueSelector(), direction)) {
+        yield element
+      }
+    } else if (typeof selector.elementContainsValueSelector() === 'object') {
+      for (const element of this.elementContainsValueSelector(selector.elementContainsValueSelector(), direction)) {
+        yield element
       }
     }
   }
@@ -318,33 +328,12 @@ export class QueryEngine {
     const selector = direction === 'ascend'
       ? this.parsed.elementPrecedentSelector()
       : this.parsed.elementAdjacentSelector()
-    const predicate = function * (engine: QueryEngine): QueryIterator<EdiDomElement> {
-      if (typeof selector.ElementReference(1) === 'object') {
-        const ref = elementReference(selector.ElementReference(1) as any)
 
-        for (const element of engine.elementSelector(ref, direction)) {
-          yield element
-        }
-      } else if (typeof selector.elementValueSelector() === 'object') {
-        for (const element of engine.elementValueSelector(selector.elementValueSelector(), direction)) {
-          yield element
-        }
-      } else if (typeof selector.elementNotValueSelector() === 'object') {
-        for (const element of engine.elementNotValueSelector(selector.elementNotValueSelector(), direction)) {
-          yield element
-        }
-      } else if (typeof selector.elementContainsValueSelector() === 'object') {
-        for (const element of engine.elementContainsValueSelector(selector.elementContainsValueSelector(), direction)) {
-          yield element
-        }
-      }
-    }
-
-    if (typeof selector.ElementReference(0) === 'object') {
-      const ref = elementReference(selector.ElementReference(0) as any)
+    if (typeof selector.ElementReference() === 'object') {
+      const ref = elementReference(selector.ElementReference())
 
       for (const node of this.elementSelector(ref)) {
-        for (const element of predicate(this)) {
+        for (const element of this.predicate(selector, direction)) {
           if (typeof element === 'object') {
             yield node
           }
@@ -352,7 +341,7 @@ export class QueryEngine {
       }
     } else if (typeof selector.parentSegmentSelector() === 'object') {
       for (const node of this.parentSegmentSelector(selector.parentSegmentSelector())) {
-        for (const element of predicate(this)) {
+        for (const element of this.predicate(selector, direction)) {
           if (typeof element === 'object') {
             yield node
           }
@@ -360,7 +349,7 @@ export class QueryEngine {
       }
     } else if (typeof selector.hlPathSelector() === 'object') {
       for (const node of this.hlPathSelector(selector.hlPathSelector())) {
-        for (const element of predicate(this)) {
+        for (const element of this.predicate(selector, direction)) {
           if (typeof element === 'object') {
             yield node
           }
@@ -368,7 +357,7 @@ export class QueryEngine {
       }
     } else if (typeof selector.loopPathSelector() === 'object') {
       for (const node of this.loopPathSelector(selector.loopPathSelector())) {
-        for (const element of predicate(this)) {
+        for (const element of this.predicate(selector, direction)) {
           if (typeof element === 'object') {
             yield node
           }

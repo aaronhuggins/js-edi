@@ -1,8 +1,22 @@
+import type { TerminalNode } from 'antlr4ts/tree'
+import type {
+  ElementContainsValueSelectorContext,
+  ElementNotValueSelectorContext,
+  ElementValueSelectorContext
+} from './ElementSelectorParser'
+
 export type QueryDirection = 'ascend' | 'descend'
+
+export type QueryPredicate = TerminalNode | ElementValueSelectorContext | ElementNotValueSelectorContext | ElementContainsValueSelectorContext
 
 export interface ElementReference {
   segmentId: string
   elementId: number
+}
+
+export interface ValueReference {
+  ref: ElementReference
+  value: string
 }
 
 interface QueryYieldResult<TYield> {

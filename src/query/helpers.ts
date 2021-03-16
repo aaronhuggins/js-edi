@@ -1,7 +1,12 @@
 import { EdiDomNodeAlias } from '../dom/EdiDomNodeAlias'
 import type { TerminalNode } from 'antlr4ts/tree'
 import type { EdiDomNodeTagMap } from '../dom/EdiDomTypes'
-import type { ElementReference } from './QueryEngineTypes'
+import type { ElementReference, ValueReference } from './QueryEngineTypes'
+import type {
+  ElementContainsValueSelectorContext,
+  ElementNotValueSelectorContext,
+  ElementValueSelectorContext
+} from './ElementSelectorParser'
 
 /** Transform an element reference terminal node into ElementReference object. */
 export function elementReference (ref: TerminalNode): ElementReference {
@@ -19,6 +24,15 @@ export function elementValue (ref: TerminalNode): string {
   if (typeof ref === 'undefined') return
 
   return ref.text.substring(2, ref.text.length - 2)
+}
+
+export function valueReference (
+  selector: ElementValueSelectorContext | ElementNotValueSelectorContext | ElementContainsValueSelectorContext
+): ValueReference {
+  return {
+    ref: elementReference(selector.ElementReference()),
+    value: elementValue(selector.ElementValue())
+  }
 }
 
 export function isNodeTag<K extends keyof EdiDomNodeTagMap> (selector: K | string): selector is K {
