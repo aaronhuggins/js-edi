@@ -7,6 +7,7 @@ Work in progress, not fit for production use. Parser for both EDIX12 and EDIFACT
   - Use enums for consistency
   - Provide method for setting own options
   - Address custom eventing
+- Split out code into smaller loosely-coupled NPM packages
 - Implement CharStream class for Node Readable streams
 - Improve support for defining input encoding(s)
 - Improve accuracy of parsing/handling EDIFACT
