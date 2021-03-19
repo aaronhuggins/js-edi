@@ -1,0 +1,38 @@
+{
+  "name": "@js-edi/dom",
+  "version": "0.0.0",
+  "description": "The JS-EDI Document Object Model for EDIFACT and EDI X12",
+  "keywords": [
+    "edi",
+    "edifact",
+    "x12",
+    "parser",
+    "dom",
+    "antlr",
+    "js-edi"
+  ],
+  "author": "Aaron Huggins <ahuggins@nethealthshops.com>",
+  "homepage": "https://github.com/ahuggins-nhs/edi-parser/tree/main/packages/dom#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahuggins-nhs/edi-parser.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/ahuggins-nhs/edi-parser/issues"
+  }
+}

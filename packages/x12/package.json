@@ -1,0 +1,28 @@
+{
+  "name": "@js-edi/x12",
+  "version": "0.0.0",
+  "description": "A raw parser for EDI X12 which outputs an ANTLR4 ParseTree",
+  "keywords": [
+    "edi",
+    "x12",
+    "parser",
+    "antlr"
+  ],
+  "author": "Aaron Huggins <ahuggins@nethealthshops.com>",
+  "homepage": "https://github.com/ahuggins-nhs/edi-parser/tree/main/packages/x12#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahuggins-nhs/edi-parser.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/ahuggins-nhs/edi-parser/issues"
+  }
+}

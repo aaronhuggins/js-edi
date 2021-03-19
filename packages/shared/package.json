@@ -1,0 +1,25 @@
+{
+  "name": "@js-edi/shared",
+  "version": "0.0.0",
+  "description": "Shared classes, interfaces, and types for js-edi monorepo",
+  "keywords": [
+    "js-edi"
+  ],
+  "author": "Aaron Huggins <ahuggins@nethealthshops.com>",
+  "homepage": "https://github.com/ahuggins-nhs/edi-parser/tree/main/packages/shared#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahuggins-nhs/edi-parser.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/ahuggins-nhs/edi-parser/issues"
+  }
+}
