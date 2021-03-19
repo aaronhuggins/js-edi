@@ -61,43 +61,35 @@ export class QueryEngine {
       const tokens = new CommonTokenStream(lexer)
       const parser = new ElementSelectorParser(tokens)
       this.parsed = parser.selector()
-  
+
       if (typeof this.parsed.elementSelector() === 'object') {
-        for (const node of this.elementSelector()) {
-          yield node
-        }
+        for (const node of this.elementSelector()) yield node
+
       } else if (typeof this.parsed.parentSegmentSelector() === 'object') {
-        for (const node of this.parentSegmentSelector()) {
-          yield node
-        }
+        for (const node of this.parentSegmentSelector()) yield node
+
       } else if (typeof this.parsed.hlPathSelector() === 'object') {
-        for (const node of this.hlPathSelector()) {
-          yield node
-        }
+        for (const node of this.hlPathSelector()) yield node
+
       } else if (typeof this.parsed.loopPathSelector() === 'object') {
-        for (const node of this.loopPathSelector()) {
-          yield node
-        }
+        for (const node of this.loopPathSelector()) yield node
+
       } else if (typeof this.parsed.elementValueSelector() === 'object') {
-        for (const node of this.elementValueSelector()) {
-          yield node
-        }
+        for (const node of this.elementValueSelector()) yield node
+
       } else if (typeof this.parsed.elementNotValueSelector() === 'object') {
-        for (const node of this.elementNotValueSelector()) {
-          yield node
-        }
+        for (const node of this.elementNotValueSelector()) yield node
+
       } else if (typeof this.parsed.elementContainsValueSelector() === 'object') {
-        for (const node of this.elementContainsValueSelector()) {
-          yield node
-        }
+        for (const node of this.elementContainsValueSelector()) yield node
+
+      } else if (typeof this.parsed.elementSiblingSelector() === 'object') {
+
       } else if (typeof this.parsed.elementPrecedentSelector() === 'object') {
-        for (const node of this.elementPrecedentSelector()) {
-          yield node
-        }
+        for (const node of this.elementPrecedentSelector()) yield node
+
       } else if (typeof this.parsed.elementAdjacentSelector() === 'object') {
-        for (const node of this.elementAdjacentSelector()) {
-          yield node
-        }
+        for (const node of this.elementAdjacentSelector()) yield node
       }
     }
   }
@@ -366,6 +358,8 @@ export class QueryEngine {
       }
     }
   }
+
+  private *elementSiblingSelector (): QueryIterator<EdiDomElement> {}
 
   private *elementPrecedentSelector (): QueryIterator<EdiDomElement> {
     for (const node of this.elementCombinatorSelector('ascend')) yield node
