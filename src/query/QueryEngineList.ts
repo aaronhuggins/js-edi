@@ -15,7 +15,7 @@ export class QueryEngineList<T> implements Iterable<T> {
           if (Number.isNaN(key)) {
             return target[prop]
           } else {
-            return target._values[key]
+            return target.get(key)
           }
         } else {
           return target[prop]
@@ -66,55 +66,66 @@ export class QueryEngineList<T> implements Iterable<T> {
 
   /** Get a result by its index in the list. */
   get (key: number): T {
-    if (key in this._values) {
+    if (key in this._values || this._queryFinished) {
       return this._values[key]
     }
 
+    let result: T
+
     for (const [index, node] of this.entries()) {
-      if (index === key) return node
+      if (index === key) result = node
     }
+
+    return result
   }
 
   /** Delete a result from this list by value or by index. */
   delete (result: T | number): void {
     if (typeof result === 'number') {
-      if (result in this._values) {
+      if (result in this._values || this._queryFinished) {
         this._values.splice(result, 1)
       } else {
+        let i: number
+
         for (const [index] of this.entries()) {
-          if (index === result) {
-            this._values.splice(result, 1)
-            return
-          }
+          if (index === result) i = index
         }
+
+        this._values.splice(i, 1)
       }
     } else {
       const index = this._values.indexOf(result)
 
-      this._values.splice(index, 1)
+      if (index > -1 || this._queryFinished) {
+        this._values.splice(index, 1)
+      } else {
+
+      }
     }
   }
 
   /** Implement iterable iterator for this class. */
-  *[Symbol.iterator] (): IterableIterator<T> {
-    if (this._queryFinished) {
-      for (const node of this._values) {
-        yield node
-      }
-    } else {
-      for (const node of this._query) {
-        this._values.push(node)
-        yield node
-      }
-
-      this._queryFinished = true
-    }
+  [Symbol.iterator] (): IterableIterator<T> {
+    return this.values()
   }
 
   /** Get the entries for this list in the form of key/value pairs. */
   *entries (): IterableIterator<[number, T]> {
-    let index = 0
-    for (const node of this) yield [index++, node]
+    if (this._queryFinished) {
+      for (const [index, node] of this._values.entries()) {
+        yield [index, node]
+      }
+    } else {
+      let index = 0
+
+      for (const node of this._query) {
+        this._values[index++] = node
+
+        yield [index, node]
+      }
+
+      this._queryFinished = true
+    }
   }
 
   /** Get all keys from this list. */
@@ -124,7 +135,7 @@ export class QueryEngineList<T> implements Iterable<T> {
 
   /** Get all values from this list. */
   *values (): IterableIterator<T> {
-    for (const node of this) yield node
+    for (const entry of this.entries()) yield entry[1]
   }
 
   /** Execute a synchronous callback for each value in the list. */
@@ -138,17 +149,16 @@ export class QueryEngineList<T> implements Iterable<T> {
 
   /** Map each value to the result of a synchronous callback. */
   map<U> (callbackfn: (value: T, index: number, parent: QueryEngineList<T>) => U, thisArg?: any): QueryEngineList<U> {
-    const list = this
-    const mapper = function * (): QueryIterator<U> {
-      const fn: typeof callbackfn = typeof thisArg === 'undefined'
-        ? callbackfn.bind(list)
-        : callbackfn.bind(thisArg)
-
-      for (const [key, value] of list.entries()) {
+    const entries = this.entries()
+    const fn: typeof callbackfn = typeof thisArg === 'undefined'
+      ? callbackfn.bind(this)
+      : callbackfn.bind(thisArg)
+    const mapper = function * map (list: QueryEngineList<T>): QueryIterator<U> {
+      for (const [key, value] of entries) {
         yield fn(value, key, list)
       }
     }
 
-    return new QueryEngineList(mapper())
+    return new QueryEngineList(mapper(this))
   }
 }
