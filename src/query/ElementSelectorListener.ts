@@ -6,6 +6,7 @@ import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
 import { SelectorContext } from "./ElementSelectorParser";
 import { ElementAdjacentSelectorContext } from "./ElementSelectorParser";
 import { ElementPrecedentSelectorContext } from "./ElementSelectorParser";
+import { ElementSiblingSelectorContext } from "./ElementSelectorParser";
 import { ElementContainsValueSelectorContext } from "./ElementSelectorParser";
 import { ElementNotValueSelectorContext } from "./ElementSelectorParser";
 import { ElementValueSelectorContext } from "./ElementSelectorParser";
@@ -53,6 +54,17 @@ export interface ElementSelectorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitElementPrecedentSelector?: (ctx: ElementPrecedentSelectorContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ElementSelectorParser.elementSiblingSelector`.
+	 * @param ctx the parse tree
+	 */
+	enterElementSiblingSelector?: (ctx: ElementSiblingSelectorContext) => void;
+	/**
+	 * Exit a parse tree produced by `ElementSelectorParser.elementSiblingSelector`.
+	 * @param ctx the parse tree
+	 */
+	exitElementSiblingSelector?: (ctx: ElementSiblingSelectorContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ElementSelectorParser.elementContainsValueSelector`.

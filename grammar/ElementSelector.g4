@@ -9,6 +9,7 @@ selector:
   | elementValueSelector
   | elementNotValueSelector
   | elementContainsValueSelector
+  | elementSiblingSelector
   | elementPrecedentSelector
   | elementAdjacentSelector
   ;
@@ -21,6 +22,12 @@ elementAdjacentSelector:
   ;
 // Element reference precedent to selector.
 elementPrecedentSelector:
+  (ElementReference | hlPathSelector | parentSegmentSelector | loopPathSelector)
+  '?'
+  (elementValueSelector | elementNotValueSelector | elementContainsValueSelector)
+  ;
+// Element reference precedent to selector.
+elementSiblingSelector:
   (ElementReference | hlPathSelector | parentSegmentSelector | loopPathSelector)
   ':'
   (elementValueSelector | elementNotValueSelector | elementContainsValueSelector)
