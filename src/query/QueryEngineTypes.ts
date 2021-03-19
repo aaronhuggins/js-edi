@@ -1,13 +1,11 @@
-import type { TerminalNode } from 'antlr4ts/tree'
 import type {
-  ElementContainsValueSelectorContext,
-  ElementNotValueSelectorContext,
-  ElementValueSelectorContext
+  ElementAdjacentSelectorContext,
+  ElementPrecedentSelectorContext
 } from './ElementSelectorParser'
 
 export type QueryDirection = 'ascend' | 'descend'
 
-export type QueryPredicate = TerminalNode | ElementValueSelectorContext | ElementNotValueSelectorContext | ElementContainsValueSelectorContext
+export type QueryCombinator = ElementPrecedentSelectorContext | ElementAdjacentSelectorContext
 
 export interface ElementReference {
   segmentId: string

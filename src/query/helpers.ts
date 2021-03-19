@@ -1,12 +1,15 @@
 import { EdiDomNodeAlias } from '../dom/EdiDomNodeAlias'
 import type { TerminalNode } from 'antlr4ts/tree'
 import type { EdiDomNodeTagMap } from '../dom/EdiDomTypes'
-import type { ElementReference, PredicateReference, ValueReference } from './QueryEngineTypes'
 import type {
-  ElementAdjacentSelectorContext,
+  ElementReference,
+  PredicateReference,
+  QueryCombinator,
+  ValueReference
+} from './QueryEngineTypes'
+import type {
   ElementContainsValueSelectorContext,
   ElementNotValueSelectorContext,
-  ElementPrecedentSelectorContext,
   ElementValueSelectorContext
 } from './ElementSelectorParser'
 
@@ -37,7 +40,7 @@ export function valueReference (
   }
 }
 
-export function predicateReference (selector: ElementPrecedentSelectorContext | ElementAdjacentSelectorContext): PredicateReference {
+export function predicateReference (selector: QueryCombinator): PredicateReference {
   if (typeof selector.elementValueSelector() === 'object') {
     return {
       ...valueReference(selector.elementValueSelector()),

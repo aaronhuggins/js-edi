@@ -3,7 +3,7 @@ import { EdiDomNodeAlias } from '../dom/EdiDomNodeAlias'
 import { EdiDomNodeType } from '../dom/EdiDomNodeType'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
 import { ElementAdjacentSelectorContext, ElementPrecedentSelectorContext, ElementSelectorParser } from './ElementSelectorParser'
-import { elementReference, isNodeTag, isSegmentTag, valueReference } from './helpers'
+import { elementReference, isNodeTag, isSegmentTag, predicateReference, valueReference } from './helpers'
 import { QueryDomWalker } from './QueryDomWalker'
 import { QueryEngineList } from './QueryEngineList'
 import type { EdiDomAbstractNode } from '../dom/EdiDomAbstractNode'
@@ -19,7 +19,7 @@ import type {
   ParentSegmentSelectorContext,
   SelectorContext
 } from './ElementSelectorParser'
-import type { ElementReference, QueryDirection, QueryIterator, QueryPredicate, ValueReference } from './QueryEngineTypes'
+import type { ElementReference, PredicateReference, QueryDirection, QueryIterator } from './QueryEngineTypes'
 
 export class QueryEngine {
   constructor (selector: string, node: EdiDomNode | EdiDomAbstractNode) {
@@ -292,34 +292,43 @@ export class QueryEngine {
     }
   }
 
-  private getPredicateReference (selector: ElementPrecedentSelectorContext | ElementAdjacentSelectorContext): ValueReference {
-    if (typeof selector.elementValueSelector() === 'object') {
-      return valueReference(selector.elementValueSelector())
-    } else if (typeof selector.elementNotValueSelector() === 'object') {
-      return valueReference(selector.elementNotValueSelector())
-    } else if (typeof selector.elementContainsValueSelector() === 'object') {
-      return valueReference(selector.elementContainsValueSelector())
-    }
-  }
-
   private *predicate (
     selector: ElementPrecedentSelectorContext | ElementAdjacentSelectorContext,
     direction: QueryDirection,
     segments?: EdiDomSegment[]
   ): QueryIterator<EdiDomElement> {
-    const { ref, value } = this.getPredicateReference(selector)
+    const { ref, value, comparison } = predicateReference(selector)
+    const getElement = (segment: EdiDomSegment): EdiDomElement => {
+      const element = segment.getChildNode(ref.elementId)
 
-    if (typeof selector.elementValueSelector() === 'object') {
-      for (const element of this.elementValueSelector(selector.elementValueSelector(), direction)) {
-        yield element
+      switch (comparison) {
+        case 'contains':
+          if (this.elementContainsValue(element, value)) return element
+          break
+        case 'equals':
+          if (this.elementEqualsValue(element, value)) return element
+          break
+        case 'not':
+          if (!this.elementEqualsValue(element, value)) return element
+          break
       }
-    } else if (typeof selector.elementNotValueSelector() === 'object') {
-      for (const element of this.elementNotValueSelector(selector.elementNotValueSelector(), direction)) {
-        yield element
+    }
+
+    if (direction === 'ascend') {
+      for (let i = segments.length -1; i > -1; i -= 1) {
+        if (segments[i].tag === ref.segmentId) {
+          const element = getElement(segments[i])
+
+          if (typeof element === 'object') yield element
+        }
       }
-    } else if (typeof selector.elementContainsValueSelector() === 'object') {
-      for (const element of this.elementContainsValueSelector(selector.elementContainsValueSelector(), direction)) {
-        yield element
+    } else {
+      for (const segment of segments) {
+        if (segment.tag === ref.segmentId) {
+          const element = getElement(segment)
+
+          if (typeof element === 'object') yield element
+        }
       }
     }
   }
@@ -333,35 +342,27 @@ export class QueryEngine {
       const ref = elementReference(selector.ElementReference())
 
       for (const node of this.elementSelector(ref)) {
-        for (const element of this.predicate(selector, direction)) {
-          if (typeof element === 'object') {
-            yield node
-          }
-        }
+        const { value } = this.predicate(selector, direction).next()
+
+        if (typeof value === 'object') yield node
       }
     } else if (typeof selector.parentSegmentSelector() === 'object') {
       for (const node of this.parentSegmentSelector(selector.parentSegmentSelector())) {
-        for (const element of this.predicate(selector, direction)) {
-          if (typeof element === 'object') {
-            yield node
-          }
-        }
+        const { value } = this.predicate(selector, direction).next()
+
+        if (typeof value === 'object') yield node
       }
     } else if (typeof selector.hlPathSelector() === 'object') {
       for (const node of this.hlPathSelector(selector.hlPathSelector())) {
-        for (const element of this.predicate(selector, direction)) {
-          if (typeof element === 'object') {
-            yield node
-          }
-        }
+        const { value } = this.predicate(selector, direction).next()
+
+        if (typeof value === 'object') yield node
       }
     } else if (typeof selector.loopPathSelector() === 'object') {
       for (const node of this.loopPathSelector(selector.loopPathSelector())) {
-        for (const element of this.predicate(selector, direction)) {
-          if (typeof element === 'object') {
-            yield node
-          }
-        }
+        const { value } = this.predicate(selector, direction).next()
+
+        if (typeof value === 'object') yield node
       }
     }
   }
