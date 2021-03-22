@@ -49,7 +49,7 @@ export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends 
 
   /** Add an element, component, or value to this node. */
   addChildNode (child: EdiDomElement | T): void {
-    const setRels = () => {
+    const setRels = (): void => {
       child.parent = this
 
       for (const node of child.walk()) {

@@ -59,7 +59,7 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
 
   /** The read-only text representation of this node. */
   get text (): string {
-    const handleUNA = () => {
+    const handleUNA = (): string => {
       return this.header.tag === 'UNB'
         ? this.root.createUNAString()
         : ''
@@ -84,7 +84,7 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
   }
 
   /** Add a group or message to this interchange. */
-  addChildNode (child: EdiDomGroup | EdiDomMessage) {
+  addChildNode (child: EdiDomGroup | EdiDomMessage): void {
     child.parent = this
 
     for (const node of child.walk()) {

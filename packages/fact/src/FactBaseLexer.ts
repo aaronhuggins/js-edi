@@ -80,7 +80,7 @@ export abstract class FactBaseLexer extends BaseLexer {
   /** Handles control characters encountered by the lexer. */
   handleControlChars (lexer: Record<string, any>): void {
     const charType = this.ControlCharMap.get(this.text)
-    const charTypeHandler = () => {
+    const charTypeHandler = (): void => {
       if (charType in ControlChar) {
         this.type = lexer[charType]
       } else {

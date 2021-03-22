@@ -19,7 +19,7 @@ import type {
   ParentSegmentSelectorContext,
   SelectorContext
 } from './ElementSelectorParser'
-import type { ElementReference, PredicateReference, QueryDirection, QueryIterator } from './QueryEngineTypes'
+import type { ElementReference, QueryDirection, QueryIterator } from './QueryEngineTypes'
 
 export class QueryEngine {
   constructor (selector: string, node: EdiDomNode | EdiDomAbstractNode) {

@@ -8,7 +8,7 @@ export class EdiDomRoot extends EdiDomAbstractNode {
   constructor () {
     super()
     this.nodeType = EdiDomNodeType.Root
-    this.options = {} as EdiDomOptions
+    this.options = {} as unknown as EdiDomOptions
     this.interchanges = []
     this.root = this
     this.parent = this
@@ -53,9 +53,9 @@ export class EdiDomRoot extends EdiDomAbstractNode {
     const contents = 'UNA' +
       this.options.componentSeparator +
       this.options.dataSeparator +
-      this.options.decimalMark ?? '.' +
-      this.options.releaseIndicator ?? '?' +
-      this.options.repititionSeparator ?? ' ' +
+      (this.options.decimalMark ?? '.') +
+      (this.options.releaseIndicator ?? '?') +
+      (this.options.repititionSeparator ?? ' ') +
       this.options.segmentTerminator
 
     if (typeof this.options.endOfLine === 'string') {
@@ -66,7 +66,7 @@ export class EdiDomRoot extends EdiDomAbstractNode {
   }
 
   /** Add an interchange to this document. */
-  addChildNode (child: EdiDomInterchange) {
+  addChildNode (child: EdiDomInterchange): void {
     if (child.nodeType === EdiDomNodeType.Interchange) {
       child.parent = this
 
