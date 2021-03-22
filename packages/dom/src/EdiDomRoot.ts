@@ -78,6 +78,27 @@ export class EdiDomRoot extends EdiDomAbstractNode {
     }
   }
 
+  /** Get an interchange by zer-based index in the root. */
+  getChildNode (index: number): EdiDomInterchange {
+    return this.interchanges[index]
+  }
+
+  /** Remove an interchange from this root and destroy all descendent relationships to this root. */
+  removeChildNode (child: EdiDomInterchange): void {
+    const index = this.interchanges.indexOf(child)
+
+    if (index > -1) {
+      child.parent = undefined
+
+      for (const node of child.walk()) {
+        node.root = undefined
+      }
+
+      this.interchanges.splice(index, 1)
+    }
+  }
+
+  /** Walk the document object model sequentially. */
   * walk (): Generator<EdiDomNode> {
     yield this
 
