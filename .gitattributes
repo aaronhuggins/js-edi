@@ -1,0 +1,3 @@
+packages/fact/src/EdiFact*.ts          linguist-generated=true
+packages/dom/query/ElementSelector*.ts linguist-generated=true
+packages/x12/src/EdiX12*.ts            linguist-generated=true
