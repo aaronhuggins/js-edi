@@ -19,7 +19,7 @@ export class EdiDomMessage extends EdiDomAbstractNode {
   /** The header of this message. */
   protected _header: EdiDomSegment<'UNH'|'ST'>
   /** The segments contained in this message. */
-  segments: Array<EdiDomSegment>
+  segments: EdiDomSegment[]
   /** The root of this instance. */
   root: EdiDomRoot
   /** The trailer of this message. */
