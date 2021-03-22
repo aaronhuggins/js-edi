@@ -1,6 +1,6 @@
-import { EdiDomNodeAlias } from '../dom/EdiDomNodeAlias'
+import { EdiDomNodeAlias } from '../src/EdiDomNodeAlias'
 import type { TerminalNode } from 'antlr4ts/tree'
-import type { EdiDomNodeTagMap } from '../dom/EdiDomTypes'
+import type { EdiDomNodeTagMap } from '../src/EdiDomTypes'
 import type {
   ElementReference,
   PredicateReference,

@@ -1,16 +1,21 @@
-import { EdiX12Lexer } from '../x12/EdiX12Lexer'
-import { RepititionCharElementContext } from '../x12/EdiX12Parser'
-import { EdiDomComponent } from './EdiDomComponent'
-import { EdiDomElement } from './EdiDomElement'
-import { EdiDomGroup } from './EdiDomGroup'
-import { EdiDomInterchange } from './EdiDomInterchange'
-import { EdiDomMessage } from './EdiDomMessage'
-import { EdiDomRoot } from './EdiDomRoot'
-import { EdiDomSegment } from './EdiDomSegment'
-import { EdiDomValue } from './EdiDomValue'
+import {
+  EdiX12Lexer,
+  RepititionCharElementContext
+} from '@js-edi/x12'
+import {
+  EdiDomComponent,
+  EdiDomElement,
+  EdiDomGroup,
+  EdiDomInterchange,
+  EdiDomMessage,
+  EdiDomRoot,
+  EdiDomSegment,
+  EdiDomValue
+} from '@js-edi/dom'
 import type { ErrorNode } from 'antlr4ts/tree'
 import type {
   ComponentCharElementContext,
+  EdiX12ParserListener,
   ElementContext,
   GroupHeaderContext,
   GroupTrailerContext,
@@ -23,8 +28,7 @@ import type {
   TransactionHeaderContext,
   TransactionTrailerContext,
   ValueContext
-} from '../x12/EdiX12Parser'
-import type { EdiX12ParserListener } from '../x12/EdiX12ParserListener'
+} from '@js-edi/x12'
 
 function contextToElement (ctx: ElementContext | RepeatedElementContext): EdiDomElement {
   const domElement = new EdiDomElement()

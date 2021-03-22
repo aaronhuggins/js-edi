@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs'
-import { EdiParser } from '../src/EdiParser'
+import { EdiParser } from '../packages/documents/index'
 import { strictEqual } from 'assert'
-import type { EdiDomSegment } from '../src/dom/EdiDomSegment'
+import type { EdiDomSegment } from '../packages/dom/index'
 
 const parseLabel = '    query duration'
 const parser = new EdiParser({
@@ -28,6 +28,8 @@ describe('QueryEngine', () => {
     console.time(parseLabel)
     const result = document.querySelectorAll('REF01')
     console.timeEnd(parseLabel)
+
+    // console.log(Array.from(result).length)
 
     strictEqual(result.size, 2)
   })

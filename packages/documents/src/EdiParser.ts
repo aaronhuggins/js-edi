@@ -1,11 +1,11 @@
-import { Readable } from 'stream'
 import { CharStream, CharStreams, CommonTokenStream, RecognitionException, Recognizer } from 'antlr4ts'
-import { EdiX12Lexer } from './x12/EdiX12Lexer'
-import { DocumentContext as EdiX12DocumentContext, EdiX12Parser } from './x12/EdiX12Parser'
-import { EdiFactLexer } from './fact/EdiFactLexer'
-import { DocumentContext as EdiFactDocumentContext, EdiFactParser } from './fact/EdiFactParser'
-import { EdiDomRoot } from './dom/EdiDomRoot'
-import { EdiDomX12Listener } from './dom/EdiDomX12Listener'
+import { EdiX12Lexer, EdiX12Parser } from '@js-edi/x12'
+import { EdiFactLexer, EdiFactParser } from '@js-edi/fact'
+import { EdiDomX12Listener } from './EdiDomX12Listener'
+import type { Readable } from 'stream'
+import type { DocumentContext as EdiFactDocumentContext } from '@js-edi/fact'
+import type { DocumentContext as EdiX12DocumentContext } from '@js-edi/x12'
+import type { EdiDomRoot } from '@js-edi/dom'
 
 export type DocumentContext = EdiX12DocumentContext | EdiFactDocumentContext
 export type EdiCustomLexer = EdiX12Lexer | EdiFactLexer

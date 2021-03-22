@@ -38,3 +38,125 @@ This means developers should expect:
   > All scenarios during DOM construction not meeting expectations should throw.
 - A single node can be re-serialized simply by accessing the `text` getter on the node.
   > This means the document root can implicitly provide the entire contents in EDIFACT or EDIX12 format.
+
+# Document Object Model API
+
+## Global Methods
+
+### `addChildNode`
+
+### `getChildNode`
+
+### `toJSON`
+
+### `querySelector`
+
+### `querySelectorAll`
+
+### `removeChildNode`
+
+### `walk`
+
+## Global Properties
+
+### `innerEDI`
+
+### `nodeType`
+
+### `outerEDI`
+
+### `parent`
+
+### `root`
+
+### `text`
+
+### `textContent`
+
+## `EdiDomRoot` Methods
+
+### `createUNAString`
+
+## `EdiDomRoot` Properties
+
+### `documentType`
+
+### `interchanges`
+
+### `options`
+
+## `EdiDomInterchange` Methods
+
+### N/A
+
+## `EdiDomInterchange` Properties
+
+### `groups`
+
+### `header`
+
+### `messages`
+
+### `trailer`
+
+## `EdiDomGroup` Methods
+
+### N/A
+
+## `EdiDomGroup` Properties
+
+### `header`
+
+### `messages`
+
+### `trailer`
+
+## `EdiDomMessage` Methods
+
+### N/A
+
+## `EdiDomMessage` Properties
+
+### `header`
+
+### `segments`
+
+### `trailer`
+
+## `EdiDomSegment` Methods
+
+### N/A
+
+## `EdiDomSegment` Properties
+
+### `elements`
+
+### `tag`
+
+## `EdiDomElement` Methods
+
+### N/A
+
+## `EdiDomElement` Properties
+
+### `elements`
+
+### `type`
+
+### `value`
+
+## `EdiDomComponent` Methods
+
+### N/A
+
+## `EdiDomComponent` Properties
+
+### `values`
+
+## `EdiDomValue` Methods
+
+### N/A
+
+## `EdiDomValue` Properties
+
+### `type`

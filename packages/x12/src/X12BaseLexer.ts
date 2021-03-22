@@ -1,46 +1,32 @@
-import { CharStream, Lexer } from 'antlr4ts'
-import { EdiDomOptions } from '../dom/EdiDomTypes'
+import { BaseLexer, ControlChar, EdiOptions } from '@js-edi/shared'
 
-export enum ControlChar {
-  SegmentTerminator = 'SegmentTerminator',
-  DataSeparator = 'DataSeparator',
-  ComponentSeparator = 'ComponentSeparator',
-  RepititionSeparator = 'RepititionSeparator',
-  EndOfLine = 'EndOfLine'
+enum ISAPos {
+  DataSeparator = 4,
+  RepititionSeparator = 83,
+  ComponentSeparator = 105,
+  SegmentTerminator = 106,
+  EndOfLine = 107
 }
 
-// Zero-based line positions.
-const DATA_SEPARATOR_POS: number = 3
-const REPETITION_SEPARATOR_POS: number = 82
-const COMPONENT_SEPARATOR_POS: number = 104
-const SEGMENT_TERMINATOR_POS: number = 105
-const END_OF_LINE_POS: number = 106
-
-export abstract class X12BaseLexer extends Lexer {
-  constructor (input: CharStream) {
-    super(input)
-
-    this.ControlCharMap = new Map()
-  }
-
+export abstract class X12BaseLexer extends BaseLexer {
   get isDataSep (): boolean {
-    return this.line === 1 && this.charPositionInLine === DATA_SEPARATOR_POS + 1
+    return this.line === 1 && this.charPositionInLine === ISAPos.DataSeparator
   }
 
   get isRepititionSep (): boolean {
-    return this.line === 1 && this.charPositionInLine === REPETITION_SEPARATOR_POS + 1
+    return this.line === 1 && this.charPositionInLine === ISAPos.RepititionSeparator
   }
 
   get isComponentSep (): boolean {
-    return this.line === 1 && this.charPositionInLine === COMPONENT_SEPARATOR_POS + 1
+    return this.line === 1 && this.charPositionInLine === ISAPos.ComponentSeparator
   }
 
   get isSegmentTerm (): boolean {
-    return this.line === 1 && this.charPositionInLine === SEGMENT_TERMINATOR_POS + 1
+    return this.line === 1 && this.charPositionInLine === ISAPos.SegmentTerminator
   }
 
   get isEndOfLine (): boolean {
-    const isCr = this.line === 1 && this.charPositionInLine === END_OF_LINE_POS + 1
+    const isCr = this.line === 1 && this.charPositionInLine === ISAPos.EndOfLine
     const isNl = this.line === 2 && this.charPositionInLine === 0
 
     return isCr || isNl
@@ -91,9 +77,7 @@ export abstract class X12BaseLexer extends Lexer {
     }
   }
 
-  protected ControlCharMap: Map<string, ControlChar>
-
-  getOptions (): EdiDomOptions {
+  getOptions (): EdiOptions {
     const options: any = {}
 
     for (const [char, type] of this.ControlCharMap) {
@@ -117,5 +101,32 @@ export abstract class X12BaseLexer extends Lexer {
     }
 
     return options
+  }
+
+  setOptions (options: EdiOptions): void {
+    const eolChars = '\r\n'
+    const noEmptyString = (str: string): boolean => {
+      return typeof str === 'string' && str.trim() !== ''
+    }
+
+    if (noEmptyString(options.componentSeparator)) {
+      this.ControlCharMap.set(options.componentSeparator, ControlChar.ComponentSeparator)
+    }
+
+    if (noEmptyString(options.dataSeparator)) {
+      this.ControlCharMap.set(options.dataSeparator, ControlChar.DataSeparator)
+    }
+
+    if (noEmptyString(options.endOfLine) || eolChars.includes(options.endOfLine)) {
+      this.ControlCharMap.set(options.endOfLine, ControlChar.EndOfLine)
+    }
+
+    if (noEmptyString(options.repititionSeparator)) {
+      this.ControlCharMap.set(options.repititionSeparator, ControlChar.RepititionSeparator)
+    }
+
+    if (noEmptyString(options.segmentTerminator)) {
+      this.ControlCharMap.set(options.segmentTerminator, ControlChar.SegmentTerminator)
+    }
   }
 }

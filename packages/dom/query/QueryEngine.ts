@@ -1,15 +1,15 @@
 import { CharStreams, CommonTokenStream } from 'antlr4ts'
-import { EdiDomNodeAlias } from '../dom/EdiDomNodeAlias'
-import { EdiDomNodeType } from '../dom/EdiDomNodeType'
+import { EdiDomNodeAlias } from '../src/EdiDomNodeAlias'
+import { EdiDomNodeType } from '../src/EdiDomNodeType'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
 import { ElementAdjacentSelectorContext, ElementPrecedentSelectorContext, ElementSelectorParser } from './ElementSelectorParser'
 import { elementReference, isNodeTag, isSegmentTag, predicateReference, valueReference } from './helpers'
 import { QueryDomWalker } from './QueryDomWalker'
 import { QueryEngineList } from './QueryEngineList'
-import type { EdiDomAbstractNode } from '../dom/EdiDomAbstractNode'
-import type { EdiDomElement } from '../dom/EdiDomElement'
-import type { EdiDomSegment } from '../dom/EdiDomSegment'
-import type { EdiDomNode } from '../dom/EdiDomTypes'
+import type { EdiDomAbstractNode } from '../src/EdiDomAbstractNode'
+import type { EdiDomElement } from '../src/EdiDomElement'
+import type { EdiDomSegment } from '../src/EdiDomSegment'
+import type { EdiDomNode } from '../src/EdiDomTypes'
 import type {
   ElementContainsValueSelectorContext,
   ElementNotValueSelectorContext,

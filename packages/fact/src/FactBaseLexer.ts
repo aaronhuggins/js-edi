@@ -1,85 +1,59 @@
-import { CharStream, Lexer } from 'antlr4ts'
-import { EdiDomOptions } from '../dom/EdiDomTypes'
-
-export interface EdiFactOptions {
-  componentSeparator: string
-  dataSeparator: string
-  decimalMark: ',' | '.'
-  releaseIndicator?: string
-  repititionSeparator?: string
-  segmentTerminator: string
-  endOfLine?: string
-}
-
-export enum ControlChar {
-  DataSeparator = 'DataSeparator',
-  RepititionSeparator = 'RepititionSeparator',
-  ComponentSeparator = 'ComponentSeparator',
-  SegmentTerminator = 'SegmentTerminator',
-  DecimalMark = 'DecimalMark',
-  ReleaseIndicator = 'ReleaseIndicator',
-  EndOfLine = 'EndOfLine'
-}
+import { BaseLexer, ControlChar, EdiOptions } from '@js-edi/shared'
 
 /** Positions of EDIFACT delimiters in a UNA segment. */
-enum UNA_POS {
-  COMPONENT_SEPARATOR = 4,
-  DATA_SEPARATOR,
-  DECIMAL_MARK,
-  RELEASE_INDICATOR,
-  REPETITION_SEPARATOR,
-  SEGMENT_TERMINATOR,
-  END_OF_LINE
+enum UNAPos {
+  ComponentSeparator = 4,
+  DataSeparator,
+  DecimalMark,
+  ReleaseIndicator,
+  RepititionSeparator,
+  SegmentTerminator,
+  EndOfLine
 }
 
-export abstract class FactBaseLexer extends Lexer {
-  constructor (input: CharStream) {
-    super(input)
-
-    this._encounteredUNA = false
-    this.ControlCharMap = new Map()
-  }
-
+export abstract class FactBaseLexer extends BaseLexer {
   private _encounteredUNA: boolean
 
   /** Has the lexer encountered an UNA segment? */
   get encounteredUNA (): boolean {
-    return this._encounteredUNA
+    return typeof this._encounteredUNA === 'boolean'
+      ? this._encounteredUNA
+      : false
   }
 
   /** Is the current right-hand lexer position a component separator definition? */
   get isComponentSep (): boolean {
-    return this.encounteredUNA && this.line === 1 && this.charPositionInLine === UNA_POS.COMPONENT_SEPARATOR
+    return this.encounteredUNA && this.line === 1 && this.charPositionInLine === UNAPos.ComponentSeparator
   }
 
   /** Is the current right-hand lexer position a data separator definition? */
   get isDataSep (): boolean {
-    return this.encounteredUNA && this.line === 1 && this.charPositionInLine === UNA_POS.DATA_SEPARATOR
+    return this.encounteredUNA && this.line === 1 && this.charPositionInLine === UNAPos.DataSeparator
   }
 
   /** Is the current right-hand lexer position a decimal mark definition? */
   get isDecimalMark (): boolean {
-    return this.encounteredUNA && this.line === 1 && this.charPositionInLine === UNA_POS.DECIMAL_MARK
+    return this.encounteredUNA && this.line === 1 && this.charPositionInLine === UNAPos.DecimalMark
   }
 
   /** Is the current right-hand lexer position a release indicator definition? */
   get isReleaseIndicator (): boolean {
-    return this.encounteredUNA && this.line === 1 && this.charPositionInLine === UNA_POS.RELEASE_INDICATOR
+    return this.encounteredUNA && this.line === 1 && this.charPositionInLine === UNAPos.ReleaseIndicator
   }
 
   /** Is the current right-hand lexer position a repitition separator definition? */
   get isRepititionSep (): boolean {
-    return this.encounteredUNA && this.line === 1 && this.charPositionInLine === UNA_POS.REPETITION_SEPARATOR
+    return this.encounteredUNA && this.line === 1 && this.charPositionInLine === UNAPos.RepititionSeparator
   }
 
   /** Is the current right-hand lexer position a segement terminator definition? */
   get isSegmentTerm (): boolean {
-    return this.encounteredUNA && this.line === 1 && this.charPositionInLine === UNA_POS.SEGMENT_TERMINATOR
+    return this.encounteredUNA && this.line === 1 && this.charPositionInLine === UNAPos.SegmentTerminator
   }
 
   /** Is the current right-hand lexer position an end-of-line definition? */
   get isEndOfLine (): boolean {
-    const isCr = this.encounteredUNA && this.line === 1 && this.charPositionInLine === UNA_POS.END_OF_LINE
+    const isCr = this.encounteredUNA && this.line === 1 && this.charPositionInLine === UNAPos.EndOfLine
     const isNl = this.encounteredUNA && this.line === 2 && this.charPositionInLine === 0
 
     return isCr || isNl
@@ -148,9 +122,7 @@ export abstract class FactBaseLexer extends Lexer {
     }
   }
 
-  protected ControlCharMap: Map<string, ControlChar>
-
-  getOptions (): EdiDomOptions {
+  getOptions (): EdiOptions {
     const options: any = {}
 
     for (const [char, type] of this.ControlCharMap) {
@@ -183,7 +155,7 @@ export abstract class FactBaseLexer extends Lexer {
   }
 
   /** Set the options for EDIFACT parsing if no UNA segment is provided. UNA segments take precedence over provided options. */
-  setOptions (options: EdiFactOptions): void {
+  setOptions (options: EdiOptions): void {
     const eolChars = '\r\n'
     const noEmptyString = (str: string): boolean => {
       return typeof str === 'string' && str.trim() !== ''

@@ -94,7 +94,7 @@ export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends 
   toJSON (): Partial<this> {
     const result = super.toJSON()
 
-    if (result.elements.length === 0) delete result.elements
+    if (Array.isArray(result.elements) && result.elements.length === 0) delete result.elements
 
     return result
   }

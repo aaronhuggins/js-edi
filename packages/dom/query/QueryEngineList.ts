@@ -119,9 +119,11 @@ export class QueryEngineList<T> implements Iterable<T> {
       let index = 0
 
       for (const node of this._query) {
-        this._values[index++] = node
+        this._values[index] = node
 
         yield [index, node]
+
+        index++
       }
 
       this._queryFinished = true
