@@ -1,5 +1,5 @@
 {
-  "name": "edi-parser",
+  "name": "js-edi",
   "version": "0.0.0",
   "description": "Next-gen EDI parser in Antlr4 grammar compiled by antlr4ts",
   "main": "dist/index.js",
