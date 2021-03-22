@@ -1,6 +1,6 @@
 import { strictEqual, throws } from 'assert'
 import { readFileSync } from 'fs'
-import { EdiParser } from '../src/EdiParser'
+import { EdiParser } from '../packages/documents/index'
 
 const parseLabel = '    parse duration'
 
