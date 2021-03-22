@@ -1,6 +1,8 @@
-# edi-parser
+# JS-EDI
 
 Work in progress, not fit for production use. Parser for both EDIX12 and EDIFACT leveraging Antlr4 grammar.
+
+If I could call it J-EDI, I would. May the force be with you.
 
 # Known TO-DOs
 
