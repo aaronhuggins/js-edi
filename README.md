@@ -3,17 +3,14 @@
 Work in progress, not fit for production use. Parser for both EDIX12 and EDIFACT leveraging Antlr4 grammar.
 
 # Known TO-DOs
-- Stabilize "base lexer" class API
-  - Use enums for consistency
-  - Provide method for setting own options
-  - Address custom eventing
-- Split out code into smaller loosely-coupled NPM packages
+
 - Implement CharStream class for Node Readable streams
 - Improve support for defining input encoding(s)
 - Improve accuracy of parsing/handling EDIFACT
   - Better service string advice detection
   - Conform to EDIFACt standard with "release indicator"
   - Conform to EDIFACT charactar sets better (technically only UNOA and UNOB supported for now)
+- Address custom eventing in document parser
 - Probably more
 
 # Roadmap
