@@ -1,4 +1,4 @@
-import type { EdiDomNode } from '../dom/EdiDomTypes'
+import type { EdiDomNode } from '../src/EdiDomTypes'
 
 export class QueryDomWalker {
   constructor (iterator: Generator<EdiDomNode>) {
