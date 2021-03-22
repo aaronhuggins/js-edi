@@ -35,7 +35,7 @@ Element selectors define the nodes to which a query applies. Results are returne
 ### Element Reference Not Value selector
 - Selects all element nodes matching the reference and which do not equal the value.
 - **Syntax**: `TAG##!['VALUE']` Single or duoble quotes are permitted.
-- **Example**: `N102!['Kai']` will match any element node containing the word "Kai".
+- **Example**: `N102!['Kai']` will match any element node which does not equal the word "Kai".
 
 ### Element Reference Contains Value selector
 - Selects all element nodes matching the reference and which contains the value.
