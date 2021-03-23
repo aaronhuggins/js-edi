@@ -6,6 +6,8 @@ import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
 import type { EdiDomNode } from './EdiDomTypes'
 
+type InterchangeChild = EdiDomGroup | EdiDomMessage
+
 export class EdiDomInterchange extends EdiDomAbstractNode {
   constructor () {
     super()
@@ -84,7 +86,7 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
   }
 
   /** Add a group or message to this interchange. */
-  addChildNode (child: EdiDomGroup | EdiDomMessage): void {
+  addChildNode (child: InterchangeChild): void {
     child.parent = this
 
     for (const node of child.walk()) {
@@ -101,6 +103,40 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
     }
   }
 
+  /** Get a child group or child message of this interchange. */
+  getChildNode (index: number): InterchangeChild {
+    if (this.groups.length > 0) return this.groups[index]
+
+    return this.messages[index]
+  }
+
+  /** Remove a child group or message from this interchange. */
+  removeChildNode (child: InterchangeChild): void {
+    const unrelate = (array: any[]): void => {
+      const index = array.indexOf(child)
+
+      if (index > -1) {
+        child.parent = undefined
+
+        for (const node of child.walk()) {
+          node.root = undefined
+        }
+
+        array.splice(index, 1)
+      }
+    }
+
+    switch (child.nodeType) {
+      case EdiDomNodeType.Group:
+        unrelate(this.groups)
+        break
+      case EdiDomNodeType.Message:
+        unrelate(this.messages)
+        break
+    }
+  }
+
+  /** Walk the document object model from this node sequentially. */
   * walk (): Generator<EdiDomNode> {
     yield this
     if (typeof this.header === 'object') {
