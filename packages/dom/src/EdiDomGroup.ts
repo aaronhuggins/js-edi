@@ -1,4 +1,5 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import { EdiDomGlobal } from './EdiDomGlobal'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomMessage } from './EdiDomMessage'
 import type { EdiDomRoot } from './EdiDomRoot'
@@ -77,6 +78,26 @@ export class EdiDomGroup extends EdiDomAbstractNode {
     }
   }
 
+  /** Retrieve the message/transaction at the given zero-based index. */
+  getChildNode (index: number): EdiDomMessage {
+    return this.messages[index]
+  }
+
+  /** Remove a message/transaction from this group and destroy all descendent relationships to this group. */
+  removeChildNode (child: EdiDomMessage): void {
+    const index = this.messages.indexOf(child)
+
+    if (index > -1) {
+      child.parent = undefined
+
+      for (const node of child.walk()) {
+        node.root = undefined
+      }
+
+      this.messages.splice(index, 1)
+    }
+  }
+
   * walk (): Generator<EdiDomNode> {
     yield this
     if (typeof this.header === 'object') {
@@ -98,3 +119,5 @@ export class EdiDomGroup extends EdiDomAbstractNode {
     }
   }
 }
+
+EdiDomGlobal.Group = EdiDomGroup

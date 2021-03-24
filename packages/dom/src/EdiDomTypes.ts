@@ -13,7 +13,7 @@ import type { EdiDomValue } from './EdiDomValue'
  * In the case of EDIFACT, this represents the UNA segment.
  * In the case of EDIX12, this represents control characters in the ISA segment.
  */
- export interface EdiDomOptions {
+export interface EdiDomOptions {
   /** The component separator for EDI documents. */
   componentSeparator: string
   /** The data separator for EDI documents. */
@@ -30,7 +30,7 @@ import type { EdiDomValue } from './EdiDomValue'
   endOfLine?: string
 }
 
-export type EdiDomNode = 
+export type EdiDomNode =
   | EdiDomRoot
   | EdiDomInterchange
   | EdiDomGroup

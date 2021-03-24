@@ -1,4 +1,5 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import { EdiDomGlobal } from './EdiDomGlobal'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomGroup } from './EdiDomGroup'
 import type { EdiDomInterchange } from './EdiDomInterchange'
@@ -19,7 +20,7 @@ export class EdiDomMessage extends EdiDomAbstractNode {
   /** The header of this message. */
   protected _header: EdiDomSegment<'UNH'|'ST'>
   /** The segments contained in this message. */
-  segments: Array<EdiDomSegment>
+  segments: EdiDomSegment[]
   /** The root of this instance. */
   root: EdiDomRoot
   /** The trailer of this message. */
@@ -79,6 +80,30 @@ export class EdiDomMessage extends EdiDomAbstractNode {
     }
   }
 
+  /** Retrieve the first available segment by tag or by zero-based index. */
+  getChildNode (indexOrTag: number | string): EdiDomSegment {
+    if (typeof indexOrTag === 'number') {
+      return this.segments[indexOrTag]
+    } else if (typeof indexOrTag === 'string') {
+      return this.segments.find(segment => segment.tag === indexOrTag)
+    }
+  }
+
+  /** Remove a segment from this message and destroy all descendent relationships to this message. */
+  removeChildNode (child: EdiDomSegment): void {
+    const index = this.segments.indexOf(child)
+
+    if (index > -1) {
+      child.parent = undefined
+
+      for (const node of child.walk()) {
+        node.root = undefined
+      }
+
+      this.segments.splice(index, 1)
+    }
+  }
+
   * walk (): Generator<EdiDomNode> {
     yield this
     if (typeof this.header === 'object') {
@@ -100,3 +125,6 @@ export class EdiDomMessage extends EdiDomAbstractNode {
     }
   }
 }
+
+EdiDomGlobal.Message = EdiDomMessage
+EdiDomGlobal.Transaction = EdiDomMessage

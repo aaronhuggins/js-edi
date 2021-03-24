@@ -1,4 +1,5 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import { EdiDomGlobal } from './EdiDomGlobal'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomInterchange } from './EdiDomInterchange'
 import type { EdiDomDocumentType, EdiDomNode, EdiDomOptions } from './EdiDomTypes'
@@ -8,7 +9,7 @@ export class EdiDomRoot extends EdiDomAbstractNode {
   constructor () {
     super()
     this.nodeType = EdiDomNodeType.Root
-    this.options = {} as EdiDomOptions
+    this.options = {} as unknown as EdiDomOptions
     this.interchanges = []
     this.root = this
     this.parent = this
@@ -53,9 +54,9 @@ export class EdiDomRoot extends EdiDomAbstractNode {
     const contents = 'UNA' +
       this.options.componentSeparator +
       this.options.dataSeparator +
-      this.options.decimalMark ?? '.' +
-      this.options.releaseIndicator ?? '?' +
-      this.options.repititionSeparator ?? ' ' +
+      (this.options.decimalMark ?? '.') +
+      (this.options.releaseIndicator ?? '?') +
+      (this.options.repititionSeparator ?? ' ') +
       this.options.segmentTerminator
 
     if (typeof this.options.endOfLine === 'string') {
@@ -66,7 +67,7 @@ export class EdiDomRoot extends EdiDomAbstractNode {
   }
 
   /** Add an interchange to this document. */
-  addChildNode (child: EdiDomInterchange) {
+  addChildNode (child: EdiDomInterchange): void {
     if (child.nodeType === EdiDomNodeType.Interchange) {
       child.parent = this
 
@@ -78,6 +79,27 @@ export class EdiDomRoot extends EdiDomAbstractNode {
     }
   }
 
+  /** Get an interchange by zer-based index in the root. */
+  getChildNode (index: number): EdiDomInterchange {
+    return this.interchanges[index]
+  }
+
+  /** Remove an interchange from this root and destroy all descendent relationships to this root. */
+  removeChildNode (child: EdiDomInterchange): void {
+    const index = this.interchanges.indexOf(child)
+
+    if (index > -1) {
+      child.parent = undefined
+
+      for (const node of child.walk()) {
+        node.root = undefined
+      }
+
+      this.interchanges.splice(index, 1)
+    }
+  }
+
+  /** Walk the document object model sequentially. */
   * walk (): Generator<EdiDomNode> {
     yield this
 
@@ -88,3 +110,5 @@ export class EdiDomRoot extends EdiDomAbstractNode {
     }
   }
 }
+
+EdiDomGlobal.Root = EdiDomRoot

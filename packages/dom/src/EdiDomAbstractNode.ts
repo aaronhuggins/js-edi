@@ -17,19 +17,17 @@ export abstract class EdiDomAbstractNode {
   abstract get text (): string
 
   /** Add a child node to the dom. On value nodes, this is undefined. */
-  addChildNode (child: EdiDomNode): void {}
+  abstract addChildNode (child: EdiDomNode): void
 
   /** Get a child node from this node. */
-  getChildNode (position: string | number): EdiDomNode {
-    return
-  }
+  abstract getChildNode (position: string | number): EdiDomNode
 
   /** Remove a child node from the dom. On value nodes, this is undefined. */
-  removeChildNode (child: EdiDomNode): void {}
+  abstract removeChildNode (child: EdiDomNode): void
 
   /** Sequentially walk the Document Object Model starting with this node. */
-  * walk (): Generator<EdiDomNode> {}
-  
+  abstract walk (): Generator<EdiDomNode>
+
   /** Returns the first element that is a descendant of node that matches selectors. */
   querySelector<K extends keyof EdiDomNodeTagMap> (selector: K): EdiDomNodeTagMap[K]
   querySelector<E extends EdiDomElement | EdiDomSegment = EdiDomElement> (selector: string): E

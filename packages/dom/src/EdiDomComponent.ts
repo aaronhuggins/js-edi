@@ -1,4 +1,5 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import { EdiDomGlobal } from './EdiDomGlobal'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
@@ -40,6 +41,28 @@ export class EdiDomComponent extends EdiDomAbstractNode {
     }
   }
 
+  /** Get a child value by zero-based index. */
+  getChildNode (index: number): EdiDomValue {
+    return this.values[index]
+  }
+
+  /** Remove a child by DOM value instance. */
+  removeChildNode (child: EdiDomValue): void
+  /** Remove a child by literal string value. */
+  removeChildNode (value: string): void
+  removeChildNode (child: EdiDomValue | string): void {
+    const index = typeof child === 'string'
+      ? this.values.findIndex(value => value.text === child)
+      : this.values.indexOf(child)
+
+    if (index > -1) {
+      this.values[index].parent = undefined
+      this.values[index].root = undefined
+
+      this.values.splice(index, 1)
+    }
+  }
+
   * walk (): Generator<EdiDomNode> {
     yield this
 
@@ -50,3 +73,5 @@ export class EdiDomComponent extends EdiDomAbstractNode {
     }
   }
 }
+
+EdiDomGlobal.Component = EdiDomComponent

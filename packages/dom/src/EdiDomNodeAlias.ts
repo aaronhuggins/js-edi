@@ -4,7 +4,7 @@ import type { EdiDomNodeTagMap } from './EdiDomTypes'
 export const EdiDomNodeAlias: Record<keyof EdiDomNodeTagMap, EdiDomNodeType> = {
   // Universal selector.
   '*': EdiDomNodeType.All,
-  'All': EdiDomNodeType.All,
+  All: EdiDomNodeType.All,
   // Interchange aliases.
   Interchange: EdiDomNodeType.Interchange,
   ISA: EdiDomNodeType.Interchange,

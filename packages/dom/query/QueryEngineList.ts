@@ -110,7 +110,7 @@ export class QueryEngineList<T> implements Iterable<T> {
   }
 
   /** Get the entries for this list in the form of key/value pairs. */
-  *entries (): IterableIterator<[number, T]> {
+  * entries (): IterableIterator<[number, T]> {
     if (this._queryFinished) {
       for (const [index, node] of this._values.entries()) {
         yield [index, node]
@@ -131,12 +131,12 @@ export class QueryEngineList<T> implements Iterable<T> {
   }
 
   /** Get all keys from this list. */
-  *keys (): IterableIterator<number> {
+  * keys (): IterableIterator<number> {
     for (const [index] of this.entries()) yield index
   }
 
   /** Get all values from this list. */
-  *values (): IterableIterator<T> {
+  * values (): IterableIterator<T> {
     for (const entry of this.entries()) yield entry[1]
   }
 

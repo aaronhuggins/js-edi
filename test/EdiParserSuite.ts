@@ -114,7 +114,7 @@ describe('EdiParser', () => {
 
   it('should error on an incomplete document', () => {
     const fileName = './test/data/856.edi'
-    const contents = readFileSync(fileName).slice(0,300)
+    const contents = readFileSync(fileName).slice(0, 300)
     const parser = new EdiParser({
       ediType: 'EDIX12',
       keepInitialListeners: false,

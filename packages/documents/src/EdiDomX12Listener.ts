@@ -163,7 +163,7 @@ export class EdiDomX12Listener implements EdiX12ParserListener {
     this.segment.addChildNode(this.repitition)
   }
 
-  exitRepitition (ctx: RepititionContext) {
+  exitRepitition (ctx: RepititionContext): void {
     const element = this.repitition ?? new EdiDomElement('repeated')
     const ctxRepititions = ctx.repeatedElement()
 

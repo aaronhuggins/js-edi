@@ -7,12 +7,12 @@ export class QueryDomWalker {
     this.position = 0
   }
 
-  private iterator: Generator<EdiDomNode>
-  private visited: EdiDomNode[]
+  private readonly iterator: Generator<EdiDomNode>
+  private readonly visited: EdiDomNode[]
   private position: number
 
   /** Descend down the node iterator. */
-  *descend (): Generator<EdiDomNode> {
+  * descend (): Generator<EdiDomNode> {
     for (const node of this.iterator) {
       this.position = this.visited.push(node) - 1
 
@@ -21,7 +21,7 @@ export class QueryDomWalker {
   }
 
   /** Ascend up the array of visited nodes. */
-  *ascend (): Generator<EdiDomNode> {
+  * ascend (): Generator<EdiDomNode> {
     for (let i = this.position; i > -1; i -= 1) yield this.visited[i]
   }
 }

@@ -3,7 +3,7 @@
  * In the case of EDIFACT, this represents the UNA segment.
  * In the case of EDIX12, this represents control characters in the ISA segment.
  */
- export interface EdiOptions {
+export interface EdiOptions {
   /** The component separator for EDI documents. */
   componentSeparator: string
   /** The data separator for EDI documents. */

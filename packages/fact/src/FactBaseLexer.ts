@@ -61,13 +61,13 @@ export abstract class FactBaseLexer extends BaseLexer {
 
   /** Is the current right-hand lexer position a control character definition? */
   get isCtlCharPos (): boolean {
-    return this.isComponentSep
-      || this.isDataSep
-      || this.isDecimalMark
-      || this.isReleaseIndicator
-      || this.isRepititionSep
-      || this.isSegmentTerm
-      || this.isEndOfLine
+    return this.isComponentSep ||
+      this.isDataSep ||
+      this.isDecimalMark ||
+      this.isReleaseIndicator ||
+      this.isRepititionSep ||
+      this.isSegmentTerm ||
+      this.isEndOfLine
   }
 
   /** Handles UNA segments encountered by the lexer. */
@@ -80,7 +80,7 @@ export abstract class FactBaseLexer extends BaseLexer {
   /** Handles control characters encountered by the lexer. */
   handleControlChars (lexer: Record<string, any>): void {
     const charType = this.ControlCharMap.get(this.text)
-    const charTypeHandler = () => {
+    const charTypeHandler = (): void => {
       if (charType in ControlChar) {
         this.type = lexer[charType]
       } else {
