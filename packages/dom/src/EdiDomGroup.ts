@@ -82,7 +82,7 @@ export class EdiDomGroup extends EdiDomAbstractNode {
     return this.messages[index]
   }
 
-  /** Remove an interchange from this root and destroy all descendent relationships to this root. */
+  /** Remove a message/transaction from this group and destroy all descendent relationships to this group. */
   removeChildNode (child: EdiDomMessage): void {
     const index = this.messages.indexOf(child)
 
