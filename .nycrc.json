@@ -1,7 +1,7 @@
 {
   "extends": "@istanbuljs/nyc-config-typescript",
   "all": true,
-  "include": ["src/**/*.ts"],
+  "include": ["packages/**/*.ts"],
   "exclude": [
     "packages/fact/src/EdiFact*.ts",
     "packages/dom/query/ElementSelector*.ts",
