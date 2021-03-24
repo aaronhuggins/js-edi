@@ -1,6 +1,7 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import { EdiDomGlobal } from './EdiDomGlobal'
 import { EdiDomNodeType } from './EdiDomNodeType'
-import { EdiDomNode } from './EdiDomTypes'
+import type { EdiDomNode } from './EdiDomTypes'
 import type { EdiDomComponent } from './EdiDomComponent'
 import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
@@ -47,3 +48,5 @@ export class EdiDomValue extends EdiDomAbstractNode {
     yield this
   }
 }
+
+EdiDomGlobal.Value = EdiDomValue

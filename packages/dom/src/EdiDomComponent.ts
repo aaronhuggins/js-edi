@@ -1,4 +1,5 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import { EdiDomGlobal } from './EdiDomGlobal'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
@@ -72,3 +73,5 @@ export class EdiDomComponent extends EdiDomAbstractNode {
     }
   }
 }
+
+EdiDomGlobal.Component = EdiDomComponent

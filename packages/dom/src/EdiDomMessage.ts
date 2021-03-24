@@ -1,4 +1,5 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
+import { EdiDomGlobal } from './EdiDomGlobal'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomGroup } from './EdiDomGroup'
 import type { EdiDomInterchange } from './EdiDomInterchange'
@@ -124,3 +125,6 @@ export class EdiDomMessage extends EdiDomAbstractNode {
     }
   }
 }
+
+EdiDomGlobal.Message = EdiDomMessage
+EdiDomGlobal.Transaction = EdiDomMessage
