@@ -25,7 +25,11 @@ export class EdiDomValue extends EdiDomAbstractNode {
   root: EdiDomRoot
   /** A type derived from the contents of the value. */
   type: EdiDomValueType
+  /** An EdiDomValue cannot have child nodes. */
   addChildNode: never
+  /** An EdiDomValue cannot get child nodes. */
+  getChildNode: never
+  /** An EdiDomValue cannot remove child nodes. */
   removeChildNode: never
   protected _text: string
 
