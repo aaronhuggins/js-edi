@@ -80,7 +80,7 @@ export class EdiDomMessage extends EdiDomAbstractNode {
   }
 
   /** Retrieve the first available segment by tag or by zero-based index. */
-  getChildNode (indexOrTag: number | string) {
+  getChildNode (indexOrTag: number | string): EdiDomSegment {
     if (typeof indexOrTag === 'number') {
       return this.segments[indexOrTag]
     } else if (typeof indexOrTag === 'string') {
