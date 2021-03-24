@@ -77,6 +77,26 @@ export class EdiDomGroup extends EdiDomAbstractNode {
     }
   }
 
+  /** Retrieve the message/transaction at the given zero-based index. */
+  getChildNode (index: number): EdiDomMessage {
+    return this.messages[index]
+  }
+
+  /** Remove an interchange from this root and destroy all descendent relationships to this root. */
+  removeChildNode (child: EdiDomMessage): void {
+    const index = this.messages.indexOf(child)
+
+    if (index > -1) {
+      child.parent = undefined
+
+      for (const node of child.walk()) {
+        node.root = undefined
+      }
+
+      this.messages.splice(index, 1)
+    }
+  }
+
   * walk (): Generator<EdiDomNode> {
     yield this
     if (typeof this.header === 'object') {
