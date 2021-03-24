@@ -79,6 +79,60 @@ export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends 
     }
   }
 
+  /** Get the child value or optionally a child repeated element at the first or a given position. */
+  getChildNode (index?: number): EdiDomElement | T {
+    if (typeof index === 'number') {
+      return this.elements[index]
+    } else if (this.elements.length === 1) {
+      return this.elements[0]
+    }
+
+    return this.value
+  }
+
+  /** Remove the child value or a child repeated element from this element. */
+  removeChildNode (child?: EdiDomElement | T): void {
+    if (typeof child === 'undefined') {
+      if (this.elements.length === 1) {
+        this.elements[0].parent = undefined
+
+        for (const node of this.elements[0].walk()) {
+          node.root = undefined
+        }
+
+        this.elements.splice(0, 1)
+      } else if (typeof this.value === 'object') {
+        this.value.parent = undefined
+
+        for (const node of this.value.walk()) {
+          node.root = undefined
+        }
+
+        this.value = undefined
+      }
+    } else if (child === this.value) {
+      child.parent = undefined
+
+      for (const node of child.walk()) {
+        node.root = undefined
+      }
+
+      this.value = undefined
+    } else if (child.nodeType === EdiDomNodeType.Element) {
+      const index = this.elements.indexOf(child)
+
+      if (index > -1) {
+        child.parent = undefined
+
+        for (const node of child.walk()) {
+          node.root = undefined
+        }
+
+        this.elements.splice(index, 1)
+      }
+    }
+  }
+
   * walk (): Generator<EdiDomNode> {
     yield this
 
