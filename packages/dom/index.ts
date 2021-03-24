@@ -1,3 +1,9 @@
+/**
+ * [[include:packages/dom/README.md]]
+ * @packageDocumentation
+ * @module @js-edi/dom
+ */
+
 export * from './src/EdiDomAbstractNode'
 export * from './src/EdiDomComponent'
 export * from './src/EdiDomElement'
