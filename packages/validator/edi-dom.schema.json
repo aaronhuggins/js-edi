@@ -1,0 +1,222 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "options": {
+      "type": "object",
+      "required": [
+        "dataSeparator",
+        "componentSeparator",
+        "segmentTerminator"
+      ],
+      "properties": {
+        "componentSeparator": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1
+        },
+        "dataSeparator": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1
+        },
+        "decimalMark": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1
+        },
+        "releaseIndicator": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1
+        },
+        "repititionSeparator": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1
+        },
+        "segmentTerminator": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1
+        },
+        "endOfLine": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2
+        }
+      },
+      "additionalProperties": true
+    },
+    "root": {
+      "type": "object",
+      "required": [
+        "interchanges",
+        "options"
+      ],
+      "properties": {
+        "options": {
+          "$ref": "#/definitions/options"
+        },
+        "interchanges": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/interchange"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "interchange": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "$ref": "#/definitions/segment"
+        },
+        "groups": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/group"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/message"
+          }
+        },
+        "footer": {
+          "$ref": "#/definitions/segment"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "header",
+            "groups",
+            "footer"
+          ]
+        },
+        {
+          "required": [
+            "header",
+            "messages",
+            "footer"
+          ]
+        }
+      ],
+      "additionalProperties": true
+    },
+    "group": {
+      "type": "object",
+      "required": [
+        "header",
+        "messages",
+        "footer"
+      ],
+      "properties": {
+        "header": {
+          "$ref": "#/definitions/segment"
+        },
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/message"
+          }
+        },
+        "footer": {
+          "$ref": "#/definitions/segment"
+        }
+      },
+      "additionalProperties": true
+    },
+    "message": {
+      "type": "object",
+      "required": [
+        "header",
+        "segments",
+        "footer"
+      ],
+      "properties": {
+        "header": {
+          "$ref": "#/definitions/segment"
+        },
+        "segments": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/segment"
+          }
+        },
+        "footer": {
+          "$ref": "#/definitions/segment"
+        }
+      },
+      "additionalProperties": true
+    },
+    "segment": {
+      "type": "object",
+      "required": [
+        "tag",
+        "elements"
+      ],
+      "properties": {
+        "tag": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 4
+        },
+        "elements": {
+          "type": "array",
+          "maxItems": 99,
+          "items": {
+            "$ref": "#/definitions/element"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "element": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "component",
+            "repeated",
+            "value"
+          ]
+        },
+        "elements": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/element"
+          }
+        },
+        "value": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/value"
+            },
+            {
+              "$ref": "#/definitions/component"
+            }
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "component": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "value": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}
