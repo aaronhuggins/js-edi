@@ -9,7 +9,7 @@ import { QueryEngineList } from './QueryEngineList'
 import type { EdiDomAbstractNode } from '../src/EdiDomAbstractNode'
 import type { EdiDomElement } from '../src/EdiDomElement'
 import type { EdiDomSegment } from '../src/EdiDomSegment'
-import type { EdiDomNode } from '../src/EdiDomTypes'
+import type { EdiDomNode, ElementChild } from '../src/EdiDomTypes'
 import type {
   ElementContainsValueSelectorContext,
   ElementNotValueSelectorContext,
@@ -232,13 +232,17 @@ export class QueryEngine {
 
   private elementEqualsValue (element: EdiDomElement, value: string): boolean {
     if (typeof element === 'object') {
-      switch (element.type) {
-        case 'component':
-          return element.value.nodeType === EdiDomNodeType.Component && element.value.text === value
-        case 'repeated':
-          return element.elements.map(el => el.value.text).includes(value)
-        case 'value':
-          return element.value.nodeType === EdiDomNodeType.Value && element.value.text === value
+      const child: ElementChild = element.value
+
+      switch (child.nodeType) {
+        case EdiDomNodeType.Repeated:
+          for (const node of child.repeats) {
+            if (node.text === value) return true
+          }
+          break
+        case EdiDomNodeType.Component:
+        case EdiDomNodeType.Value:
+          return child.text === value
       }
     }
 
