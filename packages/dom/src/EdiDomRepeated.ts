@@ -3,9 +3,9 @@ import { EdiDomGlobal } from './EdiDomGlobal'
 import { isArrayType, relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomComponent } from './EdiDomComponent'
-import type { EdiDomElement, ElementChild } from './EdiDomElement'
+import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
-import type { EdiDomNode } from './EdiDomTypes'
+import type { EdiDomNode, RepeatedChild } from './EdiDomTypes'
 import type { EdiDomValue } from './EdiDomValue'
 
 export class EdiDomRepeated extends EdiDomAbstractNode {
@@ -26,7 +26,7 @@ export class EdiDomRepeated extends EdiDomAbstractNode {
       .join(this.root.options.repititionSeparator)
   }
 
-  addChildNode (child: ElementChild): void {
+  addChildNode (child: RepeatedChild): void {
     switch (child.nodeType) {
       case EdiDomNodeType.Component:
         if (isArrayType(this.repeats, child)) {
@@ -43,11 +43,11 @@ export class EdiDomRepeated extends EdiDomAbstractNode {
     }
   }
 
-  getChildNode (index: number): ElementChild {
+  getChildNode (index: number): RepeatedChild {
     return this.repeats[index]
   }
 
-  removeChildNode (child: ElementChild): void {
+  removeChildNode (child: RepeatedChild): void {
     let index = -1
 
     switch (child.nodeType) {

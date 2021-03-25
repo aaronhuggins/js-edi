@@ -5,9 +5,7 @@ import type { EdiDomGroup } from './EdiDomGroup'
 import type { EdiDomMessage } from './EdiDomMessage'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
-import type { EdiDomNode } from './EdiDomTypes'
-
-type InterchangeChild = EdiDomGroup | EdiDomMessage
+import type { EdiDomNode, InterchangeChild } from './EdiDomTypes'
 
 export class EdiDomInterchange extends EdiDomAbstractNode {
   constructor () {
@@ -88,10 +86,12 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
 
   /** Add a group or message to this interchange. */
   addChildNode (child: InterchangeChild): void {
-    child.parent = this
+    const relate = () => {
+      child.parent = this
 
-    for (const node of child.walk()) {
-      node.root = this.root
+      for (const node of child.walk()) {
+        node.root = this.root
+      }
     }
 
     switch (child.nodeType) {

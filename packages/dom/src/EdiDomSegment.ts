@@ -65,11 +65,9 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
 
         for (let i = 0; i < index; i += 1) {
           if (typeof this.elements[i] === 'undefined') {
-            this.elements[i] = new EdiDomGlobal.Element('value')
+            this.elements[i] = new EdiDomGlobal.Element()
             this.elements[i].parent = this
             this.elements[i].root = this.root
-
-            this.elements[i].addChildNode(new EdiDomGlobal.Value(''))
           }
         }
       } else {

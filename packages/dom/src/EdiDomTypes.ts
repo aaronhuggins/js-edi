@@ -31,6 +31,12 @@ export interface EdiDomOptions {
   endOfLine?: string
 }
 
+export type InterchangeChild = EdiDomGroup | EdiDomMessage
+
+export type ElementChild = RepeatedChild | EdiDomRepeated
+
+export type RepeatedChild = EdiDomComponent | EdiDomValue
+
 export type EdiDomNode =
   | EdiDomRoot
   | EdiDomInterchange

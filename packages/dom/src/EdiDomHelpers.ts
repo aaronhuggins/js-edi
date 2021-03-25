@@ -1,6 +1,5 @@
-import type { ElementChild } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
-import type { EdiDomNode } from './EdiDomTypes'
+import type { EdiDomNode, ElementChild } from './EdiDomTypes'
 
 /** Method for relating a child, parent, and root node. */
 export function relate (child: EdiDomNode, parent: typeof child['parent'], root: EdiDomRoot): void {
