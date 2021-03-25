@@ -181,22 +181,10 @@
     },
     "element": {
       "type": "object",
+      "required": [
+        "value"
+      ],
       "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "component",
-            "repeated",
-            "value"
-          ]
-        },
-        "elements": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/element"
-          }
-        },
         "value": {
           "oneOf": [
             {
@@ -204,18 +192,64 @@
             },
             {
               "$ref": "#/definitions/component"
+            },
+            {
+              "$ref": "#/definitions/repeated"
             }
           ]
         }
       },
       "additionalProperties": true
     },
+    "repeated": {
+      "type": "object",
+      "required": [
+        "repeats"
+      ],
+      "properties": {
+        "repeats": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/value"
+              },
+              {
+                "$ref": "#/definitions/component"
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": true
+    },
     "component": {
       "type": "object",
+      "required": [
+        "values"
+      ],
+      "properties": {
+        "values": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/value"
+          }
+        }
+      },
       "additionalProperties": true
     },
     "value": {
       "type": "object",
+      "required": [
+        "text"
+      ],
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      },
       "additionalProperties": true
     }
   }
