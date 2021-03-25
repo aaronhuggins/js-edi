@@ -1,5 +1,6 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
+import { relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
@@ -32,12 +33,7 @@ export class EdiDomComponent extends EdiDomAbstractNode {
   /** Add a value to this componenet. */
   addChildNode (child: EdiDomValue): void {
     if (child.nodeType === EdiDomNodeType.Value) {
-      child.parent = this
-
-      for (const node of child.walk()) {
-        node.root = this.root
-      }
-
+      relate(child, this, this.root)
       this.values.push(child)
     }
   }
@@ -57,9 +53,7 @@ export class EdiDomComponent extends EdiDomAbstractNode {
       : this.values.indexOf(child)
 
     if (index > -1) {
-      this.values[index].parent = undefined
-      this.values[index].root = undefined
-
+      unrelate(this.values[index])
       this.values.splice(index, 1)
     }
   }

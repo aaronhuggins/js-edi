@@ -1,5 +1,6 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
+import { relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
@@ -40,15 +41,12 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
     return contents
   }
 
-  /** Add a child element to this segment, optionally at a given position. */
+  /** Add a child element to this segment, optionally at a given 1-based position. */
   addChildNode (child: EdiDomElement, position?: string | number): void {
     if (child.nodeType === EdiDomNodeType.Element) {
       let index = -1
-      child.parent = this
 
-      for (const node of child.walk()) {
-        node.root = this.root
-      }
+      relate(child, this, this.root)
 
       switch (typeof position) {
         case 'number':
@@ -66,8 +64,7 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
         for (let i = 0; i < index; i += 1) {
           if (typeof this.elements[i] === 'undefined') {
             this.elements[i] = new EdiDomGlobal.Element()
-            this.elements[i].parent = this
-            this.elements[i].root = this.root
+            relate(this.elements[i], this, this.root)
           }
         }
       } else {
@@ -106,13 +103,7 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
       }
     }
 
-    if (typeof element !== 'undefined') {
-      element.parent = undefined
-
-      for (const node of element.walk()) {
-        node.root = undefined
-      }
-    }
+    if (typeof element === 'object') unrelate(element)
   }
 
   * walk (): Generator<EdiDomNode> {

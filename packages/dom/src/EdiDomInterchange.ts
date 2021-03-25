@@ -1,5 +1,6 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
+import { relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomGroup } from './EdiDomGroup'
 import type { EdiDomMessage } from './EdiDomMessage'
@@ -33,12 +34,7 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
 
   /** The header of this interchange. */
   set header (_header: EdiDomSegment<'UNB'|'ISA'>) {
-    _header.parent = this
-
-    for (const node of _header.walk()) {
-      node.root = this.root
-    }
-
+    relate(_header, this, this.root)
     this._header = _header
   }
 
@@ -49,12 +45,7 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
 
   /** The trailer of this interchange. */
   set trailer (_trailer: EdiDomSegment<'UNZ'|'IEA'>) {
-    _trailer.parent = this
-
-    for (const node of _trailer.walk()) {
-      node.root = this.root
-    }
-
+    relate(_trailer, this, this.root)
     this._trailer = _trailer
   }
 
@@ -86,20 +77,17 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
 
   /** Add a group or message to this interchange. */
   addChildNode (child: InterchangeChild): void {
-    const relate = () => {
-      child.parent = this
-
-      for (const node of child.walk()) {
-        node.root = this.root
-      }
+    const relateToArray = (array: any[]): void => {
+      relate(child, this, this.root)
+      array.push(child)
     }
 
     switch (child.nodeType) {
       case EdiDomNodeType.Group:
-        this.groups.push(child)
+        relateToArray(this.groups)
         break
       case EdiDomNodeType.Message:
-        this.messages.push(child)
+        relateToArray(this.messages)
         break
     }
   }
@@ -113,26 +101,21 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
 
   /** Remove a child group or message from this interchange. */
   removeChildNode (child: InterchangeChild): void {
-    const unrelate = (array: any[]): void => {
+    const unrelateFromArray = (array: any[]): void => {
       const index = array.indexOf(child)
 
       if (index > -1) {
-        child.parent = undefined
-
-        for (const node of child.walk()) {
-          node.root = undefined
-        }
-
+        unrelate(child)
         array.splice(index, 1)
       }
     }
 
     switch (child.nodeType) {
       case EdiDomNodeType.Group:
-        unrelate(this.groups)
+        unrelateFromArray(this.groups)
         break
       case EdiDomNodeType.Message:
-        unrelate(this.messages)
+        unrelateFromArray(this.messages)
         break
     }
   }

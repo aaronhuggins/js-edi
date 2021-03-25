@@ -1,5 +1,6 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
+import { relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomGroup } from './EdiDomGroup'
 import type { EdiDomInterchange } from './EdiDomInterchange'
@@ -33,12 +34,7 @@ export class EdiDomMessage extends EdiDomAbstractNode {
 
   /** The header of this message. */
   set header (_header: EdiDomSegment<'UNH'|'ST'>) {
-    _header.parent = this
-
-    for (const node of _header.walk()) {
-      node.root = this.root
-    }
-
+    relate(_header, this, this.root)
     this._header = _header
   }
 
@@ -49,12 +45,7 @@ export class EdiDomMessage extends EdiDomAbstractNode {
 
   /** The trailer of this message. */
   set trailer (_trailer: EdiDomSegment<'UNT'|'SE'>) {
-    _trailer.parent = this
-
-    for (const node of _trailer.walk()) {
-      node.root = this.root
-    }
-
+    relate(_trailer, this, this.root)
     this._trailer = _trailer
   }
 
@@ -70,12 +61,7 @@ export class EdiDomMessage extends EdiDomAbstractNode {
   /** Add a segment to this message. */
   addChildNode (child: EdiDomSegment): void {
     if (child.nodeType === EdiDomNodeType.Segment) {
-      child.parent = this
-
-      for (const node of child.walk()) {
-        node.root = this.root
-      }
-
+      relate(child, this, this.root)
       this.segments.push(child)
     }
   }
@@ -94,12 +80,7 @@ export class EdiDomMessage extends EdiDomAbstractNode {
     const index = this.segments.indexOf(child)
 
     if (index > -1) {
-      child.parent = undefined
-
-      for (const node of child.walk()) {
-        node.root = undefined
-      }
-
+      unrelate(child)
       this.segments.splice(index, 1)
     }
   }

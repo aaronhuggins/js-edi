@@ -1,5 +1,6 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
+import { relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomInterchange } from './EdiDomInterchange'
 import type { EdiDomDocumentType, EdiDomNode, EdiDomOptions } from './EdiDomTypes'
@@ -69,12 +70,7 @@ export class EdiDomRoot extends EdiDomAbstractNode {
   /** Add an interchange to this document. */
   addChildNode (child: EdiDomInterchange): void {
     if (child.nodeType === EdiDomNodeType.Interchange) {
-      child.parent = this
-
-      for (const node of child.walk()) {
-        node.root = this.root
-      }
-
+      relate(child, this, this.root)
       this.interchanges.push(child)
     }
   }
@@ -89,12 +85,7 @@ export class EdiDomRoot extends EdiDomAbstractNode {
     const index = this.interchanges.indexOf(child)
 
     if (index > -1) {
-      child.parent = undefined
-
-      for (const node of child.walk()) {
-        node.root = undefined
-      }
-
+      unrelate(child)
       this.interchanges.splice(index, 1)
     }
   }
