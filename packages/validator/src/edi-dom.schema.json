@@ -71,10 +71,11 @@
       "type": "object",
       "properties": {
         "header": {
+          "type": "object",
           "$ref": "#/definitions/segment",
           "properties": {
             "tag": {
-              "oneOf": [
+              "anyOf": [
                 {
                   "const": "ISA"
                 },
@@ -85,25 +86,12 @@
             }
           }
         },
-        "groups": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/group"
-          }
-        },
-        "messages": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/message"
-          }
-        },
         "trailer": {
+          "type": "object",
           "$ref": "#/definitions/segment",
           "properties": {
             "tag": {
-              "oneOf": [
+              "anyOf": [
                 {
                   "const": "IEA"
                 },
@@ -115,20 +103,38 @@
           }
         }
       },
-      "oneOf": [
+      "anyOf": [
         {
           "required": [
             "header",
             "groups",
             "trailer"
-          ]
+          ],
+          "properties": {
+            "groups": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/definitions/group"
+              }
+            }
+          }
         },
         {
           "required": [
             "header",
             "messages",
             "trailer"
-          ]
+          ],
+          "properties": {
+            "messages": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/definitions/message"
+              }
+            }
+          }
         }
       ],
       "additionalProperties": true
@@ -142,10 +148,11 @@
       ],
       "properties": {
         "header": {
+          "type": "object",
           "$ref": "#/definitions/segment",
           "properties": {
             "tag": {
-              "oneOf": [
+              "anyOf": [
                 {
                   "const": "GS"
                 },
@@ -164,10 +171,11 @@
           }
         },
         "trailer": {
+          "type": "object",
           "$ref": "#/definitions/segment",
           "properties": {
             "tag": {
-              "oneOf": [
+              "anyOf": [
                 {
                   "const": "GE"
                 },
@@ -190,10 +198,11 @@
       ],
       "properties": {
         "header": {
+          "type": "object",
           "$ref": "#/definitions/segment",
           "properties": {
             "tag": {
-              "oneOf": [
+              "anyOf": [
                 {
                   "const": "ST"
                 },
@@ -212,10 +221,11 @@
           }
         },
         "trailer": {
+          "type": "object",
           "$ref": "#/definitions/segment",
           "properties": {
             "tag": {
-              "oneOf": [
+              "anyOf": [
                 {
                   "const": "SE"
                 },
@@ -258,7 +268,7 @@
       ],
       "properties": {
         "value": {
-          "oneOf": [
+          "anyOf": [
             {
               "$ref": "#/definitions/value"
             },
@@ -283,7 +293,7 @@
           "type": "array",
           "minItems": 1,
           "items": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/definitions/value"
               },

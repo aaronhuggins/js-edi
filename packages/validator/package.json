@@ -34,5 +34,14 @@
   },
   "bugs": {
     "url": "https://github.com/ahuggins-nhs/edi-parser/issues"
+  },
+  "dependencies": {
+    "ajv": "^7.2.3"
+  },
+  "peerDependencies": {
+    "@js-edi/dom": "^0.0.0"
+  },
+  "devDependencies": {
+    "@js-edi/dom": "^0.0.0"
   }
 }
