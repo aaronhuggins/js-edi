@@ -9,7 +9,7 @@ import type { EdiDomNode, EdiDomNodeTagMap } from './EdiDomTypes'
 export abstract class EdiDomAbstractNode {
   abstract nodeType: EdiDomNodeType
   abstract parent: EdiDomNode
-  root: EdiDomRoot
+  abstract root: EdiDomRoot
   protected _header?: EdiDomSegment
   protected _trailer?: EdiDomSegment
   protected _text?: string
