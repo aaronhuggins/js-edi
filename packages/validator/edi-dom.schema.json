@@ -71,7 +71,19 @@
       "type": "object",
       "properties": {
         "header": {
-          "$ref": "#/definitions/segment"
+          "$ref": "#/definitions/segment",
+          "properties": {
+            "tag": {
+              "oneOf": [
+                {
+                  "const": "ISA"
+                },
+                {
+                  "const": "UNB"
+                }
+              ]
+            }
+          }
         },
         "groups": {
           "type": "array",
@@ -87,8 +99,20 @@
             "$ref": "#/definitions/message"
           }
         },
-        "footer": {
-          "$ref": "#/definitions/segment"
+        "trailer": {
+          "$ref": "#/definitions/segment",
+          "properties": {
+            "tag": {
+              "oneOf": [
+                {
+                  "const": "IEA"
+                },
+                {
+                  "const": "UNZ"
+                }
+              ]
+            }
+          }
         }
       },
       "oneOf": [
@@ -96,14 +120,14 @@
           "required": [
             "header",
             "groups",
-            "footer"
+            "trailer"
           ]
         },
         {
           "required": [
             "header",
             "messages",
-            "footer"
+            "trailer"
           ]
         }
       ],
@@ -114,11 +138,23 @@
       "required": [
         "header",
         "messages",
-        "footer"
+        "trailer"
       ],
       "properties": {
         "header": {
-          "$ref": "#/definitions/segment"
+          "$ref": "#/definitions/segment",
+          "properties": {
+            "tag": {
+              "oneOf": [
+                {
+                  "const": "GS"
+                },
+                {
+                  "const": "UNG"
+                }
+              ]
+            }
+          }
         },
         "messages": {
           "type": "array",
@@ -127,8 +163,20 @@
             "$ref": "#/definitions/message"
           }
         },
-        "footer": {
-          "$ref": "#/definitions/segment"
+        "trailer": {
+          "$ref": "#/definitions/segment",
+          "properties": {
+            "tag": {
+              "oneOf": [
+                {
+                  "const": "GE"
+                },
+                {
+                  "const": "UNE"
+                }
+              ]
+            }
+          }
         }
       },
       "additionalProperties": true
@@ -138,11 +186,23 @@
       "required": [
         "header",
         "segments",
-        "footer"
+        "trailer"
       ],
       "properties": {
         "header": {
-          "$ref": "#/definitions/segment"
+          "$ref": "#/definitions/segment",
+          "properties": {
+            "tag": {
+              "oneOf": [
+                {
+                  "const": "ST"
+                },
+                {
+                  "const": "UNH"
+                }
+              ]
+            }
+          }
         },
         "segments": {
           "type": "array",
@@ -151,8 +211,20 @@
             "$ref": "#/definitions/segment"
           }
         },
-        "footer": {
-          "$ref": "#/definitions/segment"
+        "trailer": {
+          "$ref": "#/definitions/segment",
+          "properties": {
+            "tag": {
+              "oneOf": [
+                {
+                  "const": "SE"
+                },
+                {
+                  "const": "UNT"
+                }
+              ]
+            }
+          }
         }
       },
       "additionalProperties": true
