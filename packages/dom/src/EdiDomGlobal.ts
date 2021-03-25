@@ -3,6 +3,7 @@ import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomGroup } from './EdiDomGroup'
 import type { EdiDomInterchange } from './EdiDomInterchange'
 import type { EdiDomMessage } from './EdiDomMessage'
+import type { EdiDomRepeated } from './EdiDomRepeated'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
 import type { EdiDomValue } from './EdiDomValue'
@@ -14,6 +15,7 @@ export interface EdiDomGlobalSpace {
   Message: typeof EdiDomMessage
   Transaction: typeof EdiDomMessage
   Segment: typeof EdiDomSegment
+  Repeated: typeof EdiDomRepeated
   Element: typeof EdiDomElement
   Component: typeof EdiDomComponent
   Value: typeof EdiDomValue

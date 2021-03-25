@@ -5,6 +5,7 @@ import type { EdiDomNode } from './EdiDomTypes'
 import type { EdiDomComponent } from './EdiDomComponent'
 import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
+import type { EdiDomRepeated } from './EdiDomRepeated'
 
 /** Value types supported for detection. */
 export type EdiDomValueType = 'alpha' | 'numeric' | 'alphanumeric'
@@ -22,7 +23,7 @@ export class EdiDomValue extends EdiDomAbstractNode {
   }
 
   nodeType: EdiDomNodeType.Value
-  parent: EdiDomComponent | EdiDomElement
+  parent: EdiDomComponent | EdiDomElement | EdiDomRepeated
   root: EdiDomRoot
   /** A type derived from the contents of the value. */
   type: EdiDomValueType

@@ -5,6 +5,7 @@ import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomNode } from './EdiDomTypes'
 import type { EdiDomValue } from './EdiDomValue'
+import type { EdiDomRepeated } from './EdiDomRepeated'
 
 /** An intermediate value type in the object model, holding an array of values. */
 export class EdiDomComponent extends EdiDomAbstractNode {
@@ -15,7 +16,7 @@ export class EdiDomComponent extends EdiDomAbstractNode {
   }
 
   nodeType: EdiDomNodeType.Component
-  parent: EdiDomElement
+  parent: EdiDomElement | EdiDomRepeated
   /** One or more values of the component value. */
   values: EdiDomValue[]
   /** The root of this instance. */

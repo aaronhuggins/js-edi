@@ -8,10 +8,11 @@ import type { EdiDomValue } from './EdiDomValue'
 import type { EdiDomNode } from './EdiDomTypes'
 
 /** Element types supported for detection. */
-export type EdiDomElementType= 'repeated' | 'component' | 'value'
+export type EdiDomElementType = 'repeated' | 'component' | 'value'
+export type ElementChild = EdiDomComponent | EdiDomValue
 
 /** An element containing one or more repeated elements, a component, or a value. */
-export class EdiDomElement<T extends EdiDomComponent|EdiDomValue = any> extends EdiDomAbstractNode {
+export class EdiDomElement<T extends ElementChild = any> extends EdiDomAbstractNode {
   constructor (type?: EdiDomElementType) {
     super()
     this.nodeType = EdiDomNodeType.Element

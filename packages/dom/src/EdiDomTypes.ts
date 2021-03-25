@@ -4,6 +4,7 @@ import type { EdiDomGroup } from './EdiDomGroup'
 import type { EdiDomInterchange } from './EdiDomInterchange'
 import type { EdiDomMessage } from './EdiDomMessage'
 import type { EdiDomNodeType } from './EdiDomNodeType'
+import type { EdiDomRepeated } from './EdiDomRepeated'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomSegment } from './EdiDomSegment'
 import type { EdiDomValue } from './EdiDomValue'
@@ -37,6 +38,7 @@ export type EdiDomNode =
   | EdiDomMessage
   | EdiDomSegment
   | EdiDomElement
+  | EdiDomRepeated
   | EdiDomComponent
   | EdiDomValue
 
@@ -51,6 +53,7 @@ export interface EdiDomNodeTagMap extends Record<EdiDomNodeType, EdiDomNode> {
   Message: EdiDomMessage
   Transaction: EdiDomMessage
   Segment: EdiDomSegment
+  Repeated: EdiDomRepeated
   Element: EdiDomElement
   Component: EdiDomComponent
   Value: EdiDomValue

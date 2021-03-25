@@ -21,6 +21,7 @@ export const EdiDomNodeAlias: Record<keyof EdiDomNodeTagMap, EdiDomNodeType> = {
   // EDI DOM Node aliases.
   Root: EdiDomNodeType.Root,
   Segment: EdiDomNodeType.Segment,
+  Repeated: EdiDomNodeType.Repeated,
   Element: EdiDomNodeType.Element,
   Component: EdiDomNodeType.Component,
   Value: EdiDomNodeType.Value
