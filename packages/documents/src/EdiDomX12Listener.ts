@@ -8,6 +8,7 @@ import {
   EdiDomGroup,
   EdiDomInterchange,
   EdiDomMessage,
+  EdiDomRepeated,
   EdiDomRoot,
   EdiDomSegment,
   EdiDomValue
@@ -30,6 +31,7 @@ import type {
   ValueContext
 } from '@js-edi/x12'
 
+/** Produces an element which contains a component or a value, never a repeated element. */
 function contextToElement (ctx: ElementContext | RepeatedElementContext): EdiDomElement {
   const domElement = new EdiDomElement()
   const ctxComponents = ctx.component()
@@ -52,6 +54,7 @@ function contextToElement (ctx: ElementContext | RepeatedElementContext): EdiDom
   return domElement
 }
 
+/** Converts a control char element from a parser context to a valid element in the dom. */
 function controlCharElement (ctx: RepititionCharElementContext | ComponentCharElementContext): EdiDomValue {
   const domValue = new EdiDomValue()
 
@@ -81,6 +84,7 @@ function controlCharElement (ctx: RepititionCharElementContext | ComponentCharEl
   return domValue
 }
 
+/** Produces a valid segment in the dom from a parser strict element context. */
 function strictSegment<T extends string> (tag: T, ctxElements: StrictElementContext[]): EdiDomSegment<T> {
   const domSegment = new EdiDomSegment(tag)
 
@@ -122,10 +126,14 @@ export class EdiDomX12Listener implements EdiX12ParserListener {
   root: EdiDomRoot
   /** The current interchange being constructed. */
   private interchange: EdiDomInterchange
+  /** The current group being constructed. */
   private group: EdiDomGroup
+  /** The current transaction being constructed. */
   private message: EdiDomMessage
+  /** The current segment being constructed. */
   private segment: EdiDomSegment
-  private repitition?: EdiDomElement
+  /** The current repitition being constructed. */
+  private repitition?: EdiDomRepeated
 
   /** Deal with errors as encountered. */
   visitErrorNode (node: ErrorNode): void {}
@@ -159,19 +167,22 @@ export class EdiDomX12Listener implements EdiX12ParserListener {
   }
 
   enterRepitition (): void {
-    this.repitition = new EdiDomElement('repeated')
-    this.segment.addChildNode(this.repitition)
+    const element = new EdiDomElement()
+    this.repitition = new EdiDomRepeated()
+
+    element.addChildNode(this.repitition)
+    this.segment.addChildNode(element)
   }
 
   exitRepitition (ctx: RepititionContext): void {
-    const element = this.repitition ?? new EdiDomElement('repeated')
+    const repitition = this.repitition ?? new EdiDomRepeated()
     const ctxRepititions = ctx.repeatedElement()
 
     if (Array.isArray(ctxRepititions) && ctxRepititions.length > 0) {
       for (const ctxRepitition of ctxRepititions) {
         const subElement = contextToElement(ctxRepitition)
 
-        element.addChildNode(subElement)
+        repitition.addChildNode(subElement.value)
       }
     }
 
@@ -182,7 +193,7 @@ export class EdiDomX12Listener implements EdiX12ParserListener {
     const element = contextToElement(ctx)
 
     if (typeof this.repitition === 'object') {
-      this.repitition.addChildNode(element)
+      this.repitition.addChildNode(element.value)
     } else {
       this.segment.addChildNode(element)
     }
@@ -222,22 +233,27 @@ export class EdiDomX12Listener implements EdiX12ParserListener {
     }
   }
 
+  /** Constructs the interchange trailer. */
   exitInterchangeTrailer (ctx: InterchangeTrailerContext): void {
     this.interchange.trailer = strictSegment('IEA', ctx.strictElement())
   }
 
+  /** Constructs the group header. */
   exitGroupHeader (ctx: GroupHeaderContext): void {
     this.group.header = strictSegment('GS', ctx.strictElement())
   }
 
+  /** Constructs the group trailer. */
   exitGroupTrailer (ctx: GroupTrailerContext): void {
     this.group.trailer = strictSegment('GE', ctx.strictElement())
   }
 
+  /** Constructs the transaction header. */
   exitTransactionHeader (ctx: TransactionHeaderContext): void {
     this.message.header = strictSegment('ST', ctx.strictElement())
   }
 
+  /** Constructs the transaction trailer. */
   exitTransactionTrailer (ctx: TransactionTrailerContext): void {
     this.message.trailer = strictSegment('SE', ctx.strictElement())
   }
