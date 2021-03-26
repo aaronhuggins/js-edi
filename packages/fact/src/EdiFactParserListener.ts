@@ -1,4 +1,4 @@
-// Generated from grammar/EdiFactParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from grammars/fact/EdiFactParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
