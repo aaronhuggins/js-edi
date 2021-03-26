@@ -6,8 +6,7 @@ If I could call it J-EDI, I would. May the force be with you.
 
 # Known TO-DOs
 
-- Implement CharStream class for Node Readable streams
-- Improve support for defining input encoding(s)
+- Finish implementing element selector query language.
 - Improve accuracy of parsing/handling EDIFACT
   - Better service string advice detection
   - Conform to EDIFACt standard with "release indicator"
