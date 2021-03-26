@@ -51,7 +51,7 @@ export class EdiParser {
   private encoding: BufferEncoding
   private parsed: boolean
 
-  private createParser (opts: Omit<EdiParserOpts, 'contents'>) {
+  private createParser (opts: Omit<EdiParserOpts, 'contents'>): void {
     const keepInitialListeners = opts.keepInitialListeners ?? false
     const throwOnError = opts.throwOnError ?? false
 

@@ -18,7 +18,7 @@ export class EdiDomRepeated extends EdiDomAbstractNode {
   nodeType: EdiDomNodeType.Repeated
   parent: EdiDomElement
   root: EdiDomRoot
-  repeats: Array<EdiDomComponent> | Array<EdiDomValue>
+  repeats: EdiDomComponent[] | EdiDomValue[]
 
   get text (): string {
     return this.repeats
@@ -54,7 +54,7 @@ export class EdiDomRepeated extends EdiDomAbstractNode {
       case EdiDomNodeType.Component:
         if (isArrayType(this.repeats, child)) {
           index = this.repeats.indexOf(child)
-          
+
           if (index > -1) {
             unrelate(child)
             this.repeats.splice(index, 1)
@@ -64,7 +64,7 @@ export class EdiDomRepeated extends EdiDomAbstractNode {
       case EdiDomNodeType.Value:
         if (isArrayType(this.repeats, child)) {
           index = this.repeats.indexOf(child)
-          
+
           if (index > -1) {
             unrelate(child)
             this.repeats.splice(index, 1)

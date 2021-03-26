@@ -12,6 +12,7 @@ export async function * streamToAsyncGenerator<T = any> (reader: Readable, chunk
     })
   })
 
+  // eslint-disable-next-line no-unmodified-loop-condition
   while (!readableEnded) {
     while (reader.readable) {
       const val: T = typeof chunkSize === 'number'

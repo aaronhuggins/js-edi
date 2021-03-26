@@ -20,6 +20,6 @@ export function unrelate (child: EdiDomNode): void {
 }
 
 /** Method for narrowing the type of array of nodes. */
-export function isArrayType <T extends ElementChild> (array: any[], compare: T): array is Array<T> {
+export function isArrayType <T extends ElementChild> (array: any[], compare: T): array is T[] {
   return array.length === 0 || array[0].nodeType === compare.nodeType
 }
