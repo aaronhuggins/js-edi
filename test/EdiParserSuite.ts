@@ -25,7 +25,7 @@ describe('EdiParser', () => {
     const parser2 = result2.getParser()
 
     strictEqual(result2 instanceof EdiParser, true)
-    strictEqual(typeof parser2, 'object')
+    strictEqual(typeof parser2, 'undefined')
   })
 
   it('should parse an EDIFACT document', () => {
