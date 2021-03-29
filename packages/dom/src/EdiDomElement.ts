@@ -2,9 +2,16 @@ import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
 import { relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
+import type { EdiJsonComponent } from './EdiDomComponent'
 import type { EdiDomRoot } from './EdiDomRoot'
+import type { EdiJsonRepeated } from './EdiDomRepeated'
 import type { EdiDomSegment } from './EdiDomSegment'
 import type { EdiDomNode, ElementChild } from './EdiDomTypes'
+import type { EdiJsonValue } from './EdiDomValue'
+
+export interface EdiJsonElement {
+  value: EdiJsonComponent | EdiJsonRepeated | EdiJsonValue
+}
 
 /** An element containing one or more repeated elements, a component, or a value. */
 export class EdiDomElement<T extends ElementChild = any> extends EdiDomAbstractNode {
@@ -21,9 +28,27 @@ export class EdiDomElement<T extends ElementChild = any> extends EdiDomAbstractN
   /** The parent of this instance. */
   parent: EdiDomSegment | EdiDomElement
 
+  get innerEDI (): string {
+    return typeof this.value === 'object' ? this.value.text : ''
+  }
+
+  get outerEDI (): string {
+    return this.root.options.dataSeparator + this.innerEDI
+  }
+
   /** The read-only text representation of this node. */
   get text (): string {
-    return this.root.options.dataSeparator + (typeof this.value === 'object' ? this.value.text : '')
+    return this.outerEDI
+  }
+
+  get textContent (): string {
+    if (typeof this.value === 'object') {
+      const innerContent = this.value.textContent.split('\n')
+
+      return '  ' + innerContent.join('\n  ')
+    }
+
+    return ''
   }
 
   /** Add an element, component, or value to this node. */
@@ -58,6 +83,36 @@ export class EdiDomElement<T extends ElementChild = any> extends EdiDomAbstractN
         yield node
       }
     }
+  }
+
+  toJSON (): EdiJsonElement {
+    return {
+      value: this.value.toJSON()
+    }
+  }
+
+  fromJSON (input: EdiJsonElement): void {
+    if ('repeats' in input.value) {
+      const domRepeated = new EdiDomGlobal.Repeated()
+
+      domRepeated.fromJSON(input.value)
+
+      this.value = domRepeated as any
+    } else if ('values' in input.value) {
+      const domComponent = new EdiDomGlobal.Component()
+
+      domComponent.fromJSON(input.value)
+
+      this.value = domComponent as any
+    } else {
+      const domValue = new EdiDomGlobal.Value()
+
+      domValue.fromJSON(input.value)
+
+      this.value = domValue as any
+    }
+
+    relate(this.value, this, this.root)
   }
 }
 
