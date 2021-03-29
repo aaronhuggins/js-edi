@@ -45,7 +45,7 @@ export class EdiDomComponent extends EdiDomAbstractNode {
   get textContent (): string {
     return this.values
       .map(value => value.textContent)
-      .join(' ')
+      .join('\t')
   }
 
   /** Add a value to this componenet. */
@@ -94,13 +94,16 @@ export class EdiDomComponent extends EdiDomAbstractNode {
 
   fromJSON (input: EdiJsonComponent): void {
     if (Array.isArray(input.values)) {
-      this.values = input.values.map(value => {
+      this.values = []
+
+      for (const value of input.values) {
         const domValue = new EdiDomGlobal.Value()
 
         domValue.fromJSON(value)
+        relate(domValue, this, this.root)
 
-        return domValue
-      })
+        this.values.push(domValue)
+      }
     }
   }
 }

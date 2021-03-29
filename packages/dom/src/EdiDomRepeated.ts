@@ -110,21 +110,25 @@ export class EdiDomRepeated extends EdiDomAbstractNode {
 
   fromJSON (input: EdiJsonRepeated): void {
     if (Array.isArray(input.repeats)) {
-      this.repeats = (input.repeats as any).map(repeat => {
+      this.repeats = []
+
+      for (const repeat of input.repeats) {
         if ('values' in repeat) {
           const domComponent = new EdiDomGlobal.Component()
 
           domComponent.fromJSON(repeat)
+          relate(domComponent, this, this.root)
 
-          return domComponent
+          this.repeats.push(domComponent as any)
         } else {
           const domValue = new EdiDomGlobal.Value()
 
           domValue.fromJSON(repeat)
+          relate(domValue, this, this.root)
 
-          return domValue
+          this.repeats.push(domValue as any)
         }
-      })
+      }
     }
   }
 }
