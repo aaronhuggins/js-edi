@@ -5,8 +5,12 @@ import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomNode } from './EdiDomTypes'
-import type { EdiDomValue } from './EdiDomValue'
+import type { EdiDomValue, EdiJsonValue } from './EdiDomValue'
 import type { EdiDomRepeated } from './EdiDomRepeated'
+
+export interface EdiJsonComponent {
+  values: EdiJsonValue[]
+}
 
 /** An intermediate value type in the object model, holding an array of values. */
 export class EdiDomComponent extends EdiDomAbstractNode {
@@ -23,11 +27,25 @@ export class EdiDomComponent extends EdiDomAbstractNode {
   /** The root of this instance. */
   root: EdiDomRoot
 
-  /** The read-only text representation of this node. */
-  get text (): string {
+  get innerEDI (): string {
     return this.values
       .map(value => value.text)
       .join(this.root.options.componentSeparator)
+  }
+
+  get outerEDI (): string {
+    return this.innerEDI
+  }
+
+  /** The read-only text representation of this node. */
+  get text (): string {
+    return this.innerEDI
+  }
+
+  get textContent (): string {
+    return this.values
+      .map(value => value.text)
+      .join(' ')
   }
 
   /** Add a value to this componenet. */
@@ -65,6 +83,24 @@ export class EdiDomComponent extends EdiDomAbstractNode {
       for (const node of value.walk()) {
         yield node
       }
+    }
+  }
+
+  toJSON (): EdiJsonComponent {
+    return {
+      values: this.values.map(value => value.toJSON())
+    }
+  }
+
+  fromJSON (input: EdiJsonComponent): void {
+    if (Array.isArray(input.values)) {
+      this.values = input.values.map(value => {
+        const domValue = new EdiDomGlobal.Value()
+
+        domValue.fromJSON(value)
+
+        return domValue
+      })
     }
   }
 }

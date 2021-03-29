@@ -43,7 +43,7 @@ export abstract class EdiDomAbstractNode {
   abstract walk (): Generator<EdiDomNode>
 
   /** Return a cleaned EdiDomNode for serialization; removes circular references and verbose node types. */
-  abstract toJSON (): Partial<EdiDomNode>
+  abstract toJSON (): any
 
   /** Populate an EdiDomNode from serialized JSON EDI notation. */
   abstract fromJSON (json: any): void
