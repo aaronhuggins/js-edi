@@ -44,7 +44,7 @@ export class EdiDomComponent extends EdiDomAbstractNode {
 
   get textContent (): string {
     return this.values
-      .map(value => value.text)
+      .map(value => value.textContent)
       .join(' ')
   }
 

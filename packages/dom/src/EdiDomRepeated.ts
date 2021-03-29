@@ -2,11 +2,15 @@ import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
 import { isArrayType, relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
-import type { EdiDomComponent } from './EdiDomComponent'
+import type { EdiDomComponent, EdiJsonComponent } from './EdiDomComponent'
 import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomNode, RepeatedChild } from './EdiDomTypes'
-import type { EdiDomValue } from './EdiDomValue'
+import type { EdiDomValue, EdiJsonValue } from './EdiDomValue'
+
+export interface EdiJsonRepeated {
+  repeats: EdiJsonComponent[] | EdiJsonValue[]
+}
 
 export class EdiDomRepeated extends EdiDomAbstractNode {
   constructor () {
@@ -20,10 +24,24 @@ export class EdiDomRepeated extends EdiDomAbstractNode {
   root: EdiDomRoot
   repeats: EdiDomComponent[] | EdiDomValue[]
 
-  get text (): string {
+  get innerEDI (): string {
     return this.repeats
       .map(value => value.text)
       .join(this.root.options.repititionSeparator)
+  }
+
+  get outerEDI (): string {
+    return this.innerEDI
+  }
+
+  get text (): string {
+    return this.innerEDI
+  }
+
+  get textContent (): string {
+    return this.repeats
+      .map(value => '  ' + value.textContent)
+      .join('\n')
   }
 
   addChildNode (child: RepeatedChild): void {
@@ -81,6 +99,32 @@ export class EdiDomRepeated extends EdiDomAbstractNode {
       for (const node of repeat.walk()) {
         yield node
       }
+    }
+  }
+
+  toJSON (): EdiJsonRepeated {
+    return {
+      repeats: this.repeats.map(repeat => repeat.toJSON())
+    }
+  }
+
+  fromJSON (input: EdiJsonRepeated): void {
+    if (Array.isArray(input.repeats)) {
+      this.repeats = (input.repeats as any).map(repeat => {
+        if ('values' in repeat) {
+          const domComponent = new EdiDomGlobal.Component()
+
+          domComponent.fromJSON(repeat)
+
+          return domComponent
+        } else {
+          const domValue = new EdiDomGlobal.Value()
+
+          domValue.fromJSON(repeat)
+
+          return domValue
+        }
+      })
     }
   }
 }
