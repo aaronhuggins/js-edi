@@ -83,7 +83,8 @@ export class QueryEngineList<T> implements Iterable<T> {
   /** Delete a result from this list by value or by index. */
   delete (result: T | number): void {
     if (typeof result === 'number') {
-      if (result in this._values || this._queryFinished) {
+      // We check if `key in ...` because we need to avoid weird cases where `indexOf` or `includes` may return `-1`
+      if (result in this._values || this._queryFinished) { // NOSONAR
         this._values.splice(result, 1)
       } else {
         let i: number
