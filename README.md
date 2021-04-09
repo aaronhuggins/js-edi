@@ -17,9 +17,9 @@ If I could call it J-EDI, I would. May the force be with you.
 
 # What's done prior to alpha so far
 
-- EDI X12 support; parser in antlr4ts is fully functional
-- Document object model
-- Validator
+- EDI X12 support; parser in antlr4ts is fully functional, detects component and repeated elements
+- Document object model, supports detecting difference between EDI flavors and complexe nodes
+- Validator, works with the DOM to be able to validate a document with JSON Schema
 
 # Known TO-DOs
 
