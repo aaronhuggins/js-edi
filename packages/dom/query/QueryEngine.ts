@@ -46,51 +46,65 @@ export class QueryEngine {
   }
 
   /** Evaluate an element selector and return each element found. */
-  * evaluate (): QueryIterator<EdiDomNode> {
+  evaluate (): QueryIterator<EdiDomNode> {
     if (isNodeTag(this.selector)) {
-      const nodeType = EdiDomNodeAlias[this.selector]
+      return this.parseNodeTag()
+    }
 
-      if (nodeType === EdiDomNodeType.All) {
-        for (const node of this.walker.descend()) yield node
-      } else {
-        for (const node of this.walker.descend()) {
-          if (node.nodeType === nodeType) yield node
-        }
-      }
-    } else if (isSegmentTag(this.selector)) {
-      for (const node of this.walker.descend()) {
-        if ('tag' in node && node.tag === this.selector) {
-          yield node
-        }
-      }
+    if (isSegmentTag(this.selector)) {
+      return this.parseSegmentTag()
+    }
+
+    return this.parseSelector()
+  }
+
+  private * parseNodeTag (): QueryIterator<EdiDomNode> {
+    const nodeType = EdiDomNodeAlias[this.selector]
+
+    if (nodeType === EdiDomNodeType.All) {
+      for (const node of this.walker.descend()) yield node
     } else {
-      const charStream = CharStreams.fromString(this.selector, 'selector')
-      const lexer = new ElementSelectorLexer(charStream)
-      const tokens = new CommonTokenStream(lexer)
-      const parser = new ElementSelectorParser(tokens)
-      this.parsed = parser.selector()
-
-      if (typeof this.parsed.elementSelector() === 'object') {
-        for (const node of this.elementSelector()) yield node
-      } else if (typeof this.parsed.parentSegmentSelector() === 'object') {
-        for (const node of this.parentSegmentSelector()) yield node
-      } else if (typeof this.parsed.hlPathSelector() === 'object') {
-        for (const node of this.hlPathSelector()) yield node
-      } else if (typeof this.parsed.loopPathSelector() === 'object') {
-        for (const node of this.loopPathSelector()) yield node
-      } else if (typeof this.parsed.elementValueSelector() === 'object') {
-        for (const node of this.elementValueSelector()) yield node
-      } else if (typeof this.parsed.elementNotValueSelector() === 'object') {
-        for (const node of this.elementNotValueSelector()) yield node
-      } else if (typeof this.parsed.elementContainsValueSelector() === 'object') {
-        for (const node of this.elementContainsValueSelector()) yield node
-      } else if (typeof this.parsed.elementSiblingSelector() === 'object') {
-
-      } else if (typeof this.parsed.elementPrecedentSelector() === 'object') {
-        for (const node of this.elementPrecedentSelector()) yield node
-      } else if (typeof this.parsed.elementAdjacentSelector() === 'object') {
-        for (const node of this.elementAdjacentSelector()) yield node
+      for (const node of this.walker.descend()) {
+        if (node.nodeType === nodeType) yield node
       }
+    }
+  }
+
+  private * parseSegmentTag (): QueryIterator<EdiDomNode> {
+    for (const node of this.walker.descend()) {
+      if ('tag' in node && node.tag === this.selector) {
+        yield node
+      }
+    }
+  }
+
+  private parseSelector (): QueryIterator<EdiDomNode> {
+    const charStream = CharStreams.fromString(this.selector, 'selector')
+    const lexer = new ElementSelectorLexer(charStream)
+    const tokens = new CommonTokenStream(lexer)
+    const parser = new ElementSelectorParser(tokens)
+    this.parsed = parser.selector()
+
+    if (typeof this.parsed.elementSelector() === 'object') {
+      return this.elementSelector()
+    } else if (typeof this.parsed.parentSegmentSelector() === 'object') {
+      return this.parentSegmentSelector()
+    } else if (typeof this.parsed.hlPathSelector() === 'object') {
+      return this.hlPathSelector()
+    } else if (typeof this.parsed.loopPathSelector() === 'object') {
+      return this.loopPathSelector()
+    } else if (typeof this.parsed.elementValueSelector() === 'object') {
+      return this.elementValueSelector()
+    } else if (typeof this.parsed.elementNotValueSelector() === 'object') {
+      return this.elementNotValueSelector()
+    } else if (typeof this.parsed.elementContainsValueSelector() === 'object') {
+      return this.elementContainsValueSelector()
+    } else if (typeof this.parsed.elementSiblingSelector() === 'object') {
+
+    } else if (typeof this.parsed.elementPrecedentSelector() === 'object') {
+      return this.elementPrecedentSelector()
+    } else if (typeof this.parsed.elementAdjacentSelector() === 'object') {
+      return this.elementAdjacentSelector()
     }
   }
 
