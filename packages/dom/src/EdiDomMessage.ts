@@ -5,8 +5,14 @@ import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomGroup } from './EdiDomGroup'
 import type { EdiDomInterchange } from './EdiDomInterchange'
 import type { EdiDomRoot } from './EdiDomRoot'
-import type { EdiDomSegment } from './EdiDomSegment'
+import type { EdiDomSegment, EdiJsonSegment } from './EdiDomSegment'
 import type { EdiDomNode } from './EdiDomTypes'
+
+export interface EdiJsonMessage {
+  header: EdiJsonSegment
+  segments: EdiJsonSegment[]
+  trailer: EdiJsonSegment
+}
 
 /** An EDIFACT UNH message or an X12 ST transaction. */
 export class EdiDomMessage extends EdiDomAbstractNode {
@@ -103,6 +109,44 @@ export class EdiDomMessage extends EdiDomAbstractNode {
       for (const node of this.trailer.walk()) {
         yield node
       }
+    }
+  }
+
+  toJSON (): EdiJsonMessage {
+    return {
+      header: this.header.toJSON(),
+      segments: this.segments.map(segment => segment.toJSON()),
+      trailer: this.trailer.toJSON()
+    }
+  }
+
+  fromJSON (input: EdiJsonMessage): void {
+    if ('header' in input) {
+      const domSegment = new EdiDomGlobal.Segment<'UNH'|'ST'>()
+
+      domSegment.fromJSON(input.header)
+
+      this.header = domSegment
+    }
+
+    if (Array.isArray(input.segments)) {
+      this.segments = []
+
+      for (const segment of input.segments) {
+        const domSegment = new EdiDomGlobal.Segment()
+
+        domSegment.fromJSON(segment)
+        relate(domSegment, this, this.root)
+        this.segments.push(domSegment)
+      }
+    }
+
+    if ('trailer' in input) {
+      const domSegment = new EdiDomGlobal.Segment<'UNT'|'SE'>()
+
+      domSegment.fromJSON(input.trailer)
+
+      this.trailer = domSegment
     }
   }
 }
