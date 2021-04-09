@@ -100,7 +100,7 @@ export class QueryEngine {
     } else if (typeof this.parsed.elementContainsValueSelector() === 'object') {
       return this.elementContainsValueSelector()
     } else if (typeof this.parsed.elementSiblingSelector() === 'object') {
-
+      return this.elementSiblingSelector()
     } else if (typeof this.parsed.elementPrecedentSelector() === 'object') {
       return this.elementPrecedentSelector()
     } else if (typeof this.parsed.elementAdjacentSelector() === 'object') {
@@ -379,11 +379,11 @@ export class QueryEngine {
 
   private * elementSiblingSelector (): QueryIterator<EdiDomElement> {}
 
-  private * elementPrecedentSelector (): QueryIterator<EdiDomElement> {
-    for (const node of this.elementCombinatorSelector('ascend')) yield node
+  private elementPrecedentSelector (): QueryIterator<EdiDomElement> {
+    return this.elementCombinatorSelector('ascend')
   }
 
-  private * elementAdjacentSelector (): QueryIterator<EdiDomElement> {
-    for (const node of this.elementCombinatorSelector('descend')) yield node
+  private elementAdjacentSelector (): QueryIterator<EdiDomElement> {
+    return this.elementCombinatorSelector('descend')
   }
 }
