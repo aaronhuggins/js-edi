@@ -4,6 +4,8 @@ Work in progress, not fit for production use. Parser for both EDIX12 and EDIFACT
 
 If I could call it J-EDI, I would. May the force be with you.
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ahuggins-nhs_js-edi&metric=alert_status)](https://sonarcloud.io/dashboard?id=ahuggins-nhs_js-edi) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=ahuggins-nhs_js-edi&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=ahuggins-nhs_js-edi) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=ahuggins-nhs_js-edi&metric=security_rating)](https://sonarcloud.io/dashboard?id=ahuggins-nhs_js-edi) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=ahuggins-nhs_js-edi&metric=ncloc)](https://sonarcloud.io/dashboard?id=ahuggins-nhs_js-edi)
+
 # Features
 
 - Support for EDI X12 and EDIFACT
