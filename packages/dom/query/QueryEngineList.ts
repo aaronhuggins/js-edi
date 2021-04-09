@@ -66,7 +66,7 @@ export class QueryEngineList<T> implements Iterable<T> {
 
   /** Get a result by its index in the list. */
   get (key: number): T {
-    if (key in this._values || this._queryFinished) {
+    if (key in this._values || this._queryFinished) { // NOSONAR
       return this._values[key]
     }
 
