@@ -100,8 +100,6 @@ export class QueryEngineList<T> implements Iterable<T> {
 
       if (index > -1 || this._queryFinished) {
         this._values.splice(index, 1)
-      } else {
-
       }
     }
   }
