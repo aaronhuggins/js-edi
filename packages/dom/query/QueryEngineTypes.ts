@@ -2,6 +2,16 @@ import type {
   ElementAdjacentSelectorContext,
   ElementPrecedentSelectorContext
 } from './ElementSelectorParser'
+import type { EdiDomAbstractNode } from '../src/EdiDomAbstractNode'
+import type { EdiDomNode } from '../src/EdiDomTypes'
+
+export interface QueryEngineOpts {
+  selector: string
+  node: EdiDomNode | EdiDomAbstractNode
+  mode: QueryEngineMode
+}
+
+export type QueryEngineMode = 'strict' | 'loose'
 
 export type QueryDirection = 'ascend' | 'descend'
 

@@ -19,17 +19,25 @@ import type {
   ParentSegmentSelectorContext,
   SelectorContext
 } from './ElementSelectorParser'
-import type { ElementReference, QueryDirection, QueryIterator } from './QueryEngineTypes'
+import type {
+  ElementReference,
+  QueryDirection,
+  QueryEngineMode,
+  QueryEngineOpts,
+  QueryIterator
+} from './QueryEngineTypes'
 
 export class QueryEngine {
-  constructor (selector: string, node: EdiDomNode | EdiDomAbstractNode) {
-    this.node = node
-    this.selector = selector
+  constructor (options: QueryEngineOpts) {
+    this.node = options.node
+    this.mode = options.mode
+    this.selector = options.selector
     this.walker = new QueryDomWalker(this.node.walk())
   }
 
   private readonly node: EdiDomNode | EdiDomAbstractNode
   private readonly selector: string
+  private readonly mode: QueryEngineMode
   private parsed: SelectorContext
   private readonly walker: QueryDomWalker
 
