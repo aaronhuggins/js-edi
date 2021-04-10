@@ -47,15 +47,10 @@ export class EdiDomRepeated extends EdiDomAbstractNode {
   addChildNode (child: RepeatedChild): void {
     switch (child.nodeType) {
       case EdiDomNodeType.Component:
-        if (isArrayType(this.repeats, child)) {
-          relate(child, this, this.root)
-          this.repeats.push(child)
-        }
-        break
       case EdiDomNodeType.Value:
         if (isArrayType(this.repeats, child)) {
           relate(child, this, this.root)
-          this.repeats.push(child)
+          this.repeats.push(child as any)
         }
         break
     }
