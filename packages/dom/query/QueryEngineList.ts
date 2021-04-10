@@ -86,21 +86,25 @@ export class QueryEngineList<T> implements Iterable<T> {
       // We check if `key in ...` because we need to avoid weird cases where `indexOf` or `includes` may return `-1`
       if (result in this._values || this._queryFinished) { // NOSONAR
         this._values.splice(result, 1)
-      } else {
-        let i: number
 
-        for (const [index] of this.entries()) {
-          if (index === result) i = index
-        }
-
-        this._values.splice(i, 1)
+        return
       }
-    } else {
-      const index = this._values.indexOf(result)
 
-      if (index > -1 || this._queryFinished) {
-        this._values.splice(index, 1)
+      let i: number
+
+      for (const [index] of this.entries()) {
+        if (index === result) i = index
       }
+
+      this._values.splice(i, 1)
+
+      return
+    }
+
+    const index = this._values.indexOf(result)
+
+    if (index > -1 || this._queryFinished) {
+      this._values.splice(index, 1)
     }
   }
 
