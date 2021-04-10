@@ -52,7 +52,7 @@ export abstract class EdiDomAbstractNode {
   querySelector<K extends keyof EdiDomNodeTagMap> (selector: K): EdiDomNodeTagMap[K]
   querySelector<E extends EdiDomElement | EdiDomSegment = EdiDomElement> (selector: string): E
   querySelector (selector: string): EdiDomNode | QueryEngineList<EdiDomNode> {
-    const query = new QueryEngine(selector, this)
+    const query = new QueryEngine({ selector, node: this, mode: 'strict' })
     const evaluate = query.evaluate()
     const { value } = evaluate.next()
 
@@ -63,7 +63,7 @@ export abstract class EdiDomAbstractNode {
   querySelectorAll<K extends keyof EdiDomNodeTagMap> (selector: K): QueryEngineList<EdiDomNodeTagMap[K]>
   querySelectorAll<E extends EdiDomElement | EdiDomSegment = EdiDomElement> (selector: string): QueryEngineList<E>
   querySelectorAll (selector: string): QueryEngineList<EdiDomNode> {
-    const query = new QueryEngine(selector, this)
+    const query = new QueryEngine({ selector, node: this, mode: 'strict' })
 
     return query.list()
   }

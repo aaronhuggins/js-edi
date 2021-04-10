@@ -1,12 +1,18 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
-import { relate, unrelate } from './EdiDomHelpers'
+import { assignMessagesFromJson, containerFromJson, relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
-import type { EdiDomMessage } from './EdiDomMessage'
+import type { EdiDomMessage, EdiJsonMessage } from './EdiDomMessage'
 import type { EdiDomRoot } from './EdiDomRoot'
-import type { EdiDomSegment } from './EdiDomSegment'
+import type { EdiDomSegment, EdiJsonSegment } from './EdiDomSegment'
 import type { EdiDomNode } from './EdiDomTypes'
 import type { EdiDomInterchange } from './EdiDomInterchange'
+
+export interface EdiJsonGroup {
+  header: EdiJsonSegment
+  messages: EdiJsonMessage[]
+  trailer: EdiJsonSegment
+}
 
 /** An EDIFACT UNG message or an X12 ST transaction. */
 export class EdiDomGroup extends EdiDomAbstractNode {
@@ -36,6 +42,32 @@ export class EdiDomGroup extends EdiDomAbstractNode {
     this._header = _header
   }
 
+  get innerEDI (): string {
+    return this.messages.map(message => message.outerEDI).join('')
+  }
+
+  get outerEDI (): string {
+    return this.header.outerEDI + this.innerEDI + this.trailer.outerEDI
+  }
+
+  get text (): string {
+    return this.outerEDI
+  }
+
+  get textContent (): string {
+    let content = `BEGIN Group\n`
+
+    if (Array.isArray(this.messages) && this.messages.length > 0) {
+      for (const message of this.messages) {
+        const innerContent = message.textContent.split('\n')
+
+        content += '  ' + innerContent.join('\n  ') + '\n'
+      }
+    }
+
+    return content + `END Group`
+  }
+
   /** The trailer of this group. */
   get trailer (): EdiDomSegment<'UNE'|'GE'> {
     return this._trailer
@@ -45,15 +77,6 @@ export class EdiDomGroup extends EdiDomAbstractNode {
   set trailer (_trailer: EdiDomSegment<'UNE'|'GE'>) {
     relate(_trailer, this, this.root)
     this._trailer = _trailer
-  }
-
-  /** The read-only text representation of this node. */
-  get text (): string {
-    return this.header.text +
-      this.messages
-        .map(segment => segment.text)
-        .join('') +
-      this.trailer.text
   }
 
   /** Add a message to this group. */
@@ -98,6 +121,20 @@ export class EdiDomGroup extends EdiDomAbstractNode {
         yield node
       }
     }
+  }
+
+  toJSON (): EdiJsonGroup {
+    return {
+      header: this.header.toJSON(),
+      messages: this.messages.map(message => message.toJSON()),
+      trailer: this.trailer.toJSON()
+    }
+  }
+
+  fromJSON (input: EdiJsonGroup): void {
+    containerFromJson(this, input, () => {
+      assignMessagesFromJson(this, input)
+    })
   }
 }
 

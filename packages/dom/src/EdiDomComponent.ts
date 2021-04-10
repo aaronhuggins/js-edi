@@ -101,7 +101,6 @@ export class EdiDomComponent extends EdiDomAbstractNode {
 
         domValue.fromJSON(value)
         relate(domValue, this, this.root)
-
         this.values.push(domValue)
       }
     }
