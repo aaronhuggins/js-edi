@@ -68,18 +68,19 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<a href="#js-edivalidator" id="js-edivalidator" style="color: inherit; text-decoration: none;">
-							<h1><code>@js-edi/validator</code></h1>
+						<a href="#js-edi-document-validator" id="js-edi-document-validator" style="color: inherit; text-decoration: none;">
+							<h1>JS-EDI Document Validator</h1>
 						</a>
-						<blockquote>
-							<p>TODO: description</p>
-						</blockquote>
+						<p>Library <code>@js-edi/validator</code> takes an EDI Document Object Model or JSON EDI Notation (JSEN) and validates the document against JSON Schema. The schema which ships in this library will do a minimal check to make sure that a given document meets the bare minimum criteria for being an EDI document. It can be extended so that full segments and elements in a document may be validated using JSON Schema provided by the user.</p>
 						<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 							<h2>Usage</h2>
 						</a>
-						<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">validator</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;@js-edi/validator&#039;</span><span style="color: #000000">);</span>
+						<p>Install from npm and then:</p>
+						<pre><code class="language-TypeScript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">ediDomValidate</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@js-edi/validator&#039;</span>
 
-<span style="color: #008000">// TODO: DEMONSTRATE API</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">text</span><span style="color: #000000"> = </span><span style="color: #001080">fs</span><span style="color: #000000">.</span><span style="color: #795E26">readFileSync</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;my-edi-dom.json&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;utf8&#039;</span><span style="color: #000000">)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">jsen</span><span style="color: #000000"> = </span><span style="color: #267F99">JSON</span><span style="color: #000000">.</span><span style="color: #795E26">parse</span><span style="color: #000000">(</span><span style="color: #001080">text</span><span style="color: #000000">)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">valid</span><span style="color: #000000"> = </span><span style="color: #795E26">ediDomValidate</span><span style="color: #000000">(</span><span style="color: #001080">jsen</span><span style="color: #000000">)</span>
 </code></pre>
 					</div>
 				</div>
@@ -115,7 +116,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/9466a83/packages/validator/src/ValidatorHelpers.ts#L6">validator/src/ValidatorHelpers.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/9139350/packages/validator/src/ValidatorHelpers.ts#L6">validator/src/ValidatorHelpers.ts:6</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
