@@ -70,18 +70,9 @@ export class EdiDomRepeated extends EdiDomAbstractNode {
 
     switch (child.nodeType) {
       case EdiDomNodeType.Component:
-        if (isArrayType(this.repeats, child)) {
-          index = this.repeats.indexOf(child)
-
-          if (index > -1) {
-            unrelate(child)
-            this.repeats.splice(index, 1)
-          }
-        }
-        break
       case EdiDomNodeType.Value:
         if (isArrayType(this.repeats, child)) {
-          index = this.repeats.indexOf(child)
+          index = this.repeats.indexOf(child as any)
 
           if (index > -1) {
             unrelate(child)
