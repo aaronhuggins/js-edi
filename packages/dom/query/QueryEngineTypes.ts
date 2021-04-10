@@ -1,11 +1,22 @@
 import type {
   ElementAdjacentSelectorContext,
-  ElementPrecedentSelectorContext
+  ElementPrecedentSelectorContext,
+  ElementSiblingSelectorContext
 } from './ElementSelectorParser'
+import type { EdiDomAbstractNode } from '../src/EdiDomAbstractNode'
+import type { EdiDomNode } from '../src/EdiDomTypes'
 
-export type QueryDirection = 'ascend' | 'descend'
+export interface QueryEngineOpts {
+  selector: string
+  node: EdiDomNode | EdiDomAbstractNode
+  mode: QueryEngineMode
+}
 
-export type QueryCombinator = ElementPrecedentSelectorContext | ElementAdjacentSelectorContext
+export type QueryEngineMode = 'strict' | 'loose'
+
+export type QueryDirection = 'ascend' | 'descend' | 'sibling'
+
+export type QueryCombinator = ElementPrecedentSelectorContext | ElementAdjacentSelectorContext | ElementSiblingSelectorContext
 
 export interface ElementReference {
   segmentId: string

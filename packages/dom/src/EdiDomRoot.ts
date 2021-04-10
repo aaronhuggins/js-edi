@@ -1,8 +1,14 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
+import { relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
-import type { EdiDomInterchange } from './EdiDomInterchange'
+import type { EdiDomInterchange, EdiJsonInterchange } from './EdiDomInterchange'
 import type { EdiDomDocumentType, EdiDomNode, EdiDomOptions } from './EdiDomTypes'
+
+export interface EdiJsonRoot {
+  options: EdiDomOptions
+  interchanges: EdiJsonInterchange[]
+}
 
 /** The document root containing one or more interchanges. */
 export class EdiDomRoot extends EdiDomAbstractNode {
@@ -25,9 +31,30 @@ export class EdiDomRoot extends EdiDomAbstractNode {
   /** Recursive self-reference for consistency. */
   parent: EdiDomRoot
 
-  /** The read-only text representation of this node. */
+  get innerEDI (): string {
+    return this.interchanges.map(interchange => interchange.outerEDI).join('')
+  }
+
+  get outerEDI (): string {
+    return this.innerEDI
+  }
+
   get text (): string {
-    return this.interchanges.map(interchange => interchange.text).join('')
+    return this.outerEDI
+  }
+
+  get textContent (): string {
+    let content = `BEGIN Document\n`
+
+    if (Array.isArray(this.interchanges) && this.interchanges.length > 0) {
+      for (const interchange of this.interchanges) {
+        const innerContent = interchange.textContent.split('\n')
+
+        content += '  ' + innerContent.join('\n  ') + '\n'
+      }
+    }
+
+    return content + `END Document`
   }
 
   get documentType (): EdiDomDocumentType {
@@ -69,12 +96,7 @@ export class EdiDomRoot extends EdiDomAbstractNode {
   /** Add an interchange to this document. */
   addChildNode (child: EdiDomInterchange): void {
     if (child.nodeType === EdiDomNodeType.Interchange) {
-      child.parent = this
-
-      for (const node of child.walk()) {
-        node.root = this.root
-      }
-
+      relate(child, this, this)
       this.interchanges.push(child)
     }
   }
@@ -89,12 +111,7 @@ export class EdiDomRoot extends EdiDomAbstractNode {
     const index = this.interchanges.indexOf(child)
 
     if (index > -1) {
-      child.parent = undefined
-
-      for (const node of child.walk()) {
-        node.root = undefined
-      }
-
+      unrelate(child)
       this.interchanges.splice(index, 1)
     }
   }
@@ -106,6 +123,31 @@ export class EdiDomRoot extends EdiDomAbstractNode {
     for (const interchange of this.interchanges) {
       for (const node of interchange.walk()) {
         yield node
+      }
+    }
+  }
+
+  toJSON (): EdiJsonRoot {
+    return {
+      options: this.options,
+      interchanges: this.interchanges.map(interchange => interchange.toJSON())
+    }
+  }
+
+  fromJSON (input: EdiJsonRoot): void {
+    this.interchanges = []
+
+    if ('options' in input) {
+      this.options = input.options
+    }
+
+    if (Array.isArray(input.interchanges)) {
+      for (const interchange of input.interchanges) {
+        const domInterchange = new EdiDomGlobal.Interchange()
+
+        domInterchange.fromJSON(interchange)
+        relate(domInterchange, this, this)
+        this.interchanges.push(domInterchange)
       }
     }
   }

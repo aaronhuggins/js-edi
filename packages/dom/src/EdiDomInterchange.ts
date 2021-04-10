@@ -1,13 +1,19 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
+import { assignMessagesFromJson, containerFromJson, messagesAsContent, relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
-import type { EdiDomGroup } from './EdiDomGroup'
-import type { EdiDomMessage } from './EdiDomMessage'
+import type { EdiDomGroup, EdiJsonGroup } from './EdiDomGroup'
+import type { EdiDomMessage, EdiJsonMessage } from './EdiDomMessage'
 import type { EdiDomRoot } from './EdiDomRoot'
-import type { EdiDomSegment } from './EdiDomSegment'
-import type { EdiDomNode } from './EdiDomTypes'
+import type { EdiDomSegment, EdiJsonSegment } from './EdiDomSegment'
+import type { EdiDomNode, InterchangeChild } from './EdiDomTypes'
 
-type InterchangeChild = EdiDomGroup | EdiDomMessage
+export interface EdiJsonInterchange {
+  header: EdiJsonSegment
+  groups?: EdiJsonGroup[]
+  messages?: EdiJsonMessage[]
+  trailer: EdiJsonSegment
+}
 
 export class EdiDomInterchange extends EdiDomAbstractNode {
   constructor () {
@@ -35,13 +41,44 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
 
   /** The header of this interchange. */
   set header (_header: EdiDomSegment<'UNB'|'ISA'>) {
-    _header.parent = this
+    relate(_header, this, this.root)
+    this._header = _header
+  }
 
-    for (const node of _header.walk()) {
-      node.root = this.root
+  get innerEDI (): string {
+    if (this.groups.length > 0) {
+      return this.groups.map(group => group.outerEDI).join('')
     }
 
-    this._header = _header
+    return this.messages.map(message => message.outerEDI).join('')
+  }
+
+  get outerEDI (): string {
+    const handleUNA = (): string => {
+      return this.header.tag === 'UNB'
+        ? this.root.createUNAString()
+        : ''
+    }
+
+    return handleUNA() + this.header.outerEDI + this.innerEDI + this.trailer.outerEDI
+  }
+
+  get text (): string {
+    return this.outerEDI
+  }
+
+  get textContent (): string {
+    let content = `BEGIN Interchange\n`
+
+    if (Array.isArray(this.groups) && this.groups.length > 0) {
+      for (const group of this.groups) {
+        const innerContent = group.textContent.split('\n')
+
+        content += '  ' + innerContent.join('\n  ') + '\n'
+      }
+    }
+
+    return `${content}${messagesAsContent(this)}END Interchange`
   }
 
   /** The trailer of this interchange. */
@@ -51,55 +88,23 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
 
   /** The trailer of this interchange. */
   set trailer (_trailer: EdiDomSegment<'UNZ'|'IEA'>) {
-    _trailer.parent = this
-
-    for (const node of _trailer.walk()) {
-      node.root = this.root
-    }
-
+    relate(_trailer, this, this.root)
     this._trailer = _trailer
-  }
-
-  /** The read-only text representation of this node. */
-  get text (): string {
-    const handleUNA = (): string => {
-      return this.header.tag === 'UNB'
-        ? this.root.createUNAString()
-        : ''
-    }
-
-    // Prefer groups.
-    if (this.groups.length > 0) {
-      return handleUNA() +
-        this.header.text +
-        this.groups
-          .map(segment => segment.text)
-          .join('') +
-        this.trailer.text
-    }
-
-    return handleUNA() +
-      this.header.text +
-      this.messages
-        .map(segment => segment.text)
-        .join('') +
-      this.trailer.text
   }
 
   /** Add a group or message to this interchange. */
   addChildNode (child: InterchangeChild): void {
-    child.parent = this
-
-    for (const node of child.walk()) {
-      node.root = this.root
+    const relateToArray = (array: any[]): void => {
+      relate(child, this, this.root)
+      array.push(child)
     }
 
     switch (child.nodeType) {
       case EdiDomNodeType.Group:
-        this.groups.push(child)
+        relateToArray(this.groups)
         break
       case EdiDomNodeType.Message:
-        this.messages.push(child)
+        relateToArray(this.messages)
         break
     }
   }
@@ -113,26 +118,21 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
 
   /** Remove a child group or message from this interchange. */
   removeChildNode (child: InterchangeChild): void {
-    const unrelate = (array: any[]): void => {
+    const unrelateFromArray = (array: any[]): void => {
       const index = array.indexOf(child)
 
       if (index > -1) {
-        child.parent = undefined
-
-        for (const node of child.walk()) {
-          node.root = undefined
-        }
-
+        unrelate(child)
         array.splice(index, 1)
       }
     }
 
     switch (child.nodeType) {
       case EdiDomNodeType.Group:
-        unrelate(this.groups)
+        unrelateFromArray(this.groups)
         break
       case EdiDomNodeType.Message:
-        unrelate(this.messages)
+        unrelateFromArray(this.messages)
         break
     }
   }
@@ -163,6 +163,47 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
         yield node
       }
     }
+  }
+
+  toJSON (): EdiJsonInterchange {
+    // Guarantee the order of property serialization.
+    const json: EdiJsonInterchange = {
+      header: this.header.toJSON(),
+      groups: undefined,
+      messages: undefined,
+      trailer: this.trailer.toJSON()
+    }
+
+    if (this.groups.length > 0) {
+      json.groups = this.groups.map(group => group.toJSON())
+      delete json.messages
+
+      return json
+    }
+
+    json.messages = this.messages.map(message => message.toJSON())
+    delete json.groups
+
+    return json
+  }
+
+  fromJSON (input: EdiJsonInterchange): void {
+    this.groups = []
+    this.messages = []
+
+    containerFromJson(this, input, () => {
+      if (Array.isArray(input.groups) && input.groups.length > 0) {
+        for (const group of input.groups) {
+          const domGroup = new EdiDomGlobal.Group()
+
+          domGroup.fromJSON(group)
+          relate(domGroup, this, this.root)
+          this.groups.push(domGroup)
+        }
+      }
+
+      assignMessagesFromJson(this, input)
+    })
   }
 }
 

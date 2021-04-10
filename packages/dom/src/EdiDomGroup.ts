@@ -1,11 +1,18 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
+import { assignMessagesFromJson, containerFromJson, messagesAsContent, relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
-import type { EdiDomMessage } from './EdiDomMessage'
+import type { EdiDomMessage, EdiJsonMessage } from './EdiDomMessage'
 import type { EdiDomRoot } from './EdiDomRoot'
-import type { EdiDomSegment } from './EdiDomSegment'
+import type { EdiDomSegment, EdiJsonSegment } from './EdiDomSegment'
 import type { EdiDomNode } from './EdiDomTypes'
 import type { EdiDomInterchange } from './EdiDomInterchange'
+
+export interface EdiJsonGroup {
+  header: EdiJsonSegment
+  messages: EdiJsonMessage[]
+  trailer: EdiJsonSegment
+}
 
 /** An EDIFACT UNG message or an X12 ST transaction. */
 export class EdiDomGroup extends EdiDomAbstractNode {
@@ -31,13 +38,24 @@ export class EdiDomGroup extends EdiDomAbstractNode {
 
   /** The header of this group. */
   set header (_header: EdiDomSegment<'UNG'|'GS'>) {
-    _header.parent = this
-
-    for (const node of _header.walk()) {
-      node.root = this.root
-    }
-
+    relate(_header, this, this.root)
     this._header = _header
+  }
+
+  get innerEDI (): string {
+    return this.messages.map(message => message.outerEDI).join('')
+  }
+
+  get outerEDI (): string {
+    return this.header.outerEDI + this.innerEDI + this.trailer.outerEDI
+  }
+
+  get text (): string {
+    return this.outerEDI
+  }
+
+  get textContent (): string {
+    return `BEGIN Group\n${messagesAsContent(this)}END Group`
   }
 
   /** The trailer of this group. */
@@ -47,33 +65,14 @@ export class EdiDomGroup extends EdiDomAbstractNode {
 
   /** The trailer of this group. */
   set trailer (_trailer: EdiDomSegment<'UNE'|'GE'>) {
-    _trailer.parent = this
-
-    for (const node of _trailer.walk()) {
-      node.root = this.root
-    }
-
+    relate(_trailer, this, this.root)
     this._trailer = _trailer
-  }
-
-  /** The read-only text representation of this node. */
-  get text (): string {
-    return this.header.text +
-      this.messages
-        .map(segment => segment.text)
-        .join('') +
-      this.trailer.text
   }
 
   /** Add a message to this group. */
   addChildNode (child: EdiDomMessage): void {
     if (child.nodeType === EdiDomNodeType.Message) {
-      child.parent = this
-
-      for (const node of child.walk()) {
-        node.root = this.root
-      }
-
+      relate(child, this, this.root)
       this.messages.push(child)
     }
   }
@@ -88,12 +87,7 @@ export class EdiDomGroup extends EdiDomAbstractNode {
     const index = this.messages.indexOf(child)
 
     if (index > -1) {
-      child.parent = undefined
-
-      for (const node of child.walk()) {
-        node.root = undefined
-      }
-
+      unrelate(child)
       this.messages.splice(index, 1)
     }
   }
@@ -117,6 +111,20 @@ export class EdiDomGroup extends EdiDomAbstractNode {
         yield node
       }
     }
+  }
+
+  toJSON (): EdiJsonGroup {
+    return {
+      header: this.header.toJSON(),
+      messages: this.messages.map(message => message.toJSON()),
+      trailer: this.trailer.toJSON()
+    }
+  }
+
+  fromJSON (input: EdiJsonGroup): void {
+    containerFromJson(this, input, () => {
+      assignMessagesFromJson(this, input)
+    })
   }
 }
 

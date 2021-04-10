@@ -4,9 +4,9 @@ import { series } from 'gulp'
 
 export async function antlr4ts (): Promise<void> {
   await shell.task([
-    'antlr4ts -visitor grammar/EdiFactLexer.g4 grammar/EdiFactParser.g4 -o packages/fact/src',
-    'antlr4ts -visitor grammar/EdiX12Lexer.g4 grammar/EdiX12Parser.g4 -o packages/x12/src',
-    'antlr4ts -visitor grammar/ElementSelector.g4 -o packages/dom/query'
+    'antlr4ts -visitor grammars/fact/EdiFactLexer.g4 grammars/fact/EdiFactParser.g4 -o packages/fact/src',
+    'antlr4ts -visitor grammars/x12/EdiX12Lexer.g4 grammars/x12/EdiX12Parser.g4 -o packages/x12/src',
+    'antlr4ts -visitor grammars/query/ElementSelector.g4 -o packages/dom/query'
   ])()
 }
 

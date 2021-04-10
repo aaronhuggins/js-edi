@@ -1,12 +1,18 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
+import { relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
-import type { EdiDomElement } from './EdiDomElement'
+import type { EdiDomElement, EdiJsonElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomNode } from './EdiDomTypes'
 import type { EdiDomInterchange } from './EdiDomInterchange'
 import type { EdiDomGroup } from './EdiDomGroup'
 import type { EdiDomMessage } from './EdiDomMessage'
+
+export interface EdiJsonSegment {
+  tag: string
+  elements: EdiJsonElement[]
+}
 
 /** The segment of an EDI document. */
 export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode {
@@ -26,8 +32,11 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
   /** The root of this instance. */
   root: EdiDomRoot
 
-  /** The read-only text representation of this node. */
-  get text (): string {
+  get innerEDI (): string {
+    return this.elements.map(element => element.text).join('')
+  }
+
+  get outerEDI (): string {
     const contents = this.tag + this.elements
       .map(element => element.text)
       .join('') +
@@ -40,36 +49,54 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
     return contents
   }
 
-  /** Add a child element to this segment, optionally at a given position. */
+  get text (): string {
+    return this.outerEDI
+  }
+
+  get textContent (): string {
+    let content = `BEGIN Segment ${this.tag}\n`
+
+    if (Array.isArray(this.elements) && this.elements.length > 0) {
+      for (const element of this.elements) {
+        const innerContent = element.textContent.split('\n')
+
+        content += '  ' + innerContent.join('\n  ') + '\n'
+      }
+    }
+
+    return `${content}END Segment ${this.tag}`
+  }
+
+  private getZeroBasedIndex (position: string | number): number {
+    let index = -1
+
+    switch (typeof position) {
+      case 'number':
+        index = position - 1
+        break
+      case 'string':
+        index = parseFloat(position) - 1
+        if (Number.isNaN(index)) index = -1
+        break
+    }
+
+    return index
+  }
+
+  /** Add a child element to this segment, optionally at a given 1-based position. */
   addChildNode (child: EdiDomElement, position?: string | number): void {
     if (child.nodeType === EdiDomNodeType.Element) {
-      let index = -1
-      child.parent = this
+      const index = this.getZeroBasedIndex(position)
 
-      for (const node of child.walk()) {
-        node.root = this.root
-      }
-
-      switch (typeof position) {
-        case 'number':
-          index = position - 1
-          break
-        case 'string':
-          index = parseFloat(position) - 1
-          if (Number.isNaN(index)) index = -1
-          break
-      }
+      relate(child, this, this.root)
 
       if (index > -1) {
         this.elements[index] = child
 
         for (let i = 0; i < index; i += 1) {
           if (typeof this.elements[i] === 'undefined') {
-            this.elements[i] = new EdiDomGlobal.Element('value')
-            this.elements[i].parent = this
-            this.elements[i].root = this.root
-
-            this.elements[i].addChildNode(new EdiDomGlobal.Value(''))
+            this.elements[i] = new EdiDomGlobal.Element()
+            relate(this.elements[i], this, this.root)
           }
         }
       } else {
@@ -108,13 +135,7 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
       }
     }
 
-    if (typeof element !== 'undefined') {
-      element.parent = undefined
-
-      for (const node of element.walk()) {
-        node.root = undefined
-      }
-    }
+    if (typeof element === 'object') unrelate(element)
   }
 
   * walk (): Generator<EdiDomNode> {
@@ -123,6 +144,31 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
     for (const element of this.elements) {
       for (const node of element.walk()) {
         yield node
+      }
+    }
+  }
+
+  toJSON (): EdiJsonSegment {
+    return {
+      tag: this.tag,
+      elements: this.elements.map(element => element.toJSON())
+    }
+  }
+
+  fromJSON (input: EdiJsonSegment): void {
+    if ('tag' in input) {
+      this.tag = input.tag as T
+    }
+
+    if (Array.isArray(input.elements)) {
+      this.elements = []
+
+      for (const element of input.elements) {
+        const domElement = new EdiDomGlobal.Element()
+
+        domElement.fromJSON(element)
+        relate(domElement, this, this.root)
+        this.elements.push(domElement)
       }
     }
   }

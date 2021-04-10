@@ -1,6 +1,7 @@
-import { CharStream, CharStreams, CommonTokenStream, RecognitionException, Recognizer } from 'antlr4ts'
+import { CharStream, CommonTokenStream, RecognitionException, Recognizer } from 'antlr4ts'
 import { EdiX12Lexer, EdiX12Parser } from '@js-edi/x12'
 import { EdiFactLexer, EdiFactParser } from '@js-edi/fact'
+import { BaseCharStreams } from '@js-edi/shared'
 import { EdiDomX12Listener } from './EdiDomX12Listener'
 import type { Readable } from 'stream'
 import type { DocumentContext as EdiFactDocumentContext } from '@js-edi/fact'
@@ -19,24 +20,40 @@ export interface EdiParserOpts {
   ediType?: 'EDIX12' | 'EDIFACT'
   keepInitialListeners?: boolean
   throwOnError?: boolean
-  contents: string | Buffer | Readable
+  contents: string | Buffer
 }
 
 export class EdiParser {
-  constructor (opts: EdiParserOpts) {
-    const keepInitialListeners = opts.keepInitialListeners ?? false
-    const throwOnError = opts.throwOnError ?? false
+  /** Create an asynchronous parser for a readable stream. */
+  constructor ()
+  /** Create a synchronous parser for a string or buffer. */
+  constructor (opts: EdiParserOpts)
+  constructor (opts?: EdiParserOpts) {
     this.encoding = opts.encoding ?? 'utf8'
     this.fileName = opts.fileName ?? 'document.edi'
     this.parsed = false
 
     if (typeof opts.contents === 'string') {
-      this.charStream = CharStreams.fromString(opts.contents, this.fileName)
+      this.charStream = BaseCharStreams.fromString(opts.contents, this.fileName)
+      this.createParser(opts)
     } else if (Buffer.isBuffer(opts.contents)) {
-      this.charStream = CharStreams.fromString(opts.contents.toString(this.encoding), this.fileName)
-    } else {
-      // TODO: Write CharStreams implementation to handle a Node ReadableStream.
+      this.charStream = BaseCharStreams.fromNodeBuffer(opts.contents, this.encoding, this.fileName)
+      this.createParser(opts)
     }
+  }
+
+  fileName: string
+  private listener: EdiDomListener
+  private lexer: EdiCustomLexer
+  private tokens: CommonTokenStream
+  private parser: EdiCustomParser
+  private charStream: CharStream
+  private encoding: BufferEncoding
+  private parsed: boolean
+
+  private createParser (opts: Omit<EdiParserOpts, 'contents'>): void {
+    const keepInitialListeners = opts.keepInitialListeners ?? false
+    const throwOnError = opts.throwOnError ?? false
 
     switch (opts.ediType) {
       case 'EDIFACT':
@@ -76,15 +93,6 @@ export class EdiParser {
     }
   }
 
-  fileName: string
-  private readonly listener: EdiDomListener
-  private readonly lexer: EdiCustomLexer
-  private readonly tokens: CommonTokenStream
-  private readonly parser: EdiCustomParser
-  private readonly charStream: CharStream
-  private readonly encoding: BufferEncoding
-  private parsed: boolean
-
   /** Get the internal parser instance. */
   getParser (): EdiCustomParser {
     return this.parser
@@ -98,10 +106,28 @@ export class EdiParser {
     return tree
   }
 
-  /** Synchronously parse to return an EDI DOM root. */
-  documentRoot (): EdiDomRoot {
-    if (!this.parsed) this.parse()
+  /** Asynchronously parse a Node Readable stream. */
+  async parseReadable (readable: Readable, opts: Omit<EdiParserOpts, 'contents'>): Promise<DocumentContext> {
+    this.encoding = opts.encoding ?? 'utf8'
+    this.fileName = opts.fileName ?? 'document.edi'
+    this.parsed = false
+    this.charStream = await BaseCharStreams.fromNodeReadable(readable, this.encoding, this.fileName)
 
-    return this.listener.root
+    this.createParser(opts)
+
+    const tree = this.parser.document()
+    this.parsed = true
+
+    return tree
+  }
+
+  /**
+   * Synchronously parse to return an EDI DOM root; will simply return the DOM if `parse` or `parseReadable` have already been called.
+   * If the parser has not been instantiated with options or `parseReadable` has not finished, this will return undefined.
+   */
+  documentRoot (): EdiDomRoot {
+    if (!this.parsed && typeof this.parser === 'object') this.parse()
+
+    if (typeof this.listener === 'object') return this.listener.root
   }
 }

@@ -1,10 +1,16 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
+import { relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomElement } from './EdiDomElement'
 import type { EdiDomRoot } from './EdiDomRoot'
 import type { EdiDomNode } from './EdiDomTypes'
-import type { EdiDomValue } from './EdiDomValue'
+import type { EdiDomValue, EdiJsonValue } from './EdiDomValue'
+import type { EdiDomRepeated } from './EdiDomRepeated'
+
+export interface EdiJsonComponent {
+  values: EdiJsonValue[]
+}
 
 /** An intermediate value type in the object model, holding an array of values. */
 export class EdiDomComponent extends EdiDomAbstractNode {
@@ -15,28 +21,37 @@ export class EdiDomComponent extends EdiDomAbstractNode {
   }
 
   nodeType: EdiDomNodeType.Component
-  parent: EdiDomElement
+  parent: EdiDomElement | EdiDomRepeated
   /** One or more values of the component value. */
   values: EdiDomValue[]
   /** The root of this instance. */
   root: EdiDomRoot
 
-  /** The read-only text representation of this node. */
-  get text (): string {
+  get innerEDI (): string {
     return this.values
       .map(value => value.text)
       .join(this.root.options.componentSeparator)
   }
 
+  get outerEDI (): string {
+    return this.innerEDI
+  }
+
+  /** The read-only text representation of this node. */
+  get text (): string {
+    return this.innerEDI
+  }
+
+  get textContent (): string {
+    return this.values
+      .map(value => value.textContent)
+      .join('\t')
+  }
+
   /** Add a value to this componenet. */
   addChildNode (child: EdiDomValue): void {
     if (child.nodeType === EdiDomNodeType.Value) {
-      child.parent = this
-
-      for (const node of child.walk()) {
-        node.root = this.root
-      }
-
+      relate(child, this, this.root)
       this.values.push(child)
     }
   }
@@ -56,9 +71,7 @@ export class EdiDomComponent extends EdiDomAbstractNode {
       : this.values.indexOf(child)
 
     if (index > -1) {
-      this.values[index].parent = undefined
-      this.values[index].root = undefined
-
+      unrelate(this.values[index])
       this.values.splice(index, 1)
     }
   }
@@ -69,6 +82,26 @@ export class EdiDomComponent extends EdiDomAbstractNode {
     for (const value of this.values) {
       for (const node of value.walk()) {
         yield node
+      }
+    }
+  }
+
+  toJSON (): EdiJsonComponent {
+    return {
+      values: this.values.map(value => value.toJSON())
+    }
+  }
+
+  fromJSON (input: EdiJsonComponent): void {
+    if (Array.isArray(input.values)) {
+      this.values = []
+
+      for (const value of input.values) {
+        const domValue = new EdiDomGlobal.Value()
+
+        domValue.fromJSON(value)
+        relate(domValue, this, this.root)
+        this.values.push(domValue)
       }
     }
   }

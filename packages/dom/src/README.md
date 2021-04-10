@@ -45,6 +45,8 @@ This means developers should expect:
 
 ### `addChildNode`
 
+### `fromJSON`
+
 ### `getChildNode`
 
 ### `toJSON`
