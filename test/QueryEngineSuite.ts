@@ -29,8 +29,6 @@ describe('QueryEngine', () => {
     const result = document.querySelectorAll('REF01')
     console.timeEnd(parseLabel)
 
-    // console.log(Array.from(result).length)
-
     strictEqual(result.size, 2)
   })
 
