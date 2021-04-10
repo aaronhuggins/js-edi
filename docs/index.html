@@ -57,30 +57,85 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Modules</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-module"><a href="modules/_js_edi_documents.html" class="tsd-kind-icon">@js-<wbr>edi/documents</a></li>
-								<li class="tsd-kind-module"><a href="modules/_js_edi_dom.html" class="tsd-kind-icon">@js-<wbr>edi/dom</a></li>
-								<li class="tsd-kind-module"><a href="modules/_js_edi_fact.html" class="tsd-kind-icon">@js-<wbr>edi/fact</a></li>
-								<li class="tsd-kind-module"><a href="modules/_js_edi_shared.html" class="tsd-kind-icon">@js-<wbr>edi/shared</a></li>
-								<li class="tsd-kind-module"><a href="modules/_js_edi_x12.html" class="tsd-kind-icon">@js-<wbr>edi/x12</a></li>
-								<li class="tsd-kind-module"><a href="modules/validator.html" class="tsd-kind-icon">validator</a></li>
-							</ul>
-						</section>
-					</div>
-				</section>
-			</section>
+			<div class="tsd-panel tsd-typography">
+				<a href="#js-edi" id="js-edi" style="color: inherit; text-decoration: none;">
+					<h1>JS-EDI</h1>
+				</a>
+				<p>Work in progress, not fit for production use. Parser for both EDIX12 and EDIFACT leveraging Antlr4 grammar.</p>
+				<p>If I could call it J-EDI, I would. May the force be with you.</p>
+				<p><a href="https://sonarcloud.io/dashboard?id=ahuggins-nhs_js-edi"><img src="https://sonarcloud.io/api/project_badges/measure?project=ahuggins-nhs_js-edi&metric=alert_status" alt="Quality Gate Status"></a> <a href="https://sonarcloud.io/dashboard?id=ahuggins-nhs_js-edi"><img src="https://sonarcloud.io/api/project_badges/measure?project=ahuggins-nhs_js-edi&metric=sqale_rating" alt="Maintainability Rating"></a> <a href="https://sonarcloud.io/dashboard?id=ahuggins-nhs_js-edi"><img src="https://sonarcloud.io/api/project_badges/measure?project=ahuggins-nhs_js-edi&metric=security_rating" alt="Security Rating"></a> <a href="https://sonarcloud.io/dashboard?id=ahuggins-nhs_js-edi"><img src="https://sonarcloud.io/api/project_badges/measure?project=ahuggins-nhs_js-edi&metric=ncloc" alt="Lines of Code"></a></p>
+				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+					<h1>Features</h1>
+				</a>
+				<ul>
+					<li>Support for EDI X12 and EDIFACT</li>
+					<li>Parse natively in JS to a document object model (DOM)</li>
+					<li>Generate from a constructed dom</li>
+					<li>Query the dom using element selectors</li>
+					<li>Traverse as a hierarchical dom</li>
+					<li>Transform to and from JS objects</li>
+					<li>Serialize to and from JSON EDI notation</li>
+					<li>Validate parsed EDI using JSON Schema</li>
+				</ul>
+				<a href="#what39s-done-prior-to-alpha-so-far" id="what39s-done-prior-to-alpha-so-far" style="color: inherit; text-decoration: none;">
+					<h1>What&#39;s done prior to alpha so far</h1>
+				</a>
+				<ul>
+					<li>EDI X12 support; parser in antlr4ts is fully functional, detects component and repeated elements</li>
+					<li>Document object model, supports detecting difference between EDI flavors and complexe nodes</li>
+					<li>Validator, works with the DOM to be able to validate a document with JSON Schema</li>
+					<li>Element selector query language</li>
+				</ul>
+				<a href="#known-to-dos" id="known-to-dos" style="color: inherit; text-decoration: none;">
+					<h1>Known TO-DOs</h1>
+				</a>
+				<a href="#before-alpha-release" id="before-alpha-release" style="color: inherit; text-decoration: none;">
+					<h2>Before alpha release</h2>
+				</a>
+				<ul>
+					<li>Complete initial documentation</li>
+				</ul>
+				<a href="#before-beta-release" id="before-beta-release" style="color: inherit; text-decoration: none;">
+					<h2>Before beta release</h2>
+				</a>
+				<ul>
+					<li>Improve accuracy of parsing/handling EDIFACT<ul>
+							<li>Better service string advice detection</li>
+							<li>Conform to EDIFACT standard with &quot;release indicator&quot;</li>
+							<li>Conform to EDIFACT charactar sets better (technically only UNOA and UNOB supported for now)</li>
+						</ul>
+					</li>
+				</ul>
+				<a href="#before-release-candidate" id="before-release-candidate" style="color: inherit; text-decoration: none;">
+					<h2>Before release candidate</h2>
+				</a>
+				<ul>
+					<li>Add custom eventing in document parser<ul>
+							<li>Events for each node type generated</li>
+							<li>on errors</li>
+							<li>on parse start and stop</li>
+						</ul>
+					</li>
+					<li>Stabilize </li>
+					<li>Finish writing tests</li>
+				</ul>
+				<a href="#roadmap" id="roadmap" style="color: inherit; text-decoration: none;">
+					<h1>Roadmap</h1>
+				</a>
+				<ul>
+					<li>Complete EDIFACT support and optimize grammar</li>
+					<li>Stabilize all APIs</li>
+					<li>Expose listener APIs</li>
+					<li>Write examples</li>
+					<li>Make tests more broadly specific to the parsing of grammars(??)</li>
+				</ul>
+			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="current ">
-						<a href="index.html">Modules</a>
+					<li class=" ">
+						<a href="modules.html">Modules</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/_js_edi_documents.html">@js-<wbr>edi/documents</a>

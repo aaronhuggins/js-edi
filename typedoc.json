@@ -1,6 +1,5 @@
 {
   "name": "JS-EDI",
-  "readme": "none",
   "entryPoints": [
     "packages/documents/index.ts",
     "packages/dom/index.ts",
