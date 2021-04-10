@@ -1,11 +1,3 @@
-# `@js-edi/fact`
+# JS-EDI EDIFACT parser library
 
-> TODO: description
-
-## Usage
-
-```
-const fact = require('@js-edi/fact');
-
-// TODO: DEMONSTRATE API
-```
+Library `@js-edi/fact` implements an incomplete parser for EDIFACT documents. This is a work-in-progress and should not be used for anything more than experimentation until finished.
