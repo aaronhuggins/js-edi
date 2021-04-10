@@ -356,7 +356,7 @@ export class QueryEngine {
         if (typeof element === 'object') return element
       }
     }
-    let siblingResult: EdiDomElement
+    let siblingElement: EdiDomElement
 
     switch (direction) {
       case 'ascend':
@@ -382,9 +382,9 @@ export class QueryEngine {
         }
         break
       case 'sibling':
-        siblingResult = siblingHandler()
+        siblingElement = siblingHandler()
 
-        if (typeof siblingResult === 'object') yield siblingResult
+        if (typeof siblingElement === 'object') yield siblingElement
         break
     }
   }
