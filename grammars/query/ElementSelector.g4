@@ -26,7 +26,7 @@ elementPrecedentSelector:
   '?'
   (elementValueSelector | elementNotValueSelector | elementContainsValueSelector)
   ;
-// Element reference precedent to selector.
+// Element reference which is a sibling to selector.
 elementSiblingSelector:
   (ElementReference | hlPathSelector | parentSegmentSelector | loopPathSelector)
   ':'
