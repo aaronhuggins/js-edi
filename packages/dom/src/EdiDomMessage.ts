@@ -44,6 +44,22 @@ export class EdiDomMessage extends EdiDomAbstractNode {
     this._header = _header
   }
 
+  get innerEDI (): string {
+    return this.segments.map(segment => segment.text).join('')
+  }
+
+  get outerEDI (): string {
+    return this.header.outerEDI + this.innerEDI + this.trailer.outerEDI
+  }
+
+  get text (): string {
+    return this.outerEDI
+  }
+
+  get textContent (): string {
+    return ''
+  }
+
   /** The trailer of this message. */
   get trailer (): EdiDomSegment<'UNT'|'SE'> {
     return this._trailer
@@ -53,15 +69,6 @@ export class EdiDomMessage extends EdiDomAbstractNode {
   set trailer (_trailer: EdiDomSegment<'UNT'|'SE'>) {
     relate(_trailer, this, this.root)
     this._trailer = _trailer
-  }
-
-  /** The read-only text representation of this node. */
-  get text (): string {
-    return this.header.text +
-      this.segments
-        .map(segment => segment.text)
-        .join('') +
-      this.trailer.text
   }
 
   /** Add a segment to this message. */
