@@ -1,0 +1,22 @@
+{
+  "name": "JS-EDI",
+  "out": "docs/packages",
+  "readme": "none",
+  "entryPoints": [
+    "packages/documents/index.ts",
+    "packages/dom/index.ts",
+    "packages/fact/index.ts",
+    "packages/shared/index.ts",
+    "packages/validator/index.ts",
+    "packages/x12/index.ts"
+  ],
+  "includes": [
+    "./"
+  ],
+  "exclude": [
+    "**/node_modules/**",
+    "packages/dom/query/ElementSelector*.ts",
+    "packages/fact/src/EdiFact*.ts",
+    "packages/x12/src/EdiX12*.ts"
+  ]
+}
