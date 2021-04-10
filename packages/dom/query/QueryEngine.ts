@@ -108,6 +108,12 @@ export class QueryEngine {
     }
   }
 
+  private getWalkerNodes (direction?: QueryDirection): Generator<EdiDomNode> {
+    return typeof direction === 'undefined' || direction === 'descend'
+      ? this.walker.descend()
+      : this.walker.ascend()
+  }
+
   /** Walk the node tree from the current position and select the elements matching the reference. Direction will return only the first matching result, if any. */
   private * elementSelector (reference?: ElementReference, direction?: QueryDirection): QueryIterator<EdiDomElement> {
     const selector = this.parsed.elementSelector()
@@ -115,9 +121,7 @@ export class QueryEngine {
       ? elementReference(selector.ElementReference())
       : reference
     const { segmentId, elementId } = ref
-    const nodes = typeof direction === 'undefined' || direction === 'descend'
-      ? this.walker.descend()
-      : this.walker.ascend()
+    const nodes = this.getWalkerNodes(direction)
     let firstSegment = true
 
     for (const node of nodes) {
