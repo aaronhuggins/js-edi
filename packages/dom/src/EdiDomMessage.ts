@@ -1,6 +1,6 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
-import { relate, unrelate } from './EdiDomHelpers'
+import { containerFromJson, relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomGroup } from './EdiDomGroup'
 import type { EdiDomInterchange } from './EdiDomInterchange'
@@ -128,33 +128,21 @@ export class EdiDomMessage extends EdiDomAbstractNode {
   }
 
   fromJSON (input: EdiJsonMessage): void {
-    if ('header' in input) {
-      const domSegment = new EdiDomGlobal.Segment<'UNH'|'ST'>()
+    this.segments = []
 
-      domSegment.fromJSON(input.header)
-
-      this.header = domSegment
-    }
-
-    if (Array.isArray(input.segments)) {
-      this.segments = []
-
-      for (const segment of input.segments) {
-        const domSegment = new EdiDomGlobal.Segment()
-
-        domSegment.fromJSON(segment)
-        relate(domSegment, this, this.root)
-        this.segments.push(domSegment)
+    containerFromJson(this, input, () => {
+      if (Array.isArray(input.segments)) {
+        this.segments = []
+  
+        for (const segment of input.segments) {
+          const domSegment = new EdiDomGlobal.Segment()
+  
+          domSegment.fromJSON(segment)
+          relate(domSegment, this, this.root)
+          this.segments.push(domSegment)
+        }
       }
-    }
-
-    if ('trailer' in input) {
-      const domSegment = new EdiDomGlobal.Segment<'UNT'|'SE'>()
-
-      domSegment.fromJSON(input.trailer)
-
-      this.trailer = domSegment
-    }
+    })
   }
 }
 

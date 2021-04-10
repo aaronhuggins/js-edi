@@ -1,12 +1,19 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
-import { relate, unrelate } from './EdiDomHelpers'
+import { assignMessagesFromJson, containerFromJson, relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
-import type { EdiDomGroup } from './EdiDomGroup'
-import type { EdiDomMessage } from './EdiDomMessage'
+import type { EdiDomGroup, EdiJsonGroup } from './EdiDomGroup'
+import type { EdiDomMessage, EdiJsonMessage } from './EdiDomMessage'
 import type { EdiDomRoot } from './EdiDomRoot'
-import type { EdiDomSegment } from './EdiDomSegment'
+import type { EdiDomSegment, EdiJsonSegment } from './EdiDomSegment'
 import type { EdiDomNode, InterchangeChild } from './EdiDomTypes'
+
+export interface EdiJsonInterchange {
+  header: EdiJsonSegment
+  groups?: EdiJsonGroup[]
+  messages?: EdiJsonMessage[]
+  trailer: EdiJsonSegment
+}
 
 export class EdiDomInterchange extends EdiDomAbstractNode {
   constructor () {
@@ -38,6 +45,32 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
     this._header = _header
   }
 
+  get innerEDI (): string {
+    if (this.groups.length > 0) {
+      return this.groups.map(group => group.outerEDI).join('')
+    }
+
+    return this.messages.map(message => message.outerEDI).join('')
+  }
+
+  get outerEDI (): string {
+    const handleUNA = (): string => {
+      return this.header.tag === 'UNB'
+        ? this.root.createUNAString()
+        : ''
+    }
+
+    return handleUNA() + this.header.outerEDI + this.innerEDI + this.trailer.outerEDI
+  }
+
+  get text (): string {
+    return this.outerEDI
+  }
+
+  get textContent (): string {
+    return ''
+  }
+
   /** The trailer of this interchange. */
   get trailer (): EdiDomSegment<'UNZ'|'IEA'> {
     return this._trailer
@@ -47,32 +80,6 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
   set trailer (_trailer: EdiDomSegment<'UNZ'|'IEA'>) {
     relate(_trailer, this, this.root)
     this._trailer = _trailer
-  }
-
-  /** The read-only text representation of this node. */
-  get text (): string {
-    const handleUNA = (): string => {
-      return this.header.tag === 'UNB'
-        ? this.root.createUNAString()
-        : ''
-    }
-
-    // Prefer groups.
-    if (this.groups.length > 0) {
-      return handleUNA() +
-        this.header.text +
-        this.groups
-          .map(segment => segment.text)
-          .join('') +
-        this.trailer.text
-    }
-
-    return handleUNA() +
-      this.header.text +
-      this.messages
-        .map(segment => segment.text)
-        .join('') +
-      this.trailer.text
   }
 
   /** Add a group or message to this interchange. */
@@ -146,6 +153,47 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
         yield node
       }
     }
+  }
+
+  toJSON (): EdiJsonInterchange {
+    // Guarantee the order of property serialization.
+    const json: EdiJsonInterchange = {
+      header: this.header.toJSON(),
+      groups: undefined,
+      messages: undefined,
+      trailer: this.trailer.toJSON()
+    }
+
+    if (this.groups.length > 0) {
+      json.groups = this.groups.map(group => group.toJSON())
+      delete json.messages
+
+      return json
+    }
+
+    json.messages = this.messages.map(message => message.toJSON())
+    delete json.groups
+
+    return json
+  }
+
+  fromJSON (input: EdiJsonInterchange): void {
+    this.groups = []
+    this.messages = []
+
+    containerFromJson(this, input, () => {
+      if (Array.isArray(input.groups) && input.groups.length > 0) {
+        for (const group of input.groups) {
+          const domGroup = new EdiDomGlobal.Group()
+
+          domGroup.fromJSON(group)
+          relate(domGroup, this, this.root)
+          this.groups.push(domGroup)
+        }
+      }
+
+      assignMessagesFromJson(this, input)
+    })
   }
 }
 
