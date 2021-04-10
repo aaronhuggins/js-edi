@@ -67,22 +67,28 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
     return `${content}END Segment ${this.tag}`
   }
 
+  private getZeroBasedIndex (position: string | number): number {
+    let index = -1
+
+    switch (typeof position) {
+      case 'number':
+        index = position - 1
+        break
+      case 'string':
+        index = parseFloat(position) - 1
+        if (Number.isNaN(index)) index = -1
+        break
+    }
+
+    return index
+  }
+
   /** Add a child element to this segment, optionally at a given 1-based position. */
   addChildNode (child: EdiDomElement, position?: string | number): void {
     if (child.nodeType === EdiDomNodeType.Element) {
-      let index = -1
+      const index = this.getZeroBasedIndex(position)
 
       relate(child, this, this.root)
-
-      switch (typeof position) {
-        case 'number':
-          index = position - 1
-          break
-        case 'string':
-          index = parseFloat(position) - 1
-          if (Number.isNaN(index)) index = -1
-          break
-      }
 
       if (index > -1) {
         this.elements[index] = child
