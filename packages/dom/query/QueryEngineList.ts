@@ -92,8 +92,8 @@ export class QueryEngineList<T> implements Iterable<T> {
 
       let i: number
 
-      for (const [index] of this.entries()) {
-        if (index === result) i = index
+      for (const [currentIndex] of this.entries()) {
+        if (currentIndex === result) i = currentIndex
       }
 
       this._values.splice(i, 1)
