@@ -1,0 +1,2376 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>EdiX12ParserListener | JS-EDI</title>
+	<meta name="description" content="Documentation for JS-EDI">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">JS-EDI</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../index.html">JS-EDI</a>
+				</li>
+				<li>
+					<a href="../modules/_js_edi_x12.html">@js-edi/x12</a>
+				</li>
+				<li>
+					<a href="_js_edi_x12.edix12parserlistener.html">EdiX12ParserListener</a>
+				</li>
+			</ul>
+			<h1>Interface EdiX12ParserListener</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>This interface defines a complete listener for a parse tree produced by
+						<code>EdiX12Parser</code>.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="tsd-signature-type">ParseTreeListener</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">EdiX12ParserListener</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#entercomponent" class="tsd-kind-icon">enter<wbr>Component</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#entercomponentcharelement" class="tsd-kind-icon">enter<wbr>Component<wbr>Char<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#enterdatacharelement" class="tsd-kind-icon">enter<wbr>Data<wbr>Char<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#enterdocument" class="tsd-kind-icon">enter<wbr>Document</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#enterelement" class="tsd-kind-icon">enter<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="_js_edi_x12.edix12parserlistener.html#entereveryrule" class="tsd-kind-icon">enter<wbr>Every<wbr>Rule</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#entergroup" class="tsd-kind-icon">enter<wbr>Group</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#entergroupheader" class="tsd-kind-icon">enter<wbr>Group<wbr>Header</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#entergrouptrailer" class="tsd-kind-icon">enter<wbr>Group<wbr>Trailer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#enterinterchange" class="tsd-kind-icon">enter<wbr>Interchange</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#enterinterchangeelement" class="tsd-kind-icon">enter<wbr>Interchange<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#enterinterchangeheader" class="tsd-kind-icon">enter<wbr>Interchange<wbr>Header</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#enterinterchangetrailer" class="tsd-kind-icon">enter<wbr>Interchange<wbr>Trailer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#enterrepeatedelement" class="tsd-kind-icon">enter<wbr>Repeated<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#enterrepitition" class="tsd-kind-icon">enter<wbr>Repitition</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#enterrepititioncharelement" class="tsd-kind-icon">enter<wbr>Repitition<wbr>Char<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#entersegment" class="tsd-kind-icon">enter<wbr>Segment</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#entersegmentend" class="tsd-kind-icon">enter<wbr>Segment<wbr>End</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#enterstrictelement" class="tsd-kind-icon">enter<wbr>Strict<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#entertransaction" class="tsd-kind-icon">enter<wbr>Transaction</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#entertransactionheader" class="tsd-kind-icon">enter<wbr>Transaction<wbr>Header</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#entertransactiontrailer" class="tsd-kind-icon">enter<wbr>Transaction<wbr>Trailer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#entervalue" class="tsd-kind-icon">enter<wbr>Value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitcomponent" class="tsd-kind-icon">exit<wbr>Component</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitcomponentcharelement" class="tsd-kind-icon">exit<wbr>Component<wbr>Char<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitdatacharelement" class="tsd-kind-icon">exit<wbr>Data<wbr>Char<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitdocument" class="tsd-kind-icon">exit<wbr>Document</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitelement" class="tsd-kind-icon">exit<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="_js_edi_x12.edix12parserlistener.html#exiteveryrule" class="tsd-kind-icon">exit<wbr>Every<wbr>Rule</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitgroup" class="tsd-kind-icon">exit<wbr>Group</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitgroupheader" class="tsd-kind-icon">exit<wbr>Group<wbr>Header</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitgrouptrailer" class="tsd-kind-icon">exit<wbr>Group<wbr>Trailer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitinterchange" class="tsd-kind-icon">exit<wbr>Interchange</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitinterchangeelement" class="tsd-kind-icon">exit<wbr>Interchange<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitinterchangeheader" class="tsd-kind-icon">exit<wbr>Interchange<wbr>Header</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitinterchangetrailer" class="tsd-kind-icon">exit<wbr>Interchange<wbr>Trailer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitrepeatedelement" class="tsd-kind-icon">exit<wbr>Repeated<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitrepitition" class="tsd-kind-icon">exit<wbr>Repitition</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitrepititioncharelement" class="tsd-kind-icon">exit<wbr>Repitition<wbr>Char<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitsegment" class="tsd-kind-icon">exit<wbr>Segment</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitsegmentend" class="tsd-kind-icon">exit<wbr>Segment<wbr>End</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitstrictelement" class="tsd-kind-icon">exit<wbr>Strict<wbr>Element</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exittransaction" class="tsd-kind-icon">exit<wbr>Transaction</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exittransactionheader" class="tsd-kind-icon">exit<wbr>Transaction<wbr>Header</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exittransactiontrailer" class="tsd-kind-icon">exit<wbr>Transaction<wbr>Trailer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_js_edi_x12.edix12parserlistener.html#exitvalue" class="tsd-kind-icon">exit<wbr>Value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="_js_edi_x12.edix12parserlistener.html#visiterrornode" class="tsd-kind-icon">visit<wbr>Error<wbr>Node</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="_js_edi_x12.edix12parserlistener.html#visitterminal" class="tsd-kind-icon">visit<wbr>Terminal</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="entercomponent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Component</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.componentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ComponentContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L259">x12/src/EdiX12ParserListener.ts:259</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.component</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.componentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ComponentContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.componentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ComponentContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="entercomponentcharelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Component<wbr>Char<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Component<wbr>Char<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.componentcharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ComponentCharElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L237">x12/src/EdiX12ParserListener.ts:237</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.componentCharElement</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.componentcharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ComponentCharElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.componentcharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ComponentCharElementContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enterdatacharelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Data<wbr>Char<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Data<wbr>Char<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.datacharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">DataCharElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L215">x12/src/EdiX12ParserListener.ts:215</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.dataCharElement</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.datacharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">DataCharElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.datacharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">DataCharElementContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enterdocument" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Document</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Document<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.documentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">DocumentContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L39">x12/src/EdiX12ParserListener.ts:39</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.document</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.documentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">DocumentContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.documentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">DocumentContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enterelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.elementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L182">x12/src/EdiX12ParserListener.ts:182</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.element</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.elementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.elementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ElementContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+					<a name="entereveryrule" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Every<wbr>Rule</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Every<wbr>Rule<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ParserRuleContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ParseTreeListener.enterEveryRule</p>
+						<ul>
+							<li>Defined in documents/node_modules/antlr4ts/tree/ParseTreeListener.d.ts:24</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ParserRuleContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <span class="tsd-signature-type">ParserRuleContext</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="entergroup" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Group</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Group<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.groupcontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L61">x12/src/EdiX12ParserListener.ts:61</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.group</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.groupcontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.groupcontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="entergroupheader" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Group<wbr>Header</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Group<wbr>Header<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.groupheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupHeaderContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L116">x12/src/EdiX12ParserListener.ts:116</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.groupHeader</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.groupheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupHeaderContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.groupheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupHeaderContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="entergrouptrailer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Group<wbr>Trailer</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Group<wbr>Trailer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.grouptrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupTrailerContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L127">x12/src/EdiX12ParserListener.ts:127</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.groupTrailer</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.grouptrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupTrailerContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.grouptrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupTrailerContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enterinterchange" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Interchange</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Interchange<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangecontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L50">x12/src/EdiX12ParserListener.ts:50</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.interchange</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangecontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.interchangecontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enterinterchangeelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Interchange<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Interchange<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangeelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L193">x12/src/EdiX12ParserListener.ts:193</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.interchangeElement</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangeelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.interchangeelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeElementContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enterinterchangeheader" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Interchange<wbr>Header</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Interchange<wbr>Header<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangeheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeHeaderContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L94">x12/src/EdiX12ParserListener.ts:94</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.interchangeHeader</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangeheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeHeaderContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.interchangeheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeHeaderContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enterinterchangetrailer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Interchange<wbr>Trailer</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Interchange<wbr>Trailer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangetrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeTrailerContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L105">x12/src/EdiX12ParserListener.ts:105</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.interchangeTrailer</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangetrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeTrailerContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.interchangetrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeTrailerContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enterrepeatedelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Repeated<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Repeated<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.repeatedelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepeatedElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L248">x12/src/EdiX12ParserListener.ts:248</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.repeatedElement</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.repeatedelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepeatedElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.repeatedelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepeatedElementContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enterrepitition" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Repitition</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Repitition<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.repititioncontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepititionContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L171">x12/src/EdiX12ParserListener.ts:171</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.repitition</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.repititioncontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepititionContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.repititioncontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepititionContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enterrepititioncharelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Repitition<wbr>Char<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Repitition<wbr>Char<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.repititioncharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepititionCharElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L226">x12/src/EdiX12ParserListener.ts:226</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.repititionCharElement</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.repititioncharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepititionCharElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.repititioncharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepititionCharElementContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="entersegment" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Segment</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Segment<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.segmentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">SegmentContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L83">x12/src/EdiX12ParserListener.ts:83</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.segment</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.segmentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">SegmentContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.segmentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">SegmentContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="entersegmentend" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Segment<wbr>End</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Segment<wbr>End<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.segmentendcontext.html" class="tsd-signature-type" data-tsd-kind="Class">SegmentEndContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L160">x12/src/EdiX12ParserListener.ts:160</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.segmentEnd</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.segmentendcontext.html" class="tsd-signature-type" data-tsd-kind="Class">SegmentEndContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.segmentendcontext.html" class="tsd-signature-type" data-tsd-kind="Class">SegmentEndContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enterstrictelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Strict<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Strict<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.strictelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">StrictElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L204">x12/src/EdiX12ParserListener.ts:204</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.strictElement</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.strictelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">StrictElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.strictelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">StrictElementContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="entertransaction" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Transaction</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Transaction<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.transactioncontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L72">x12/src/EdiX12ParserListener.ts:72</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.transaction</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.transactioncontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.transactioncontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="entertransactionheader" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Transaction<wbr>Header</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Transaction<wbr>Header<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.transactionheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionHeaderContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L138">x12/src/EdiX12ParserListener.ts:138</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.transactionHeader</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.transactionheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionHeaderContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.transactionheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionHeaderContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="entertransactiontrailer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Transaction<wbr>Trailer</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Transaction<wbr>Trailer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.transactiontrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionTrailerContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L149">x12/src/EdiX12ParserListener.ts:149</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.transactionTrailer</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.transactiontrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionTrailerContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.transactiontrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionTrailerContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="entervalue" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enter<wbr>Value</h3>
+					<div class="tsd-signature tsd-kind-icon">enter<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.valuecontext.html" class="tsd-signature-type" data-tsd-kind="Class">ValueContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L270">x12/src/EdiX12ParserListener.ts:270</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enter a parse tree produced by <code>EdiX12Parser.value</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.valuecontext.html" class="tsd-signature-type" data-tsd-kind="Class">ValueContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.valuecontext.html" class="tsd-signature-type" data-tsd-kind="Class">ValueContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitcomponent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Component</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.componentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ComponentContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L264">x12/src/EdiX12ParserListener.ts:264</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.component</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.componentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ComponentContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.componentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ComponentContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitcomponentcharelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Component<wbr>Char<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Component<wbr>Char<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.componentcharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ComponentCharElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L242">x12/src/EdiX12ParserListener.ts:242</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.componentCharElement</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.componentcharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ComponentCharElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.componentcharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ComponentCharElementContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitdatacharelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Data<wbr>Char<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Data<wbr>Char<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.datacharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">DataCharElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L220">x12/src/EdiX12ParserListener.ts:220</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.dataCharElement</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.datacharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">DataCharElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.datacharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">DataCharElementContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitdocument" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Document</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Document<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.documentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">DocumentContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L44">x12/src/EdiX12ParserListener.ts:44</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.document</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.documentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">DocumentContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.documentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">DocumentContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.elementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L187">x12/src/EdiX12ParserListener.ts:187</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.element</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.elementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.elementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">ElementContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+					<a name="exiteveryrule" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Every<wbr>Rule</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Every<wbr>Rule<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ParserRuleContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ParseTreeListener.exitEveryRule</p>
+						<ul>
+							<li>Defined in documents/node_modules/antlr4ts/tree/ParseTreeListener.d.ts:25</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ParserRuleContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <span class="tsd-signature-type">ParserRuleContext</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitgroup" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Group</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Group<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.groupcontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L66">x12/src/EdiX12ParserListener.ts:66</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.group</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.groupcontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.groupcontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitgroupheader" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Group<wbr>Header</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Group<wbr>Header<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.groupheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupHeaderContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L121">x12/src/EdiX12ParserListener.ts:121</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.groupHeader</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.groupheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupHeaderContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.groupheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupHeaderContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitgrouptrailer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Group<wbr>Trailer</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Group<wbr>Trailer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.grouptrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupTrailerContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L132">x12/src/EdiX12ParserListener.ts:132</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.groupTrailer</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.grouptrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupTrailerContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.grouptrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">GroupTrailerContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitinterchange" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Interchange</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Interchange<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangecontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L55">x12/src/EdiX12ParserListener.ts:55</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.interchange</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangecontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.interchangecontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitinterchangeelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Interchange<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Interchange<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangeelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L198">x12/src/EdiX12ParserListener.ts:198</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.interchangeElement</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangeelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.interchangeelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeElementContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitinterchangeheader" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Interchange<wbr>Header</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Interchange<wbr>Header<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangeheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeHeaderContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L99">x12/src/EdiX12ParserListener.ts:99</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.interchangeHeader</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangeheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeHeaderContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.interchangeheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeHeaderContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitinterchangetrailer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Interchange<wbr>Trailer</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Interchange<wbr>Trailer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangetrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeTrailerContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L110">x12/src/EdiX12ParserListener.ts:110</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.interchangeTrailer</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.interchangetrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeTrailerContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.interchangetrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">InterchangeTrailerContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitrepeatedelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Repeated<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Repeated<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.repeatedelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepeatedElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L253">x12/src/EdiX12ParserListener.ts:253</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.repeatedElement</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.repeatedelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepeatedElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.repeatedelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepeatedElementContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitrepitition" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Repitition</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Repitition<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.repititioncontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepititionContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L176">x12/src/EdiX12ParserListener.ts:176</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.repitition</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.repititioncontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepititionContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.repititioncontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepititionContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitrepititioncharelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Repitition<wbr>Char<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Repitition<wbr>Char<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.repititioncharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepititionCharElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L231">x12/src/EdiX12ParserListener.ts:231</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.repititionCharElement</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.repititioncharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepititionCharElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.repititioncharelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">RepititionCharElementContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitsegment" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Segment</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Segment<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.segmentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">SegmentContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L88">x12/src/EdiX12ParserListener.ts:88</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.segment</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.segmentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">SegmentContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.segmentcontext.html" class="tsd-signature-type" data-tsd-kind="Class">SegmentContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitsegmentend" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Segment<wbr>End</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Segment<wbr>End<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.segmentendcontext.html" class="tsd-signature-type" data-tsd-kind="Class">SegmentEndContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L165">x12/src/EdiX12ParserListener.ts:165</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.segmentEnd</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.segmentendcontext.html" class="tsd-signature-type" data-tsd-kind="Class">SegmentEndContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.segmentendcontext.html" class="tsd-signature-type" data-tsd-kind="Class">SegmentEndContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitstrictelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Strict<wbr>Element</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Strict<wbr>Element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.strictelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">StrictElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L209">x12/src/EdiX12ParserListener.ts:209</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.strictElement</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.strictelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">StrictElementContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.strictelementcontext.html" class="tsd-signature-type" data-tsd-kind="Class">StrictElementContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exittransaction" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Transaction</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Transaction<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.transactioncontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L77">x12/src/EdiX12ParserListener.ts:77</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.transaction</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.transactioncontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.transactioncontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exittransactionheader" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Transaction<wbr>Header</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Transaction<wbr>Header<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.transactionheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionHeaderContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L143">x12/src/EdiX12ParserListener.ts:143</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.transactionHeader</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.transactionheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionHeaderContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.transactionheadercontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionHeaderContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exittransactiontrailer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Transaction<wbr>Trailer</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Transaction<wbr>Trailer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.transactiontrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionTrailerContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L154">x12/src/EdiX12ParserListener.ts:154</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.transactionTrailer</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.transactiontrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionTrailerContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.transactiontrailercontext.html" class="tsd-signature-type" data-tsd-kind="Class">TransactionTrailerContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="exitvalue" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> exit<wbr>Value</h3>
+					<div class="tsd-signature tsd-kind-icon">exit<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.valuecontext.html" class="tsd-signature-type" data-tsd-kind="Class">ValueContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ahuggins-nhs/js-edi/blob/dabf1b1/packages/x12/src/EdiX12ParserListener.ts#L275">x12/src/EdiX12ParserListener.ts:275</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Exit a parse tree produced by <code>EdiX12Parser.value</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>the parse tree</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="../classes/_js_edi_x12.valuecontext.html" class="tsd-signature-type" data-tsd-kind="Class">ValueContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>ctx: <a href="../classes/_js_edi_x12.valuecontext.html" class="tsd-signature-type" data-tsd-kind="Class">ValueContext</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+					<a name="visiterrornode" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> visit<wbr>Error<wbr>Node</h3>
+					<div class="tsd-signature tsd-kind-icon">visit<wbr>Error<wbr>Node<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ErrorNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ParseTreeListener.visitErrorNode</p>
+						<ul>
+							<li>Defined in documents/node_modules/antlr4ts/tree/ParseTreeListener.d.ts:23</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ErrorNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>node: <span class="tsd-signature-type">ErrorNode</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+					<a name="visitterminal" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> visit<wbr>Terminal</h3>
+					<div class="tsd-signature tsd-kind-icon">visit<wbr>Terminal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TerminalNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ParseTreeListener.visitTerminal</p>
+						<ul>
+							<li>Defined in documents/node_modules/antlr4ts/tree/ParseTreeListener.d.ts:22</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TerminalNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>node: <span class="tsd-signature-type">TerminalNode</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../index.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_js_edi_documents.html">@js-<wbr>edi/documents</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_js_edi_dom.html">@js-<wbr>edi/dom</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_js_edi_fact.html">@js-<wbr>edi/fact</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_js_edi_shared.html">@js-<wbr>edi/shared</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/_js_edi_x12.html">@js-<wbr>edi/x12</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/validator.html">validator</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.componentcharelementcontext.html" class="tsd-kind-icon">Component<wbr>Char<wbr>Element<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.componentcontext.html" class="tsd-kind-icon">Component<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.datacharelementcontext.html" class="tsd-kind-icon">Data<wbr>Char<wbr>Element<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.documentcontext.html" class="tsd-kind-icon">Document<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.edix12lexer.html" class="tsd-kind-icon">Edi<wbr>X12<wbr>Lexer</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.edix12parser.html" class="tsd-kind-icon">Edi<wbr>X12<wbr>Parser</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.elementcontext.html" class="tsd-kind-icon">Element<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.groupcontext.html" class="tsd-kind-icon">Group<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.groupheadercontext.html" class="tsd-kind-icon">Group<wbr>Header<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.grouptrailercontext.html" class="tsd-kind-icon">Group<wbr>Trailer<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.interchangecontext.html" class="tsd-kind-icon">Interchange<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.interchangeelementcontext.html" class="tsd-kind-icon">Interchange<wbr>Element<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.interchangeheadercontext.html" class="tsd-kind-icon">Interchange<wbr>Header<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.interchangetrailercontext.html" class="tsd-kind-icon">Interchange<wbr>Trailer<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.repeatedelementcontext.html" class="tsd-kind-icon">Repeated<wbr>Element<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.repititioncharelementcontext.html" class="tsd-kind-icon">Repitition<wbr>Char<wbr>Element<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.repititioncontext.html" class="tsd-kind-icon">Repitition<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.segmentcontext.html" class="tsd-kind-icon">Segment<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.segmentendcontext.html" class="tsd-kind-icon">Segment<wbr>End<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.strictelementcontext.html" class="tsd-kind-icon">Strict<wbr>Element<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.transactioncontext.html" class="tsd-kind-icon">Transaction<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.transactionheadercontext.html" class="tsd-kind-icon">Transaction<wbr>Header<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.transactiontrailercontext.html" class="tsd-kind-icon">Transaction<wbr>Trailer<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/_js_edi_x12.valuecontext.html" class="tsd-kind-icon">Value<wbr>Context</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
+						<a href="_js_edi_x12.edix12parserlistener.html" class="tsd-kind-icon">Edi<wbr>X12<wbr>Parser<wbr>Listener</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#entercomponent" class="tsd-kind-icon">enter<wbr>Component</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#entercomponentcharelement" class="tsd-kind-icon">enter<wbr>Component<wbr>Char<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#enterdatacharelement" class="tsd-kind-icon">enter<wbr>Data<wbr>Char<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#enterdocument" class="tsd-kind-icon">enter<wbr>Document</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#enterelement" class="tsd-kind-icon">enter<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="_js_edi_x12.edix12parserlistener.html#entereveryrule" class="tsd-kind-icon">enter<wbr>Every<wbr>Rule</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#entergroup" class="tsd-kind-icon">enter<wbr>Group</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#entergroupheader" class="tsd-kind-icon">enter<wbr>Group<wbr>Header</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#entergrouptrailer" class="tsd-kind-icon">enter<wbr>Group<wbr>Trailer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#enterinterchange" class="tsd-kind-icon">enter<wbr>Interchange</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#enterinterchangeelement" class="tsd-kind-icon">enter<wbr>Interchange<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#enterinterchangeheader" class="tsd-kind-icon">enter<wbr>Interchange<wbr>Header</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#enterinterchangetrailer" class="tsd-kind-icon">enter<wbr>Interchange<wbr>Trailer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#enterrepeatedelement" class="tsd-kind-icon">enter<wbr>Repeated<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#enterrepitition" class="tsd-kind-icon">enter<wbr>Repitition</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#enterrepititioncharelement" class="tsd-kind-icon">enter<wbr>Repitition<wbr>Char<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#entersegment" class="tsd-kind-icon">enter<wbr>Segment</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#entersegmentend" class="tsd-kind-icon">enter<wbr>Segment<wbr>End</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#enterstrictelement" class="tsd-kind-icon">enter<wbr>Strict<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#entertransaction" class="tsd-kind-icon">enter<wbr>Transaction</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#entertransactionheader" class="tsd-kind-icon">enter<wbr>Transaction<wbr>Header</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#entertransactiontrailer" class="tsd-kind-icon">enter<wbr>Transaction<wbr>Trailer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#entervalue" class="tsd-kind-icon">enter<wbr>Value</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitcomponent" class="tsd-kind-icon">exit<wbr>Component</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitcomponentcharelement" class="tsd-kind-icon">exit<wbr>Component<wbr>Char<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitdatacharelement" class="tsd-kind-icon">exit<wbr>Data<wbr>Char<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitdocument" class="tsd-kind-icon">exit<wbr>Document</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitelement" class="tsd-kind-icon">exit<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="_js_edi_x12.edix12parserlistener.html#exiteveryrule" class="tsd-kind-icon">exit<wbr>Every<wbr>Rule</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitgroup" class="tsd-kind-icon">exit<wbr>Group</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitgroupheader" class="tsd-kind-icon">exit<wbr>Group<wbr>Header</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitgrouptrailer" class="tsd-kind-icon">exit<wbr>Group<wbr>Trailer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitinterchange" class="tsd-kind-icon">exit<wbr>Interchange</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitinterchangeelement" class="tsd-kind-icon">exit<wbr>Interchange<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitinterchangeheader" class="tsd-kind-icon">exit<wbr>Interchange<wbr>Header</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitinterchangetrailer" class="tsd-kind-icon">exit<wbr>Interchange<wbr>Trailer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitrepeatedelement" class="tsd-kind-icon">exit<wbr>Repeated<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitrepitition" class="tsd-kind-icon">exit<wbr>Repitition</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitrepititioncharelement" class="tsd-kind-icon">exit<wbr>Repitition<wbr>Char<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitsegment" class="tsd-kind-icon">exit<wbr>Segment</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitsegmentend" class="tsd-kind-icon">exit<wbr>Segment<wbr>End</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitstrictelement" class="tsd-kind-icon">exit<wbr>Strict<wbr>Element</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exittransaction" class="tsd-kind-icon">exit<wbr>Transaction</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exittransactionheader" class="tsd-kind-icon">exit<wbr>Transaction<wbr>Header</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exittransactiontrailer" class="tsd-kind-icon">exit<wbr>Transaction<wbr>Trailer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_js_edi_x12.edix12parserlistener.html#exitvalue" class="tsd-kind-icon">exit<wbr>Value</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="_js_edi_x12.edix12parserlistener.html#visiterrornode" class="tsd-kind-icon">visit<wbr>Error<wbr>Node</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="_js_edi_x12.edix12parserlistener.html#visitterminal" class="tsd-kind-icon">visit<wbr>Terminal</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

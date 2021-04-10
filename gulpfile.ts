@@ -38,3 +38,7 @@ export async function lint (): Promise<void> {
 export async function fix (): Promise<void> {
   await shell.task('ts-standard --fix --report codeframe')()
 }
+
+export async function typedoc (): Promise<void> {
+  await shell.task('typedoc')()
+}
