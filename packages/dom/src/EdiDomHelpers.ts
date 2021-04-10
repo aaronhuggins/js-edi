@@ -59,3 +59,17 @@ export function assignMessagesFromJson (recipient: EdiDomInterchange | EdiDomGro
     }
   }
 }
+
+export function messagesAsContent (node: EdiDomInterchange | EdiDomGroup): string {
+  let content = ''
+
+  if (Array.isArray(node.messages) && node.messages.length > 0) {
+    for (const message of node.messages) {
+      const innerContent = message.textContent.split('\n')
+
+      content += '  ' + innerContent.join('\n  ') + '\n'
+    }
+  }
+
+  return content
+}

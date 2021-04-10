@@ -1,6 +1,6 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
-import { assignMessagesFromJson, containerFromJson, relate, unrelate } from './EdiDomHelpers'
+import { assignMessagesFromJson, containerFromJson, messagesAsContent, relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomMessage, EdiJsonMessage } from './EdiDomMessage'
 import type { EdiDomRoot } from './EdiDomRoot'
@@ -55,17 +55,7 @@ export class EdiDomGroup extends EdiDomAbstractNode {
   }
 
   get textContent (): string {
-    let content = `BEGIN Group\n`
-
-    if (Array.isArray(this.messages) && this.messages.length > 0) {
-      for (const message of this.messages) {
-        const innerContent = message.textContent.split('\n')
-
-        content += '  ' + innerContent.join('\n  ') + '\n'
-      }
-    }
-
-    return content + `END Group`
+    return `BEGIN Group\n${messagesAsContent(this)}END Group`
   }
 
   /** The trailer of this group. */

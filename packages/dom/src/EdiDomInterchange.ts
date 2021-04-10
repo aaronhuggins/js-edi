@@ -1,6 +1,6 @@
 import { EdiDomAbstractNode } from './EdiDomAbstractNode'
 import { EdiDomGlobal } from './EdiDomGlobal'
-import { assignMessagesFromJson, containerFromJson, relate, unrelate } from './EdiDomHelpers'
+import { assignMessagesFromJson, containerFromJson, messagesAsContent, relate, unrelate } from './EdiDomHelpers'
 import { EdiDomNodeType } from './EdiDomNodeType'
 import type { EdiDomGroup, EdiJsonGroup } from './EdiDomGroup'
 import type { EdiDomMessage, EdiJsonMessage } from './EdiDomMessage'
@@ -78,15 +78,7 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
       }
     }
 
-    if (Array.isArray(this.messages) && this.messages.length > 0) {
-      for (const message of this.messages) {
-        const innerContent = message.textContent.split('\n')
-
-        content += '  ' + innerContent.join('\n  ') + '\n'
-      }
-    }
-
-    return content + `END Interchange`
+    return `${content}${messagesAsContent(this)}END Interchange`
   }
 
   /** The trailer of this interchange. */

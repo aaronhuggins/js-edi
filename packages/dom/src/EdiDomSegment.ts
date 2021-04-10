@@ -64,7 +64,7 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
       }
     }
 
-    return content + `END Segment ${this.tag}`
+    return `${content}END Segment ${this.tag}`
   }
 
   /** Add a child element to this segment, optionally at a given 1-based position. */

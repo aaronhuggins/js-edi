@@ -67,7 +67,7 @@ export class EdiDomMessage extends EdiDomAbstractNode {
       }
     }
 
-    return content + `END Message`
+    return `${content}END Message`
   }
 
   /** The trailer of this message. */
