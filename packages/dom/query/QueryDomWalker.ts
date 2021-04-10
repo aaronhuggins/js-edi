@@ -25,6 +25,6 @@ export class QueryDomWalker {
   }
 
   * fastforward (): Generator<EdiDomNode> {
-    for (let i = this.position; i > this.iterator.size; i += 1) yield this.iterator[i]
+    for (let i = this.position; i < this.iterator.size; i += 1) yield this.iterator[i]
   }
 }

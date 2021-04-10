@@ -432,7 +432,7 @@ export class QueryEngine {
     }
   }
 
-  private * elementSiblingSelector (): QueryIterator<EdiDomElement> {
+  private elementSiblingSelector (): QueryIterator<EdiDomElement> {
     return this.elementCombinatorSelector('sibling')
   }
 
