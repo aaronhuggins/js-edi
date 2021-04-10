@@ -57,7 +57,17 @@ export class EdiDomMessage extends EdiDomAbstractNode {
   }
 
   get textContent (): string {
-    return ''
+    let content = `BEGIN Message\n`
+
+    if (Array.isArray(this.segments) && this.segments.length > 0) {
+      for (const segment of this.segments) {
+        const innerContent = segment.textContent.split('\n')
+
+        content += '  ' + innerContent.join('\n  ') + '\n'
+      }
+    }
+
+    return content + `END Message`
   }
 
   /** The trailer of this message. */

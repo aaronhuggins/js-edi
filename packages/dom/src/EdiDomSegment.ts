@@ -54,15 +54,17 @@ export class EdiDomSegment<T extends string = string> extends EdiDomAbstractNode
   }
 
   get textContent (): string {
+    let content = `BEGIN Segment ${this.tag}\n`
+
     if (Array.isArray(this.elements) && this.elements.length > 0) {
       for (const element of this.elements) {
         const innerContent = element.textContent.split('\n')
 
-        return '  ' + innerContent.join('\n  ')
+        content += '  ' + innerContent.join('\n  ') + '\n'
       }
     }
 
-    return ''
+    return content + `END Segment ${this.tag}`
   }
 
   /** Add a child element to this segment, optionally at a given 1-based position. */

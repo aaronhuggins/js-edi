@@ -68,7 +68,25 @@ export class EdiDomInterchange extends EdiDomAbstractNode {
   }
 
   get textContent (): string {
-    return ''
+    let content = `BEGIN Interchange\n`
+
+    if (Array.isArray(this.groups) && this.groups.length > 0) {
+      for (const group of this.groups) {
+        const innerContent = group.textContent.split('\n')
+
+        content += '  ' + innerContent.join('\n  ') + '\n'
+      }
+    }
+
+    if (Array.isArray(this.messages) && this.messages.length > 0) {
+      for (const message of this.messages) {
+        const innerContent = message.textContent.split('\n')
+
+        content += '  ' + innerContent.join('\n  ') + '\n'
+      }
+    }
+
+    return content + `END Interchange`
   }
 
   /** The trailer of this interchange. */

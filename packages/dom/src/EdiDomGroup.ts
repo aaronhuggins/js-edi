@@ -55,7 +55,17 @@ export class EdiDomGroup extends EdiDomAbstractNode {
   }
 
   get textContent (): string {
-    return ''
+    let content = `BEGIN Group\n`
+
+    if (Array.isArray(this.messages) && this.messages.length > 0) {
+      for (const message of this.messages) {
+        const innerContent = message.textContent.split('\n')
+
+        content += '  ' + innerContent.join('\n  ') + '\n'
+      }
+    }
+
+    return content + `END Group`
   }
 
   /** The trailer of this group. */
