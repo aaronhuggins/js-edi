@@ -22,11 +22,11 @@ If I could call it J-EDI, I would. May the force be with you.
 - EDI X12 support; parser in antlr4ts is fully functional, detects component and repeated elements
 - Document object model, supports detecting difference between EDI flavors and complexe nodes
 - Validator, works with the DOM to be able to validate a document with JSON Schema
+- Element selector query language
 
 # Known TO-DOs
 
 ## Before alpha release
-- Finish implementing element selector query language.
 - Complete initial documentation
 
 ## Before beta release
