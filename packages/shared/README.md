@@ -1,11 +1,3 @@
-# `@js-edi/shared`
+# JS-EDI Shared Types and Classes
 
-> TODO: description
-
-## Usage
-
-```
-const shared = require('@js-edi/shared');
-
-// TODO: DEMONSTRATE API
-```
+Library `@js-edi/shared` provides shared classes, types, and interfaces used by other modules in the JS-EDI library suite.
