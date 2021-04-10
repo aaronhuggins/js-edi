@@ -2,10 +2,10 @@ import type { QueryIterator } from './QueryEngineTypes'
 
 /** Custom iterable for wrapping the query engine generator in a re-usable, re-iterable list. */
 export class QueryEngineList<T> implements Iterable<T> {
-  constructor (query?: QueryIterator<T>) {
+  constructor (iterator?: QueryIterator<T>) {
     this._values = []
-    this._query = query
-    this._queryFinished = typeof query === 'undefined'
+    this._iterator = iterator
+    this._iterationFinished = typeof iterator === 'undefined'
 
     return new Proxy(this, {
       get (target: QueryEngineList<T>, prop: string | symbol, receiver: any): any {
@@ -40,13 +40,13 @@ export class QueryEngineList<T> implements Iterable<T> {
   }
 
   private readonly _values: T[]
-  private readonly _query?: QueryIterator<T>
-  private _queryFinished: boolean
+  private readonly _iterator?: QueryIterator<T>
+  private _iterationFinished: boolean
   [key: number]: T
 
   /** Get the size of this list. */
   get size (): number {
-    if (this._queryFinished) {
+    if (this._iterationFinished) {
       return this._values.length
     }
 
@@ -67,7 +67,7 @@ export class QueryEngineList<T> implements Iterable<T> {
   /** Get a result by its index in the list. */
   get (key: number): T {
     // We check if `key in ...` because we need to avoid weird cases where `indexOf` or `includes` may return `-1`
-    if (key in this._values || this._queryFinished) { // NOSONAR
+    if (key in this._values || this._iterationFinished) { // NOSONAR
       return this._values[key]
     }
 
@@ -84,7 +84,7 @@ export class QueryEngineList<T> implements Iterable<T> {
   delete (result: T | number): void {
     if (typeof result === 'number') {
       // We check if `key in ...` because we need to avoid weird cases where `indexOf` or `includes` may return `-1`
-      if (result in this._values || this._queryFinished) { // NOSONAR
+      if (result in this._values || this._iterationFinished) { // NOSONAR
         this._values.splice(result, 1)
 
         return
@@ -103,7 +103,7 @@ export class QueryEngineList<T> implements Iterable<T> {
 
     const index = this._values.indexOf(result)
 
-    if (index > -1 || this._queryFinished) {
+    if (index > -1 || this._iterationFinished) {
       this._values.splice(index, 1)
     }
   }
@@ -115,23 +115,39 @@ export class QueryEngineList<T> implements Iterable<T> {
 
   /** Get the entries for this list in the form of key/value pairs. */
   * entries (): IterableIterator<[number, T]> {
-    if (this._queryFinished) {
-      for (const [index, node] of this._values.entries()) {
-        yield [index, node]
+    if (this._iterationFinished) {
+      for (const [valueIndex, node] of this._values.entries()) {
+        yield [valueIndex, node]
       }
-    } else {
-      let index = 0
 
-      for (const node of this._query) {
-        this._values[index] = node
+      return
+    }
 
-        yield [index, node]
+    let index = 0
+
+    if (this._values.length > 0) {
+      for (const [valueIndex, node] of this._values.entries()) {
+        yield [valueIndex, node]
 
         index++
       }
-
-      this._queryFinished = true
     }
+
+    for (const node of this._iterator) {
+      this._values[index] = node
+
+      yield [index, node]
+
+      index++
+
+      if (this._values.length >= index) {
+        for (let newIndex = index; newIndex < this._values.length; newIndex++) {
+          yield [newIndex, this._values[newIndex]]
+        }
+      }
+    }
+
+    this._iterationFinished = true
   }
 
   /** Get all keys from this list. */

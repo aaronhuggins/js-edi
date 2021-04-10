@@ -1,4 +1,5 @@
 import { CharStreams, CommonTokenStream } from 'antlr4ts'
+import { EdiDomGlobal } from '../src/EdiDomGlobal'
 import { EdiDomNodeAlias } from '../src/EdiDomNodeAlias'
 import { EdiDomNodeType } from '../src/EdiDomNodeType'
 import { ElementSelectorLexer } from './ElementSelectorLexer'
@@ -21,11 +22,13 @@ import type {
 } from './ElementSelectorParser'
 import type {
   ElementReference,
+  QueryCombinator,
   QueryDirection,
   QueryEngineMode,
   QueryEngineOpts,
   QueryIterator
 } from './QueryEngineTypes'
+import { relate } from '../src/EdiDomHelpers'
 
 export class QueryEngine {
   constructor (options: QueryEngineOpts) {
@@ -108,6 +111,12 @@ export class QueryEngine {
     }
   }
 
+  private getWalkerNodes (direction?: QueryDirection): Generator<EdiDomNode> {
+    return typeof direction === 'undefined' || direction === 'descend'
+      ? this.walker.descend()
+      : this.walker.ascend()
+  }
+
   /** Walk the node tree from the current position and select the elements matching the reference. Direction will return only the first matching result, if any. */
   private * elementSelector (reference?: ElementReference, direction?: QueryDirection): QueryIterator<EdiDomElement> {
     const selector = this.parsed.elementSelector()
@@ -115,9 +124,7 @@ export class QueryEngine {
       ? elementReference(selector.ElementReference())
       : reference
     const { segmentId, elementId } = ref
-    const nodes = typeof direction === 'undefined' || direction === 'descend'
-      ? this.walker.descend()
-      : this.walker.ascend()
+    const nodes = this.getWalkerNodes(direction)
     let firstSegment = true
 
     for (const node of nodes) {
@@ -129,6 +136,13 @@ export class QueryEngine {
 
           if (typeof element === 'object') {
             yield element
+          } else if (this.mode === 'loose') {
+            const domElement = new EdiDomGlobal.Element()
+
+            relate(domElement, node, node.root)
+            domElement.addChildNode(new EdiDomGlobal.Value())
+
+            yield domElement
           }
         }
       }
@@ -305,7 +319,7 @@ export class QueryEngine {
   private * predicate (
     selector: ElementPrecedentSelectorContext | ElementAdjacentSelectorContext,
     direction: QueryDirection,
-    segments?: EdiDomSegment[]
+    sibling: EdiDomElement
   ): QueryIterator<EdiDomElement> {
     const { ref, value, comparison } = predicateReference(selector)
     const getElement = (segment: EdiDomSegment): EdiDomElement => {
@@ -323,61 +337,104 @@ export class QueryEngine {
           break
       }
     }
+    const siblingHandler = () => {
+      let segment: EdiDomSegment
 
-    if (direction === 'ascend') {
-      for (let i = segments.length - 1; i > -1; i -= 1) {
-        if (segments[i].tag === ref.segmentId) {
-          const element = getElement(segments[i])
-
-          if (typeof element === 'object') yield element
-        }
+      switch (sibling.parent.nodeType) {
+        case EdiDomNodeType.Segment:
+          segment = sibling.parent
+          break
+        case EdiDomNodeType.Element:
+          // Elements cannot be deeply nested, so this is a segment or undefined
+          segment = sibling.parent.parent as EdiDomSegment
+          break
       }
-    } else {
-      for (const segment of segments) {
-        if (segment.tag === ref.segmentId) {
-          const element = getElement(segment)
+      
+      if (typeof segment === 'object' && segment.nodeType === EdiDomNodeType.Segment) {
+        const element = getElement(segment)
 
-          if (typeof element === 'object') yield element
-        }
+        if (typeof element === 'object') return element
       }
+    }
+    let siblingResult: EdiDomElement
+
+    switch (direction) {
+      case 'ascend':
+        for (const node of this.walker.ascend()) {
+          if (node.nodeType === EdiDomNodeType.Segment) {
+            if (node.tag === ref.segmentId) {
+              const element = getElement(node)
+  
+              if (typeof element === 'object') yield element
+            }
+          }
+        }
+        break
+      case 'descend':
+        for (const node of this.walker.fastforward()) {
+          if (node.nodeType === EdiDomNodeType.Segment) {
+            if (node.tag === ref.segmentId) {
+              const element = getElement(node)
+  
+              if (typeof element === 'object') yield element
+            }
+          }
+        }
+        break
+      case 'sibling':
+        siblingResult = siblingHandler()
+
+        if (typeof siblingResult === 'object') yield siblingResult
+        break
+    }
+  }
+
+  private getQueryCombinator (direction: QueryDirection): QueryCombinator {
+    switch (direction) {
+      case 'ascend':
+        return this.parsed.elementPrecedentSelector()
+      case 'descend':
+        return this.parsed.elementAdjacentSelector()
+      case 'sibling':
+        return this.parsed.elementSiblingSelector()
     }
   }
 
   private * elementCombinatorSelector (direction: QueryDirection): QueryIterator<EdiDomElement> {
-    const selector = direction === 'ascend'
-      ? this.parsed.elementPrecedentSelector()
-      : this.parsed.elementAdjacentSelector()
+    const selector: QueryCombinator = this.getQueryCombinator(direction)
 
     if (typeof selector.ElementReference() === 'object') {
       const ref = elementReference(selector.ElementReference())
 
       for (const node of this.elementSelector(ref)) {
-        const { value } = this.predicate(selector, direction).next()
+        const { value } = this.predicate(selector, direction, node).next()
 
         if (typeof value === 'object') yield node
       }
     } else if (typeof selector.parentSegmentSelector() === 'object') {
       for (const node of this.parentSegmentSelector(selector.parentSegmentSelector())) {
-        const { value } = this.predicate(selector, direction).next()
+        const { value } = this.predicate(selector, direction, node).next()
 
         if (typeof value === 'object') yield node
       }
     } else if (typeof selector.hlPathSelector() === 'object') {
       for (const node of this.hlPathSelector(selector.hlPathSelector())) {
-        const { value } = this.predicate(selector, direction).next()
+        const { value } = this.predicate(selector, direction, node).next()
 
         if (typeof value === 'object') yield node
       }
     } else if (typeof selector.loopPathSelector() === 'object') {
       for (const node of this.loopPathSelector(selector.loopPathSelector())) {
-        const { value } = this.predicate(selector, direction).next()
+        const { value } = this.predicate(selector, direction, node).next()
 
         if (typeof value === 'object') yield node
       }
     }
   }
 
-  private * elementSiblingSelector (): QueryIterator<EdiDomElement> {}
+  private elementSiblingSelector (): QueryIterator<EdiDomElement> {
+    return this.elementCombinatorSelector('sibling')
+  }
 
   private elementPrecedentSelector (): QueryIterator<EdiDomElement> {
     return this.elementCombinatorSelector('ascend')
